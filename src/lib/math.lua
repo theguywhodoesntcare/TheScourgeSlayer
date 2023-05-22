@@ -117,6 +117,36 @@ function GetPointsOnLine(x1, y1, x2, y2, d)
     return points
 end
 
+function GetPointsOnLineWithRotation(x1, y1, x2, y2, d)
+    --возвращает массив точек, делящих луч на отрезки, а также рандомные значения вращения
+    --с pitch возникает какой-то баг, если задавать через SetPitch
+    local points = {}
+    local dx = x2 - x1
+    local dy = y2 - y1
+    local dist = math.sqrt(dx * dx + dy * dy)
+    local steps = math.floor(dist / d)
+
+    local startYaw = math.random(-math.pi, math.pi)
+    local endYaw = math.random(-math.pi, math.pi)
+    local startPitch = math.random(-math.pi, math.pi)
+    local endPitch = math.random(-math.pi, math.pi)
+    local startRoll = math.random(-math.pi, math.pi)
+    local endRoll = math.random(-math.pi, math.pi)
+
+    for i = 1, steps+1 do
+        local t = i / steps
+        local x = x1 + dx * t
+        local y = y1 + dy * t
+        local yaw = startYaw + (endYaw - startYaw) * t
+        local pitch = startPitch + (endPitch - startPitch) * t
+        local roll = startRoll + (endRoll - startRoll) * t
+        table.insert(points, {x = x, y = y, yaw = yaw, pitch = pitch, roll = roll})
+    end
+
+    table.insert(points, {x = x2, y = y2, yaw = endYaw, pitch = endPitch, roll = endRoll})
+    return points
+end
+
 function GetPointOnLine(x1, y1, x2, y2, d)
     --возвращает точку на луче, удалённую от начальной точки на расстояние d
     local dx = x2 - x1
@@ -198,4 +228,43 @@ function RandomPointInCircle(xCenter, yCenter, radius)
     local x = xCenter + r * math.cos(theta)
     local y = yCenter + r * math.sin(theta)
     return {x, y}
+end
+
+function RandomPointInCircleXY(xCenter, yCenter, radius)
+    --возвращает случайную точку в пределах окружности
+    local theta = math.random() * 2 * math.pi
+    local r = math.sqrt(math.random()) * radius
+    local x = xCenter + r * math.cos(theta)
+    local y = yCenter + r * math.sin(theta)
+    return x, y
+end
+
+function IsCirclesIntersect(x1, y1, r1, x2, y2, r2)
+    --возвращает true если две окржуности пересекаются
+    local dx = x2 - x1
+    local dy = y2 - y1
+    local distance = math.sqrt(dx * dx + dy * dy)
+    return distance < r1 + r2
+end
+
+function RotatePoints(centerX, centerY, radius, step)
+    --возвращает таблицу значений x,y для вращения четырёх точек по окружности
+    local points = {{},{},{},{}}
+    for angle = 0, 360, step do
+        local radians = math.rad(angle)
+        for i = 1, 4 do
+            local x = centerX + radius * math.cos(radians + math.pi/2 * (i-1))
+            local y = centerY + radius * math.sin(radians + math.pi/2 * (i-1))
+            table.insert(points[i], {x, y})
+        end
+    end
+    return points
+end
+
+function MovePoint(x1, y1, x2, y2, x3, y3)
+    local angle = CalculateAngleAndDistance(x1, y1, x2, y2)
+    local dist = CalculateDistance(x1, y1, x3, y3)
+    local newX3 = x1 + dist * math.cos(angle)
+    local newY3 = y1 + dist * math.sin(angle)
+    return newX3, newY3
 end

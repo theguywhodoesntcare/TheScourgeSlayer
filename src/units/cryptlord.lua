@@ -49,7 +49,6 @@ function TripleImpale(d)
 
     end
     print(GetUnitPosition(impaleCasters[1]))
-    --local firePainter = CreateTimer()
 
     local effects = {}
     local iTable = {1, 1, 1}
@@ -57,6 +56,7 @@ function TripleImpale(d)
         TimerStart( CreateTimer(), 1/#points[l], true, function()
             eff = AddSpecialEffect("models\\redtriangle3", points[l][iTable[l]].x, points[l][iTable[l]].y)
             BlzSetSpecialEffectYaw( eff, angles[l] )
+            PlayImpaleMarkerSound(points[l][iTable[l]].x, points[l][iTable[l]].y)
             table.insert(effects, eff)
 
             iTable[l] = iTable[l] + 1
@@ -70,6 +70,7 @@ function TripleImpale(d)
     local castDelay = CreateTimer()
     TimerStart(castDelay, 0.75, false, function()
 
+
         IssuePointOrder(dummy1, "impale", endpoints[1][1], endpoints[1][2])
 
         IssuePointOrder(dummy2, "impale", endpoints[2][1], endpoints[2][2])
@@ -80,6 +81,7 @@ function TripleImpale(d)
         local t1 = CreateTimer()
         TimerStart(t1, 0.4, false, function()
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
+            PlayImpaleSound()
             DestroyTimer(t1)
         end)
 
@@ -88,7 +90,6 @@ function TripleImpale(d)
             CameraClearNoiseForPlayer( Player(0) )
             print(#effects)
             for e = 1, #effects do
-                --BlzSetSpecialEffectScale(effects[e], 0.001)
                 DestroyEffect(effects[e])
             end
             DestroyTimer(t2)
@@ -106,48 +107,45 @@ function TripleImpale(d)
 end
 
 function FireBall(startX, startY, endX, endY)
-    local tripleTimer = CreateTimer()
-    local time = 0.2
-    local bigCircleValue = 20
-    local littleCircleValue = 15
-    local counter = 0
-    TimerStart(tripleTimer, littleCircleValue * time, true, function()
-        counter = counter + 1
-        if IsPointInCircle(endX, endY, CenterX, CenterY, Radius) then
-            local marker = AddSpecialEffect("Abilities\\Spells\\Orc\\CommandAura\\CommandAura", endX, endY)
-            BlzSetSpecialEffectScale(marker, 0.8)
-            local maxZ = 800
-            local startZ = 400
-            local endZ = 250
+    --local angle = CalculateAngle(startX, endX, GetUnitX(slayer), GetUnitY(slayer))
+    if IsPointInCircle(endX, endY, CenterX, CenterY, Radius) then
+        --SetUnitFacing(boss, angle*180 / math.pi)
+        SetUnitAnimationByIndex(boss, 7)
+        local marker = AddSpecialEffect("models\\marker", endX, endY)
+        BlzSetSpecialEffectScale(marker, 0.8)
+        local maxZ = 820
+        local startZ = 400
+        local endZ = 220
 
-            local points = ComputePath(startX, startY, startZ, endX, endY, endZ, maxZ, 30)
-            local eff = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", startX, startY)
-            BlzSetSpecialEffectScale(eff, 1.5)
-            local t = CreateTimer()
-            local i = 1
-            local sharp = #points
+        local points = ComputePath(startX, startY, startZ, endX, endY, endZ, maxZ, 30)
+        local eff = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", startX, startY)
+        BlzSetSpecialEffectScale(eff, 1.5)
+        local t = CreateTimer()
+        local i = 1
+        local sharp = #points
 
-            TimerStart(t, 1/32, true, function()
-                BlzSetSpecialEffectX(eff, points[i].x)
-                BlzSetSpecialEffectY(eff, points[i].y)
-                BlzSetSpecialEffectZ(eff, points[i].z)
-                i = i + 1
-                if i >= sharp then
-                    PauseTimer(t)
-                    DestroyEffect(marker)
-                    DestroyEffect(eff)
-                    DestroyTimer(t)
-                end
-            end)
-        end
-        if counter == 3 then
-            PauseTimer(tripleTimer)
-            DestroyTimer(tripleTimer)
-        end
+        TimerStart(t, 1/32, true, function()
+            BlzSetSpecialEffectX(eff, points[i].x)
+            BlzSetSpecialEffectY(eff, points[i].y)
+            BlzSetSpecialEffectZ(eff, points[i].z)
+            i = i + 1
+            if i >= sharp then
+                PauseTimer(t)
+                CheckFireballDamage(points[i].x, points[i].y)
+                DestroyEffect(marker)
+                DestroyEffect(eff)
+                DestroyTimer(t)
+            end
         end)
+    end
 end
 
 function FireBalls()
+    local time = 0.15
+    local bigCircleValue = 10
+    local littleCircleValue = 20
+
+
     local startX, startY = GetUnitPosition(boss)
     local endX, endY = GetUnitPosition(slayer)
 
@@ -155,7 +153,7 @@ function FireBalls()
     table.insert(targets, {endX, endY})
 
     for i = 1, littleCircleValue do
-        table.insert(targets, RandomPointInCircle(endX, endY, 400))
+        table.insert(targets, RandomPointInCircle(endX, endY, 600))
     end
     for ii = 1, bigCircleValue do
         table.insert(targets, RandomPointInCircle(CenterX, CenterY, Radius))
@@ -171,3 +169,82 @@ function FireBalls()
         end
     end)
 end
+
+function ThrowStone()
+    local bx, by = GetUnitPosition(boss)
+    local sx, sy = RandomPointInCircleXY(GetUnitX(slayer), GetUnitY(slayer), 400)
+    local targetX, targetY = FindIntersection(bx, by, sx, sy)
+    local points = GetPointsOnLineWithRotation(bx, by, targetX, targetY, 50)
+    local eff = AddSpecialEffect("models\\Rock3", bx, by)
+    BlzSetSpecialEffectScale(eff, 0.75)
+    BlzSetSpecialEffectZ(eff, 350)
+
+
+    local t = CreateTimer()
+    local i = 1
+    local sharp = #points
+    TimerStart(t, 1/32, true, function()
+        local pt = points[i]
+        BlzSetSpecialEffectPosition(eff, pt.x,pt.y, 350)
+        if CheckStoneDamage(pt.x, pt.y) then
+            PauseTimer(t)
+            DestroyEffect(eff)
+            PlayStoneSound()
+            DestroyTimer(t)
+        end
+        --BlzSetSpecialEffectYaw(eff, pt.yaw)
+        --BlzSetSpecialEffectPitch(eff, pt.pitch)
+        --BlzSetSpecialEffectRoll(ff, pt.roll)
+        BlzSetSpecialEffectOrientation(eff, pt.yaw, pt.pitch, pt.roll)
+        i = i + 1
+        if i > sharp then
+            PauseTimer(t)
+            DestroyEffect(eff)
+            PlayStoneSoundMain(pt.x, pt.y)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function ThrowStones(duration)
+    local points = RotatePoints(GetUnitX(boss), GetUnitY(boss), 200, 5)
+    local t = {}
+    for i = 1, 4 do
+        local eff = AddSpecialEffect("models\\Rock3", points[i][1][1], points[i][1][2])
+        BlzSetSpecialEffectScale(eff, 0.75)
+        BlzSetSpecialEffectYaw(eff, math.random(1, 3))
+        BlzSetSpecialEffectZ(eff, 350)
+        table.insert(t, eff)
+    end
+    local rotateTimer = CreateTimer()
+    local cd = CreateTimer()
+    local waitDuration = CreateTimer()
+
+
+    local n = 1
+    local sharp = #points[1]
+    TimerStart(rotateTimer, 1/32, true, function()
+        for a = 1, 4 do
+            BlzSetSpecialEffectPosition(t[a], points[a][n][1], points[a][n][2], 350)
+        end
+        if n == sharp then
+            n = 2
+        else
+            n=n+1
+        end
+    end)
+    TimerStart(cd, 0.5, true, function()
+        ThrowStone()
+    end)
+    TimerStart(waitDuration, duration, false, function()
+        PauseTimer(cd)
+        DestroyTimer(cd)
+        PauseTimer(rotateTimer)
+        DestroyTimer(rotateTimer)
+        for m = 1, #t do
+            DestroyEffect(t[m])
+        end
+        DestroyTimer(waitDuration)
+    end)
+end
+

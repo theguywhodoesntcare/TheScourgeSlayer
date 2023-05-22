@@ -39,7 +39,8 @@ function Clicker()
         MakeShot(BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY())
     end
     if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
-        print("RMB: "..BlzGetTriggerPlayerMouseX().." "..BlzGetTriggerPlayerMouseY())
+        --print("RMB: "..BlzGetTriggerPlayerMouseX().." "..BlzGetTriggerPlayerMouseY())
+        ChainHook()
     end
 end
 

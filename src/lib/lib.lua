@@ -24,3 +24,24 @@ function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level,
     BlzFrameSetScale(frame, scale)
     BlzFrameSetTextAlignment(frame, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
 end
+
+function FindClosestUnit(units, x, y)
+    local closestUnit = nil
+    local closestDistance = math.huge
+    for i, unit in ipairs(units) do
+        local unitX, unitY = GetUnitPosition(unit)
+        local distance = CalculateDistance(unitX, unitY, x, y)
+        if distance < closestDistance then
+            closestUnit = unit
+            closestDistance = distance
+        end
+    end
+    return closestUnit
+end
+
+function Shuffle (arr)
+    for i = 1, #arr - 1 do
+        local j = math.random (i, #arr)
+        arr [i], arr [j] = arr [j], arr [i]
+    end
+end

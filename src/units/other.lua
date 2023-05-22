@@ -1,7 +1,8 @@
 creeps = {}
 
 function CreateTestUnit()
-    testUnit = CreateUnit(Player(1), _('hpea'), 600, 600, bj_UNIT_FACING)
+    local testUnit = CreateUnit(Player(1), _('hpea'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
+    SetUnitPathing(testUnit, false)
     table.insert(creeps, testUnit)
 end
 

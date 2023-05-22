@@ -5,54 +5,54 @@
 --  Constants
 -- 
 --  Misc constants
-bj_PI                             = 3.14159    ---@type real
-bj_E                              = 2.71828    ---@type real
-bj_CELLWIDTH                      = 128.0    ---@type real
-bj_CLIFFHEIGHT                    = 128.0    ---@type real
-bj_UNIT_FACING                    = 270.0    ---@type real
-bj_RADTODEG                       = 180.0 / bj_PI    ---@type real
-bj_DEGTORAD                       = bj_PI / 180.0    ---@type real
-bj_TEXT_DELAY_QUEST               = 20.00    ---@type real
-bj_TEXT_DELAY_QUESTUPDATE         = 20.00    ---@type real
-bj_TEXT_DELAY_QUESTDONE           = 20.00    ---@type real
-bj_TEXT_DELAY_QUESTFAILED         = 20.00    ---@type real
-bj_TEXT_DELAY_QUESTREQUIREMENT    = 20.00    ---@type real
-bj_TEXT_DELAY_MISSIONFAILED       = 20.00    ---@type real
-bj_TEXT_DELAY_ALWAYSHINT          = 12.00    ---@type real
-bj_TEXT_DELAY_HINT                = 12.00    ---@type real
-bj_TEXT_DELAY_SECRET              = 10.00    ---@type real
-bj_TEXT_DELAY_UNITACQUIRED        = 15.00    ---@type real
-bj_TEXT_DELAY_UNITAVAILABLE       = 10.00    ---@type real
-bj_TEXT_DELAY_ITEMACQUIRED        = 10.00    ---@type real
-bj_TEXT_DELAY_WARNING             = 12.00    ---@type real
-bj_QUEUE_DELAY_QUEST              = 5.00    ---@type real
-bj_QUEUE_DELAY_HINT               = 5.00    ---@type real
-bj_QUEUE_DELAY_SECRET             = 3.00    ---@type real
-bj_HANDICAP_EASY                  = 60.00    ---@type real
-bj_HANDICAP_NORMAL                = 90.00    ---@type real
-bj_HANDICAPDAMAGE_EASY            = 50.00    ---@type real
-bj_HANDICAPDAMAGE_NORMAL          = 90.00    ---@type real
-bj_HANDICAPREVIVE_NOTHARD         = 50.00    ---@type real
-bj_GAME_STARTED_THRESHOLD         = 0.01    ---@type real
-bj_WAIT_FOR_COND_MIN_INTERVAL     = 0.10    ---@type real
-bj_POLLED_WAIT_INTERVAL           = 0.10    ---@type real
-bj_POLLED_WAIT_SKIP_THRESHOLD     = 2.00    ---@type real
+bj_PI = 3.14159	---@type real	
+bj_E = 2.71828	---@type real	
+bj_CELLWIDTH = 128.0	---@type real	
+bj_CLIFFHEIGHT = 128.0	---@type real	
+bj_UNIT_FACING = 270.0	---@type real	
+bj_RADTODEG = 180.0 / bj_PI	---@type real	
+bj_DEGTORAD = bj_PI / 180.0	---@type real	
+bj_TEXT_DELAY_QUEST = 20.00	---@type real	
+bj_TEXT_DELAY_QUESTUPDATE = 20.00	---@type real	
+bj_TEXT_DELAY_QUESTDONE = 20.00	---@type real	
+bj_TEXT_DELAY_QUESTFAILED = 20.00	---@type real	
+bj_TEXT_DELAY_QUESTREQUIREMENT = 20.00	---@type real	
+bj_TEXT_DELAY_MISSIONFAILED = 20.00	---@type real	
+bj_TEXT_DELAY_ALWAYSHINT = 12.00	---@type real	
+bj_TEXT_DELAY_HINT = 12.00	---@type real	
+bj_TEXT_DELAY_SECRET = 10.00	---@type real	
+bj_TEXT_DELAY_UNITACQUIRED = 15.00	---@type real	
+bj_TEXT_DELAY_UNITAVAILABLE = 10.00	---@type real	
+bj_TEXT_DELAY_ITEMACQUIRED = 10.00	---@type real	
+bj_TEXT_DELAY_WARNING = 12.00	---@type real	
+bj_QUEUE_DELAY_QUEST = 5.00	---@type real	
+bj_QUEUE_DELAY_HINT = 5.00	---@type real	
+bj_QUEUE_DELAY_SECRET = 3.00	---@type real	
+bj_HANDICAP_EASY = 60.00	---@type real	
+bj_HANDICAP_NORMAL = 90.00	---@type real	
+bj_HANDICAPDAMAGE_EASY = 50.00	---@type real	
+bj_HANDICAPDAMAGE_NORMAL = 90.00	---@type real	
+bj_HANDICAPREVIVE_NOTHARD = 50.00	---@type real	
+bj_GAME_STARTED_THRESHOLD = 0.01	---@type real	
+bj_WAIT_FOR_COND_MIN_INTERVAL = 0.10	---@type real	
+bj_POLLED_WAIT_INTERVAL = 0.10	---@type real	
+bj_POLLED_WAIT_SKIP_THRESHOLD = 2.00	---@type real	
 --  Game constants
-bj_MAX_INVENTORY                  = 6    ---@type integer
-bj_MAX_PLAYERS                    = GetBJMaxPlayers()    ---@type integer
-bj_PLAYER_NEUTRAL_VICTIM          = GetBJPlayerNeutralVictim()    ---@type integer
-bj_PLAYER_NEUTRAL_EXTRA           = GetBJPlayerNeutralExtra()    ---@type integer
-bj_MAX_PLAYER_SLOTS               = GetBJMaxPlayerSlots()    ---@type integer
-bj_MAX_SKELETONS                  = 25    ---@type integer
-bj_MAX_STOCK_ITEM_SLOTS           = 11    ---@type integer
-bj_MAX_STOCK_UNIT_SLOTS           = 11    ---@type integer
-bj_MAX_ITEM_LEVEL                 = 10    ---@type integer
+bj_MAX_INVENTORY = 6	---@type integer	
+bj_MAX_PLAYERS = GetBJMaxPlayers()	---@type integer	
+bj_PLAYER_NEUTRAL_VICTIM = GetBJPlayerNeutralVictim()	---@type integer	
+bj_PLAYER_NEUTRAL_EXTRA = GetBJPlayerNeutralExtra()	---@type integer	
+bj_MAX_PLAYER_SLOTS = GetBJMaxPlayerSlots()	---@type integer	
+bj_MAX_SKELETONS = 25	---@type integer	
+bj_MAX_STOCK_ITEM_SLOTS = 11	---@type integer	
+bj_MAX_STOCK_UNIT_SLOTS = 11	---@type integer	
+bj_MAX_ITEM_LEVEL = 10	---@type integer	
 --  Auto Save constants
-bj_MAX_CHECKPOINTS                = 5    ---@type integer
+bj_MAX_CHECKPOINTS = 5	---@type integer	
 --  Ideally these would be looked up from Units/MiscData.txt,
 --  but there is currently no script functionality exposed to do that
-bj_TOD_DAWN                       = 6.00    ---@type real
-bj_TOD_DUSK                       = 18.00    ---@type real
+bj_TOD_DAWN = 6.00	---@type real	
+bj_TOD_DUSK = 18.00	---@type real	
 --  Melee game settings:
 --    - Starting Time of Day (TOD)
 --    - Starting Gold
@@ -62,534 +62,534 @@ bj_TOD_DUSK                       = 18.00    ---@type real
 --    - Max heroes allowed per hero type
 --    - Distance from start loc to search for nearby mines
 -- 
-bj_MELEE_STARTING_TOD             = 8.00    ---@type real
-bj_MELEE_STARTING_GOLD_V0         = 750    ---@type integer
-bj_MELEE_STARTING_GOLD_V1         = 500    ---@type integer
-bj_MELEE_STARTING_LUMBER_V0       = 200    ---@type integer
-bj_MELEE_STARTING_LUMBER_V1       = 150    ---@type integer
-bj_MELEE_STARTING_HERO_TOKENS     = 1    ---@type integer
-bj_MELEE_HERO_LIMIT               = 3    ---@type integer
-bj_MELEE_HERO_TYPE_LIMIT          = 1    ---@type integer
-bj_MELEE_MINE_SEARCH_RADIUS       = 2000    ---@type real
-bj_MELEE_CLEAR_UNITS_RADIUS       = 1500    ---@type real
-bj_MELEE_CRIPPLE_TIMEOUT          = 120.00    ---@type real
-bj_MELEE_CRIPPLE_MSG_DURATION     = 20.00    ---@type real
-bj_MELEE_MAX_TWINKED_HEROES_V0    = 3    ---@type integer
-bj_MELEE_MAX_TWINKED_HEROES_V1    = 1    ---@type integer
+bj_MELEE_STARTING_TOD = 8.00	---@type real	
+bj_MELEE_STARTING_GOLD_V0 = 750	---@type integer	
+bj_MELEE_STARTING_GOLD_V1 = 500	---@type integer	
+bj_MELEE_STARTING_LUMBER_V0 = 200	---@type integer	
+bj_MELEE_STARTING_LUMBER_V1 = 150	---@type integer	
+bj_MELEE_STARTING_HERO_TOKENS = 1	---@type integer	
+bj_MELEE_HERO_LIMIT = 3	---@type integer	
+bj_MELEE_HERO_TYPE_LIMIT = 1	---@type integer	
+bj_MELEE_MINE_SEARCH_RADIUS = 2000	---@type real	
+bj_MELEE_CLEAR_UNITS_RADIUS = 1500	---@type real	
+bj_MELEE_CRIPPLE_TIMEOUT = 120.00	---@type real	
+bj_MELEE_CRIPPLE_MSG_DURATION = 20.00	---@type real	
+bj_MELEE_MAX_TWINKED_HEROES_V0 = 3	---@type integer	
+bj_MELEE_MAX_TWINKED_HEROES_V1 = 1	---@type integer	
 --  Delay between a creep's death and the time it may drop an item.
-bj_CREEP_ITEM_DELAY               = 0.50    ---@type real
+bj_CREEP_ITEM_DELAY = 0.50	---@type real	
 --  Timing settings for Marketplace inventories.
-bj_STOCK_RESTOCK_INITIAL_DELAY    = 120    ---@type real
-bj_STOCK_RESTOCK_INTERVAL         = 30    ---@type real
-bj_STOCK_MAX_ITERATIONS           = 20    ---@type integer
+bj_STOCK_RESTOCK_INITIAL_DELAY = 120	---@type real	
+bj_STOCK_RESTOCK_INTERVAL = 30	---@type real	
+bj_STOCK_MAX_ITERATIONS = 20	---@type integer	
 --  Max events registered by a single "dest dies in region" event.
-bj_MAX_DEST_IN_REGION_EVENTS      = 64    ---@type integer
+bj_MAX_DEST_IN_REGION_EVENTS = 64	---@type integer	
 --  Camera settings
-bj_CAMERA_MIN_FARZ                = 100    ---@type integer
-bj_CAMERA_DEFAULT_DISTANCE        = 1650    ---@type integer
-bj_CAMERA_DEFAULT_FARZ            = 5000    ---@type integer
-bj_CAMERA_DEFAULT_AOA             = 304    ---@type integer
-bj_CAMERA_DEFAULT_FOV             = 70    ---@type integer
-bj_CAMERA_DEFAULT_ROLL            = 0    ---@type integer
-bj_CAMERA_DEFAULT_ROTATION        = 90    ---@type integer
+bj_CAMERA_MIN_FARZ = 100	---@type integer	
+bj_CAMERA_DEFAULT_DISTANCE = 1650	---@type integer	
+bj_CAMERA_DEFAULT_FARZ = 5000	---@type integer	
+bj_CAMERA_DEFAULT_AOA = 304	---@type integer	
+bj_CAMERA_DEFAULT_FOV = 70	---@type integer	
+bj_CAMERA_DEFAULT_ROLL = 0	---@type integer	
+bj_CAMERA_DEFAULT_ROTATION = 90	---@type integer	
 --  Rescue
-bj_RESCUE_PING_TIME               = 2.00    ---@type real
+bj_RESCUE_PING_TIME = 2.00	---@type real	
 --  Transmission behavior settings
-bj_NOTHING_SOUND_DURATION         = 5.00    ---@type real
-bj_TRANSMISSION_PING_TIME         = 1.00    ---@type real
-bj_TRANSMISSION_IND_RED           = 255    ---@type integer
-bj_TRANSMISSION_IND_BLUE          = 255    ---@type integer
-bj_TRANSMISSION_IND_GREEN         = 255    ---@type integer
-bj_TRANSMISSION_IND_ALPHA         = 255    ---@type integer
-bj_TRANSMISSION_PORT_HANGTIME     = 1.50    ---@type real
+bj_NOTHING_SOUND_DURATION = 5.00	---@type real	
+bj_TRANSMISSION_PING_TIME = 1.00	---@type real	
+bj_TRANSMISSION_IND_RED = 255	---@type integer	
+bj_TRANSMISSION_IND_BLUE = 255	---@type integer	
+bj_TRANSMISSION_IND_GREEN = 255	---@type integer	
+bj_TRANSMISSION_IND_ALPHA = 255	---@type integer	
+bj_TRANSMISSION_PORT_HANGTIME = 1.50	---@type real	
 --  Cinematic mode settings
-bj_CINEMODE_INTERFACEFADE         = 0.50    ---@type real
-bj_CINEMODE_GAMESPEED             = MAP_SPEED_NORMAL    ---@type gamespeed
+bj_CINEMODE_INTERFACEFADE = 0.50	---@type real	
+bj_CINEMODE_GAMESPEED = MAP_SPEED_NORMAL	---@type gamespeed	
 --  Cinematic mode volume levels
-bj_CINEMODE_VOLUME_UNITMOVEMENT   = 0.40    ---@type real
-bj_CINEMODE_VOLUME_UNITSOUNDS     = 0.00    ---@type real
-bj_CINEMODE_VOLUME_COMBAT         = 0.40    ---@type real
-bj_CINEMODE_VOLUME_SPELLS         = 0.40    ---@type real
-bj_CINEMODE_VOLUME_UI             = 0.00    ---@type real
-bj_CINEMODE_VOLUME_MUSIC          = 0.55    ---@type real
-bj_CINEMODE_VOLUME_AMBIENTSOUNDS  = 1.00    ---@type real
-bj_CINEMODE_VOLUME_FIRE           = 0.60    ---@type real
+bj_CINEMODE_VOLUME_UNITMOVEMENT = 0.40	---@type real	
+bj_CINEMODE_VOLUME_UNITSOUNDS = 0.00	---@type real	
+bj_CINEMODE_VOLUME_COMBAT = 0.40	---@type real	
+bj_CINEMODE_VOLUME_SPELLS = 0.40	---@type real	
+bj_CINEMODE_VOLUME_UI = 0.00	---@type real	
+bj_CINEMODE_VOLUME_MUSIC = 0.55	---@type real	
+bj_CINEMODE_VOLUME_AMBIENTSOUNDS = 1.00	---@type real	
+bj_CINEMODE_VOLUME_FIRE = 0.60	---@type real	
 --  Speech mode volume levels
-bj_SPEECH_VOLUME_UNITMOVEMENT     = 0.25    ---@type real
-bj_SPEECH_VOLUME_UNITSOUNDS       = 0.00    ---@type real
-bj_SPEECH_VOLUME_COMBAT           = 0.25    ---@type real
-bj_SPEECH_VOLUME_SPELLS           = 0.25    ---@type real
-bj_SPEECH_VOLUME_UI               = 0.00    ---@type real
-bj_SPEECH_VOLUME_MUSIC            = 0.55    ---@type real
-bj_SPEECH_VOLUME_AMBIENTSOUNDS    = 1.00    ---@type real
-bj_SPEECH_VOLUME_FIRE             = 0.60    ---@type real
+bj_SPEECH_VOLUME_UNITMOVEMENT = 0.25	---@type real	
+bj_SPEECH_VOLUME_UNITSOUNDS = 0.00	---@type real	
+bj_SPEECH_VOLUME_COMBAT = 0.25	---@type real	
+bj_SPEECH_VOLUME_SPELLS = 0.25	---@type real	
+bj_SPEECH_VOLUME_UI = 0.00	---@type real	
+bj_SPEECH_VOLUME_MUSIC = 0.55	---@type real	
+bj_SPEECH_VOLUME_AMBIENTSOUNDS = 1.00	---@type real	
+bj_SPEECH_VOLUME_FIRE = 0.60	---@type real	
 --  Smart pan settings
-bj_SMARTPAN_TRESHOLD_PAN          = 500    ---@type real
-bj_SMARTPAN_TRESHOLD_SNAP         = 3500    ---@type real
+bj_SMARTPAN_TRESHOLD_PAN = 500	---@type real	
+bj_SMARTPAN_TRESHOLD_SNAP = 3500	---@type real	
 --  QueuedTriggerExecute settings
-bj_MAX_QUEUED_TRIGGERS            = 100    ---@type integer
-bj_QUEUED_TRIGGER_TIMEOUT         = 180.00    ---@type real
+bj_MAX_QUEUED_TRIGGERS = 100	---@type integer	
+bj_QUEUED_TRIGGER_TIMEOUT = 180.00	---@type real	
 --  Campaign indexing constants
-bj_CAMPAIGN_INDEX_T               = 0    ---@type integer
-bj_CAMPAIGN_INDEX_H               = 1    ---@type integer
-bj_CAMPAIGN_INDEX_U               = 2    ---@type integer
-bj_CAMPAIGN_INDEX_O               = 3    ---@type integer
-bj_CAMPAIGN_INDEX_N               = 4    ---@type integer
-bj_CAMPAIGN_INDEX_XN              = 5    ---@type integer
-bj_CAMPAIGN_INDEX_XH              = 6    ---@type integer
-bj_CAMPAIGN_INDEX_XU              = 7    ---@type integer
-bj_CAMPAIGN_INDEX_XO              = 8    ---@type integer
+bj_CAMPAIGN_INDEX_T = 0	---@type integer	
+bj_CAMPAIGN_INDEX_H = 1	---@type integer	
+bj_CAMPAIGN_INDEX_U = 2	---@type integer	
+bj_CAMPAIGN_INDEX_O = 3	---@type integer	
+bj_CAMPAIGN_INDEX_N = 4	---@type integer	
+bj_CAMPAIGN_INDEX_XN = 5	---@type integer	
+bj_CAMPAIGN_INDEX_XH = 6	---@type integer	
+bj_CAMPAIGN_INDEX_XU = 7	---@type integer	
+bj_CAMPAIGN_INDEX_XO = 8	---@type integer	
 --  Campaign offset constants (for mission indexing)
-bj_CAMPAIGN_OFFSET_T              = 0    ---@type integer
-bj_CAMPAIGN_OFFSET_H              = 1    ---@type integer
-bj_CAMPAIGN_OFFSET_U              = 2    ---@type integer
-bj_CAMPAIGN_OFFSET_O              = 3    ---@type integer
-bj_CAMPAIGN_OFFSET_N              = 4    ---@type integer
-bj_CAMPAIGN_OFFSET_XN             = 5    ---@type integer
-bj_CAMPAIGN_OFFSET_XH             = 6    ---@type integer
-bj_CAMPAIGN_OFFSET_XU             = 7    ---@type integer
-bj_CAMPAIGN_OFFSET_XO             = 8    ---@type integer
+bj_CAMPAIGN_OFFSET_T = 0	---@type integer	
+bj_CAMPAIGN_OFFSET_H = 1	---@type integer	
+bj_CAMPAIGN_OFFSET_U = 2	---@type integer	
+bj_CAMPAIGN_OFFSET_O = 3	---@type integer	
+bj_CAMPAIGN_OFFSET_N = 4	---@type integer	
+bj_CAMPAIGN_OFFSET_XN = 5	---@type integer	
+bj_CAMPAIGN_OFFSET_XH = 6	---@type integer	
+bj_CAMPAIGN_OFFSET_XU = 7	---@type integer	
+bj_CAMPAIGN_OFFSET_XO = 8	---@type integer	
 --  Mission indexing constants
 --  Tutorial
-bj_MISSION_INDEX_T00              = bj_CAMPAIGN_OFFSET_T * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_T01              = bj_CAMPAIGN_OFFSET_T * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_T02              = bj_CAMPAIGN_OFFSET_T * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_T03              = bj_CAMPAIGN_OFFSET_T * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_T04              = bj_CAMPAIGN_OFFSET_T * 1000 + 4    ---@type integer
+bj_MISSION_INDEX_T00 = bj_CAMPAIGN_OFFSET_T * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_T01 = bj_CAMPAIGN_OFFSET_T * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_T02 = bj_CAMPAIGN_OFFSET_T * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_T03 = bj_CAMPAIGN_OFFSET_T * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_T04 = bj_CAMPAIGN_OFFSET_T * 1000 + 4	---@type integer	
 --  Human
-bj_MISSION_INDEX_H00              = bj_CAMPAIGN_OFFSET_H * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_H01              = bj_CAMPAIGN_OFFSET_H * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_H02              = bj_CAMPAIGN_OFFSET_H * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_H03              = bj_CAMPAIGN_OFFSET_H * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_H04              = bj_CAMPAIGN_OFFSET_H * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_H05              = bj_CAMPAIGN_OFFSET_H * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_H06              = bj_CAMPAIGN_OFFSET_H * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_H07              = bj_CAMPAIGN_OFFSET_H * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_H08              = bj_CAMPAIGN_OFFSET_H * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_H09              = bj_CAMPAIGN_OFFSET_H * 1000 + 9    ---@type integer
-bj_MISSION_INDEX_H10              = bj_CAMPAIGN_OFFSET_H * 1000 + 10    ---@type integer
-bj_MISSION_INDEX_H11              = bj_CAMPAIGN_OFFSET_H * 1000 + 11    ---@type integer
+bj_MISSION_INDEX_H00 = bj_CAMPAIGN_OFFSET_H * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_H01 = bj_CAMPAIGN_OFFSET_H * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_H02 = bj_CAMPAIGN_OFFSET_H * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_H03 = bj_CAMPAIGN_OFFSET_H * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_H04 = bj_CAMPAIGN_OFFSET_H * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_H05 = bj_CAMPAIGN_OFFSET_H * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_H06 = bj_CAMPAIGN_OFFSET_H * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_H07 = bj_CAMPAIGN_OFFSET_H * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_H08 = bj_CAMPAIGN_OFFSET_H * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_H09 = bj_CAMPAIGN_OFFSET_H * 1000 + 9	---@type integer	
+bj_MISSION_INDEX_H10 = bj_CAMPAIGN_OFFSET_H * 1000 + 10	---@type integer	
+bj_MISSION_INDEX_H11 = bj_CAMPAIGN_OFFSET_H * 1000 + 11	---@type integer	
 --  Undead
-bj_MISSION_INDEX_U00              = bj_CAMPAIGN_OFFSET_U * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_U01              = bj_CAMPAIGN_OFFSET_U * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_U02              = bj_CAMPAIGN_OFFSET_U * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_U03              = bj_CAMPAIGN_OFFSET_U * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_U05              = bj_CAMPAIGN_OFFSET_U * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_U07              = bj_CAMPAIGN_OFFSET_U * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_U08              = bj_CAMPAIGN_OFFSET_U * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_U09              = bj_CAMPAIGN_OFFSET_U * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_U10              = bj_CAMPAIGN_OFFSET_U * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_U11              = bj_CAMPAIGN_OFFSET_U * 1000 + 9    ---@type integer
+bj_MISSION_INDEX_U00 = bj_CAMPAIGN_OFFSET_U * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_U01 = bj_CAMPAIGN_OFFSET_U * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_U02 = bj_CAMPAIGN_OFFSET_U * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_U03 = bj_CAMPAIGN_OFFSET_U * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_U05 = bj_CAMPAIGN_OFFSET_U * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_U07 = bj_CAMPAIGN_OFFSET_U * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_U08 = bj_CAMPAIGN_OFFSET_U * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_U09 = bj_CAMPAIGN_OFFSET_U * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_U10 = bj_CAMPAIGN_OFFSET_U * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_U11 = bj_CAMPAIGN_OFFSET_U * 1000 + 9	---@type integer	
 --  Orc
-bj_MISSION_INDEX_O00              = bj_CAMPAIGN_OFFSET_O * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_O01              = bj_CAMPAIGN_OFFSET_O * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_O02              = bj_CAMPAIGN_OFFSET_O * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_O03              = bj_CAMPAIGN_OFFSET_O * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_O04              = bj_CAMPAIGN_OFFSET_O * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_O05              = bj_CAMPAIGN_OFFSET_O * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_O06              = bj_CAMPAIGN_OFFSET_O * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_O07              = bj_CAMPAIGN_OFFSET_O * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_O08              = bj_CAMPAIGN_OFFSET_O * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_O09              = bj_CAMPAIGN_OFFSET_O * 1000 + 9    ---@type integer
-bj_MISSION_INDEX_O10              = bj_CAMPAIGN_OFFSET_O * 1000 + 10    ---@type integer
+bj_MISSION_INDEX_O00 = bj_CAMPAIGN_OFFSET_O * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_O01 = bj_CAMPAIGN_OFFSET_O * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_O02 = bj_CAMPAIGN_OFFSET_O * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_O03 = bj_CAMPAIGN_OFFSET_O * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_O04 = bj_CAMPAIGN_OFFSET_O * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_O05 = bj_CAMPAIGN_OFFSET_O * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_O06 = bj_CAMPAIGN_OFFSET_O * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_O07 = bj_CAMPAIGN_OFFSET_O * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_O08 = bj_CAMPAIGN_OFFSET_O * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_O09 = bj_CAMPAIGN_OFFSET_O * 1000 + 9	---@type integer	
+bj_MISSION_INDEX_O10 = bj_CAMPAIGN_OFFSET_O * 1000 + 10	---@type integer	
 --  Night Elf
-bj_MISSION_INDEX_N00              = bj_CAMPAIGN_OFFSET_N * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_N01              = bj_CAMPAIGN_OFFSET_N * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_N02              = bj_CAMPAIGN_OFFSET_N * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_N03              = bj_CAMPAIGN_OFFSET_N * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_N04              = bj_CAMPAIGN_OFFSET_N * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_N05              = bj_CAMPAIGN_OFFSET_N * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_N06              = bj_CAMPAIGN_OFFSET_N * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_N07              = bj_CAMPAIGN_OFFSET_N * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_N08              = bj_CAMPAIGN_OFFSET_N * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_N09              = bj_CAMPAIGN_OFFSET_N * 1000 + 9    ---@type integer
+bj_MISSION_INDEX_N00 = bj_CAMPAIGN_OFFSET_N * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_N01 = bj_CAMPAIGN_OFFSET_N * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_N02 = bj_CAMPAIGN_OFFSET_N * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_N03 = bj_CAMPAIGN_OFFSET_N * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_N04 = bj_CAMPAIGN_OFFSET_N * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_N05 = bj_CAMPAIGN_OFFSET_N * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_N06 = bj_CAMPAIGN_OFFSET_N * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_N07 = bj_CAMPAIGN_OFFSET_N * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_N08 = bj_CAMPAIGN_OFFSET_N * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_N09 = bj_CAMPAIGN_OFFSET_N * 1000 + 9	---@type integer	
 --  Expansion Night Elf
-bj_MISSION_INDEX_XN00             = bj_CAMPAIGN_OFFSET_XN * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_XN01             = bj_CAMPAIGN_OFFSET_XN * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_XN02             = bj_CAMPAIGN_OFFSET_XN * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_XN03             = bj_CAMPAIGN_OFFSET_XN * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_XN04             = bj_CAMPAIGN_OFFSET_XN * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_XN05             = bj_CAMPAIGN_OFFSET_XN * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_XN06             = bj_CAMPAIGN_OFFSET_XN * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_XN07             = bj_CAMPAIGN_OFFSET_XN * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_XN08             = bj_CAMPAIGN_OFFSET_XN * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_XN09             = bj_CAMPAIGN_OFFSET_XN * 1000 + 9    ---@type integer
-bj_MISSION_INDEX_XN10             = bj_CAMPAIGN_OFFSET_XN * 1000 + 10    ---@type integer
+bj_MISSION_INDEX_XN00 = bj_CAMPAIGN_OFFSET_XN * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_XN01 = bj_CAMPAIGN_OFFSET_XN * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_XN02 = bj_CAMPAIGN_OFFSET_XN * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_XN03 = bj_CAMPAIGN_OFFSET_XN * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_XN04 = bj_CAMPAIGN_OFFSET_XN * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_XN05 = bj_CAMPAIGN_OFFSET_XN * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_XN06 = bj_CAMPAIGN_OFFSET_XN * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_XN07 = bj_CAMPAIGN_OFFSET_XN * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_XN08 = bj_CAMPAIGN_OFFSET_XN * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_XN09 = bj_CAMPAIGN_OFFSET_XN * 1000 + 9	---@type integer	
+bj_MISSION_INDEX_XN10 = bj_CAMPAIGN_OFFSET_XN * 1000 + 10	---@type integer	
 --  Expansion Human
-bj_MISSION_INDEX_XH00             = bj_CAMPAIGN_OFFSET_XH * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_XH01             = bj_CAMPAIGN_OFFSET_XH * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_XH02             = bj_CAMPAIGN_OFFSET_XH * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_XH03             = bj_CAMPAIGN_OFFSET_XH * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_XH04             = bj_CAMPAIGN_OFFSET_XH * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_XH05             = bj_CAMPAIGN_OFFSET_XH * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_XH06             = bj_CAMPAIGN_OFFSET_XH * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_XH07             = bj_CAMPAIGN_OFFSET_XH * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_XH08             = bj_CAMPAIGN_OFFSET_XH * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_XH09             = bj_CAMPAIGN_OFFSET_XH * 1000 + 9    ---@type integer
+bj_MISSION_INDEX_XH00 = bj_CAMPAIGN_OFFSET_XH * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_XH01 = bj_CAMPAIGN_OFFSET_XH * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_XH02 = bj_CAMPAIGN_OFFSET_XH * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_XH03 = bj_CAMPAIGN_OFFSET_XH * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_XH04 = bj_CAMPAIGN_OFFSET_XH * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_XH05 = bj_CAMPAIGN_OFFSET_XH * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_XH06 = bj_CAMPAIGN_OFFSET_XH * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_XH07 = bj_CAMPAIGN_OFFSET_XH * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_XH08 = bj_CAMPAIGN_OFFSET_XH * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_XH09 = bj_CAMPAIGN_OFFSET_XH * 1000 + 9	---@type integer	
 --  Expansion Undead
-bj_MISSION_INDEX_XU00             = bj_CAMPAIGN_OFFSET_XU * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_XU01             = bj_CAMPAIGN_OFFSET_XU * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_XU02             = bj_CAMPAIGN_OFFSET_XU * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_XU03             = bj_CAMPAIGN_OFFSET_XU * 1000 + 3    ---@type integer
-bj_MISSION_INDEX_XU04             = bj_CAMPAIGN_OFFSET_XU * 1000 + 4    ---@type integer
-bj_MISSION_INDEX_XU05             = bj_CAMPAIGN_OFFSET_XU * 1000 + 5    ---@type integer
-bj_MISSION_INDEX_XU06             = bj_CAMPAIGN_OFFSET_XU * 1000 + 6    ---@type integer
-bj_MISSION_INDEX_XU07             = bj_CAMPAIGN_OFFSET_XU * 1000 + 7    ---@type integer
-bj_MISSION_INDEX_XU08             = bj_CAMPAIGN_OFFSET_XU * 1000 + 8    ---@type integer
-bj_MISSION_INDEX_XU09             = bj_CAMPAIGN_OFFSET_XU * 1000 + 9    ---@type integer
-bj_MISSION_INDEX_XU10             = bj_CAMPAIGN_OFFSET_XU * 1000 + 10    ---@type integer
-bj_MISSION_INDEX_XU11             = bj_CAMPAIGN_OFFSET_XU * 1000 + 11    ---@type integer
-bj_MISSION_INDEX_XU12             = bj_CAMPAIGN_OFFSET_XU * 1000 + 12    ---@type integer
-bj_MISSION_INDEX_XU13             = bj_CAMPAIGN_OFFSET_XU * 1000 + 13    ---@type integer
+bj_MISSION_INDEX_XU00 = bj_CAMPAIGN_OFFSET_XU * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_XU01 = bj_CAMPAIGN_OFFSET_XU * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_XU02 = bj_CAMPAIGN_OFFSET_XU * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_XU03 = bj_CAMPAIGN_OFFSET_XU * 1000 + 3	---@type integer	
+bj_MISSION_INDEX_XU04 = bj_CAMPAIGN_OFFSET_XU * 1000 + 4	---@type integer	
+bj_MISSION_INDEX_XU05 = bj_CAMPAIGN_OFFSET_XU * 1000 + 5	---@type integer	
+bj_MISSION_INDEX_XU06 = bj_CAMPAIGN_OFFSET_XU * 1000 + 6	---@type integer	
+bj_MISSION_INDEX_XU07 = bj_CAMPAIGN_OFFSET_XU * 1000 + 7	---@type integer	
+bj_MISSION_INDEX_XU08 = bj_CAMPAIGN_OFFSET_XU * 1000 + 8	---@type integer	
+bj_MISSION_INDEX_XU09 = bj_CAMPAIGN_OFFSET_XU * 1000 + 9	---@type integer	
+bj_MISSION_INDEX_XU10 = bj_CAMPAIGN_OFFSET_XU * 1000 + 10	---@type integer	
+bj_MISSION_INDEX_XU11 = bj_CAMPAIGN_OFFSET_XU * 1000 + 11	---@type integer	
+bj_MISSION_INDEX_XU12 = bj_CAMPAIGN_OFFSET_XU * 1000 + 12	---@type integer	
+bj_MISSION_INDEX_XU13 = bj_CAMPAIGN_OFFSET_XU * 1000 + 13	---@type integer	
 --  Expansion Orc
-bj_MISSION_INDEX_XO00             = bj_CAMPAIGN_OFFSET_XO * 1000 + 0    ---@type integer
-bj_MISSION_INDEX_XO01             = bj_CAMPAIGN_OFFSET_XO * 1000 + 1    ---@type integer
-bj_MISSION_INDEX_XO02             = bj_CAMPAIGN_OFFSET_XO * 1000 + 2    ---@type integer
-bj_MISSION_INDEX_XO03             = bj_CAMPAIGN_OFFSET_XO * 1000 + 3    ---@type integer
+bj_MISSION_INDEX_XO00 = bj_CAMPAIGN_OFFSET_XO * 1000 + 0	---@type integer	
+bj_MISSION_INDEX_XO01 = bj_CAMPAIGN_OFFSET_XO * 1000 + 1	---@type integer	
+bj_MISSION_INDEX_XO02 = bj_CAMPAIGN_OFFSET_XO * 1000 + 2	---@type integer	
+bj_MISSION_INDEX_XO03 = bj_CAMPAIGN_OFFSET_XO * 1000 + 3	---@type integer	
 --  Cinematic indexing constants
-bj_CINEMATICINDEX_TOP             = 0    ---@type integer
-bj_CINEMATICINDEX_HOP             = 1    ---@type integer
-bj_CINEMATICINDEX_HED             = 2    ---@type integer
-bj_CINEMATICINDEX_OOP             = 3    ---@type integer
-bj_CINEMATICINDEX_OED             = 4    ---@type integer
-bj_CINEMATICINDEX_UOP             = 5    ---@type integer
-bj_CINEMATICINDEX_UED             = 6    ---@type integer
-bj_CINEMATICINDEX_NOP             = 7    ---@type integer
-bj_CINEMATICINDEX_NED             = 8    ---@type integer
-bj_CINEMATICINDEX_XOP             = 9    ---@type integer
-bj_CINEMATICINDEX_XED             = 10    ---@type integer
+bj_CINEMATICINDEX_TOP = 0	---@type integer	
+bj_CINEMATICINDEX_HOP = 1	---@type integer	
+bj_CINEMATICINDEX_HED = 2	---@type integer	
+bj_CINEMATICINDEX_OOP = 3	---@type integer	
+bj_CINEMATICINDEX_OED = 4	---@type integer	
+bj_CINEMATICINDEX_UOP = 5	---@type integer	
+bj_CINEMATICINDEX_UED = 6	---@type integer	
+bj_CINEMATICINDEX_NOP = 7	---@type integer	
+bj_CINEMATICINDEX_NED = 8	---@type integer	
+bj_CINEMATICINDEX_XOP = 9	---@type integer	
+bj_CINEMATICINDEX_XED = 10	---@type integer	
 --  Alliance settings
-bj_ALLIANCE_UNALLIED              = 0    ---@type integer
-bj_ALLIANCE_UNALLIED_VISION       = 1    ---@type integer
-bj_ALLIANCE_ALLIED                = 2    ---@type integer
-bj_ALLIANCE_ALLIED_VISION         = 3    ---@type integer
-bj_ALLIANCE_ALLIED_UNITS          = 4    ---@type integer
-bj_ALLIANCE_ALLIED_ADVUNITS       = 5    ---@type integer
-bj_ALLIANCE_NEUTRAL               = 6    ---@type integer
-bj_ALLIANCE_NEUTRAL_VISION        = 7    ---@type integer
+bj_ALLIANCE_UNALLIED = 0	---@type integer	
+bj_ALLIANCE_UNALLIED_VISION = 1	---@type integer	
+bj_ALLIANCE_ALLIED = 2	---@type integer	
+bj_ALLIANCE_ALLIED_VISION = 3	---@type integer	
+bj_ALLIANCE_ALLIED_UNITS = 4	---@type integer	
+bj_ALLIANCE_ALLIED_ADVUNITS = 5	---@type integer	
+bj_ALLIANCE_NEUTRAL = 6	---@type integer	
+bj_ALLIANCE_NEUTRAL_VISION = 7	---@type integer	
 --  Keyboard Event Types
-bj_KEYEVENTTYPE_DEPRESS           = 0    ---@type integer
-bj_KEYEVENTTYPE_RELEASE           = 1    ---@type integer
+bj_KEYEVENTTYPE_DEPRESS = 0	---@type integer	
+bj_KEYEVENTTYPE_RELEASE = 1	---@type integer	
 --  Keyboard Event Keys
-bj_KEYEVENTKEY_LEFT               = 0    ---@type integer
-bj_KEYEVENTKEY_RIGHT              = 1    ---@type integer
-bj_KEYEVENTKEY_DOWN               = 2    ---@type integer
-bj_KEYEVENTKEY_UP                 = 3    ---@type integer
+bj_KEYEVENTKEY_LEFT = 0	---@type integer	
+bj_KEYEVENTKEY_RIGHT = 1	---@type integer	
+bj_KEYEVENTKEY_DOWN = 2	---@type integer	
+bj_KEYEVENTKEY_UP = 3	---@type integer	
 --  Mouse Event Types
-bj_MOUSEEVENTTYPE_DOWN            = 0    ---@type integer
-bj_MOUSEEVENTTYPE_UP              = 1    ---@type integer
-bj_MOUSEEVENTTYPE_MOVE            = 2    ---@type integer
+bj_MOUSEEVENTTYPE_DOWN = 0	---@type integer	
+bj_MOUSEEVENTTYPE_UP = 1	---@type integer	
+bj_MOUSEEVENTTYPE_MOVE = 2	---@type integer	
 --  Transmission timing methods
-bj_TIMETYPE_ADD                   = 0    ---@type integer
-bj_TIMETYPE_SET                   = 1    ---@type integer
-bj_TIMETYPE_SUB                   = 2    ---@type integer
+bj_TIMETYPE_ADD = 0	---@type integer	
+bj_TIMETYPE_SET = 1	---@type integer	
+bj_TIMETYPE_SUB = 2	---@type integer	
 --  Camera bounds adjustment methods
-bj_CAMERABOUNDS_ADJUST_ADD        = 0    ---@type integer
-bj_CAMERABOUNDS_ADJUST_SUB        = 1    ---@type integer
+bj_CAMERABOUNDS_ADJUST_ADD = 0	---@type integer	
+bj_CAMERABOUNDS_ADJUST_SUB = 1	---@type integer	
 --  Quest creation states
-bj_QUESTTYPE_REQ_DISCOVERED       = 0    ---@type integer
-bj_QUESTTYPE_REQ_UNDISCOVERED     = 1    ---@type integer
-bj_QUESTTYPE_OPT_DISCOVERED       = 2    ---@type integer
-bj_QUESTTYPE_OPT_UNDISCOVERED     = 3    ---@type integer
+bj_QUESTTYPE_REQ_DISCOVERED = 0	---@type integer	
+bj_QUESTTYPE_REQ_UNDISCOVERED = 1	---@type integer	
+bj_QUESTTYPE_OPT_DISCOVERED = 2	---@type integer	
+bj_QUESTTYPE_OPT_UNDISCOVERED = 3	---@type integer	
 --  Quest message types
-bj_QUESTMESSAGE_DISCOVERED        = 0    ---@type integer
-bj_QUESTMESSAGE_UPDATED           = 1    ---@type integer
-bj_QUESTMESSAGE_COMPLETED         = 2    ---@type integer
-bj_QUESTMESSAGE_FAILED            = 3    ---@type integer
-bj_QUESTMESSAGE_REQUIREMENT       = 4    ---@type integer
-bj_QUESTMESSAGE_MISSIONFAILED     = 5    ---@type integer
-bj_QUESTMESSAGE_ALWAYSHINT        = 6    ---@type integer
-bj_QUESTMESSAGE_HINT              = 7    ---@type integer
-bj_QUESTMESSAGE_SECRET            = 8    ---@type integer
-bj_QUESTMESSAGE_UNITACQUIRED      = 9    ---@type integer
-bj_QUESTMESSAGE_UNITAVAILABLE     = 10    ---@type integer
-bj_QUESTMESSAGE_ITEMACQUIRED      = 11    ---@type integer
-bj_QUESTMESSAGE_WARNING           = 12    ---@type integer
+bj_QUESTMESSAGE_DISCOVERED = 0	---@type integer	
+bj_QUESTMESSAGE_UPDATED = 1	---@type integer	
+bj_QUESTMESSAGE_COMPLETED = 2	---@type integer	
+bj_QUESTMESSAGE_FAILED = 3	---@type integer	
+bj_QUESTMESSAGE_REQUIREMENT = 4	---@type integer	
+bj_QUESTMESSAGE_MISSIONFAILED = 5	---@type integer	
+bj_QUESTMESSAGE_ALWAYSHINT = 6	---@type integer	
+bj_QUESTMESSAGE_HINT = 7	---@type integer	
+bj_QUESTMESSAGE_SECRET = 8	---@type integer	
+bj_QUESTMESSAGE_UNITACQUIRED = 9	---@type integer	
+bj_QUESTMESSAGE_UNITAVAILABLE = 10	---@type integer	
+bj_QUESTMESSAGE_ITEMACQUIRED = 11	---@type integer	
+bj_QUESTMESSAGE_WARNING = 12	---@type integer	
 --  Leaderboard sorting methods
-bj_SORTTYPE_SORTBYVALUE           = 0    ---@type integer
-bj_SORTTYPE_SORTBYPLAYER          = 1    ---@type integer
-bj_SORTTYPE_SORTBYLABEL           = 2    ---@type integer
+bj_SORTTYPE_SORTBYVALUE = 0	---@type integer	
+bj_SORTTYPE_SORTBYPLAYER = 1	---@type integer	
+bj_SORTTYPE_SORTBYLABEL = 2	---@type integer	
 --  Cinematic fade filter methods
-bj_CINEFADETYPE_FADEIN            = 0    ---@type integer
-bj_CINEFADETYPE_FADEOUT           = 1    ---@type integer
-bj_CINEFADETYPE_FADEOUTIN         = 2    ---@type integer
+bj_CINEFADETYPE_FADEIN = 0	---@type integer	
+bj_CINEFADETYPE_FADEOUT = 1	---@type integer	
+bj_CINEFADETYPE_FADEOUTIN = 2	---@type integer	
 --  Buff removal methods
-bj_REMOVEBUFFS_POSITIVE           = 0    ---@type integer
-bj_REMOVEBUFFS_NEGATIVE           = 1    ---@type integer
-bj_REMOVEBUFFS_ALL                = 2    ---@type integer
-bj_REMOVEBUFFS_NONTLIFE           = 3    ---@type integer
+bj_REMOVEBUFFS_POSITIVE = 0	---@type integer	
+bj_REMOVEBUFFS_NEGATIVE = 1	---@type integer	
+bj_REMOVEBUFFS_ALL = 2	---@type integer	
+bj_REMOVEBUFFS_NONTLIFE = 3	---@type integer	
 --  Buff properties - polarity
-bj_BUFF_POLARITY_POSITIVE         = 0    ---@type integer
-bj_BUFF_POLARITY_NEGATIVE         = 1    ---@type integer
-bj_BUFF_POLARITY_EITHER           = 2    ---@type integer
+bj_BUFF_POLARITY_POSITIVE = 0	---@type integer	
+bj_BUFF_POLARITY_NEGATIVE = 1	---@type integer	
+bj_BUFF_POLARITY_EITHER = 2	---@type integer	
 --  Buff properties - resist type
-bj_BUFF_RESIST_MAGIC              = 0    ---@type integer
-bj_BUFF_RESIST_PHYSICAL           = 1    ---@type integer
-bj_BUFF_RESIST_EITHER             = 2    ---@type integer
-bj_BUFF_RESIST_BOTH               = 3    ---@type integer
+bj_BUFF_RESIST_MAGIC = 0	---@type integer	
+bj_BUFF_RESIST_PHYSICAL = 1	---@type integer	
+bj_BUFF_RESIST_EITHER = 2	---@type integer	
+bj_BUFF_RESIST_BOTH = 3	---@type integer	
 --  Hero stats
-bj_HEROSTAT_STR                   = 0    ---@type integer
-bj_HEROSTAT_AGI                   = 1    ---@type integer
-bj_HEROSTAT_INT                   = 2    ---@type integer
+bj_HEROSTAT_STR = 0	---@type integer	
+bj_HEROSTAT_AGI = 1	---@type integer	
+bj_HEROSTAT_INT = 2	---@type integer	
 --  Hero skill point modification methods
-bj_MODIFYMETHOD_ADD               = 0    ---@type integer
-bj_MODIFYMETHOD_SUB               = 1    ---@type integer
-bj_MODIFYMETHOD_SET               = 2    ---@type integer
+bj_MODIFYMETHOD_ADD = 0	---@type integer	
+bj_MODIFYMETHOD_SUB = 1	---@type integer	
+bj_MODIFYMETHOD_SET = 2	---@type integer	
 --  Unit state adjustment methods (for replaced units)
-bj_UNIT_STATE_METHOD_ABSOLUTE     = 0    ---@type integer
-bj_UNIT_STATE_METHOD_RELATIVE     = 1    ---@type integer
-bj_UNIT_STATE_METHOD_DEFAULTS     = 2    ---@type integer
-bj_UNIT_STATE_METHOD_MAXIMUM      = 3    ---@type integer
+bj_UNIT_STATE_METHOD_ABSOLUTE = 0	---@type integer	
+bj_UNIT_STATE_METHOD_RELATIVE = 1	---@type integer	
+bj_UNIT_STATE_METHOD_DEFAULTS = 2	---@type integer	
+bj_UNIT_STATE_METHOD_MAXIMUM = 3	---@type integer	
 --  Gate operations
-bj_GATEOPERATION_CLOSE            = 0    ---@type integer
-bj_GATEOPERATION_OPEN             = 1    ---@type integer
-bj_GATEOPERATION_DESTROY          = 2    ---@type integer
+bj_GATEOPERATION_CLOSE = 0	---@type integer	
+bj_GATEOPERATION_OPEN = 1	---@type integer	
+bj_GATEOPERATION_DESTROY = 2	---@type integer	
 --  Game cache value types
-bj_GAMECACHE_BOOLEAN              = 0    ---@type integer
-bj_GAMECACHE_INTEGER              = 1    ---@type integer
-bj_GAMECACHE_REAL                 = 2    ---@type integer
-bj_GAMECACHE_UNIT                 = 3    ---@type integer
-bj_GAMECACHE_STRING               = 4    ---@type integer
+bj_GAMECACHE_BOOLEAN = 0	---@type integer	
+bj_GAMECACHE_INTEGER = 1	---@type integer	
+bj_GAMECACHE_REAL = 2	---@type integer	
+bj_GAMECACHE_UNIT = 3	---@type integer	
+bj_GAMECACHE_STRING = 4	---@type integer	
 --  Hashtable value types
-bj_HASHTABLE_BOOLEAN              = 0    ---@type integer
-bj_HASHTABLE_INTEGER              = 1    ---@type integer
-bj_HASHTABLE_REAL                 = 2    ---@type integer
-bj_HASHTABLE_STRING               = 3    ---@type integer
-bj_HASHTABLE_HANDLE               = 4    ---@type integer
+bj_HASHTABLE_BOOLEAN = 0	---@type integer	
+bj_HASHTABLE_INTEGER = 1	---@type integer	
+bj_HASHTABLE_REAL = 2	---@type integer	
+bj_HASHTABLE_STRING = 3	---@type integer	
+bj_HASHTABLE_HANDLE = 4	---@type integer	
 --  Item status types
-bj_ITEM_STATUS_HIDDEN             = 0    ---@type integer
-bj_ITEM_STATUS_OWNED              = 1    ---@type integer
-bj_ITEM_STATUS_INVULNERABLE       = 2    ---@type integer
-bj_ITEM_STATUS_POWERUP            = 3    ---@type integer
-bj_ITEM_STATUS_SELLABLE           = 4    ---@type integer
-bj_ITEM_STATUS_PAWNABLE           = 5    ---@type integer
+bj_ITEM_STATUS_HIDDEN = 0	---@type integer	
+bj_ITEM_STATUS_OWNED = 1	---@type integer	
+bj_ITEM_STATUS_INVULNERABLE = 2	---@type integer	
+bj_ITEM_STATUS_POWERUP = 3	---@type integer	
+bj_ITEM_STATUS_SELLABLE = 4	---@type integer	
+bj_ITEM_STATUS_PAWNABLE = 5	---@type integer	
 --  Itemcode status types
-bj_ITEMCODE_STATUS_POWERUP        = 0    ---@type integer
-bj_ITEMCODE_STATUS_SELLABLE       = 1    ---@type integer
-bj_ITEMCODE_STATUS_PAWNABLE       = 2    ---@type integer
+bj_ITEMCODE_STATUS_POWERUP = 0	---@type integer	
+bj_ITEMCODE_STATUS_SELLABLE = 1	---@type integer	
+bj_ITEMCODE_STATUS_PAWNABLE = 2	---@type integer	
 --  Minimap ping styles
-bj_MINIMAPPINGSTYLE_SIMPLE        = 0    ---@type integer
-bj_MINIMAPPINGSTYLE_FLASHY        = 1    ---@type integer
-bj_MINIMAPPINGSTYLE_ATTACK        = 2    ---@type integer
+bj_MINIMAPPINGSTYLE_SIMPLE = 0	---@type integer	
+bj_MINIMAPPINGSTYLE_FLASHY = 1	---@type integer	
+bj_MINIMAPPINGSTYLE_ATTACK = 2	---@type integer	
 --  Campaign Minimap icon styles
-bj_CAMPPINGSTYLE_PRIMARY          = 0    ---@type integer
-bj_CAMPPINGSTYLE_PRIMARY_GREEN    = 1    ---@type integer
-bj_CAMPPINGSTYLE_PRIMARY_RED      = 2    ---@type integer
-bj_CAMPPINGSTYLE_BONUS            = 3    ---@type integer
-bj_CAMPPINGSTYLE_TURNIN           = 4    ---@type integer
-bj_CAMPPINGSTYLE_BOSS             = 5    ---@type integer
-bj_CAMPPINGSTYLE_CONTROL_ALLY     = 6    ---@type integer
-bj_CAMPPINGSTYLE_CONTROL_NEUTRAL  = 7    ---@type integer
-bj_CAMPPINGSTYLE_CONTROL_ENEMY    = 8    ---@type integer
+bj_CAMPPINGSTYLE_PRIMARY = 0	---@type integer	
+bj_CAMPPINGSTYLE_PRIMARY_GREEN = 1	---@type integer	
+bj_CAMPPINGSTYLE_PRIMARY_RED = 2	---@type integer	
+bj_CAMPPINGSTYLE_BONUS = 3	---@type integer	
+bj_CAMPPINGSTYLE_TURNIN = 4	---@type integer	
+bj_CAMPPINGSTYLE_BOSS = 5	---@type integer	
+bj_CAMPPINGSTYLE_CONTROL_ALLY = 6	---@type integer	
+bj_CAMPPINGSTYLE_CONTROL_NEUTRAL = 7	---@type integer	
+bj_CAMPPINGSTYLE_CONTROL_ENEMY = 8	---@type integer	
 --  Corpse creation settings
-bj_CORPSE_MAX_DEATH_TIME          = 8.00    ---@type real
+bj_CORPSE_MAX_DEATH_TIME = 8.00	---@type real	
 --  Corpse creation styles
-bj_CORPSETYPE_FLESH               = 0    ---@type integer
-bj_CORPSETYPE_BONE                = 1    ---@type integer
+bj_CORPSETYPE_FLESH = 0	---@type integer	
+bj_CORPSETYPE_BONE = 1	---@type integer	
 --  Elevator pathing-blocker destructable code
-bj_ELEVATOR_BLOCKER_CODE          = FourCC('DTep')    ---@type integer
-bj_ELEVATOR_CODE01                = FourCC('DTrf')    ---@type integer
-bj_ELEVATOR_CODE02                = FourCC('DTrx')    ---@type integer
+bj_ELEVATOR_BLOCKER_CODE = FourCC('DTep')	---@type integer	
+bj_ELEVATOR_CODE01 = FourCC('DTrf')	---@type integer	
+bj_ELEVATOR_CODE02 = FourCC('DTrx')	---@type integer	
 --  Elevator wall codes
-bj_ELEVATOR_WALL_TYPE_ALL         = 0    ---@type integer
-bj_ELEVATOR_WALL_TYPE_EAST        = 1    ---@type integer
-bj_ELEVATOR_WALL_TYPE_NORTH       = 2    ---@type integer
-bj_ELEVATOR_WALL_TYPE_SOUTH       = 3    ---@type integer
-bj_ELEVATOR_WALL_TYPE_WEST        = 4    ---@type integer
+bj_ELEVATOR_WALL_TYPE_ALL = 0	---@type integer	
+bj_ELEVATOR_WALL_TYPE_EAST = 1	---@type integer	
+bj_ELEVATOR_WALL_TYPE_NORTH = 2	---@type integer	
+bj_ELEVATOR_WALL_TYPE_SOUTH = 3	---@type integer	
+bj_ELEVATOR_WALL_TYPE_WEST = 4	---@type integer	
 -- -----------------------------------------------------------------------
 --  Variables
 -- 
 --  Force predefs
-bj_FORCE_ALL_PLAYERS              = nil    ---@type force
-bj_FORCE_PLAYER                   = {}    ---@type force
-bj_MELEE_MAX_TWINKED_HEROES       = 0    ---@type integer
+bj_FORCE_ALL_PLAYERS = nil	---@type force	
+bj_FORCE_PLAYER = {}	---@type force	
+bj_MELEE_MAX_TWINKED_HEROES = 0	---@type integer	
 --  Map area rects
-bj_mapInitialPlayableArea         = nil    ---@type rect
-bj_mapInitialCameraBounds         = nil    ---@type rect
+bj_mapInitialPlayableArea = nil	---@type rect	
+bj_mapInitialCameraBounds = nil	---@type rect	
 --  Utility function vars
-bj_forLoopAIndex                  = 0    ---@type integer
-bj_forLoopBIndex                  = 0    ---@type integer
-bj_forLoopAIndexEnd               = 0    ---@type integer
-bj_forLoopBIndexEnd               = 0    ---@type integer
-bj_slotControlReady               = false    ---@type boolean
-bj_slotControlUsed                = {}    ---@type boolean
-bj_slotControl                    = {}    ---@type mapcontrol
+bj_forLoopAIndex = 0	---@type integer	
+bj_forLoopBIndex = 0	---@type integer	
+bj_forLoopAIndexEnd = 0	---@type integer	
+bj_forLoopBIndexEnd = 0	---@type integer	
+bj_slotControlReady = false	---@type boolean	
+bj_slotControlUsed = {}	---@type boolean	
+bj_slotControl = {}	---@type mapcontrol	
 --  Game started detection vars
-bj_gameStartedTimer               = nil    ---@type timer
-bj_gameStarted                    = false    ---@type boolean
-bj_volumeGroupsTimer              = CreateTimer()    ---@type timer
+bj_gameStartedTimer = nil	---@type timer	
+bj_gameStarted = false	---@type boolean	
+bj_volumeGroupsTimer = CreateTimer()	---@type timer	
 --  Singleplayer check
-bj_isSinglePlayer                 = false    ---@type boolean
+bj_isSinglePlayer = false	---@type boolean	
 --  Day/Night Cycle vars
-bj_dncSoundsDay                   = nil    ---@type trigger
-bj_dncSoundsNight                 = nil    ---@type trigger
-bj_dayAmbientSound                = nil    ---@type sound
-bj_nightAmbientSound              = nil    ---@type sound
-bj_dncSoundsDawn                  = nil    ---@type trigger
-bj_dncSoundsDusk                  = nil    ---@type trigger
-bj_dawnSound                      = nil    ---@type sound
-bj_duskSound                      = nil    ---@type sound
-bj_useDawnDuskSounds              = true    ---@type boolean
-bj_dncIsDaytime                   = false    ---@type boolean
+bj_dncSoundsDay = nil	---@type trigger	
+bj_dncSoundsNight = nil	---@type trigger	
+bj_dayAmbientSound = nil	---@type sound	
+bj_nightAmbientSound = nil	---@type sound	
+bj_dncSoundsDawn = nil	---@type trigger	
+bj_dncSoundsDusk = nil	---@type trigger	
+bj_dawnSound = nil	---@type sound	
+bj_duskSound = nil	---@type sound	
+bj_useDawnDuskSounds = true	---@type boolean	
+bj_dncIsDaytime = false	---@type boolean	
 --  Triggered sounds
 -- sound              bj_pingMinimapSound         = null
-bj_rescueSound                    = nil    ---@type sound
-bj_questDiscoveredSound           = nil    ---@type sound
-bj_questUpdatedSound              = nil    ---@type sound
-bj_questCompletedSound            = nil    ---@type sound
-bj_questFailedSound               = nil    ---@type sound
-bj_questHintSound                 = nil    ---@type sound
-bj_questSecretSound               = nil    ---@type sound
-bj_questItemAcquiredSound         = nil    ---@type sound
-bj_questWarningSound              = nil    ---@type sound
-bj_victoryDialogSound             = nil    ---@type sound
-bj_defeatDialogSound              = nil    ---@type sound
+bj_rescueSound = nil	---@type sound	
+bj_questDiscoveredSound = nil	---@type sound	
+bj_questUpdatedSound = nil	---@type sound	
+bj_questCompletedSound = nil	---@type sound	
+bj_questFailedSound = nil	---@type sound	
+bj_questHintSound = nil	---@type sound	
+bj_questSecretSound = nil	---@type sound	
+bj_questItemAcquiredSound = nil	---@type sound	
+bj_questWarningSound = nil	---@type sound	
+bj_victoryDialogSound = nil	---@type sound	
+bj_defeatDialogSound = nil	---@type sound	
 --  Marketplace vars
-bj_stockItemPurchased             = nil    ---@type trigger
-bj_stockUpdateTimer               = nil    ---@type timer
-bj_stockAllowedPermanent          = {}    ---@type boolean
-bj_stockAllowedCharged            = {}    ---@type boolean
-bj_stockAllowedArtifact           = {}    ---@type boolean
-bj_stockPickedItemLevel           = 0    ---@type integer
+bj_stockItemPurchased = nil	---@type trigger	
+bj_stockUpdateTimer = nil	---@type timer	
+bj_stockAllowedPermanent = {}	---@type boolean	
+bj_stockAllowedCharged = {}	---@type boolean	
+bj_stockAllowedArtifact = {}	---@type boolean	
+bj_stockPickedItemLevel = 0	---@type integer	
 -- bj_stockPickedItemType	---@type itemtype	
 --  Melee vars
-bj_meleeVisibilityTrained         = nil    ---@type trigger
-bj_meleeVisibilityIsDay           = true    ---@type boolean
-bj_meleeGrantHeroItems            = false    ---@type boolean
-bj_meleeNearestMineToLoc          = nil    ---@type location
-bj_meleeNearestMine               = nil    ---@type unit
-bj_meleeNearestMineDist           = 0.00    ---@type real
-bj_meleeGameOver                  = false    ---@type boolean
-bj_meleeDefeated                  = {}    ---@type boolean
-bj_meleeVictoried                 = {}    ---@type boolean
-bj_ghoul                          = {}    ---@type unit
-bj_crippledTimer                  = {}    ---@type timer
-bj_crippledTimerWindows           = {}    ---@type timerdialog
-bj_playerIsCrippled               = {}    ---@type boolean
-bj_playerIsExposed                = {}    ---@type boolean
-bj_finishSoonAllExposed           = false    ---@type boolean
-bj_finishSoonTimerDialog          = nil    ---@type timerdialog
-bj_meleeTwinkedHeroes             = {}    ---@type integer
+bj_meleeVisibilityTrained = nil	---@type trigger	
+bj_meleeVisibilityIsDay = true	---@type boolean	
+bj_meleeGrantHeroItems = false	---@type boolean	
+bj_meleeNearestMineToLoc = nil	---@type location	
+bj_meleeNearestMine = nil	---@type unit	
+bj_meleeNearestMineDist = 0.00	---@type real	
+bj_meleeGameOver = false	---@type boolean	
+bj_meleeDefeated = {}	---@type boolean	
+bj_meleeVictoried = {}	---@type boolean	
+bj_ghoul = {}	---@type unit	
+bj_crippledTimer = {}	---@type timer	
+bj_crippledTimerWindows = {}	---@type timerdialog	
+bj_playerIsCrippled = {}	---@type boolean	
+bj_playerIsExposed = {}	---@type boolean	
+bj_finishSoonAllExposed = false	---@type boolean	
+bj_finishSoonTimerDialog = nil	---@type timerdialog	
+bj_meleeTwinkedHeroes = {}	---@type integer	
 --  Rescue behavior vars
-bj_rescueUnitBehavior             = nil    ---@type trigger
-bj_rescueChangeColorUnit          = true    ---@type boolean
-bj_rescueChangeColorBldg          = true    ---@type boolean
+bj_rescueUnitBehavior = nil	---@type trigger	
+bj_rescueChangeColorUnit = true	---@type boolean	
+bj_rescueChangeColorBldg = true	---@type boolean	
 --  Transmission vars
-bj_cineSceneEndingTimer           = nil    ---@type timer
-bj_cineSceneLastSound             = nil    ---@type sound
-bj_cineSceneBeingSkipped          = nil    ---@type trigger
+bj_cineSceneEndingTimer = nil	---@type timer	
+bj_cineSceneLastSound = nil	---@type sound	
+bj_cineSceneBeingSkipped = nil	---@type trigger	
 --  Cinematic mode vars
-bj_cineModePriorSpeed             = MAP_SPEED_NORMAL    ---@type gamespeed
-bj_cineModePriorFogSetting        = false    ---@type boolean
-bj_cineModePriorMaskSetting       = false    ---@type boolean
-bj_cineModeAlreadyIn              = false    ---@type boolean
-bj_cineModePriorDawnDusk          = false    ---@type boolean
-bj_cineModeSavedSeed              = 0    ---@type integer
+bj_cineModePriorSpeed = MAP_SPEED_NORMAL	---@type gamespeed	
+bj_cineModePriorFogSetting = false	---@type boolean	
+bj_cineModePriorMaskSetting = false	---@type boolean	
+bj_cineModeAlreadyIn = false	---@type boolean	
+bj_cineModePriorDawnDusk = false	---@type boolean	
+bj_cineModeSavedSeed = 0	---@type integer	
 --  Cinematic fade vars
-bj_cineFadeFinishTimer            = nil    ---@type timer
-bj_cineFadeContinueTimer          = nil    ---@type timer
-bj_cineFadeContinueRed            = 0    ---@type real
-bj_cineFadeContinueGreen          = 0    ---@type real
-bj_cineFadeContinueBlue           = 0    ---@type real
-bj_cineFadeContinueTrans          = 0    ---@type real
-bj_cineFadeContinueDuration       = 0    ---@type real
-bj_cineFadeContinueTex            = ""    ---@type string
+bj_cineFadeFinishTimer = nil	---@type timer	
+bj_cineFadeContinueTimer = nil	---@type timer	
+bj_cineFadeContinueRed = 0	---@type real	
+bj_cineFadeContinueGreen = 0	---@type real	
+bj_cineFadeContinueBlue = 0	---@type real	
+bj_cineFadeContinueTrans = 0	---@type real	
+bj_cineFadeContinueDuration = 0	---@type real	
+bj_cineFadeContinueTex = ""	---@type string	
 --  QueuedTriggerExecute vars
-bj_queuedExecTotal                = 0    ---@type integer
-bj_queuedExecTriggers             = {}    ---@type trigger
-bj_queuedExecUseConds             = {}    ---@type boolean
-bj_queuedExecTimeoutTimer         = CreateTimer()    ---@type timer
-bj_queuedExecTimeout              = nil    ---@type trigger
+bj_queuedExecTotal = 0	---@type integer	
+bj_queuedExecTriggers = {}	---@type trigger	
+bj_queuedExecUseConds = {}	---@type boolean	
+bj_queuedExecTimeoutTimer = CreateTimer()	---@type timer	
+bj_queuedExecTimeout = nil	---@type trigger	
 --  Helper vars (for Filter and Enum funcs)
-bj_destInRegionDiesCount          = 0    ---@type integer
-bj_destInRegionDiesTrig           = nil    ---@type trigger
-bj_groupCountUnits                = 0    ---@type integer
-bj_forceCountPlayers              = 0    ---@type integer
-bj_groupEnumTypeId                = 0    ---@type integer
-bj_groupEnumOwningPlayer          = nil    ---@type player
-bj_groupAddGroupDest              = nil    ---@type group
-bj_groupRemoveGroupDest           = nil    ---@type group
-bj_groupRandomConsidered          = 0    ---@type integer
-bj_groupRandomCurrentPick         = nil    ---@type unit
-bj_groupLastCreatedDest           = nil    ---@type group
-bj_randomSubGroupGroup            = nil    ---@type group
-bj_randomSubGroupWant             = 0    ---@type integer
-bj_randomSubGroupTotal            = 0    ---@type integer
-bj_randomSubGroupChance           = 0    ---@type real
-bj_destRandomConsidered           = 0    ---@type integer
-bj_destRandomCurrentPick          = nil    ---@type destructable
-bj_elevatorWallBlocker            = nil    ---@type destructable
-bj_elevatorNeighbor               = nil    ---@type destructable
-bj_itemRandomConsidered           = 0    ---@type integer
-bj_itemRandomCurrentPick          = nil    ---@type item
-bj_forceRandomConsidered          = 0    ---@type integer
-bj_forceRandomCurrentPick         = nil    ---@type player
-bj_makeUnitRescuableUnit          = nil    ---@type unit
-bj_makeUnitRescuableFlag          = true    ---@type boolean
-bj_pauseAllUnitsFlag              = true    ---@type boolean
-bj_enumDestructableCenter         = nil    ---@type location
-bj_enumDestructableRadius         = 0    ---@type real
-bj_setPlayerTargetColor           = nil    ---@type playercolor
-bj_isUnitGroupDeadResult          = true    ---@type boolean
-bj_isUnitGroupEmptyResult         = true    ---@type boolean
-bj_isUnitGroupInRectResult        = true    ---@type boolean
-bj_isUnitGroupInRectRect          = nil    ---@type rect
-bj_changeLevelShowScores          = false    ---@type boolean
-bj_changeLevelMapName             = nil    ---@type string
-bj_suspendDecayFleshGroup         = CreateGroup()    ---@type group
-bj_suspendDecayBoneGroup          = CreateGroup()    ---@type group
-bj_delayedSuspendDecayTimer       = CreateTimer()    ---@type timer
-bj_delayedSuspendDecayTrig        = nil    ---@type trigger
-bj_livingPlayerUnitsTypeId        = 0    ---@type integer
-bj_lastDyingWidget                = nil    ---@type widget
+bj_destInRegionDiesCount = 0	---@type integer	
+bj_destInRegionDiesTrig = nil	---@type trigger	
+bj_groupCountUnits = 0	---@type integer	
+bj_forceCountPlayers = 0	---@type integer	
+bj_groupEnumTypeId = 0	---@type integer	
+bj_groupEnumOwningPlayer = nil	---@type player	
+bj_groupAddGroupDest = nil	---@type group	
+bj_groupRemoveGroupDest = nil	---@type group	
+bj_groupRandomConsidered = 0	---@type integer	
+bj_groupRandomCurrentPick = nil	---@type unit	
+bj_groupLastCreatedDest = nil	---@type group	
+bj_randomSubGroupGroup = nil	---@type group	
+bj_randomSubGroupWant = 0	---@type integer	
+bj_randomSubGroupTotal = 0	---@type integer	
+bj_randomSubGroupChance = 0	---@type real	
+bj_destRandomConsidered = 0	---@type integer	
+bj_destRandomCurrentPick = nil	---@type destructable	
+bj_elevatorWallBlocker = nil	---@type destructable	
+bj_elevatorNeighbor = nil	---@type destructable	
+bj_itemRandomConsidered = 0	---@type integer	
+bj_itemRandomCurrentPick = nil	---@type item	
+bj_forceRandomConsidered = 0	---@type integer	
+bj_forceRandomCurrentPick = nil	---@type player	
+bj_makeUnitRescuableUnit = nil	---@type unit	
+bj_makeUnitRescuableFlag = true	---@type boolean	
+bj_pauseAllUnitsFlag = true	---@type boolean	
+bj_enumDestructableCenter = nil	---@type location	
+bj_enumDestructableRadius = 0	---@type real	
+bj_setPlayerTargetColor = nil	---@type playercolor	
+bj_isUnitGroupDeadResult = true	---@type boolean	
+bj_isUnitGroupEmptyResult = true	---@type boolean	
+bj_isUnitGroupInRectResult = true	---@type boolean	
+bj_isUnitGroupInRectRect = nil	---@type rect	
+bj_changeLevelShowScores = false	---@type boolean	
+bj_changeLevelMapName = nil	---@type string	
+bj_suspendDecayFleshGroup = CreateGroup()	---@type group	
+bj_suspendDecayBoneGroup = CreateGroup()	---@type group	
+bj_delayedSuspendDecayTimer = CreateTimer()	---@type timer	
+bj_delayedSuspendDecayTrig = nil	---@type trigger	
+bj_livingPlayerUnitsTypeId = 0	---@type integer	
+bj_lastDyingWidget = nil	---@type widget	
 --  Random distribution vars
-bj_randDistCount                  = 0    ---@type integer
-bj_randDistID                     = {}    ---@type integer
-bj_randDistChance                 = {}    ---@type integer
+bj_randDistCount = 0	---@type integer	
+bj_randDistID = {}	---@type integer	
+bj_randDistChance = {}	---@type integer	
 --  Last X'd vars
-bj_lastCreatedUnit                = nil    ---@type unit
-bj_lastCreatedItem                = nil    ---@type item
-bj_lastRemovedItem                = nil    ---@type item
-bj_lastHauntedGoldMine            = nil    ---@type unit
-bj_lastCreatedDestructable        = nil    ---@type destructable
-bj_lastCreatedGroup               = CreateGroup()    ---@type group
-bj_lastCreatedFogModifier         = nil    ---@type fogmodifier
-bj_lastCreatedEffect              = nil    ---@type effect
-bj_lastCreatedWeatherEffect       = nil    ---@type weathereffect
-bj_lastCreatedTerrainDeformation  = nil    ---@type terraindeformation
-bj_lastCreatedQuest               = nil    ---@type quest
-bj_lastCreatedQuestItem           = nil    ---@type questitem
-bj_lastCreatedDefeatCondition     = nil    ---@type defeatcondition
-bj_lastStartedTimer               = CreateTimer()    ---@type timer
-bj_lastCreatedTimerDialog         = nil    ---@type timerdialog
-bj_lastCreatedLeaderboard         = nil    ---@type leaderboard
-bj_lastCreatedMultiboard          = nil    ---@type multiboard
-bj_lastPlayedSound                = nil    ---@type sound
-bj_lastPlayedMusic                = ""    ---@type string
-bj_lastTransmissionDuration       = 0    ---@type real
-bj_lastCreatedGameCache           = nil    ---@type gamecache
-bj_lastCreatedHashtable           = nil    ---@type hashtable
-bj_lastLoadedUnit                 = nil    ---@type unit
-bj_lastCreatedButton              = nil    ---@type button
-bj_lastReplacedUnit               = nil    ---@type unit
-bj_lastCreatedTextTag             = nil    ---@type texttag
-bj_lastCreatedLightning           = nil    ---@type lightning
-bj_lastCreatedImage               = nil    ---@type image
-bj_lastCreatedUbersplat           = nil    ---@type ubersplat
-bj_lastCreatedMinimapIcon         = nil    ---@type minimapicon
-bj_lastCreatedCommandButtonEffect = nil    ---@type commandbuttoneffect
+bj_lastCreatedUnit = nil	---@type unit	
+bj_lastCreatedItem = nil	---@type item	
+bj_lastRemovedItem = nil	---@type item	
+bj_lastHauntedGoldMine = nil	---@type unit	
+bj_lastCreatedDestructable = nil	---@type destructable	
+bj_lastCreatedGroup = CreateGroup()	---@type group	
+bj_lastCreatedFogModifier = nil	---@type fogmodifier	
+bj_lastCreatedEffect = nil	---@type effect	
+bj_lastCreatedWeatherEffect = nil	---@type weathereffect	
+bj_lastCreatedTerrainDeformation = nil	---@type terraindeformation	
+bj_lastCreatedQuest = nil	---@type quest	
+bj_lastCreatedQuestItem = nil	---@type questitem	
+bj_lastCreatedDefeatCondition = nil	---@type defeatcondition	
+bj_lastStartedTimer = CreateTimer()	---@type timer	
+bj_lastCreatedTimerDialog = nil	---@type timerdialog	
+bj_lastCreatedLeaderboard = nil	---@type leaderboard	
+bj_lastCreatedMultiboard = nil	---@type multiboard	
+bj_lastPlayedSound = nil	---@type sound	
+bj_lastPlayedMusic = ""	---@type string	
+bj_lastTransmissionDuration = 0	---@type real	
+bj_lastCreatedGameCache = nil	---@type gamecache	
+bj_lastCreatedHashtable = nil	---@type hashtable	
+bj_lastLoadedUnit = nil	---@type unit	
+bj_lastCreatedButton = nil	---@type button	
+bj_lastReplacedUnit = nil	---@type unit	
+bj_lastCreatedTextTag = nil	---@type texttag	
+bj_lastCreatedLightning = nil	---@type lightning	
+bj_lastCreatedImage = nil	---@type image	
+bj_lastCreatedUbersplat = nil	---@type ubersplat	
+bj_lastCreatedMinimapIcon = nil	---@type minimapicon	
+bj_lastCreatedCommandButtonEffect = nil	---@type commandbuttoneffect	
 --  Filter function vars
-filterIssueHauntOrderAtLocBJ      = nil    ---@type boolexpr
-filterEnumDestructablesInCircleBJ = nil    ---@type boolexpr
-filterGetUnitsInRectOfPlayer      = nil    ---@type boolexpr
-filterGetUnitsOfTypeIdAll         = nil    ---@type boolexpr
-filterGetUnitsOfPlayerAndTypeId   = nil    ---@type boolexpr
-filterMeleeTrainedUnitIsHeroBJ    = nil    ---@type boolexpr
-filterLivingPlayerUnitsOfTypeId   = nil    ---@type boolexpr
+filterIssueHauntOrderAtLocBJ = nil	---@type boolexpr	
+filterEnumDestructablesInCircleBJ = nil	---@type boolexpr	
+filterGetUnitsInRectOfPlayer = nil	---@type boolexpr	
+filterGetUnitsOfTypeIdAll = nil	---@type boolexpr	
+filterGetUnitsOfPlayerAndTypeId = nil	---@type boolexpr	
+filterMeleeTrainedUnitIsHeroBJ = nil	---@type boolexpr	
+filterLivingPlayerUnitsOfTypeId = nil	---@type boolexpr	
 --  Memory cleanup vars
-bj_wantDestroyGroup               = false    ---@type boolean
+bj_wantDestroyGroup = false	---@type boolean	
 --  Instanced Operation Results
-bj_lastInstObjFuncSuccessful      = true    ---@type boolean
+bj_lastInstObjFuncSuccessful = true	---@type boolean	
 -- ***************************************************************************
 -- 
 -- *  Debugging Functions
@@ -598,6 +598,7 @@ bj_lastInstObjFuncSuccessful      = true    ---@type boolean
 -- ===========================================================================
 
 ---@param msg string
+---@return nothing
 function BJDebugMsg(msg)
 	local i = 0
 	while true do
@@ -919,6 +920,7 @@ end
 -- 
 
 ---@param trig trigger
+---@return nothing
 function ConditionalTriggerExecute(trig)
 	if TriggerEvaluate(trig) then
 		TriggerExecute(trig)
@@ -933,7 +935,7 @@ end
 ---@return boolean
 function TriggerExecuteBJ(trig, checkConditions)
 	if checkConditions then
-		if not (TriggerEvaluate(trig)) then
+		if  not (TriggerEvaluate(trig)) then
 			return false
 		end
 	end
@@ -951,7 +953,7 @@ end
 ---@return boolean
 function PostTriggerExecuteBJ(trig, checkConditions)
 	if checkConditions then
-		if not (TriggerEvaluate(trig)) then
+		if  not (TriggerEvaluate(trig)) then
 			return false
 		end
 	end
@@ -961,11 +963,12 @@ end
 -- ===========================================================================
 --  Debug - Display the contents of the trigger queue (as either null or "x"
 --  for each entry).
+---@return nothing
 function QueuedTriggerCheck()
 	local s = "TrigQueue Check "
 	local i
 	
-	i       = 0
+	i = 0
 	while true do
 		if i >= bj_queuedExecTotal then break end
 		s = s .. "q[" .. I2S(i) .. "]="
@@ -1016,12 +1019,12 @@ function QueuedTriggerRemoveByIndex(trigIndex)
 	
 	--  Shift all queue entries down to fill in the gap.
 	bj_queuedExecTotal = bj_queuedExecTotal - 1
-	index              = trigIndex
+	index = trigIndex
 	while true do
 		if index >= bj_queuedExecTotal then break end
 		bj_queuedExecTriggers[index] = bj_queuedExecTriggers[index + 1]
 		bj_queuedExecUseConds[index] = bj_queuedExecUseConds[index + 1]
-		index                        = index + 1
+		index = index + 1
 	end
 	return true
 end
@@ -1062,7 +1065,7 @@ function QueuedTriggerAddBJ(trig, checkConditions)
 	--  Add the trigger to an array of to-be-executed triggers.
 	bj_queuedExecTriggers[bj_queuedExecTotal] = trig
 	bj_queuedExecUseConds[bj_queuedExecTotal] = checkConditions
-	bj_queuedExecTotal                        = bj_queuedExecTotal + 1
+	bj_queuedExecTotal = bj_queuedExecTotal + 1
 	
 	--  If this is the only trigger in the queue, run it.
 	if (bj_queuedExecTotal == 1) then
@@ -1076,6 +1079,7 @@ end
 -- 
 
 ---@param trig trigger
+---@return nothing
 function QueuedTriggerRemoveBJ(trig)
 	local index
 	local trigIndex
@@ -1084,7 +1088,7 @@ function QueuedTriggerRemoveBJ(trig)
 	--  Find the trigger's index.
 	trigIndex = QueuedTriggerGetIndex(trig)
 	if (trigIndex == -1) then
-		return
+		return 
 	end
 	
 	--  Shuffle the other trigger entries down to fill in the gap.
@@ -1100,12 +1104,13 @@ end
 --  Denotes the end of a queued trigger. Be sure to call this only once per
 --  queued trigger, lest you step on the toes of other queued triggers.
 -- 
+---@return nothing
 function QueuedTriggerDoneBJ()
 	local index
 	
 	--  Make sure there's something on the queue to remove.
 	if (bj_queuedExecTotal <= 0) then
-		return
+		return 
 	end
 	
 	--  Remove the currently running trigger from the array.
@@ -1118,6 +1123,7 @@ end
 -- ===========================================================================
 --  Empty the trigger queue.
 -- 
+---@return nothing
 function QueuedTriggerClearBJ()
 	PauseTimer(bj_queuedExecTimeoutTimer)
 	bj_queuedExecTotal = 0
@@ -1125,6 +1131,7 @@ end
 -- ===========================================================================
 --  Remove all but the currently executing trigger from the trigger queue.
 -- 
+---@return nothing
 function QueuedTriggerClearInactiveBJ()
 	bj_queuedExecTotal = IMinBJ(bj_queuedExecTotal, 1)
 end
@@ -1153,6 +1160,7 @@ end
 -- ===========================================================================
 
 ---@param newIndex integer
+---@return nothing
 function SetForLoopIndexA(newIndex)
 	bj_forLoopAIndex = newIndex
 end
@@ -1164,6 +1172,7 @@ end
 -- ===========================================================================
 
 ---@param newIndex integer
+---@return nothing
 function SetForLoopIndexB(newIndex)
 	bj_forLoopBIndex = newIndex
 end
@@ -1172,6 +1181,7 @@ end
 --  and polling until the timer expires.
 
 ---@param duration real
+---@return nothing
 function PolledWait(duration)
 	local t
 	local timeRemaining
@@ -1216,6 +1226,7 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function DoNothing()
 end
 -- ===========================================================================
@@ -1225,6 +1236,7 @@ end
 -- 
 
 ---@param commentString string
+---@return nothing
 function CommentString(commentString)
 end
 -- ===========================================================================
@@ -1262,7 +1274,7 @@ end
 ---@return integer
 function PercentToInt(percentage, max)
 	local realpercent = percentage * I2R(max) * 0.01
-	local result      = MathRound(realpercent)
+	local result = MathRound(realpercent)
 	
 	if (result < 0) then
 		result = 0
@@ -1287,12 +1299,14 @@ end
 -- ===========================================================================
 
 ---@param whatTime real
+---@return nothing
 function SetTimeOfDay(whatTime)
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, whatTime)
 end
 -- ===========================================================================
 
 ---@param scalePercent real
+---@return nothing
 function SetTimeOfDayScalePercentBJ(scalePercent)
 	SetTimeOfDayScale(scalePercent * 0.01)
 end
@@ -1304,6 +1318,7 @@ end
 -- ===========================================================================
 
 ---@param soundName string
+---@return nothing
 function PlaySound(soundName)
 	local soundHandle = CreateSound(soundName, false, false, true, 12700, 12700, "")
 	StartSound(soundHandle)
@@ -1345,7 +1360,7 @@ end
 -- ===========================================================================
 ---@return camerasetup
 function GetCurrentCameraSetup()
-	local theCam   = CreateCameraSetup()
+	local theCam = CreateCameraSetup()
 	local duration = 0
 	CameraSetupSetField(theCam, CAMERA_FIELD_TARGET_DISTANCE, GetCameraField(CAMERA_FIELD_TARGET_DISTANCE), duration)
 	CameraSetupSetField(theCam, CAMERA_FIELD_FARZ, GetCameraField(CAMERA_FIELD_FARZ), duration)
@@ -1366,6 +1381,7 @@ end
 ---@param whichSetup camerasetup
 ---@param whichPlayer player
 ---@param duration real
+---@return nothing
 function CameraSetupApplyForPlayer(doPan, whichSetup, whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1381,6 +1397,7 @@ end
 ---@param easeInDuration real
 ---@param easeOutDuration real
 ---@param smoothFactor real
+---@return nothing
 function CameraSetupApplyForPlayerSmooth(doPan, whichSetup, whichPlayer, forcedDuration, easeInDuration, easeOutDuration, smoothFactor)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1401,6 +1418,7 @@ end
 ---@param whichField camerafield
 ---@param value real
 ---@param duration real
+---@return nothing
 function SetCameraFieldForPlayer(whichPlayer, whichField, value, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1414,6 +1432,7 @@ end
 ---@param xoffset real
 ---@param yoffset real
 ---@param inheritOrientation boolean
+---@return nothing
 function SetCameraTargetControllerNoZForPlayer(whichPlayer, whichUnit, xoffset, yoffset, inheritOrientation)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1425,6 +1444,7 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
+---@return nothing
 function SetCameraPositionForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1435,6 +1455,7 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
+---@return nothing
 function SetCameraPositionLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1447,6 +1468,7 @@ end
 ---@param loc location
 ---@param whichPlayer player
 ---@param duration real
+---@return nothing
 function RotateCameraAroundLocBJ(degrees, loc, whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1458,6 +1480,7 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
+---@return nothing
 function PanCameraToForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1468,6 +1491,7 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
+---@return nothing
 function PanCameraToLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1480,6 +1504,7 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
+---@return nothing
 function PanCameraToTimedForPlayer(whichPlayer, x, y, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1491,6 +1516,7 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
+---@return nothing
 function PanCameraToTimedLocForPlayer(whichPlayer, loc, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1503,6 +1529,7 @@ end
 ---@param loc location
 ---@param zOffset real
 ---@param duration real
+---@return nothing
 function PanCameraToTimedLocWithZForPlayer(whichPlayer, loc, zOffset, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1514,6 +1541,7 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
+---@return nothing
 function SmartCameraPanBJ(whichPlayer, loc, duration)
 	local dist
 	local cameraLoc = GetCameraTargetPositionLoc()
@@ -1537,6 +1565,7 @@ end
 
 ---@param whichPlayer player
 ---@param cameraModelFile string
+---@return nothing
 function SetCinematicCameraForPlayer(whichPlayer, cameraModelFile)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1547,6 +1576,7 @@ end
 
 ---@param whichPlayer player
 ---@param duration real
+---@return nothing
 function ResetToGameCameraForPlayer(whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1558,6 +1588,7 @@ end
 ---@param whichPlayer player
 ---@param magnitude real
 ---@param velocity real
+---@return nothing
 function CameraSetSourceNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1569,6 +1600,7 @@ end
 ---@param whichPlayer player
 ---@param magnitude real
 ---@param velocity real
+---@return nothing
 function CameraSetTargetNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1579,6 +1611,7 @@ end
 
 ---@param whichPlayer player
 ---@param magnitude real
+---@return nothing
 function CameraSetEQNoiseForPlayer(whichPlayer, magnitude)
 	local richter = magnitude
 	if (richter > 5.0) then
@@ -1596,6 +1629,7 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function CameraClearNoiseForPlayer(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1634,6 +1668,7 @@ end
 -- ===========================================================================
 
 ---@param r rect
+---@return nothing
 function SetCameraBoundsToRect(r)
 	local minX = GetRectMinX(r)
 	local minY = GetRectMinY(r)
@@ -1645,6 +1680,7 @@ end
 
 ---@param whichPlayer player
 ---@param r rect
+---@return nothing
 function SetCameraBoundsToRectForPlayerBJ(whichPlayer, r)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1658,11 +1694,12 @@ end
 ---@param dxEast real
 ---@param dyNorth real
 ---@param dySouth real
+---@return nothing
 function AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
-	local minX  = 0
-	local minY  = 0
-	local maxX  = 0
-	local maxY  = 0
+	local minX = 0
+	local minY = 0
+	local maxX = 0
+	local maxY = 0
 	local scale = 0
 	
 	if (adjustMethod == bj_CAMERABOUNDS_ADJUST_ADD) then
@@ -1671,7 +1708,7 @@ function AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
 		scale = -1
 	else
 		--  Unrecognized adjustment method - ignore the request.
-		return
+		return 
 	end
 	
 	--  Adjust the actual camera values
@@ -1701,6 +1738,7 @@ end
 ---@param dxEast real
 ---@param dyNorth real
 ---@param dySouth real
+---@return nothing
 function AdjustCameraBoundsForPlayerBJ(adjustMethod, whichPlayer, dxWest, dxEast, dyNorth, dySouth)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1712,6 +1750,7 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
+---@return nothing
 function SetCameraQuickPositionForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1722,6 +1761,7 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
+---@return nothing
 function SetCameraQuickPositionLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1731,12 +1771,14 @@ end
 -- ===========================================================================
 
 ---@param loc location
+---@return nothing
 function SetCameraQuickPositionLoc(loc)
 	SetCameraQuickPosition(GetLocationX(loc), GetLocationY(loc))
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function StopCameraForPlayerBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1749,6 +1791,7 @@ end
 ---@param whichUnit unit
 ---@param xoffset real
 ---@param yoffset real
+---@return nothing
 function SetCameraOrientControllerForPlayerBJ(whichPlayer, whichUnit, xoffset, yoffset)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1758,10 +1801,12 @@ end
 -- ===========================================================================
 
 ---@param factor real
+---@return nothing
 function CameraSetSmoothingFactorBJ(factor)
 	CameraSetSmoothingFactor(factor)
 end
 -- ===========================================================================
+---@return nothing
 function CameraResetSmoothingFactorBJ()
 	CameraSetSmoothingFactor(0)
 end
@@ -1774,6 +1819,7 @@ end
 
 ---@param toForce force
 ---@param message string
+---@return nothing
 function DisplayTextToForce(toForce, message)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1785,6 +1831,7 @@ end
 ---@param toForce force
 ---@param duration real
 ---@param message string
+---@return nothing
 function DisplayTimedTextToForce(toForce, duration, message)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1794,6 +1841,7 @@ end
 -- ===========================================================================
 
 ---@param toForce force
+---@return nothing
 function ClearTextMessagesBJ(toForce)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1813,11 +1861,13 @@ function SubStringBJ(source, start, end_)
 	return SubString(source, start - 1, end_)
 end
 
+
 ---@param h handle
 ---@return integer
 function GetHandleIdBJ(h)
 	return GetHandleId(h)
 end
+
 
 ---@param s string
 ---@return integer
@@ -1866,6 +1916,7 @@ end
 
 ---@param trig trigger
 ---@param whichEvent playerunitevent
+---@return nothing
 function TriggerRegisterAnyUnitEventBJ(trig, whichEvent)
 	local index
 	
@@ -2150,6 +2201,7 @@ function TriggerRegisterGameSavedEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_SAVE)
 end
 -- ===========================================================================
+---@return nothing
 function RegisterDestDeathInRegionEnum()
 	bj_destInRegionDiesCount = bj_destInRegionDiesCount + 1
 	if (bj_destInRegionDiesCount <= bj_MAX_DEST_IN_REGION_EVENTS) then
@@ -2160,8 +2212,9 @@ end
 
 ---@param trig trigger
 ---@param r rect
+---@return nothing
 function TriggerRegisterDestDeathInRegionEvent(trig, r)
-	bj_destInRegionDiesTrig  = trig
+	bj_destInRegionDiesTrig = trig
 	bj_destInRegionDiesCount = 0
 	EnumDestructablesInRect(r, nil, RegisterDestDeathInRegionEnum)
 end
@@ -2187,6 +2240,7 @@ end
 -- ===========================================================================
 
 ---@param whichWeatherEffect weathereffect
+---@return nothing
 function RemoveWeatherEffectBJ(whichWeatherEffect)
 	RemoveWeatherEffect(whichWeatherEffect)
 end
@@ -2222,9 +2276,9 @@ function TerrainDeformationRippleBJ(duration, limitNeg, where, startRadius, endR
 		return nil
 	end
 	
-	timeWave                         = 2.0 * duration / wavePeriod
-	spaceWave                        = 2.0 * endRadius / waveWidth
-	radiusRatio                      = startRadius / endRadius
+	timeWave = 2.0 * duration / wavePeriod
+	spaceWave = 2.0 * endRadius / waveWidth
+	radiusRatio = startRadius / endRadius
 	
 	bj_lastCreatedTerrainDeformation = TerrainDeformRipple(GetLocationX(where), GetLocationY(where), endRadius, depth, R2I(duration * 1000), 1, spaceWave, timeWave, radiusRatio, limitNeg)
 	return bj_lastCreatedTerrainDeformation
@@ -2249,9 +2303,9 @@ function TerrainDeformationWaveBJ(duration, source, target, radius, depth, trail
 		return nil
 	end
 	
-	dirX                             = (GetLocationX(target) - GetLocationX(source)) / distance
-	dirY                             = (GetLocationY(target) - GetLocationY(source)) / distance
-	speed                            = distance / duration
+	dirX = (GetLocationX(target) - GetLocationX(source)) / distance
+	dirY = (GetLocationY(target) - GetLocationY(source)) / distance
+	speed = distance / duration
 	
 	bj_lastCreatedTerrainDeformation = TerrainDeformWave(GetLocationX(source), GetLocationY(source), dirX, dirY, distance, speed, radius, depth, R2I(trailDelay * 1000), 1)
 	return bj_lastCreatedTerrainDeformation
@@ -2273,6 +2327,7 @@ end
 
 ---@param deformation terraindeformation
 ---@param duration real
+---@return nothing
 function TerrainDeformationStopBJ(deformation, duration)
 	TerrainDeformStop(deformation, R2I(duration * 1000))
 end
@@ -2396,6 +2451,7 @@ end
 ---@param variation integer
 ---@param area integer
 ---@param shape integer
+---@return nothing
 function SetTerrainTypeBJ(where, terrainType, variation, area, shape)
 	SetTerrainType(GetLocationX(where), GetLocationY(where), terrainType, variation, area, shape)
 end
@@ -2412,6 +2468,7 @@ end
 ---@param where location
 ---@param t pathingtype
 ---@param flag boolean
+---@return nothing
 function SetTerrainPathableBJ(where, t, flag)
 	SetTerrainPathable(GetLocationX(where), GetLocationY(where), t, flag)
 end
@@ -2421,6 +2478,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function SetWaterBaseColorBJ(red, green, blue, transparency)
 	SetWaterBaseColor(PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -2490,26 +2548,31 @@ function GetLastCreatedFogModifier()
 	return bj_lastCreatedFogModifier
 end
 -- ===========================================================================
+---@return nothing
 function FogEnableOn()
 	FogEnable(true)
 end
 -- ===========================================================================
+---@return nothing
 function FogEnableOff()
 	FogEnable(false)
 end
 -- ===========================================================================
+---@return nothing
 function FogMaskEnableOn()
 	FogMaskEnable(true)
 end
 -- ===========================================================================
+---@return nothing
 function FogMaskEnableOff()
 	FogMaskEnable(false)
 end
 -- ===========================================================================
 
 ---@param flag boolean
+---@return nothing
 function UseTimeOfDayBJ(flag)
-	SuspendTimeOfDay(not flag)
+	SuspendTimeOfDay( not flag)
 end
 -- ===========================================================================
 
@@ -2520,10 +2583,12 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
+---@return nothing
 function SetTerrainFogExBJ(style, zstart, zend, density, red, green, blue)
 	SetTerrainFogEx(style, zstart, zend, density, red * 0.01, green * 0.01, blue * 0.01)
 end
 -- ===========================================================================
+---@return nothing
 function ResetTerrainFogBJ()
 	ResetTerrainFog()
 end
@@ -2533,6 +2598,7 @@ end
 ---@param doodadID integer
 ---@param radius real
 ---@param center location
+---@return nothing
 function SetDoodadAnimationBJ(animName, doodadID, radius, center)
 	SetDoodadAnimation(GetLocationX(center), GetLocationY(center), radius, doodadID, false, animName, false)
 end
@@ -2541,6 +2607,7 @@ end
 ---@param animName string
 ---@param doodadID integer
 ---@param r rect
+---@return nothing
 function SetDoodadAnimationRectBJ(animName, doodadID, r)
 	SetDoodadAnimationRect(r, doodadID, animName, false)
 end
@@ -2549,6 +2616,7 @@ end
 ---@param add boolean
 ---@param animProperties string
 ---@param whichUnit unit
+---@return nothing
 function AddUnitAnimationPropertiesBJ(add, animProperties, whichUnit)
 	AddUnitAnimationProperties(whichUnit, animProperties, add)
 end
@@ -2568,6 +2636,7 @@ end
 
 ---@param flag boolean
 ---@param whichImage image
+---@return nothing
 function ShowImageBJ(flag, whichImage)
 	ShowImage(whichImage, flag)
 end
@@ -2576,6 +2645,7 @@ end
 ---@param whichImage image
 ---@param where location
 ---@param zOffset real
+---@return nothing
 function SetImagePositionBJ(whichImage, where, zOffset)
 	SetImagePosition(whichImage, GetLocationX(where), GetLocationY(where), zOffset)
 end
@@ -2586,6 +2656,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param alpha real
+---@return nothing
 function SetImageColorBJ(whichImage, red, green, blue, alpha)
 	SetImageColor(whichImage, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - alpha))
 end
@@ -2613,6 +2684,7 @@ end
 
 ---@param flag boolean
 ---@param whichSplat ubersplat
+---@return nothing
 function ShowUbersplatBJ(flag, whichSplat)
 	ShowUbersplat(whichSplat, flag)
 end
@@ -2622,7 +2694,7 @@ function GetLastCreatedUbersplat()
 	return bj_lastCreatedUbersplat
 end
 -- ============================================================================
----@return
+---@return 
 function GetLastCreatedMinimapIcon()
 	return bj_lastCreatedMinimapIcon
 end
@@ -2634,7 +2706,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return
+---@return 
 function CreateMinimapIconOnUnitBJ(whichUnit, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIconOnUnit(whichUnit, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2647,7 +2719,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return
+---@return 
 function CreateMinimapIconAtLocBJ(where, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIconAtLoc(where, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2661,7 +2733,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return
+---@return 
 function CreateMinimapIconBJ(x, y, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIcon(x, y, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2670,6 +2742,7 @@ end
 
 ---@param whichUnit unit
 ---@param style integer
+---@return nothing
 function CampaignMinimapIconUnitBJ(whichUnit, style)
 	local red
 	local green
@@ -2677,58 +2750,58 @@ function CampaignMinimapIconUnitBJ(whichUnit, style)
 	local path
 	if (style == bj_CAMPPINGSTYLE_PRIMARY) then
 		--  green
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_PRIMARY_GREEN) then
 		--  green
-		red   = 0
+		red = 0
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_PRIMARY_RED) then
 		--  green
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_BONUS) then
 		--  yellow
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectiveBonus")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectiveBonus")
 	elseif (style == bj_CAMPPINGSTYLE_TURNIN) then
 		--  yellow
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestTurnIn")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestTurnIn")
 	elseif (style == bj_CAMPPINGSTYLE_BOSS) then
 		--  red
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestBoss")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestBoss")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_ALLY) then
 		--  green
-		red   = 0
+		red = 0
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_NEUTRAL) then
 		--  white
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 255
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 255
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_ENEMY) then
 		--  red
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	end
 	CreateMinimapIconOnUnitBJ(whichUnit, red, green, blue, path, FOG_OF_WAR_MASKED)
 	SetMinimapIconOrphanDestroy(bj_lastCreatedMinimapIcon, true)
@@ -2737,6 +2810,7 @@ end
 
 ---@param where location
 ---@param style integer
+---@return nothing
 function CampaignMinimapIconLocBJ(where, style)
 	local red
 	local green
@@ -2744,58 +2818,58 @@ function CampaignMinimapIconLocBJ(where, style)
 	local path
 	if (style == bj_CAMPPINGSTYLE_PRIMARY) then
 		--  green (different from the unit version)
-		red   = 0
+		red = 0
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_PRIMARY_GREEN) then
 		--  green (different from the unit version)
-		red   = 0
+		red = 0
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_PRIMARY_RED) then
 		--  green (different from the unit version)
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectivePrimary")
 	elseif (style == bj_CAMPPINGSTYLE_BONUS) then
 		--  yellow
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestObjectiveBonus")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestObjectiveBonus")
 	elseif (style == bj_CAMPPINGSTYLE_TURNIN) then
 		--  yellow
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestTurnIn")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestTurnIn")
 	elseif (style == bj_CAMPPINGSTYLE_BOSS) then
 		--  red
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestBoss")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestBoss")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_ALLY) then
 		--  green
-		red   = 0
+		red = 0
 		green = 255
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_NEUTRAL) then
 		--  white
-		red   = 255
+		red = 255
 		green = 255
-		blue  = 255
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 255
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	elseif (style == bj_CAMPPINGSTYLE_CONTROL_ENEMY) then
 		--  red
-		red   = 255
+		red = 255
 		green = 0
-		blue  = 0
-		path  = SkinManagerGetLocalPath("MinimapQuestControlPoint")
+		blue = 0
+		path = SkinManagerGetLocalPath("MinimapQuestControlPoint")
 	end
 	CreateMinimapIconAtLocBJ(where, red, green, blue, path, FOG_OF_WAR_MASKED)
 end
@@ -2807,6 +2881,7 @@ end
 -- ===========================================================================
 
 ---@param soundHandle sound
+---@return nothing
 function PlaySoundBJ(soundHandle)
 	bj_lastPlayedSound = soundHandle
 	if (soundHandle ~= nil) then
@@ -2817,6 +2892,7 @@ end
 
 ---@param soundHandle sound
 ---@param fadeOut boolean
+---@return nothing
 function StopSoundBJ(soundHandle, fadeOut)
 	StopSound(soundHandle, false, fadeOut)
 end
@@ -2824,6 +2900,7 @@ end
 
 ---@param soundHandle sound
 ---@param volumePercent real
+---@return nothing
 function SetSoundVolumeBJ(soundHandle, volumePercent)
 	SetSoundVolume(soundHandle, PercentToInt(volumePercent, 127))
 end
@@ -2831,6 +2908,7 @@ end
 
 ---@param newOffset real
 ---@param soundHandle sound
+---@return nothing
 function SetSoundOffsetBJ(newOffset, soundHandle)
 	SetSoundPlayPosition(soundHandle, R2I(newOffset * 1000))
 end
@@ -2838,6 +2916,7 @@ end
 
 ---@param soundHandle sound
 ---@param cutoff real
+---@return nothing
 function SetSoundDistanceCutoffBJ(soundHandle, cutoff)
 	SetSoundDistanceCutoff(soundHandle, cutoff)
 end
@@ -2845,6 +2924,7 @@ end
 
 ---@param soundHandle sound
 ---@param pitch real
+---@return nothing
 function SetSoundPitchBJ(soundHandle, pitch)
 	SetSoundPitch(soundHandle, pitch)
 end
@@ -2853,6 +2933,7 @@ end
 ---@param soundHandle sound
 ---@param loc location
 ---@param z real
+---@return nothing
 function SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundPosition(soundHandle, GetLocationX(loc), GetLocationY(loc), z)
 end
@@ -2860,6 +2941,7 @@ end
 
 ---@param soundHandle sound
 ---@param whichUnit unit
+---@return nothing
 function AttachSoundToUnitBJ(soundHandle, whichUnit)
 	AttachSoundToUnit(soundHandle, whichUnit)
 end
@@ -2869,12 +2951,14 @@ end
 ---@param inside real
 ---@param outside real
 ---@param outsideVolumePercent real
+---@return nothing
 function SetSoundConeAnglesBJ(soundHandle, inside, outside, outsideVolumePercent)
 	SetSoundConeAngles(soundHandle, inside, outside, PercentToInt(outsideVolumePercent, 127))
 end
 -- ===========================================================================
 
 ---@param soundHandle sound
+---@return nothing
 function KillSoundWhenDoneBJ(soundHandle)
 	KillSoundWhenDone(soundHandle)
 end
@@ -2884,6 +2968,7 @@ end
 ---@param volumePercent real
 ---@param loc location
 ---@param z real
+---@return nothing
 function PlaySoundAtPointBJ(soundHandle, volumePercent, loc, z)
 	SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
@@ -2894,6 +2979,7 @@ end
 ---@param soundHandle sound
 ---@param volumePercent real
 ---@param whichUnit unit
+---@return nothing
 function PlaySoundOnUnitBJ(soundHandle, volumePercent, whichUnit)
 	AttachSoundToUnitBJ(soundHandle, whichUnit)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
@@ -2904,6 +2990,7 @@ end
 ---@param soundHandle sound
 ---@param volumePercent real
 ---@param startingOffset real
+---@return nothing
 function PlaySoundFromOffsetBJ(soundHandle, volumePercent, startingOffset)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
 	PlaySoundBJ(soundHandle)
@@ -2912,6 +2999,7 @@ end
 -- ===========================================================================
 
 ---@param musicFileName string
+---@return nothing
 function PlayMusicBJ(musicFileName)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusic(musicFileName)
@@ -2921,6 +3009,7 @@ end
 ---@param musicFileName string
 ---@param startingOffset real
 ---@param fadeInTime real
+---@return nothing
 function PlayMusicExBJ(musicFileName, startingOffset, fadeInTime)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusicEx(musicFileName, R2I(startingOffset * 1000), R2I(fadeInTime * 1000))
@@ -2928,12 +3017,14 @@ end
 -- ===========================================================================
 
 ---@param newOffset real
+---@return nothing
 function SetMusicOffsetBJ(newOffset)
 	SetMusicPlayPosition(R2I(newOffset * 1000))
 end
 -- ===========================================================================
 
 ---@param musicName string
+---@return nothing
 function PlayThematicMusicBJ(musicName)
 	PlayThematicMusic(musicName)
 end
@@ -2941,38 +3032,45 @@ end
 
 ---@param musicName string
 ---@param startingOffset real
+---@return nothing
 function PlayThematicMusicExBJ(musicName, startingOffset)
 	PlayThematicMusicEx(musicName, R2I(startingOffset * 1000))
 end
 -- ===========================================================================
 
 ---@param newOffset real
+---@return nothing
 function SetThematicMusicOffsetBJ(newOffset)
 	SetThematicMusicPlayPosition(R2I(newOffset * 1000))
 end
 -- ===========================================================================
+---@return nothing
 function EndThematicMusicBJ()
 	EndThematicMusic()
 end
 -- ===========================================================================
 
 ---@param fadeOut boolean
+---@return nothing
 function StopMusicBJ(fadeOut)
 	StopMusic(fadeOut)
 end
 -- ===========================================================================
+---@return nothing
 function ResumeMusicBJ()
 	ResumeMusic()
 end
 -- ===========================================================================
 
 ---@param volumePercent real
+---@return nothing
 function SetMusicVolumeBJ(volumePercent)
 	SetMusicVolume(PercentToInt(volumePercent, 127))
 end
 -- ===========================================================================
 
 ---@param volumePercent real
+---@return nothing
 function SetThematicMusicVolumeBJ(volumePercent)
 	SetThematicMusicVolume(PercentToInt(volumePercent, 127))
 end
@@ -3008,10 +3106,12 @@ end
 
 ---@param vgroup volumegroup
 ---@param percent real
+---@return nothing
 function VolumeGroupSetVolumeBJ(vgroup, percent)
 	VolumeGroupSetVolume(vgroup, percent * 0.01)
 end
 -- ===========================================================================
+---@return nothing
 function SetCineModeVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_CINEMODE_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_CINEMODE_VOLUME_UNITSOUNDS)
@@ -3023,6 +3123,7 @@ function SetCineModeVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_FIRE, bj_CINEMODE_VOLUME_FIRE)
 end
 -- ===========================================================================
+---@return nothing
 function SetCineModeVolumeGroupsBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3032,6 +3133,7 @@ function SetCineModeVolumeGroupsBJ()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function SetSpeechVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_SPEECH_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_SPEECH_VOLUME_UNITSOUNDS)
@@ -3043,6 +3145,7 @@ function SetSpeechVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_FIRE, bj_SPEECH_VOLUME_FIRE)
 end
 -- ===========================================================================
+---@return nothing
 function SetSpeechVolumeGroupsBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3052,10 +3155,12 @@ function SetSpeechVolumeGroupsBJ()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function VolumeGroupResetImmediateBJ()
 	VolumeGroupReset()
 end
 -- ===========================================================================
+---@return nothing
 function VolumeGroupResetBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3075,6 +3180,7 @@ end
 
 ---@param soundHandle sound
 ---@param offset real
+---@return nothing
 function WaitForSoundBJ(soundHandle, offset)
 	TriggerWaitForSound(soundHandle, offset)
 end
@@ -3082,16 +3188,19 @@ end
 
 ---@param musicName string
 ---@param index integer
+---@return nothing
 function SetMapMusicIndexedBJ(musicName, index)
 	SetMapMusic(musicName, false, index)
 end
 -- ===========================================================================
 
 ---@param musicName string
+---@return nothing
 function SetMapMusicRandomBJ(musicName)
 	SetMapMusic(musicName, true, 0)
 end
 -- ===========================================================================
+---@return nothing
 function ClearMapMusicBJ()
 	ClearMapMusic()
 end
@@ -3100,8 +3209,9 @@ end
 ---@param add boolean
 ---@param soundHandle sound
 ---@param r rect
+---@return nothing
 function SetStackedSoundBJ(add, soundHandle, r)
-	local width  = GetRectMaxX(r) - GetRectMinX(r)
+	local width = GetRectMaxX(r) - GetRectMinX(r)
 	local height = GetRectMaxY(r) - GetRectMinY(r)
 	
 	SetSoundPosition(soundHandle, GetRectCenterX(r), GetRectCenterY(r), 0)
@@ -3115,6 +3225,7 @@ end
 
 ---@param whichPlayer player
 ---@param soundHandle sound
+---@return nothing
 function StartSoundForPlayerBJ(whichPlayer, soundHandle)
 	if (whichPlayer == GetLocalPlayer()) then
 		StartSound(soundHandle)
@@ -3125,6 +3236,7 @@ end
 ---@param whichPlayer player
 ---@param vgroup volumegroup
 ---@param scale real
+---@return nothing
 function VolumeGroupSetVolumeForPlayerBJ(whichPlayer, vgroup, scale)
 	if (GetLocalPlayer() == whichPlayer) then
 		VolumeGroupSetVolume(vgroup, scale)
@@ -3133,6 +3245,7 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
+---@return nothing
 function EnableDawnDusk(flag)
 	bj_useDawnDuskSounds = flag
 end
@@ -3149,6 +3262,7 @@ end
 -- ===========================================================================
 
 ---@param inLabel string
+---@return nothing
 function SetAmbientDaySound(inLabel)
 	local ToD
 	
@@ -3161,7 +3275,7 @@ function SetAmbientDaySound(inLabel)
 	bj_dayAmbientSound = CreateMIDISound(inLabel, 20, 20)
 	
 	--  Start the sound if necessary, based on current time
-	ToD                = GetTimeOfDay()
+	ToD = GetTimeOfDay()
 	if (ToD >= bj_TOD_DAWN and ToD < bj_TOD_DUSK) then
 		StartSound(bj_dayAmbientSound)
 	end
@@ -3169,6 +3283,7 @@ end
 -- ===========================================================================
 
 ---@param inLabel string
+---@return nothing
 function SetAmbientNightSound(inLabel)
 	local ToD
 	
@@ -3181,7 +3296,7 @@ function SetAmbientNightSound(inLabel)
 	bj_nightAmbientSound = CreateMIDISound(inLabel, 20, 20)
 	
 	--  Start the sound if necessary, based on current time
-	ToD                  = GetTimeOfDay()
+	ToD = GetTimeOfDay()
 	if (ToD < bj_TOD_DAWN or ToD >= bj_TOD_DUSK) then
 		StartSound(bj_nightAmbientSound)
 	end
@@ -3231,6 +3346,7 @@ end
 -- ===========================================================================
 
 ---@param whichEffect effect
+---@return nothing
 function DestroyEffectBJ(whichEffect)
 	DestroyEffect(whichEffect)
 end
@@ -3248,7 +3364,7 @@ end
 
 ---@param abilityId integer
 ---@param order string
----@return
+---@return 
 function CreateCommandButtonEffectBJ(abilityId, order)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(abilityId, order)
 	return bj_lastCreatedCommandButtonEffect
@@ -3256,7 +3372,7 @@ end
 -- ===========================================================================
 
 ---@param unitId integer
----@return
+---@return 
 function CreateTrainCommandButtonEffectBJ(unitId)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(FourCC('Aque'), UnitId2String(unitId))
 	return bj_lastCreatedCommandButtonEffect
@@ -3264,7 +3380,7 @@ end
 -- ===========================================================================
 
 ---@param techId integer
----@return
+---@return 
 function CreateUpgradeCommandButtonEffectBJ(techId)
 	bj_lastCreatedCommandButtonEffect = CreateUpgradeCommandButtonEffect(techId)
 	return bj_lastCreatedCommandButtonEffect
@@ -3272,7 +3388,7 @@ end
 -- ===========================================================================
 
 ---@param order string
----@return
+---@return 
 function CreateCommonCommandButtonEffectBJ(order)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(0, order)
 	return bj_lastCreatedCommandButtonEffect
@@ -3280,7 +3396,7 @@ end
 -- ===========================================================================
 
 ---@param abilityId integer
----@return
+---@return 
 function CreateLearnCommandButtonEffectBJ(abilityId)
 	bj_lastCreatedCommandButtonEffect = CreateLearnCommandButtonEffect(abilityId)
 	return bj_lastCreatedCommandButtonEffect
@@ -3288,7 +3404,7 @@ end
 -- ===========================================================================
 
 ---@param unitId integer
----@return
+---@return 
 function CreateBuildCommandButtonEffectBJ(unitId)
 	local r = GetPlayerRace(GetLocalPlayer())
 	local abilityId
@@ -3307,7 +3423,7 @@ function CreateBuildCommandButtonEffectBJ(unitId)
 	return bj_lastCreatedCommandButtonEffect
 end
 -- ===========================================================================
----@return
+---@return 
 function GetLastCreatedCommandButtonEffectBJ()
 	return bj_lastCreatedCommandButtonEffect
 end
@@ -3334,6 +3450,7 @@ end
 
 ---@param whichWidget widget
 ---@param life real
+---@return nothing
 function SetItemLifeBJ(whichWidget, life)
 	SetWidgetLife(whichWidget, life)
 end
@@ -3342,6 +3459,7 @@ end
 ---@param xpToAdd integer
 ---@param whichHero unit
 ---@param showEyeCandy boolean
+---@return nothing
 function AddHeroXPSwapped(xpToAdd, whichHero, showEyeCandy)
 	AddHeroXP(whichHero, xpToAdd, showEyeCandy)
 end
@@ -3350,6 +3468,7 @@ end
 ---@param whichHero unit
 ---@param newLevel integer
 ---@param showEyeCandy boolean
+---@return nothing
 function SetHeroLevelBJ(whichHero, newLevel, showEyeCandy)
 	local oldLevel = GetHeroLevel(whichHero)
 	
@@ -3435,6 +3554,7 @@ end
 
 ---@param whichItem item
 ---@param whichHero unit
+---@return nothing
 function UnitRemoveItemSwapped(whichItem, whichHero)
 	bj_lastRemovedItem = whichItem
 	UnitRemoveItem(whichHero, whichItem)
@@ -3473,6 +3593,7 @@ end
 
 ---@param whichItem item
 ---@param loc location
+---@return nothing
 function SetItemPositionLoc(whichItem, loc)
 	SetItemPosition(whichItem, GetLocationX(loc), GetLocationY(loc))
 end
@@ -3485,13 +3606,15 @@ end
 
 ---@param flag boolean
 ---@param whichHero unit
+---@return nothing
 function SuspendHeroXPBJ(flag, whichHero)
-	SuspendHeroXP(whichHero, not flag)
+	SuspendHeroXP(whichHero,  not flag)
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
 ---@param handicapPercent real
+---@return nothing
 function SetPlayerHandicapDamageBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapDamage(whichPlayer, handicapPercent * 0.01)
 end
@@ -3506,6 +3629,7 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
+---@return nothing
 function SetPlayerHandicapReviveTimeBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapReviveTime(whichPlayer, handicapPercent * 0.01)
 end
@@ -3520,6 +3644,7 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
+---@return nothing
 function SetPlayerHandicapXPBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapXP(whichPlayer, handicapPercent * 0.01)
 end
@@ -3534,6 +3659,7 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
+---@return nothing
 function SetPlayerHandicapBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicap(whichPlayer, handicapPercent * 0.01)
 end
@@ -3567,10 +3693,11 @@ end
 ---@param whichHero unit
 ---@param whichStat integer
 ---@param value integer
+---@return nothing
 function SetHeroStat(whichHero, whichStat, value)
 	--  Ignore requests for negative hero stats.
 	if (value <= 0) then
-		return
+		return 
 	end
 	
 	if (whichStat == bj_HEROSTAT_STR) then
@@ -3589,6 +3716,7 @@ end
 ---@param whichHero unit
 ---@param modifyMethod integer
 ---@param value integer
+---@return nothing
 function ModifyHeroStat(whichStat, whichHero, modifyMethod, value)
 	if (modifyMethod == bj_MODIFYMETHOD_ADD) then
 		SetHeroStat(whichHero, whichStat, GetHeroStatBJ(whichStat, whichHero, false) + value)
@@ -3761,6 +3889,7 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
+---@return nothing
 function SetItemInvulnerableBJ(whichItem, flag)
 	SetItemInvulnerable(whichItem, flag)
 end
@@ -3768,6 +3897,7 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
+---@return nothing
 function SetItemDropOnDeathBJ(whichItem, flag)
 	SetItemDropOnDeath(whichItem, flag)
 end
@@ -3775,6 +3905,7 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
+---@return nothing
 function SetItemDroppableBJ(whichItem, flag)
 	SetItemDroppable(whichItem, flag)
 end
@@ -3783,6 +3914,7 @@ end
 ---@param whichItem item
 ---@param whichPlayer player
 ---@param changeColor boolean
+---@return nothing
 function SetItemPlayerBJ(whichItem, whichPlayer, changeColor)
 	SetItemPlayer(whichItem, whichPlayer, changeColor)
 end
@@ -3790,6 +3922,7 @@ end
 
 ---@param show boolean
 ---@param whichItem item
+---@return nothing
 function SetItemVisibleBJ(show, whichItem)
 	SetItemVisible(whichItem, show)
 end
@@ -3798,7 +3931,7 @@ end
 ---@param whichItem item
 ---@return boolean
 function IsItemHiddenBJ(whichItem)
-	return not IsItemVisible(whichItem)
+	return  not IsItemVisible(whichItem)
 end
 -- ===========================================================================
 
@@ -3831,12 +3964,14 @@ end
 
 ---@param r rect
 ---@param actionFunc code
+---@return nothing
 function EnumItemsInRectBJ(r, actionFunc)
 	EnumItemsInRect(r, nil, actionFunc)
 end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
+---@return nothing
 function RandomItemInRectBJEnum()
 	bj_itemRandomConsidered = bj_itemRandomConsidered + 1
 	if (GetRandomInt(1, bj_itemRandomConsidered) == 1) then
@@ -3851,7 +3986,7 @@ end
 ---@param filter boolexpr
 ---@return item
 function RandomItemInRectBJ(r, filter)
-	bj_itemRandomConsidered  = 0
+	bj_itemRandomConsidered = 0
 	bj_itemRandomCurrentPick = nil
 	EnumItemsInRect(r, filter, RandomItemInRectBJEnum)
 	DestroyBoolExpr(filter)
@@ -3873,7 +4008,7 @@ end
 ---@return boolean
 function CheckItemStatus(whichItem, status)
 	if (status == bj_ITEM_STATUS_HIDDEN) then
-		return not IsItemVisible(whichItem)
+		return  not IsItemVisible(whichItem)
 	elseif (status == bj_ITEM_STATUS_OWNED) then
 		return IsItemOwned(whichItem)
 	elseif (status == bj_ITEM_STATUS_INVULNERABLE) then
@@ -4044,6 +4179,7 @@ function CreateNUnitsAtLocFacingLocBJ(count, unitId, whichPlayer, loc, lookAt)
 	return CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, AngleBetweenPoints(loc, lookAt))
 end
 -- ===========================================================================
+---@return nothing
 function GetLastCreatedGroupEnum()
 	GroupAddUnit(bj_groupLastCreatedDest, GetEnumUnit())
 end
@@ -4068,10 +4204,12 @@ end
 
 ---@param suspend boolean
 ---@param whichUnit unit
+---@return nothing
 function UnitSuspendDecayBJ(suspend, whichUnit)
 	UnitSuspendDecay(whichUnit, suspend)
 end
 -- ===========================================================================
+---@return nothing
 function DelayedSuspendDecayStopAnimEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4080,6 +4218,7 @@ function DelayedSuspendDecayStopAnimEnum()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function DelayedSuspendDecayBoneEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4093,6 +4232,7 @@ end
 --  initial corpse fades away, so we reset it now.  It's best not to show
 --  off corpses thus created until after this grace period has passed.
 -- 
+---@return nothing
 function DelayedSuspendDecayFleshEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4106,6 +4246,7 @@ end
 --  Waits a short period of time to ensure that the corpse is decaying, and
 --  then suspend the animation and corpse decay.
 -- 
+---@return nothing
 function DelayedSuspendDecay()
 	local boneGroup
 	local fleshGroup
@@ -4113,9 +4254,9 @@ function DelayedSuspendDecay()
 	--  Switch the global unit groups over to local variables and recreate
 	--  the global versions, so that this function can handle overlapping
 	--  calls.
-	boneGroup                 = bj_suspendDecayBoneGroup
-	fleshGroup                = bj_suspendDecayFleshGroup
-	bj_suspendDecayBoneGroup  = CreateGroup()
+	boneGroup = bj_suspendDecayBoneGroup
+	fleshGroup = bj_suspendDecayFleshGroup
+	bj_suspendDecayBoneGroup = CreateGroup()
 	bj_suspendDecayFleshGroup = CreateGroup()
 	
 	ForGroup(fleshGroup, DelayedSuspendDecayStopAnimEnum)
@@ -4132,6 +4273,7 @@ function DelayedSuspendDecay()
 	DestroyGroup(fleshGroup)
 end
 -- ===========================================================================
+---@return nothing
 function DelayedSuspendDecayCreate()
 	bj_delayedSuspendDecayTrig = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_delayedSuspendDecayTrig, bj_delayedSuspendDecayTimer)
@@ -4179,7 +4321,7 @@ end
 ---@param whichMaxState unitstate
 ---@return real
 function GetUnitStatePercent(whichUnit, whichState, whichMaxState)
-	local value    = GetUnitState(whichUnit, whichState)
+	local value = GetUnitState(whichUnit, whichState)
 	local maxValue = GetUnitState(whichUnit, whichMaxState)
 	
 	--  Return 0 for null units.
@@ -4206,17 +4348,20 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function SelectUnitSingle(whichUnit)
 	ClearSelection()
 	SelectUnit(whichUnit, true)
 end
 -- ===========================================================================
+---@return nothing
 function SelectGroupBJEnum()
 	SelectUnit(GetEnumUnit(), true)
 end
 -- ===========================================================================
 
 ---@param g group
+---@return nothing
 function SelectGroupBJ(g)
 	ClearSelection()
 	ForGroup(g, SelectGroupBJEnum)
@@ -4224,18 +4369,21 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function SelectUnitAdd(whichUnit)
 	SelectUnit(whichUnit, true)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function SelectUnitRemove(whichUnit)
 	SelectUnit(whichUnit, false)
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function ClearSelectionForPlayer(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4246,6 +4394,7 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
+---@return nothing
 function SelectUnitForPlayerSingle(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4257,6 +4406,7 @@ end
 
 ---@param g group
 ---@param whichPlayer player
+---@return nothing
 function SelectGroupForPlayerBJ(g, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4268,6 +4418,7 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
+---@return nothing
 function SelectUnitAddForPlayer(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4278,6 +4429,7 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
+---@return nothing
 function SelectUnitRemoveForPlayer(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4288,6 +4440,7 @@ end
 
 ---@param whichUnit unit
 ---@param newValue real
+---@return nothing
 function SetUnitLifeBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, RMaxBJ(0, newValue))
 end
@@ -4295,6 +4448,7 @@ end
 
 ---@param whichUnit unit
 ---@param newValue real
+---@return nothing
 function SetUnitManaBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, RMaxBJ(0, newValue))
 end
@@ -4302,6 +4456,7 @@ end
 
 ---@param whichUnit unit
 ---@param percent real
+---@return nothing
 function SetUnitLifePercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, GetUnitState(whichUnit, UNIT_STATE_MAX_LIFE) * RMaxBJ(0, percent) * 0.01)
 end
@@ -4309,6 +4464,7 @@ end
 
 ---@param whichUnit unit
 ---@param percent real
+---@return nothing
 function SetUnitManaPercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, GetUnitState(whichUnit, UNIT_STATE_MAX_MANA) * RMaxBJ(0, percent) * 0.01)
 end
@@ -4324,11 +4480,12 @@ end
 ---@param whichUnit unit
 ---@return boolean
 function IsUnitAliveBJ(whichUnit)
-	return not IsUnitDeadBJ(whichUnit)
+	return  not IsUnitDeadBJ(whichUnit)
 end
 -- ===========================================================================
+---@return nothing
 function IsUnitGroupDeadBJEnum()
-	if not IsUnitDeadBJ(GetEnumUnit()) then
+	if  not IsUnitDeadBJ(GetEnumUnit()) then
 		bj_isUnitGroupDeadResult = false
 	end
 end
@@ -4341,8 +4498,8 @@ end
 function IsUnitGroupDeadBJ(g)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy        = bj_wantDestroyGroup
-	bj_wantDestroyGroup      = false
+	local wantDestroy = bj_wantDestroyGroup
+	bj_wantDestroyGroup = false
 	
 	bj_isUnitGroupDeadResult = true
 	ForGroup(g, IsUnitGroupDeadBJEnum)
@@ -4354,6 +4511,7 @@ function IsUnitGroupDeadBJ(g)
 	return bj_isUnitGroupDeadResult
 end
 -- ===========================================================================
+---@return nothing
 function IsUnitGroupEmptyBJEnum()
 	bj_isUnitGroupEmptyResult = false
 end
@@ -4366,8 +4524,8 @@ end
 function IsUnitGroupEmptyBJ(g)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy         = bj_wantDestroyGroup
-	bj_wantDestroyGroup       = false
+	local wantDestroy = bj_wantDestroyGroup
+	bj_wantDestroyGroup = false
 	
 	bj_isUnitGroupEmptyResult = true
 	ForGroup(g, IsUnitGroupEmptyBJEnum)
@@ -4379,8 +4537,9 @@ function IsUnitGroupEmptyBJ(g)
 	return bj_isUnitGroupEmptyResult
 end
 -- ===========================================================================
+---@return nothing
 function IsUnitGroupInRectBJEnum()
-	if not RectContainsUnit(bj_isUnitGroupInRectRect, GetEnumUnit()) then
+	if  not RectContainsUnit(bj_isUnitGroupInRectRect, GetEnumUnit()) then
 		bj_isUnitGroupInRectResult = false
 	end
 end
@@ -4393,7 +4552,7 @@ end
 ---@return boolean
 function IsUnitGroupInRectBJ(g, r)
 	bj_isUnitGroupInRectResult = true
-	bj_isUnitGroupInRectRect   = r
+	bj_isUnitGroupInRectRect = r
 	ForGroup(g, IsUnitGroupInRectBJEnum)
 	return bj_isUnitGroupInRectResult
 end
@@ -4407,16 +4566,18 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function ShowUnitHide(whichUnit)
 	ShowUnit(whichUnit, false)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function ShowUnitShow(whichUnit)
 	--  Prevent dead heroes from being unhidden.
 	if (IsUnitType(whichUnit, UNIT_TYPE_HERO) and IsUnitDeadBJ(whichUnit)) then
-		return
+		return 
 	end
 	
 	ShowUnit(whichUnit, true)
@@ -4432,11 +4593,11 @@ end
 ---@param loc location
 ---@return boolean
 function IssueHauntOrderAtLocBJ(whichPeon, loc)
-	local g
-	local goldMine
+	local g = nil
+	local goldMine = nil
 	
 	--  Search for a gold mine within a 1-cell radius of the specified location.
-	g              = CreateGroup()
+	g = CreateGroup()
 	GroupEnumUnitsInRangeOfLoc(g, loc, 2 * bj_CELLWIDTH, filterIssueHauntOrderAtLocBJ)
 	goldMine = FirstOfGroup(g)
 	DestroyGroup(g)
@@ -4496,6 +4657,7 @@ end
 ---@param whichUnit unit
 ---@param newHeight real
 ---@param rate real
+---@return nothing
 function SetUnitFlyHeightBJ(whichUnit, newHeight, rate)
 	SetUnitFlyHeight(whichUnit, newHeight, rate)
 end
@@ -4503,6 +4665,7 @@ end
 
 ---@param whichUnit unit
 ---@param turnSpeed real
+---@return nothing
 function SetUnitTurnSpeedBJ(whichUnit, turnSpeed)
 	SetUnitTurnSpeed(whichUnit, turnSpeed)
 end
@@ -4510,6 +4673,7 @@ end
 
 ---@param whichUnit unit
 ---@param propWindow real
+---@return nothing
 function SetUnitPropWindowBJ(whichUnit, propWindow)
 	local angle = propWindow
 	if (angle <= 0) then
@@ -4539,6 +4703,7 @@ end
 
 ---@param whichUnit unit
 ---@param blendTime real
+---@return nothing
 function SetUnitBlendTimeBJ(whichUnit, blendTime)
 	SetUnitBlendTime(whichUnit, blendTime)
 end
@@ -4546,6 +4711,7 @@ end
 
 ---@param whichUnit unit
 ---@param acquireRange real
+---@return nothing
 function SetUnitAcquireRangeBJ(whichUnit, acquireRange)
 	SetUnitAcquireRange(whichUnit, acquireRange)
 end
@@ -4553,6 +4719,7 @@ end
 
 ---@param whichUnit unit
 ---@param canSleep boolean
+---@return nothing
 function UnitSetCanSleepBJ(whichUnit, canSleep)
 	UnitAddSleep(whichUnit, canSleep)
 end
@@ -4566,6 +4733,7 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function UnitWakeUpBJ(whichUnit)
 	UnitWakeUp(whichUnit)
 end
@@ -4577,12 +4745,14 @@ function UnitIsSleepingBJ(whichUnit)
 	return UnitIsSleeping(whichUnit)
 end
 -- ===========================================================================
+---@return nothing
 function WakePlayerUnitsEnum()
 	UnitWakeUp(GetEnumUnit())
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function WakePlayerUnits(whichPlayer)
 	local g = CreateGroup()
 	GroupEnumUnitsOfPlayer(g, whichPlayer, nil)
@@ -4592,11 +4762,12 @@ end
 -- ===========================================================================
 
 ---@param enable boolean
+---@return nothing
 function EnableCreepSleepBJ(enable)
 	SetPlayerState(Player(PLAYER_NEUTRAL_AGGRESSIVE), PLAYER_STATE_NO_CREEP_SLEEP, IntegerTertiaryOp(enable, 0, 1))
 	
 	--  If we're disabling, attempt to wake any already-sleeping creeps.
-	if (not enable) then
+	if ( not enable) then
 		WakePlayerUnits(Player(PLAYER_NEUTRAL_AGGRESSIVE))
 	end
 end
@@ -4606,16 +4777,17 @@ end
 ---@param generate boolean
 ---@return boolean
 function UnitGenerateAlarms(whichUnit, generate)
-	return UnitIgnoreAlarm(whichUnit, not generate)
+	return UnitIgnoreAlarm(whichUnit,  not generate)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
 ---@return boolean
 function DoesUnitGenerateAlarms(whichUnit)
-	return not UnitIgnoreAlarmToggled(whichUnit)
+	return  not UnitIgnoreAlarmToggled(whichUnit)
 end
 -- ===========================================================================
+---@return nothing
 function PauseAllUnitsBJEnum()
 	PauseUnit(GetEnumUnit(), bj_pauseAllUnitsFlag)
 end
@@ -4623,14 +4795,15 @@ end
 --  Pause all units 
 
 ---@param pause boolean
+---@return nothing
 function PauseAllUnitsBJ(pause)
 	local index
 	local indexPlayer
 	local g
 	
 	bj_pauseAllUnitsFlag = pause
-	g                    = CreateGroup()
-	index                = 0
+	g = CreateGroup()
+	index = 0
 	while true do
 		indexPlayer = Player(index)
 		
@@ -4653,6 +4826,7 @@ end
 
 ---@param pause boolean
 ---@param whichUnit unit
+---@return nothing
 function PauseUnitBJ(pause, whichUnit)
 	PauseUnit(whichUnit, pause)
 end
@@ -4667,6 +4841,7 @@ end
 
 ---@param flag boolean
 ---@param whichUnit unit
+---@return nothing
 function UnitPauseTimedLifeBJ(flag, whichUnit)
 	UnitPauseTimedLife(whichUnit, flag)
 end
@@ -4675,6 +4850,7 @@ end
 ---@param duration real
 ---@param buffId integer
 ---@param whichUnit unit
+---@return nothing
 function UnitApplyTimedLifeBJ(duration, buffId, whichUnit)
 	UnitApplyTimedLife(whichUnit, buffId, duration)
 end
@@ -4683,6 +4859,7 @@ end
 ---@param share boolean
 ---@param whichUnit unit
 ---@param whichPlayer player
+---@return nothing
 function UnitShareVisionBJ(share, whichUnit, whichPlayer)
 	UnitShareVision(whichUnit, whichPlayer, share)
 end
@@ -4690,6 +4867,7 @@ end
 
 ---@param buffType integer
 ---@param whichUnit unit
+---@return nothing
 function UnitRemoveBuffsBJ(buffType, whichUnit)
 	if (buffType == bj_REMOVEBUFFS_POSITIVE) then
 		UnitRemoveBuffs(whichUnit, true, false)
@@ -4710,11 +4888,12 @@ end
 ---@param whichUnit unit
 ---@param bTLife boolean
 ---@param bAura boolean
+---@return nothing
 function UnitRemoveBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
-	local bPos   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_POSITIVE)
-	local bNeg   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_NEGATIVE)
+	local bPos = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_POSITIVE)
+	local bNeg = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_NEGATIVE)
 	local bMagic = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_MAGIC)
-	local bPhys  = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_PHYSICAL)
+	local bPhys = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_PHYSICAL)
 	
 	UnitRemoveBuffsEx(whichUnit, bPos, bNeg, bMagic, bPhys, bTLife, bAura, false)
 end
@@ -4727,10 +4906,10 @@ end
 ---@param bAura boolean
 ---@return integer
 function UnitCountBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
-	local bPos   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_POSITIVE)
-	local bNeg   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_NEGATIVE)
+	local bPos = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_POSITIVE)
+	local bNeg = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_NEGATIVE)
 	local bMagic = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_MAGIC)
-	local bPhys  = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_PHYSICAL)
+	local bPhys = (resist == bj_BUFF_RESIST_BOTH) or (resist == bj_BUFF_RESIST_PHYSICAL)
 	
 	return UnitCountBuffsEx(whichUnit, bPos, bNeg, bMagic, bPhys, bTLife, bAura, false)
 end
@@ -4779,12 +4958,14 @@ end
 
 ---@param whichUnit unit
 ---@param exploded boolean
+---@return nothing
 function SetUnitExplodedBJ(whichUnit, exploded)
 	SetUnitExploded(whichUnit, exploded)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function ExplodeUnitBJ(whichUnit)
 	SetUnitExploded(whichUnit, true)
 	KillUnit(whichUnit)
@@ -4928,6 +5109,7 @@ end
 ---@param whichUnit unit
 ---@param loc location
 ---@param facing real
+---@return nothing
 function SetUnitPositionLocFacingBJ(whichUnit, loc, facing)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, facing)
@@ -4937,6 +5119,7 @@ end
 ---@param whichUnit unit
 ---@param loc location
 ---@param lookAt location
+---@return nothing
 function SetUnitPositionLocFacingLocBJ(whichUnit, loc, lookAt)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, AngleBetweenPoints(loc, lookAt))
@@ -4947,6 +5130,7 @@ end
 ---@param whichUnit unit
 ---@param currentStock integer
 ---@param stockMax integer
+---@return nothing
 function AddItemToStockBJ(itemId, whichUnit, currentStock, stockMax)
 	AddItemToStock(whichUnit, itemId, currentStock, stockMax)
 end
@@ -4956,6 +5140,7 @@ end
 ---@param whichUnit unit
 ---@param currentStock integer
 ---@param stockMax integer
+---@return nothing
 function AddUnitToStockBJ(unitId, whichUnit, currentStock, stockMax)
 	AddUnitToStock(whichUnit, unitId, currentStock, stockMax)
 end
@@ -4963,6 +5148,7 @@ end
 
 ---@param itemId integer
 ---@param whichUnit unit
+---@return nothing
 function RemoveItemFromStockBJ(itemId, whichUnit)
 	RemoveItemFromStock(whichUnit, itemId)
 end
@@ -4970,6 +5156,7 @@ end
 
 ---@param unitId integer
 ---@param whichUnit unit
+---@return nothing
 function RemoveUnitFromStockBJ(unitId, whichUnit)
 	RemoveUnitFromStock(whichUnit, unitId)
 end
@@ -4977,6 +5164,7 @@ end
 
 ---@param enable boolean
 ---@param whichUnit unit
+---@return nothing
 function SetUnitUseFoodBJ(enable, whichUnit)
 	SetUnitUseFood(whichUnit, enable)
 end
@@ -5042,6 +5230,7 @@ end
 
 ---@param flag boolean
 ---@param d destructable
+---@return nothing
 function ShowDestructableBJ(flag, d)
 	ShowDestructable(d, flag)
 end
@@ -5049,6 +5238,7 @@ end
 
 ---@param d destructable
 ---@param flag boolean
+---@return nothing
 function SetDestructableInvulnerableBJ(d, flag)
 	SetDestructableInvulnerable(d, flag)
 end
@@ -5070,6 +5260,7 @@ end
 
 ---@param r rect
 ---@param actionFunc code
+---@return nothing
 function EnumDestructablesInRectAll(r, actionFunc)
 	EnumDestructablesInRect(r, nil, actionFunc)
 end
@@ -5079,7 +5270,7 @@ function EnumDestructablesInCircleBJFilter()
 	local destLoc = GetDestructableLoc(GetFilterDestructable())
 	local result
 	
-	result        = DistanceBetweenPoints(destLoc, bj_enumDestructableCenter) <= bj_enumDestructableRadius
+	result = DistanceBetweenPoints(destLoc, bj_enumDestructableCenter) <= bj_enumDestructableRadius
 	RemoveLocation(destLoc)
 	return result
 end
@@ -5095,11 +5286,12 @@ end
 ---@param d destructable
 ---@return boolean
 function IsDestructableAliveBJ(d)
-	return not IsDestructableDeadBJ(d)
+	return  not IsDestructableDeadBJ(d)
 end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
+---@return nothing
 function RandomDestructableInRectBJEnum()
 	bj_destRandomConsidered = bj_destRandomConsidered + 1
 	if (GetRandomInt(1, bj_destRandomConsidered) == 1) then
@@ -5114,7 +5306,7 @@ end
 ---@param filter boolexpr
 ---@return destructable
 function RandomDestructableInRectBJ(r, filter)
-	bj_destRandomConsidered  = 0
+	bj_destRandomConsidered = 0
 	bj_destRandomCurrentPick = nil
 	EnumDestructablesInRect(r, filter, RandomDestructableInRectBJEnum)
 	DestroyBoolExpr(filter)
@@ -5137,13 +5329,14 @@ end
 ---@param radius real
 ---@param loc location
 ---@param actionFunc code
+---@return nothing
 function EnumDestructablesInCircleBJ(radius, loc, actionFunc)
 	local r
 	
 	if (radius >= 0) then
 		bj_enumDestructableCenter = loc
 		bj_enumDestructableRadius = radius
-		r                         = GetRectFromCircleBJ(loc, radius)
+		r = GetRectFromCircleBJ(loc, radius)
 		EnumDestructablesInRect(r, filterEnumDestructablesInCircleBJ, actionFunc)
 		RemoveRect(r)
 	end
@@ -5152,6 +5345,7 @@ end
 
 ---@param d destructable
 ---@param percent real
+---@return nothing
 function SetDestructableLifePercentBJ(d, percent)
 	SetDestructableLife(d, GetDestructableMaxLife(d) * percent * 0.01)
 end
@@ -5159,6 +5353,7 @@ end
 
 ---@param d destructable
 ---@param max real
+---@return nothing
 function SetDestructableMaxLifeBJ(d, max)
 	SetDestructableMaxLife(d, max)
 end
@@ -5166,6 +5361,7 @@ end
 
 ---@param gateOperation integer
 ---@param d destructable
+---@return nothing
 function ModifyGateBJ(gateOperation, d)
 	if (gateOperation == bj_GATEOPERATION_CLOSE) then
 		if (GetDestructableLife(d) <= 0) then
@@ -5210,6 +5406,7 @@ end
 
 ---@param d destructable
 ---@param newHeight integer
+---@return nothing
 function ChangeElevatorHeight(d, newHeight)
 	local oldHeight
 	
@@ -5264,12 +5461,14 @@ end
 --  Grab the unit and throw his own coords in his face, forcing him to push
 --  and shove until he finds a spot where noone will bother him.
 -- 
+---@return nothing
 function NudgeUnitsInRectEnum()
 	local nudgee = GetEnumUnit()
 	
 	SetUnitPosition(nudgee, GetUnitX(nudgee), GetUnitY(nudgee))
 end
 -- ===========================================================================
+---@return nothing
 function NudgeItemsInRectEnum()
 	local nudgee = GetEnumItem()
 	
@@ -5282,6 +5481,7 @@ end
 -- 
 
 ---@param nudgeArea rect
+---@return nothing
 function NudgeObjectsInRect(nudgeArea)
 	local g
 	
@@ -5293,8 +5493,9 @@ function NudgeObjectsInRect(nudgeArea)
 	EnumItemsInRect(nudgeArea, nil, NudgeItemsInRectEnum)
 end
 -- ===========================================================================
+---@return nothing
 function NearbyElevatorExistsEnum()
-	local d     = GetEnumDestructable()
+	local d = GetEnumDestructable()
 	local dType = GetDestructableTypeId(d)
 	
 	if (dType == bj_ELEVATOR_CODE01) or (dType == bj_ELEVATOR_CODE02) then
@@ -5311,7 +5512,7 @@ function NearbyElevatorExists(x, y)
 	local r
 	
 	--  If another elevator is overlapping this one, ignore the wall.
-	r                   = Rect(x - findThreshold, y - findThreshold, x + findThreshold, y + findThreshold)
+	r = Rect(x - findThreshold, y - findThreshold, x + findThreshold, y + findThreshold)
 	bj_elevatorNeighbor = nil
 	EnumDestructablesInRect(r, nil, NearbyElevatorExistsEnum)
 	RemoveRect(r)
@@ -5319,6 +5520,7 @@ function NearbyElevatorExists(x, y)
 	return bj_elevatorNeighbor ~= nil
 end
 -- ===========================================================================
+---@return nothing
 function FindElevatorWallBlockerEnum()
 	bj_elevatorWallBlocker = GetEnumDestructable()
 end
@@ -5332,15 +5534,16 @@ end
 ---@param y real
 ---@param facing real
 ---@param open boolean
+---@return nothing
 function ChangeElevatorWallBlocker(x, y, facing, open)
-	local blocker
-	local findThreshold    = 32
-	local nudgeLength      = 4.25 * bj_CELLWIDTH
-	local nudgeWidth       = 1.25 * bj_CELLWIDTH
+	local blocker = nil
+	local findThreshold = 32
+	local nudgeLength = 4.25 * bj_CELLWIDTH
+	local nudgeWidth = 1.25 * bj_CELLWIDTH
 	local r
 	
 	--  Search for the pathing blocker within the general area.
-	r                      = Rect(x - findThreshold, y - findThreshold, x + findThreshold, y + findThreshold)
+	r = Rect(x - findThreshold, y - findThreshold, x + findThreshold, y + findThreshold)
 	bj_elevatorWallBlocker = nil
 	EnumDestructablesInRect(r, nil, FindElevatorWallBlockerEnum)
 	RemoveRect(r)
@@ -5353,7 +5556,7 @@ function ChangeElevatorWallBlocker(x, y, facing, open)
 		--  If a different destructible exists in the blocker's spot, ignore
 		--  the request.  (Two destructibles cannot occupy the same location
 		--  on the map, so we cannot create an elevator blocker here.)
-		return
+		return 
 	end
 	
 	if (open) then
@@ -5386,32 +5589,33 @@ end
 ---@param open boolean
 ---@param walls integer
 ---@param d destructable
+---@return nothing
 function ChangeElevatorWalls(open, walls, d)
-	local x              = GetDestructableX(d)
-	local y              = GetDestructableY(d)
-	local distToBlocker  = 192
+	local x = GetDestructableX(d)
+	local y = GetDestructableY(d)
+	local distToBlocker = 192
 	local distToNeighbor = 256
 	
 	if (walls == bj_ELEVATOR_WALL_TYPE_ALL) or (walls == bj_ELEVATOR_WALL_TYPE_EAST) then
-		if (not NearbyElevatorExists(x + distToNeighbor, y)) then
+		if ( not NearbyElevatorExists(x + distToNeighbor, y)) then
 			ChangeElevatorWallBlocker(x + distToBlocker, y, 0, open)
 		end
 	end
 	
 	if (walls == bj_ELEVATOR_WALL_TYPE_ALL) or (walls == bj_ELEVATOR_WALL_TYPE_NORTH) then
-		if (not NearbyElevatorExists(x, y + distToNeighbor)) then
+		if ( not NearbyElevatorExists(x, y + distToNeighbor)) then
 			ChangeElevatorWallBlocker(x, y + distToBlocker, 90, open)
 		end
 	end
 	
 	if (walls == bj_ELEVATOR_WALL_TYPE_ALL) or (walls == bj_ELEVATOR_WALL_TYPE_SOUTH) then
-		if (not NearbyElevatorExists(x, y - distToNeighbor)) then
+		if ( not NearbyElevatorExists(x, y - distToNeighbor)) then
 			ChangeElevatorWallBlocker(x, y - distToBlocker, 90, open)
 		end
 	end
 	
 	if (walls == bj_ELEVATOR_WALL_TYPE_ALL) or (walls == bj_ELEVATOR_WALL_TYPE_WEST) then
-		if (not NearbyElevatorExists(x - distToNeighbor, y)) then
+		if ( not NearbyElevatorExists(x - distToNeighbor, y)) then
 			ChangeElevatorWallBlocker(x - distToBlocker, y, 0, open)
 		end
 	end
@@ -5425,6 +5629,7 @@ end
 
 ---@param activate boolean
 ---@param waygate unit
+---@return nothing
 function WaygateActivateBJ(activate, waygate)
 	WaygateActivate(waygate, activate)
 end
@@ -5439,6 +5644,7 @@ end
 
 ---@param waygate unit
 ---@param loc location
+---@return nothing
 function WaygateSetDestinationLocBJ(waygate, loc)
 	WaygateSetDestination(waygate, GetLocationX(loc), GetLocationY(loc))
 end
@@ -5453,6 +5659,7 @@ end
 
 ---@param flag boolean
 ---@param whichUnit unit
+---@return nothing
 function UnitSetUsesAltIconBJ(flag, whichUnit)
 	UnitSetUsesAltIcon(whichUnit, flag)
 end
@@ -5465,6 +5672,7 @@ end
 
 ---@param whichPlayer player
 ---@param key string
+---@return nothing
 function ForceUIKeyBJ(whichPlayer, key)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -5474,6 +5682,7 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function ForceUICancelBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -5489,10 +5698,11 @@ end
 
 ---@param whichGroup group
 ---@param callback code
+---@return nothing
 function ForGroupBJ(whichGroup, callback)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy   = bj_wantDestroyGroup
+	local wantDestroy = bj_wantDestroyGroup
 	bj_wantDestroyGroup = false
 	
 	ForGroup(whichGroup, callback)
@@ -5506,6 +5716,7 @@ end
 
 ---@param whichUnit unit
 ---@param whichGroup group
+---@return nothing
 function GroupAddUnitSimple(whichUnit, whichGroup)
 	GroupAddUnit(whichGroup, whichUnit)
 end
@@ -5513,10 +5724,12 @@ end
 
 ---@param whichUnit unit
 ---@param whichGroup group
+---@return nothing
 function GroupRemoveUnitSimple(whichUnit, whichGroup)
 	GroupRemoveUnit(whichGroup, whichUnit)
 end
 -- ===========================================================================
+---@return nothing
 function GroupAddGroupEnum()
 	GroupAddUnit(bj_groupAddGroupDest, GetEnumUnit())
 end
@@ -5524,11 +5737,12 @@ end
 
 ---@param sourceGroup group
 ---@param destGroup group
+---@return nothing
 function GroupAddGroup(sourceGroup, destGroup)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy    = bj_wantDestroyGroup
-	bj_wantDestroyGroup  = false
+	local wantDestroy = bj_wantDestroyGroup
+	bj_wantDestroyGroup = false
 	
 	bj_groupAddGroupDest = destGroup
 	ForGroup(sourceGroup, GroupAddGroupEnum)
@@ -5539,6 +5753,7 @@ function GroupAddGroup(sourceGroup, destGroup)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function GroupRemoveGroupEnum()
 	GroupRemoveUnit(bj_groupRemoveGroupDest, GetEnumUnit())
 end
@@ -5546,11 +5761,12 @@ end
 
 ---@param sourceGroup group
 ---@param destGroup group
+---@return nothing
 function GroupRemoveGroup(sourceGroup, destGroup)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy       = bj_wantDestroyGroup
-	bj_wantDestroyGroup     = false
+	local wantDestroy = bj_wantDestroyGroup
+	bj_wantDestroyGroup = false
 	
 	bj_groupRemoveGroupDest = destGroup
 	ForGroup(sourceGroup, GroupRemoveGroupEnum)
@@ -5564,6 +5780,7 @@ end
 
 ---@param whichPlayer player
 ---@param whichForce force
+---@return nothing
 function ForceAddPlayerSimple(whichPlayer, whichForce)
 	ForceAddPlayer(whichForce, whichPlayer)
 end
@@ -5571,6 +5788,7 @@ end
 
 ---@param whichPlayer player
 ---@param whichForce force
+---@return nothing
 function ForceRemovePlayerSimple(whichPlayer, whichForce)
 	ForceRemovePlayer(whichForce, whichPlayer)
 end
@@ -5581,6 +5799,7 @@ end
 --  The chance of picking a given unit over the "current pick" is 1/N, where N is
 --  the number of units considered thusfar (including the current consideration).
 -- 
+---@return nothing
 function GroupPickRandomUnitEnum()
 	bj_groupRandomConsidered = bj_groupRandomConsidered + 1
 	if (GetRandomInt(1, bj_groupRandomConsidered) == 1) then
@@ -5596,10 +5815,10 @@ end
 function GroupPickRandomUnit(whichGroup)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy         = bj_wantDestroyGroup
-	bj_wantDestroyGroup       = false
+	local wantDestroy = bj_wantDestroyGroup
+	bj_wantDestroyGroup = false
 	
-	bj_groupRandomConsidered  = 0
+	bj_groupRandomConsidered = 0
 	bj_groupRandomCurrentPick = nil
 	ForGroup(whichGroup, GroupPickRandomUnitEnum)
 	
@@ -5612,6 +5831,7 @@ end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
+---@return nothing
 function ForcePickRandomPlayerEnum()
 	bj_forceRandomConsidered = bj_forceRandomConsidered + 1
 	if (GetRandomInt(1, bj_forceRandomConsidered) == 1) then
@@ -5625,7 +5845,7 @@ end
 ---@param whichForce force
 ---@return player
 function ForcePickRandomPlayer(whichForce)
-	bj_forceRandomConsidered  = 0
+	bj_forceRandomConsidered = 0
 	bj_forceRandomCurrentPick = nil
 	ForForce(whichForce, ForcePickRandomPlayerEnum)
 	return bj_forceRandomCurrentPick
@@ -5635,6 +5855,7 @@ end
 ---@param whichPlayer player
 ---@param enumFilter boolexpr
 ---@param enumAction code
+---@return nothing
 function EnumUnitsSelected(whichPlayer, enumFilter, enumAction)
 	local g = CreateGroup()
 	SyncSelections()
@@ -5672,7 +5893,7 @@ end
 ---@param whichPlayer player
 ---@return group
 function GetUnitsInRectOfPlayer(r, whichPlayer)
-	local g                  = CreateGroup()
+	local g = CreateGroup()
 	bj_groupEnumOwningPlayer = whichPlayer
 	GroupEnumUnitsInRect(g, r, filterGetUnitsInRectOfPlayer)
 	return g
@@ -5708,10 +5929,10 @@ end
 ---@return group
 function GetUnitsOfTypeIdAll(unitid)
 	local result = CreateGroup()
-	local g      = CreateGroup()
+	local g = CreateGroup()
 	local index
 	
-	index        = 0
+	index = 0
 	while true do
 		bj_groupEnumTypeId = unitid
 		GroupClear(g)
@@ -5754,7 +5975,7 @@ end
 ---@param unitid integer
 ---@return group
 function GetUnitsOfPlayerAndTypeId(whichPlayer, unitid)
-	local g            = CreateGroup()
+	local g = CreateGroup()
 	bj_groupEnumTypeId = unitid
 	GroupEnumUnitsOfPlayer(g, whichPlayer, filterGetUnitsOfPlayerAndTypeId)
 	return g
@@ -5788,7 +6009,7 @@ end
 ---@param whichControl mapcontrol
 ---@return force
 function GetPlayersByMapControl(whichControl)
-	local f     = CreateForce()
+	local f = CreateForce()
 	local playerIndex
 	local indexPlayer
 	
@@ -5834,6 +6055,7 @@ function GetPlayersMatching(filter)
 	return f
 end
 -- ===========================================================================
+---@return nothing
 function CountUnitsInGroupEnum()
 	bj_groupCountUnits = bj_groupCountUnits + 1
 end
@@ -5844,10 +6066,10 @@ end
 function CountUnitsInGroup(g)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
-	local wantDestroy   = bj_wantDestroyGroup
+	local wantDestroy = bj_wantDestroyGroup
 	bj_wantDestroyGroup = false
 	
-	bj_groupCountUnits  = 0
+	bj_groupCountUnits = 0
 	ForGroup(g, CountUnitsInGroupEnum)
 	
 	--  If the user wants the group destroyed, do so now.
@@ -5857,6 +6079,7 @@ function CountUnitsInGroup(g)
 	return bj_groupCountUnits
 end
 -- ===========================================================================
+---@return nothing
 function CountPlayersInForceEnum()
 	bj_forceCountPlayers = bj_forceCountPlayers + 1
 end
@@ -5870,6 +6093,7 @@ function CountPlayersInForceBJ(f)
 	return bj_forceCountPlayers
 end
 -- ===========================================================================
+---@return nothing
 function GetRandomSubGroupEnum()
 	if (bj_randomSubGroupWant > 0) then
 		if (bj_randomSubGroupWant >= bj_randomSubGroupTotal) or (GetRandomReal(0, 1) < bj_randomSubGroupChance) then
@@ -5886,10 +6110,10 @@ end
 ---@param sourceGroup group
 ---@return group
 function GetRandomSubGroup(count, sourceGroup)
-	local g                = CreateGroup()
+	local g = CreateGroup()
 	
 	bj_randomSubGroupGroup = g
-	bj_randomSubGroupWant  = count
+	bj_randomSubGroupWant = count
 	bj_randomSubGroupTotal = CountUnitsInGroup(sourceGroup)
 	
 	if (bj_randomSubGroupWant <= 0 or bj_randomSubGroupTotal <= 0) then
@@ -5915,7 +6139,7 @@ function CountLivingPlayerUnitsOfTypeId(unitId, whichPlayer)
 	local g
 	local matchedCount
 	
-	g                          = CreateGroup()
+	g = CreateGroup()
 	bj_livingPlayerUnitsTypeId = unitId
 	GroupEnumUnitsOfPlayer(g, whichPlayer, filterLivingPlayerUnitsOfTypeId)
 	matchedCount = CountUnitsInGroup(g)
@@ -5931,6 +6155,7 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
+---@return nothing
 function ResetUnitAnimation(whichUnit)
 	SetUnitAnimation(whichUnit, "stand")
 end
@@ -5938,6 +6163,7 @@ end
 
 ---@param whichUnit unit
 ---@param percentScale real
+---@return nothing
 function SetUnitTimeScalePercent(whichUnit, percentScale)
 	SetUnitTimeScale(whichUnit, percentScale * 0.01)
 end
@@ -5947,6 +6173,7 @@ end
 ---@param percentScaleX real
 ---@param percentScaleY real
 ---@param percentScaleZ real
+---@return nothing
 function SetUnitScalePercent(whichUnit, percentScaleX, percentScaleY, percentScaleZ)
 	SetUnitScale(whichUnit, percentScaleX * 0.01, percentScaleY * 0.01, percentScaleZ * 0.01)
 end
@@ -5961,6 +6188,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function SetUnitVertexColorBJ(whichUnit, red, green, blue, transparency)
 	SetUnitVertexColor(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -5971,6 +6199,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function UnitAddIndicatorBJ(whichUnit, red, green, blue, transparency)
 	AddIndicator(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -5981,6 +6210,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function DestructableAddIndicatorBJ(whichDestructable, red, green, blue, transparency)
 	AddIndicator(whichDestructable, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -5991,6 +6221,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function ItemAddIndicatorBJ(whichItem, red, green, blue, transparency)
 	AddIndicator(whichItem, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -6001,6 +6232,7 @@ end
 ---@param whichUnit unit
 ---@param target location
 ---@param duration real
+---@return nothing
 function SetUnitFacingToFaceLocTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(whichUnit)
 	
@@ -6014,6 +6246,7 @@ end
 ---@param whichUnit unit
 ---@param target unit
 ---@param duration real
+---@return nothing
 function SetUnitFacingToFaceUnitTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(target)
 	
@@ -6024,6 +6257,7 @@ end
 
 ---@param whichUnit unit
 ---@param whichAnimation string
+---@return nothing
 function QueueUnitAnimationBJ(whichUnit, whichAnimation)
 	QueueUnitAnimation(whichUnit, whichAnimation)
 end
@@ -6031,6 +6265,7 @@ end
 
 ---@param d destructable
 ---@param whichAnimation string
+---@return nothing
 function SetDestructableAnimationBJ(d, whichAnimation)
 	SetDestructableAnimation(d, whichAnimation)
 end
@@ -6038,6 +6273,7 @@ end
 
 ---@param d destructable
 ---@param whichAnimation string
+---@return nothing
 function QueueDestructableAnimationBJ(d, whichAnimation)
 	QueueDestructableAnimation(d, whichAnimation)
 end
@@ -6045,6 +6281,7 @@ end
 
 ---@param d destructable
 ---@param percentScale real
+---@return nothing
 function SetDestAnimationSpeedPercent(d, percentScale)
 	SetDestructableAnimationSpeed(d, percentScale * 0.01)
 end
@@ -6058,6 +6295,7 @@ end
 ---@param flag boolean
 ---@param whichDialog dialog
 ---@param whichPlayer player
+---@return nothing
 function DialogDisplayBJ(flag, whichDialog, whichPlayer)
 	DialogDisplay(whichPlayer, whichDialog, flag)
 end
@@ -6065,6 +6303,7 @@ end
 
 ---@param whichDialog dialog
 ---@param message string
+---@return nothing
 function DialogSetMessageBJ(whichDialog, message)
 	DialogSetMessage(whichDialog, message)
 end
@@ -6090,6 +6329,7 @@ end
 -- ===========================================================================
 
 ---@param whichDialog dialog
+---@return nothing
 function DialogClearBJ(whichDialog)
 	DialogClear(whichDialog)
 end
@@ -6119,10 +6359,11 @@ end
 ---@param whichAllianceSetting alliancetype
 ---@param value boolean
 ---@param otherPlayer player
+---@return nothing
 function SetPlayerAllianceBJ(sourcePlayer, whichAllianceSetting, value, otherPlayer)
 	--  Prevent players from attempting to ally with themselves.
 	if (sourcePlayer == otherPlayer) then
-		return
+		return 
 	end
 	
 	SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value)
@@ -6134,6 +6375,7 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
+---@return nothing
 function SetPlayerAllianceStateAllyBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_PASSIVE, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_HELP_REQUEST, flag)
@@ -6148,6 +6390,7 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
+---@return nothing
 function SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_VISION, flag)
 end
@@ -6158,6 +6401,7 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
+---@return nothing
 function SetPlayerAllianceStateControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_CONTROL, flag)
 end
@@ -6169,6 +6413,7 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
+---@return nothing
 function SetPlayerAllianceStateFullControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL, flag)
 end
@@ -6177,10 +6422,11 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param allianceState integer
+---@return nothing
 function SetPlayerAllianceStateBJ(sourcePlayer, otherPlayer, allianceState)
 	--  Prevent players from attempting to ally with themselves.
 	if (sourcePlayer == otherPlayer) then
-		return
+		return 
 	end
 	
 	if allianceState == bj_ALLIANCE_UNALLIED then
@@ -6236,6 +6482,7 @@ end
 ---@param sourceForce force
 ---@param targetForce force
 ---@param allianceState integer
+---@return nothing
 function SetForceAllianceStateBJ(sourceForce, targetForce, allianceState)
 	local sourceIndex
 	local targetIndex
@@ -6286,6 +6533,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function ShareEverythingWithTeamAI(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6310,6 +6558,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function ShareEverythingWithTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6332,12 +6581,13 @@ end
 --  Creates a 'Neutral Victim' player slot.  This slot is passive towards all
 --  other players, but all other players are aggressive towards him/her.
 -- 
+---@return nothing
 function ConfigureNeutralVictim()
 	local index
 	local indexPlayer
 	local neutralVictim = Player(bj_PLAYER_NEUTRAL_VICTIM)
 	
-	index               = 0
+	index = 0
 	while true do
 		indexPlayer = Player(index)
 		
@@ -6357,6 +6607,7 @@ function ConfigureNeutralVictim()
 	SetPlayerState(neutralVictim, PLAYER_STATE_GIVES_BOUNTY, 0)
 end
 -- ===========================================================================
+---@return nothing
 function MakeUnitsPassiveForPlayerEnum()
 	SetUnitOwner(GetEnumUnit(), Player(bj_PLAYER_NEUTRAL_VICTIM), false)
 end
@@ -6365,6 +6616,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function MakeUnitsPassiveForPlayer(whichPlayer)
 	local playerUnits = CreateGroup()
 	CachePlayerHeroData(whichPlayer)
@@ -6377,6 +6629,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function MakeUnitsPassiveForTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6400,17 +6653,18 @@ end
 ---@return boolean
 function AllowVictoryDefeat(gameResult)
 	if (gameResult == PLAYER_GAME_RESULT_VICTORY) then
-		return not IsNoVictoryCheat()
+		return  not IsNoVictoryCheat()
 	end
 	if (gameResult == PLAYER_GAME_RESULT_DEFEAT) then
-		return not IsNoDefeatCheat()
+		return  not IsNoDefeatCheat()
 	end
 	if (gameResult == PLAYER_GAME_RESULT_NEUTRAL) then
-		return (not IsNoVictoryCheat()) and (not IsNoDefeatCheat())
+		return ( not IsNoVictoryCheat()) and ( not IsNoDefeatCheat())
 	end
 	return true
 end
 -- ===========================================================================
+---@return nothing
 function EndGameBJ()
 	EndGame(true)
 end
@@ -6418,6 +6672,7 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
+---@return nothing
 function MeleeVictoryDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6445,6 +6700,7 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
+---@return nothing
 function MeleeDefeatDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6462,7 +6718,7 @@ function MeleeDefeatDialogBJ(whichPlayer, leftGame)
 	DialogSetMessage(d, GetLocalizedString("GAMEOVER_DEFEAT_MSG"))
 	
 	--  Only show the continue button if the game is not over and observers on death are allowed
-	if (not bj_meleeGameOver and IsMapFlagSet(MAP_OBSERVERS_ON_DEATH)) then
+	if ( not bj_meleeGameOver and IsMapFlagSet(MAP_OBSERVERS_ON_DEATH)) then
 		DialogAddButton(d, GetLocalizedString("GAMEOVER_CONTINUE_OBSERVING"), GetLocalizedHotkey("GAMEOVER_CONTINUE_OBSERVING"))
 	end
 	
@@ -6476,6 +6732,7 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
+---@return nothing
 function GameOverDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6503,6 +6760,7 @@ end
 ---@param whichPlayer player
 ---@param gameResult playergameresult
 ---@param leftGame boolean
+---@return nothing
 function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 	if AllowVictoryDefeat(gameResult) then
 		
@@ -6510,16 +6768,17 @@ function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 		
 		if (gameResult == PLAYER_GAME_RESULT_VICTORY) then
 			MeleeVictoryDialogBJ(whichPlayer, leftGame)
-			return
+			return 
 		elseif (gameResult == PLAYER_GAME_RESULT_DEFEAT) then
 			MeleeDefeatDialogBJ(whichPlayer, leftGame)
 		else
 			GameOverDialogBJ(whichPlayer, leftGame)
 		end
-	
+		
 	end
 end
 -- ===========================================================================
+---@return nothing
 function CustomVictoryOkBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6534,6 +6793,7 @@ function CustomVictoryOkBJ()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function CustomVictoryQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6546,6 +6806,7 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function CustomVictoryDialogBJ(whichPlayer)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6575,6 +6836,7 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
+---@return nothing
 function CustomVictorySkipBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		if bj_isSinglePlayer then
@@ -6594,11 +6856,12 @@ end
 ---@param whichPlayer player
 ---@param showDialog boolean
 ---@param showScores boolean
+---@return nothing
 function CustomVictoryBJ(whichPlayer, showDialog, showScores)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_VICTORY) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_VICTORY)
 		
-		if not bj_isSinglePlayer then
+		if  not bj_isSinglePlayer then
 			DisplayTimedTextFromPlayer(whichPlayer, 0, 0, 60, GetLocalizedString("PLAYER_VICTORIOUS"))
 		end
 		
@@ -6614,11 +6877,13 @@ function CustomVictoryBJ(whichPlayer, showDialog, showScores)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function CustomDefeatRestartBJ()
 	PauseGame(false)
 	RestartGame(true)
 end
 -- ===========================================================================
+---@return nothing
 function CustomDefeatReduceDifficultyBJ()
 	local diff = GetGameDifficulty()
 	
@@ -6638,11 +6903,13 @@ function CustomDefeatReduceDifficultyBJ()
 	RestartGame(true)
 end
 -- ===========================================================================
+---@return nothing
 function CustomDefeatLoadBJ()
 	PauseGame(false)
 	DisplayLoadDialog()
 end
 -- ===========================================================================
+---@return nothing
 function CustomDefeatQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6656,6 +6923,7 @@ end
 
 ---@param whichPlayer player
 ---@param message string
+---@return nothing
 function CustomDefeatDialogBJ(whichPlayer, message)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6698,11 +6966,12 @@ end
 
 ---@param whichPlayer player
 ---@param message string
+---@return nothing
 function CustomDefeatBJ(whichPlayer, message)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_DEFEAT) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_DEFEAT)
 		
-		if not bj_isSinglePlayer then
+		if  not bj_isSinglePlayer then
 			DisplayTimedTextFromPlayer(whichPlayer, 0, 0, 60, GetLocalizedString("PLAYER_DEFEATED"))
 		end
 		
@@ -6715,6 +6984,7 @@ end
 -- ===========================================================================
 
 ---@param nextLevel string
+---@return nothing
 function SetNextLevelBJ(nextLevel)
 	if (nextLevel == "") then
 		bj_changeLevelMapName = nil
@@ -6726,6 +6996,7 @@ end
 
 ---@param flag boolean
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerOnScoreScreenBJ(flag, whichPlayer)
 	SetPlayerOnScoreScreen(whichPlayer, flag)
 end
@@ -6742,8 +7013,8 @@ end
 ---@param iconPath string
 ---@return quest
 function CreateQuestBJ(questType, title, description, iconPath)
-	local required      = (questType == bj_QUESTTYPE_REQ_DISCOVERED) or (questType == bj_QUESTTYPE_REQ_UNDISCOVERED)
-	local discovered    = (questType == bj_QUESTTYPE_REQ_DISCOVERED) or (questType == bj_QUESTTYPE_OPT_DISCOVERED)
+	local required = (questType == bj_QUESTTYPE_REQ_DISCOVERED) or (questType == bj_QUESTTYPE_REQ_UNDISCOVERED)
+	local discovered = (questType == bj_QUESTTYPE_REQ_DISCOVERED) or (questType == bj_QUESTTYPE_OPT_DISCOVERED)
 	
 	bj_lastCreatedQuest = CreateQuest()
 	QuestSetTitle(bj_lastCreatedQuest, title)
@@ -6757,6 +7028,7 @@ end
 -- ===========================================================================
 
 ---@param whichQuest quest
+---@return nothing
 function DestroyQuestBJ(whichQuest)
 	DestroyQuest(whichQuest)
 end
@@ -6764,6 +7036,7 @@ end
 
 ---@param enabled boolean
 ---@param whichQuest quest
+---@return nothing
 function QuestSetEnabledBJ(enabled, whichQuest)
 	QuestSetEnabled(whichQuest, enabled)
 end
@@ -6771,6 +7044,7 @@ end
 
 ---@param whichQuest quest
 ---@param title string
+---@return nothing
 function QuestSetTitleBJ(whichQuest, title)
 	QuestSetTitle(whichQuest, title)
 end
@@ -6778,6 +7052,7 @@ end
 
 ---@param whichQuest quest
 ---@param description string
+---@return nothing
 function QuestSetDescriptionBJ(whichQuest, description)
 	QuestSetDescription(whichQuest, description)
 end
@@ -6785,6 +7060,7 @@ end
 
 ---@param whichQuest quest
 ---@param completed boolean
+---@return nothing
 function QuestSetCompletedBJ(whichQuest, completed)
 	QuestSetCompleted(whichQuest, completed)
 end
@@ -6792,6 +7068,7 @@ end
 
 ---@param whichQuest quest
 ---@param failed boolean
+---@return nothing
 function QuestSetFailedBJ(whichQuest, failed)
 	QuestSetFailed(whichQuest, failed)
 end
@@ -6799,6 +7076,7 @@ end
 
 ---@param whichQuest quest
 ---@param discovered boolean
+---@return nothing
 function QuestSetDiscoveredBJ(whichQuest, discovered)
 	QuestSetDiscovered(whichQuest, discovered)
 end
@@ -6822,6 +7100,7 @@ end
 
 ---@param whichQuestItem questitem
 ---@param description string
+---@return nothing
 function QuestItemSetDescriptionBJ(whichQuestItem, description)
 	QuestItemSetDescription(whichQuestItem, description)
 end
@@ -6829,6 +7108,7 @@ end
 
 ---@param whichQuestItem questitem
 ---@param completed boolean
+---@return nothing
 function QuestItemSetCompletedBJ(whichQuestItem, completed)
 	QuestItemSetCompleted(whichQuestItem, completed)
 end
@@ -6849,6 +7129,7 @@ end
 -- ===========================================================================
 
 ---@param whichCondition defeatcondition
+---@return nothing
 function DestroyDefeatConditionBJ(whichCondition)
 	DestroyDefeatCondition(whichCondition)
 end
@@ -6856,6 +7137,7 @@ end
 
 ---@param whichCondition defeatcondition
 ---@param description string
+---@return nothing
 function DefeatConditionSetDescriptionBJ(whichCondition, description)
 	DefeatConditionSetDescription(whichCondition, description)
 end
@@ -6865,6 +7147,7 @@ function GetLastCreatedDefeatConditionBJ()
 	return bj_lastCreatedDefeatCondition
 end
 -- ===========================================================================
+---@return nothing
 function FlashQuestDialogButtonBJ()
 	FlashQuestDialogButton()
 end
@@ -6873,6 +7156,7 @@ end
 ---@param f force
 ---@param messageType integer
 ---@param message string
+---@return nothing
 function QuestMessageBJ(f, messageType, message)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -6882,68 +7166,68 @@ function QuestMessageBJ(f, messageType, message)
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUEST, message)
 			StartSound(bj_questDiscoveredSound)
 			FlashQuestDialogButton()
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_UPDATED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTUPDATE, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTUPDATE, message)
 			StartSound(bj_questUpdatedSound)
 			FlashQuestDialogButton()
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_COMPLETED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTDONE, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTDONE, message)
 			StartSound(bj_questCompletedSound)
 			FlashQuestDialogButton()
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_FAILED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTFAILED, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTFAILED, message)
 			StartSound(bj_questFailedSound)
 			FlashQuestDialogButton()
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_REQUIREMENT) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_QUESTREQUIREMENT, message)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_MISSIONFAILED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_MISSIONFAILED, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_MISSIONFAILED, message)
 			StartSound(bj_questFailedSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_HINT) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_HINT, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_HINT, message)
 			StartSound(bj_questHintSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_ALWAYSHINT) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_ALWAYSHINT, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_ALWAYSHINT, message)
 			StartSound(bj_questHintSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_SECRET) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_SECRET, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_SECRET, message)
 			StartSound(bj_questSecretSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_UNITACQUIRED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_UNITACQUIRED, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_UNITACQUIRED, message)
 			StartSound(bj_questHintSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_UNITAVAILABLE) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_UNITAVAILABLE, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_UNITAVAILABLE, message)
 			StartSound(bj_questHintSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_ITEMACQUIRED) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_ITEMACQUIRED, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_ITEMACQUIRED, message)
 			StartSound(bj_questItemAcquiredSound)
-		
+			
 		elseif (messageType == bj_QUESTMESSAGE_WARNING) then
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_WARNING, " ")
 			DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, bj_TEXT_DELAY_WARNING, message)
 			StartSound(bj_questWarningSound)
-		
+			
 		else
 			--  Unrecognized message type - ignore the request.
 		end
@@ -6978,6 +7262,7 @@ end
 -- ===========================================================================
 
 ---@param whichTimer timer
+---@return nothing
 function DestroyTimerBJ(whichTimer)
 	DestroyTimer(whichTimer)
 end
@@ -6985,6 +7270,7 @@ end
 
 ---@param pause boolean
 ---@param whichTimer timer
+---@return nothing
 function PauseTimerBJ(pause, whichTimer)
 	if pause then
 		PauseTimer(whichTimer)
@@ -7011,6 +7297,7 @@ end
 -- ===========================================================================
 
 ---@param td timerdialog
+---@return nothing
 function DestroyTimerDialogBJ(td)
 	DestroyTimerDialog(td)
 end
@@ -7018,6 +7305,7 @@ end
 
 ---@param td timerdialog
 ---@param title string
+---@return nothing
 function TimerDialogSetTitleBJ(td, title)
 	TimerDialogSetTitle(td, title)
 end
@@ -7028,6 +7316,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function TimerDialogSetTitleColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTitleColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7038,6 +7327,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function TimerDialogSetTimeColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTimeColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7045,6 +7335,7 @@ end
 
 ---@param td timerdialog
 ---@param speedMultFactor real
+---@return nothing
 function TimerDialogSetSpeedBJ(td, speedMultFactor)
 	TimerDialogSetSpeed(td, speedMultFactor)
 end
@@ -7053,6 +7344,7 @@ end
 ---@param show boolean
 ---@param td timerdialog
 ---@param whichPlayer player
+---@return nothing
 function TimerDialogDisplayForPlayerBJ(show, td, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7063,6 +7355,7 @@ end
 
 ---@param show boolean
 ---@param td timerdialog
+---@return nothing
 function TimerDialogDisplayBJ(show, td)
 	TimerDialogDisplay(td, show)
 end
@@ -7079,6 +7372,7 @@ end
 -- ===========================================================================
 
 ---@param lb leaderboard
+---@return nothing
 function LeaderboardResizeBJ(lb)
 	local size = LeaderboardGetItemCount(lb)
 	
@@ -7092,6 +7386,7 @@ end
 ---@param whichPlayer player
 ---@param lb leaderboard
 ---@param val integer
+---@return nothing
 function LeaderboardSetPlayerItemValueBJ(whichPlayer, lb, val)
 	LeaderboardSetItemValue(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
@@ -7100,6 +7395,7 @@ end
 ---@param whichPlayer player
 ---@param lb leaderboard
 ---@param val string
+---@return nothing
 function LeaderboardSetPlayerItemLabelBJ(whichPlayer, lb, val)
 	LeaderboardSetItemLabel(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
@@ -7110,6 +7406,7 @@ end
 ---@param showLabel boolean
 ---@param showValue boolean
 ---@param showIcon boolean
+---@return nothing
 function LeaderboardSetPlayerItemStyleBJ(whichPlayer, lb, showLabel, showValue, showIcon)
 	LeaderboardSetItemStyle(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), showLabel, showValue, showIcon)
 end
@@ -7121,6 +7418,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function LeaderboardSetPlayerItemLabelColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemLabelColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7132,6 +7430,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function LeaderboardSetPlayerItemValueColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemValueColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7142,6 +7441,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function LeaderboardSetLabelColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetLabelColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7152,6 +7452,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function LeaderboardSetValueColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetValueColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7159,6 +7460,7 @@ end
 
 ---@param lb leaderboard
 ---@param label string
+---@return nothing
 function LeaderboardSetLabelBJ(lb, label)
 	LeaderboardSetLabel(lb, label)
 	LeaderboardResizeBJ(lb)
@@ -7170,6 +7472,7 @@ end
 ---@param showNames boolean
 ---@param showValues boolean
 ---@param showIcons boolean
+---@return nothing
 function LeaderboardSetStyleBJ(lb, showLabel, showNames, showValues, showIcons)
 	LeaderboardSetStyle(lb, showLabel, showNames, showValues, showIcons)
 end
@@ -7192,6 +7495,7 @@ end
 
 ---@param lb leaderboard
 ---@param toForce force
+---@return nothing
 function ForceSetLeaderboardBJ(lb, toForce)
 	local index
 	local indexPlayer
@@ -7221,6 +7525,7 @@ end
 -- ===========================================================================
 
 ---@param lb leaderboard
+---@return nothing
 function DestroyLeaderboardBJ(lb)
 	DestroyLeaderboard(lb)
 end
@@ -7228,6 +7533,7 @@ end
 
 ---@param show boolean
 ---@param lb leaderboard
+---@return nothing
 function LeaderboardDisplayBJ(show, lb)
 	LeaderboardDisplay(lb, show)
 end
@@ -7237,6 +7543,7 @@ end
 ---@param lb leaderboard
 ---@param label string
 ---@param value integer
+---@return nothing
 function LeaderboardAddItemBJ(whichPlayer, lb, label, value)
 	if (LeaderboardHasPlayerItem(lb, whichPlayer)) then
 		LeaderboardRemovePlayerItem(lb, whichPlayer)
@@ -7249,6 +7556,7 @@ end
 
 ---@param whichPlayer player
 ---@param lb leaderboard
+---@return nothing
 function LeaderboardRemovePlayerItemBJ(whichPlayer, lb)
 	LeaderboardRemovePlayerItem(lb, whichPlayer)
 	LeaderboardResizeBJ(lb)
@@ -7258,6 +7566,7 @@ end
 ---@param lb leaderboard
 ---@param sortType integer
 ---@param ascending boolean
+---@return nothing
 function LeaderboardSortItemsBJ(lb, sortType, ascending)
 	if (sortType == bj_SORTTYPE_SORTBYVALUE) then
 		LeaderboardSortItemsByValue(lb, ascending)
@@ -7273,6 +7582,7 @@ end
 
 ---@param lb leaderboard
 ---@param ascending boolean
+---@return nothing
 function LeaderboardSortItemsByPlayerBJ(lb, ascending)
 	LeaderboardSortItemsByPlayer(lb, ascending)
 end
@@ -7280,6 +7590,7 @@ end
 
 ---@param lb leaderboard
 ---@param ascending boolean
+---@return nothing
 function LeaderboardSortItemsByLabelBJ(lb, ascending)
 	LeaderboardSortItemsByLabel(lb, ascending)
 end
@@ -7350,6 +7661,7 @@ end
 -- ===========================================================================
 
 ---@param mb multiboard
+---@return nothing
 function DestroyMultiboardBJ(mb)
 	DestroyMultiboard(mb)
 end
@@ -7362,6 +7674,7 @@ end
 
 ---@param show boolean
 ---@param mb multiboard
+---@return nothing
 function MultiboardDisplayBJ(show, mb)
 	MultiboardDisplay(mb, show)
 end
@@ -7369,6 +7682,7 @@ end
 
 ---@param minimize boolean
 ---@param mb multiboard
+---@return nothing
 function MultiboardMinimizeBJ(minimize, mb)
 	MultiboardMinimize(mb, minimize)
 end
@@ -7379,14 +7693,16 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function MultiboardSetTitleTextColorBJ(mb, red, green, blue, transparency)
 	MultiboardSetTitleTextColor(mb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 -- ===========================================================================
 
 ---@param flag boolean
+---@return nothing
 function MultiboardAllowDisplayBJ(flag)
-	MultiboardSuppressDisplay(not flag)
+	MultiboardSuppressDisplay( not flag)
 end
 -- ===========================================================================
 
@@ -7395,12 +7711,13 @@ end
 ---@param row integer
 ---@param showValue boolean
 ---@param showIcon boolean
+---@return nothing
 function MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
-	local curRow  = 0
-	local curCol  = 0
+	local curRow = 0
+	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem
+	local mbitem = nil
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7431,12 +7748,13 @@ end
 ---@param col integer
 ---@param row integer
 ---@param val string
+---@return nothing
 function MultiboardSetItemValueBJ(mb, col, row, val)
-	local curRow  = 0
-	local curCol  = 0
+	local curRow = 0
+	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem
+	local mbitem = nil
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7470,12 +7788,13 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
-	local curRow  = 0
-	local curCol  = 0
+	local curRow = 0
+	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem
+	local mbitem = nil
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7506,12 +7825,13 @@ end
 ---@param col integer
 ---@param row integer
 ---@param width real
+---@return nothing
 function MultiboardSetItemWidthBJ(mb, col, row, width)
-	local curRow  = 0
-	local curCol  = 0
+	local curRow = 0
+	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem
+	local mbitem = nil
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7542,12 +7862,13 @@ end
 ---@param col integer
 ---@param row integer
 ---@param iconFileName string
+---@return nothing
 function MultiboardSetItemIconBJ(mb, col, row, iconFileName)
-	local curRow  = 0
-	local curCol  = 0
+	local curRow = 0
+	local curCol = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem
+	local mbitem = nil
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7604,6 +7925,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
+---@return nothing
 function SetTextTagColorBJ(tt, red, green, blue, transparency)
 	SetTextTagColor(tt, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7612,8 +7934,9 @@ end
 ---@param tt texttag
 ---@param speed real
 ---@param angle real
+---@return nothing
 function SetTextTagVelocityBJ(tt, speed, angle)
-	local vel  = TextTagSpeed2Velocity(speed)
+	local vel = TextTagSpeed2Velocity(speed)
 	local xvel = vel * Cos(angle * bj_DEGTORAD)
 	local yvel = vel * Sin(angle * bj_DEGTORAD)
 	
@@ -7624,6 +7947,7 @@ end
 ---@param tt texttag
 ---@param s string
 ---@param size real
+---@return nothing
 function SetTextTagTextBJ(tt, s, size)
 	local textHeight = TextTagSize2Height(size)
 	
@@ -7634,6 +7958,7 @@ end
 ---@param tt texttag
 ---@param loc location
 ---@param zOffset real
+---@return nothing
 function SetTextTagPosBJ(tt, loc, zOffset)
 	SetTextTagPos(tt, GetLocationX(loc), GetLocationY(loc), zOffset)
 end
@@ -7642,6 +7967,7 @@ end
 ---@param tt texttag
 ---@param whichUnit unit
 ---@param zOffset real
+---@return nothing
 function SetTextTagPosUnitBJ(tt, whichUnit, zOffset)
 	SetTextTagPosUnit(tt, whichUnit, zOffset)
 end
@@ -7649,6 +7975,7 @@ end
 
 ---@param tt texttag
 ---@param flag boolean
+---@return nothing
 function SetTextTagSuspendedBJ(tt, flag)
 	SetTextTagSuspended(tt, flag)
 end
@@ -7656,6 +7983,7 @@ end
 
 ---@param tt texttag
 ---@param flag boolean
+---@return nothing
 function SetTextTagPermanentBJ(tt, flag)
 	SetTextTagPermanent(tt, flag)
 end
@@ -7663,6 +7991,7 @@ end
 
 ---@param tt texttag
 ---@param age real
+---@return nothing
 function SetTextTagAgeBJ(tt, age)
 	SetTextTagAge(tt, age)
 end
@@ -7670,6 +7999,7 @@ end
 
 ---@param tt texttag
 ---@param lifespan real
+---@return nothing
 function SetTextTagLifespanBJ(tt, lifespan)
 	SetTextTagLifespan(tt, lifespan)
 end
@@ -7677,6 +8007,7 @@ end
 
 ---@param tt texttag
 ---@param fadepoint real
+---@return nothing
 function SetTextTagFadepointBJ(tt, fadepoint)
 	SetTextTagFadepoint(tt, fadepoint)
 end
@@ -7721,6 +8052,7 @@ end
 -- ===========================================================================
 
 ---@param tt texttag
+---@return nothing
 function DestroyTextTagBJ(tt)
 	DestroyTextTag(tt)
 end
@@ -7729,6 +8061,7 @@ end
 ---@param show boolean
 ---@param tt texttag
 ---@param whichForce force
+---@return nothing
 function ShowTextTagForceBJ(show, tt, whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7746,16 +8079,19 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function PauseGameOn()
 	PauseGame(true)
 end
 -- ===========================================================================
+---@return nothing
 function PauseGameOff()
 	PauseGame(false)
 end
 -- ===========================================================================
 
 ---@param whichForce force
+---@return nothing
 function SetUserControlForceOn(whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7765,6 +8101,7 @@ end
 -- ===========================================================================
 
 ---@param whichForce force
+---@return nothing
 function SetUserControlForceOff(whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7775,6 +8112,7 @@ end
 
 ---@param whichForce force
 ---@param fadeDuration real
+---@return nothing
 function ShowInterfaceForceOn(whichForce, fadeDuration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7785,6 +8123,7 @@ end
 
 ---@param whichForce force
 ---@param fadeDuration real
+---@return nothing
 function ShowInterfaceForceOff(whichForce, fadeDuration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7797,6 +8136,7 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
+---@return nothing
 function PingMinimapForForce(whichForce, x, y, duration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7809,6 +8149,7 @@ end
 ---@param whichForce force
 ---@param loc location
 ---@param duration real
+---@return nothing
 function PingMinimapLocForForce(whichForce, loc, duration)
 	PingMinimapForForce(whichForce, GetLocationX(loc), GetLocationY(loc), duration)
 end
@@ -7818,6 +8159,7 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
+---@return nothing
 function PingMinimapForPlayer(whichPlayer, x, y, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7830,6 +8172,7 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
+---@return nothing
 function PingMinimapLocForPlayer(whichPlayer, loc, duration)
 	PingMinimapForPlayer(whichPlayer, GetLocationX(loc), GetLocationY(loc), duration)
 end
@@ -7843,10 +8186,11 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
+---@return nothing
 function PingMinimapForForceEx(whichForce, x, y, duration, style, red, green, blue)
-	local red255   = PercentTo255(red)
+	local red255 = PercentTo255(red)
 	local green255 = PercentTo255(green)
-	local blue255  = PercentTo255(blue)
+	local blue255 = PercentTo255(blue)
 	
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7878,6 +8222,7 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
+---@return nothing
 function PingMinimapLocForForceEx(whichForce, loc, duration, style, red, green, blue)
 	PingMinimapForForceEx(whichForce, GetLocationX(loc), GetLocationY(loc), duration, style, red, green, blue)
 end
@@ -7885,6 +8230,7 @@ end
 
 ---@param enable boolean
 ---@param f force
+---@return nothing
 function EnableWorldFogBoundaryBJ(enable, f)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7895,6 +8241,7 @@ end
 
 ---@param enable boolean
 ---@param f force
+---@return nothing
 function EnableOcclusionBJ(enable, f)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7909,6 +8256,7 @@ end
 -- ===========================================================================
 --  If cancelled, stop the sound and end the cinematic scene.
 -- 
+---@return nothing
 function CancelCineSceneBJ()
 	StopSoundBJ(bj_cineSceneLastSound, true)
 	EndCinematicScene()
@@ -7919,12 +8267,13 @@ end
 --  only be called once a cinematic scene has been started, so that maps
 --  lacking such scenes do not bother to register for these events.
 -- 
+---@return nothing
 function TryInitCinematicBehaviorBJ()
 	local index
 	
 	if (bj_cineSceneBeingSkipped == nil) then
 		bj_cineSceneBeingSkipped = CreateTrigger()
-		index                    = 0
+		index = 0
 		while true do
 			TriggerRegisterPlayerEvent(bj_cineSceneBeingSkipped, Player(index), EVENT_PLAYER_END_CINEMATIC)
 			index = index + 1
@@ -7942,6 +8291,7 @@ end
 ---@param text string
 ---@param sceneDuration real
 ---@param voiceoverDuration real
+---@return nothing
 function SetCinematicSceneBJ(soundHandle, portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
 	bj_cineSceneLastSound = soundHandle
 	SetCinematicScene(portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
@@ -7978,26 +8328,27 @@ end
 ---@param soundHandle sound
 ---@param timeType integer
 ---@param timeVal real
+---@return nothing
 function WaitTransmissionDuration(soundHandle, timeType, timeVal)
 	if (timeType == bj_TIMETYPE_SET) then
 		--  If we have a static duration wait, just perform the wait.
 		TriggerSleepAction(timeVal)
-	
+		
 	elseif (soundHandle == nil) then
 		--  If the sound does not exist, perform a default length wait.
 		TriggerSleepAction(bj_NOTHING_SOUND_DURATION)
-	
+		
 	elseif (timeType == bj_TIMETYPE_SUB) then
 		--  If the transmission is cutting off the sound, wait for the sound
 		--  to be mostly finished.
 		WaitForSoundBJ(soundHandle, timeVal)
-	
+		
 	elseif (timeType == bj_TIMETYPE_ADD) then
 		--  If the transmission is extending beyond the sound's length, wait
 		--  for it to finish, and then wait the additional time.
 		WaitForSoundBJ(soundHandle, 0)
 		TriggerSleepAction(timeVal)
-	
+		
 	else
 		--  Unrecognized timeType - ignore.
 	end
@@ -8012,6 +8363,7 @@ end
 ---@param unitName string
 ---@param message string
 ---@param duration real
+---@return nothing
 function DoTransmissionBasicsXYBJ(unitId, color, x, y, soundHandle, unitName, message, duration)
 	SetCinematicSceneBJ(soundHandle, unitId, color, unitName, message, duration + bj_TRANSMISSION_PORT_HANGTIME, duration)
 	
@@ -8039,16 +8391,17 @@ end
 ---@param timeType integer
 ---@param timeVal real
 ---@param wait boolean
+---@return nothing
 function TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 	
 	AttachSoundToUnit(soundHandle, whichUnit)
 	
 	--  Ensure that the time value is non-negative.
-	timeVal                     = RMaxBJ(timeVal, 0)
+	timeVal = RMaxBJ(timeVal, 0)
 	
 	bj_lastTransmissionDuration = GetTransmissionDuration(soundHandle, timeType, timeVal)
-	bj_lastPlayedSound          = soundHandle
+	bj_lastPlayedSound = soundHandle
 	
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8058,7 +8411,7 @@ function TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandl
 			DoTransmissionBasicsXYBJ(0, PLAYER_COLOR_RED, 0, 0, soundHandle, unitName, message, bj_lastTransmissionDuration)
 		else
 			DoTransmissionBasicsXYBJ(GetUnitTypeId(whichUnit), GetPlayerColor(GetOwningPlayer(whichUnit)), GetUnitX(whichUnit), GetUnitY(whichUnit), soundHandle, unitName, message, bj_lastTransmissionDuration)
-			if (not IsUnitHidden(whichUnit)) then
+			if ( not IsUnitHidden(whichUnit)) then
 				UnitAddIndicator(whichUnit, bj_TRANSMISSION_IND_RED, bj_TRANSMISSION_IND_BLUE, bj_TRANSMISSION_IND_GREEN, bj_TRANSMISSION_IND_ALPHA)
 			end
 		end
@@ -8068,7 +8421,7 @@ function TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandl
 		--  call TriggerSleepAction(bj_lastTransmissionDuration)
 		WaitTransmissionDuration(soundHandle, timeType, timeVal)
 	end
-
+	
 end
 -- ===========================================================================
 
@@ -8093,10 +8446,10 @@ function PlayDialogueFromSpeakerEx(toForce, speaker, speakerType, soundHandle, t
 	AttachSoundToUnit(soundHandle, speaker)
 	
 	--  Ensure that the time value is non-negative.
-	timeVal                     = RMaxBJ(timeVal, 0)
+	timeVal = RMaxBJ(timeVal, 0)
 	
 	bj_lastTransmissionDuration = GetTransmissionDuration(soundHandle, timeType, timeVal)
-	bj_lastPlayedSound          = soundHandle
+	bj_lastPlayedSound = soundHandle
 	
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		SetCinematicSceneBJ(soundHandle, speakerType, GetPlayerColor(GetOwningPlayer(speaker)), GetLocalizedString(GetDialogueSpeakerNameKey(soundHandle)), GetLocalizedString(GetDialogueTextKey(soundHandle)), bj_lastTransmissionDuration + bj_TRANSMISSION_PORT_HANGTIME, bj_lastTransmissionDuration)
@@ -8124,10 +8477,10 @@ function PlayDialogueFromSpeakerTypeEx(toForce, fromPlayer, speakerType, loc, so
 	TryInitCinematicBehaviorBJ()
 	
 	--  Ensure that the time value is non-negative.
-	timeVal                     = RMaxBJ(timeVal, 0)
+	timeVal = RMaxBJ(timeVal, 0)
 	
 	bj_lastTransmissionDuration = GetTransmissionDuration(soundHandle, timeType, timeVal)
-	bj_lastPlayedSound          = soundHandle
+	bj_lastPlayedSound = soundHandle
 	
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		SetCinematicSceneBJ(soundHandle, speakerType, GetPlayerColor(fromPlayer), GetLocalizedString(GetDialogueSpeakerNameKey(soundHandle)), GetLocalizedString(GetDialogueTextKey(soundHandle)), bj_lastTransmissionDuration + bj_TRANSMISSION_PORT_HANGTIME, bj_lastTransmissionDuration)
@@ -8158,14 +8511,15 @@ end
 ---@param timeType integer
 ---@param timeVal real
 ---@param wait boolean
+---@return nothing
 function TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitName, loc, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 	
 	--  Ensure that the time value is non-negative.
-	timeVal                     = RMaxBJ(timeVal, 0)
+	timeVal = RMaxBJ(timeVal, 0)
 	
 	bj_lastTransmissionDuration = GetTransmissionDuration(soundHandle, timeType, timeVal)
-	bj_lastPlayedSound          = soundHandle
+	bj_lastPlayedSound = soundHandle
 	
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8177,7 +8531,7 @@ function TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitNam
 		--  call TriggerSleepAction(bj_lastTransmissionDuration)
 		WaitTransmissionDuration(soundHandle, timeType, timeVal)
 	end
-
+	
 end
 -- ===========================================================================
 ---@return real
@@ -8187,6 +8541,7 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
+---@return nothing
 function ForceCinematicSubtitlesBJ(flag)
 	ForceCinematicSubtitles(flag)
 end
@@ -8218,22 +8573,23 @@ end
 ---@param cineMode boolean
 ---@param forForce force
 ---@param interfaceFadeTime real
+---@return nothing
 function CinematicModeExBJ(cineMode, forForce, interfaceFadeTime)
 	--  If the game hasn't started yet, perform interface fades immediately
-	if (not bj_gameStarted) then
+	if ( not bj_gameStarted) then
 		interfaceFadeTime = 0
 	end
 	
 	if (cineMode) then
 		--  Save the UI state so that we can restore it later.
-		if (not bj_cineModeAlreadyIn) then
+		if ( not bj_cineModeAlreadyIn) then
 			SetCinematicAudio(true)
-			bj_cineModeAlreadyIn        = true
-			bj_cineModePriorSpeed       = GetGameSpeed()
-			bj_cineModePriorFogSetting  = IsFogEnabled()
+			bj_cineModeAlreadyIn = true
+			bj_cineModePriorSpeed = GetGameSpeed()
+			bj_cineModePriorFogSetting = IsFogEnabled()
 			bj_cineModePriorMaskSetting = IsFogMaskEnabled()
-			bj_cineModePriorDawnDusk    = IsDawnDuskEnabled()
-			bj_cineModeSavedSeed        = GetRandomInt(0, 1000000)
+			bj_cineModePriorDawnDusk = IsDawnDuskEnabled()
+			bj_cineModeSavedSeed = GetRandomInt(0, 1000000)
 		end
 		
 		--  Perform local changes
@@ -8285,6 +8641,7 @@ end
 
 ---@param cineMode boolean
 ---@param forForce force
+---@return nothing
 function CinematicModeBJ(cineMode, forForce)
 	CinematicModeExBJ(cineMode, forForce, bj_CINEMODE_INTERFACEFADE)
 end
@@ -8296,6 +8653,7 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
+---@return nothing
 function DisplayCineFilterBJ(flag)
 	DisplayCineFilter(flag)
 end
@@ -8308,6 +8666,7 @@ end
 ---@param tex string
 ---@param startTrans real
 ---@param endTrans real
+---@return nothing
 function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endTrans)
 	if (duration == 0) then
 		--  If the fade is instant, use the same starting and ending values,
@@ -8326,6 +8685,7 @@ function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endT
 	DisplayCineFilter(true)
 end
 -- ===========================================================================
+---@return nothing
 function FinishCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeFinishTimer)
 	bj_cineFadeFinishTimer = nil
@@ -8335,12 +8695,14 @@ end
 -- ===========================================================================
 
 ---@param duration real
+---@return nothing
 function FinishCinematicFadeAfterBJ(duration)
 	--  Create a timer to end the cinematic fade.
 	bj_cineFadeFinishTimer = CreateTimer()
 	TimerStart(bj_cineFadeFinishTimer, duration, false, FinishCinematicFadeBJ)
 end
 -- ===========================================================================
+---@return nothing
 function ContinueCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeContinueTimer)
 	bj_cineFadeContinueTimer = nil
@@ -8354,19 +8716,21 @@ end
 ---@param blue real
 ---@param trans real
 ---@param tex string
+---@return nothing
 function ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
-	bj_cineFadeContinueRed      = red
-	bj_cineFadeContinueGreen    = green
-	bj_cineFadeContinueBlue     = blue
-	bj_cineFadeContinueTrans    = trans
+	bj_cineFadeContinueRed = red
+	bj_cineFadeContinueGreen = green
+	bj_cineFadeContinueBlue = blue
+	bj_cineFadeContinueTrans = trans
 	bj_cineFadeContinueDuration = duration
-	bj_cineFadeContinueTex      = tex
+	bj_cineFadeContinueTex = tex
 	
 	--  Create a timer to continue the cinematic fade.
-	bj_cineFadeContinueTimer    = CreateTimer()
+	bj_cineFadeContinueTimer = CreateTimer()
 	TimerStart(bj_cineFadeContinueTimer, duration, false, ContinueCinematicFadeBJ)
 end
 -- ===========================================================================
+---@return nothing
 function AbortCinematicFadeBJ()
 	if (bj_cineFadeContinueTimer ~= nil) then
 		DestroyTimer(bj_cineFadeContinueTimer)
@@ -8385,6 +8749,7 @@ end
 ---@param green real
 ---@param blue real
 ---@param trans real
+---@return nothing
 function CinematicFadeBJ(fadetype, duration, tex, red, green, blue, trans)
 	if (fadetype == bj_CINEFADETYPE_FADEOUT) then
 		--  Fade out to the requested color.
@@ -8420,6 +8785,7 @@ end
 ---@param green1 real
 ---@param blue1 real
 ---@param trans1 real
+---@return nothing
 function CinematicFilterGenericBJ(duration, bmode, tex, red0, green0, blue0, trans0, red1, green1, blue1, trans1)
 	AbortCinematicFadeBJ()
 	SetCineFilterTexture(tex)
@@ -8446,9 +8812,10 @@ end
 ---@param whichUnit unit
 ---@param rescuer player
 ---@param changeColor boolean
+---@return nothing
 function RescueUnitBJ(whichUnit, rescuer, changeColor)
 	if IsUnitDeadBJ(whichUnit) or (GetOwningPlayer(whichUnit) == rescuer) then
-		return
+		return 
 	end
 	
 	StartSound(bj_rescueSound)
@@ -8457,6 +8824,7 @@ function RescueUnitBJ(whichUnit, rescuer, changeColor)
 	PingMinimapForPlayer(rescuer, GetUnitX(whichUnit), GetUnitY(whichUnit), bj_RESCUE_PING_TIME)
 end
 -- ===========================================================================
+---@return nothing
 function TriggerActionUnitRescuedBJ()
 	local theUnit = GetTriggerUnit()
 	
@@ -8471,12 +8839,13 @@ end
 --  reasons, this should only be attempted if a player is set to Rescuable,
 --  or if a specific unit is thus flagged.
 -- 
+---@return nothing
 function TryInitRescuableTriggersBJ()
 	local index
 	
 	if (bj_rescueUnitBehavior == nil) then
 		bj_rescueUnitBehavior = CreateTrigger()
-		index                 = 0
+		index = 0
 		while true do
 			TriggerRegisterPlayerUnitEvent(bj_rescueUnitBehavior, Player(index), EVENT_PLAYER_UNIT_RESCUED, nil)
 			index = index + 1
@@ -8491,6 +8860,7 @@ end
 -- 
 
 ---@param changeColor boolean
+---@return nothing
 function SetRescueUnitColorChangeBJ(changeColor)
 	bj_rescueChangeColorUnit = changeColor
 end
@@ -8500,10 +8870,12 @@ end
 -- 
 
 ---@param changeColor boolean
+---@return nothing
 function SetRescueBuildingColorChangeBJ(changeColor)
 	bj_rescueChangeColorBldg = changeColor
 end
 -- ===========================================================================
+---@return nothing
 function MakeUnitRescuableToForceBJEnum()
 	TryInitRescuableTriggersBJ()
 	SetUnitRescuable(bj_makeUnitRescuableUnit, GetEnumPlayer(), bj_makeUnitRescuableFlag)
@@ -8513,6 +8885,7 @@ end
 ---@param whichUnit unit
 ---@param isRescuable boolean
 ---@param whichForce force
+---@return nothing
 function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 	--  Flag the unit as rescuable/unrescuable for the appropriate players.
 	bj_makeUnitRescuableUnit = whichUnit
@@ -8520,6 +8893,7 @@ function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 	ForForce(whichForce, MakeUnitRescuableToForceBJEnum)
 end
 -- ===========================================================================
+---@return nothing
 function InitRescuableBehaviorBJ()
 	local index
 	
@@ -8529,7 +8903,7 @@ function InitRescuableBehaviorBJ()
 		--  rescue behavior triggers.
 		if (GetPlayerController(Player(index)) == MAP_CONTROL_RESCUABLE) then
 			TryInitRescuableTriggersBJ()
-			return
+			return 
 		end
 		index = index + 1
 		if index == bj_MAX_PLAYERS then break end
@@ -8545,6 +8919,7 @@ end
 ---@param techid integer
 ---@param levels integer
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerTechResearchedSwap(techid, levels, whichPlayer)
 	SetPlayerTechResearched(whichPlayer, techid, levels)
 end
@@ -8553,6 +8928,7 @@ end
 ---@param techid integer
 ---@param maximum integer
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerTechMaxAllowedSwap(techid, maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, techid, maximum)
 end
@@ -8560,6 +8936,7 @@ end
 
 ---@param maximum integer
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerMaxHeroesAllowed(maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, FourCC('HERO'), maximum)
 end
@@ -8584,6 +8961,7 @@ end
 ---@param avail boolean
 ---@param abilid integer
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerAbilityAvailableBJ(avail, abilid, whichPlayer)
 	SetPlayerAbilityAvailable(whichPlayer, abilid, avail)
 end
@@ -8594,6 +8972,7 @@ end
 -- ***************************************************************************
 
 ---@param campaignNumber integer
+---@return nothing
 function SetCampaignMenuRaceBJ(campaignNumber)
 	if (campaignNumber == bj_CAMPAIGN_INDEX_T) then
 		SetCampaignMenuRace(RACE_OTHER)
@@ -8627,9 +9006,10 @@ end
 
 ---@param available boolean
 ---@param missionIndex integer
+---@return nothing
 function SetMissionAvailableBJ(available, missionIndex)
 	local campaignNumber = missionIndex / 1000
-	local missionNumber  = missionIndex - campaignNumber * 1000
+	local missionNumber = missionIndex - campaignNumber * 1000
 	
 	SetMissionAvailable(campaignNumber, missionNumber, available)
 end
@@ -8637,6 +9017,7 @@ end
 
 ---@param available boolean
 ---@param campaignNumber integer
+---@return nothing
 function SetCampaignAvailableBJ(available, campaignNumber)
 	local campaignOffset
 	
@@ -8664,6 +9045,7 @@ end
 
 ---@param available boolean
 ---@param cinematicIndex integer
+---@return nothing
 function SetCinematicAvailableBJ(available, cinematicIndex)
 	if (cinematicIndex == bj_CINEMATICINDEX_TOP) then
 		SetOpCinematicAvailable(bj_CAMPAIGN_INDEX_T, available)
@@ -8739,6 +9121,7 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
+---@return nothing
 function StoreRealBJ(value, key, missionKey, cache)
 	StoreReal(cache, missionKey, key, value)
 end
@@ -8748,6 +9131,7 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
+---@return nothing
 function StoreIntegerBJ(value, key, missionKey, cache)
 	StoreInteger(cache, missionKey, key, value)
 end
@@ -8757,6 +9141,7 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
+---@return nothing
 function StoreBooleanBJ(value, key, missionKey, cache)
 	StoreBoolean(cache, missionKey, key, value)
 end
@@ -8786,6 +9171,7 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
+---@return nothing
 function SaveRealBJ(value, key, missionKey, table)
 	SaveReal(table, missionKey, key, value)
 end
@@ -8795,6 +9181,7 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
+---@return nothing
 function SaveIntegerBJ(value, key, missionKey, table)
 	SaveInteger(table, missionKey, key, value)
 end
@@ -8804,6 +9191,7 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
+---@return nothing
 function SaveBooleanBJ(value, key, missionKey, table)
 	SaveBoolean(table, missionKey, key, value)
 end
@@ -9678,6 +10066,7 @@ end
 -- ===========================================================================
 
 ---@param cache gamecache
+---@return nothing
 function FlushGameCacheBJ(cache)
 	FlushGameCache(cache)
 end
@@ -9685,12 +10074,14 @@ end
 
 ---@param missionKey string
 ---@param cache gamecache
+---@return nothing
 function FlushStoredMissionBJ(missionKey, cache)
 	FlushStoredMission(cache, missionKey)
 end
 -- ===========================================================================
 
 ---@param table hashtable
+---@return nothing
 function FlushParentHashtableBJ(table)
 	FlushParentHashtable(table)
 end
@@ -9698,6 +10089,7 @@ end
 
 ---@param missionKey integer
 ---@param table hashtable
+---@return nothing
 function FlushChildHashtableBJ(missionKey, table)
 	FlushChildHashtable(table, missionKey)
 end
@@ -9751,6 +10143,7 @@ end
 
 ---@param show boolean
 ---@param whichButton integer
+---@return nothing
 function ShowCustomCampaignButton(show, whichButton)
 	SetCustomCampaignButtonVisible(whichButton - 1, show)
 end
@@ -9767,6 +10160,7 @@ end
 
 ---@param mapSaveName string
 ---@param doCheckpointHint boolean
+---@return nothing
 function SaveGameCheckPointBJ(mapSaveName, doCheckpointHint)
 	SaveGameCheckpoint(mapSaveName, doCheckpointHint)
 end
@@ -9774,6 +10168,7 @@ end
 
 ---@param loadFileName string
 ---@param doScoreScreen boolean
+---@return nothing
 function LoadGameBJ(loadFileName, doScoreScreen)
 	LoadGame(loadFileName, doScoreScreen)
 end
@@ -9782,6 +10177,7 @@ end
 ---@param saveFileName string
 ---@param newLevel string
 ---@param doScoreScreen boolean
+---@return nothing
 function SaveAndChangeLevelBJ(saveFileName, newLevel, doScoreScreen)
 	SaveGame(saveFileName)
 	ChangeLevel(newLevel, doScoreScreen)
@@ -9791,6 +10187,7 @@ end
 ---@param saveFileName string
 ---@param loadFileName string
 ---@param doScoreScreen boolean
+---@return nothing
 function SaveAndLoadGameBJ(saveFileName, loadFileName, doScoreScreen)
 	SaveGame(saveFileName)
 	LoadGame(loadFileName, doScoreScreen)
@@ -9884,6 +10281,7 @@ end
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
 ---@param delta integer
+---@return nothing
 function AdjustPlayerStateSimpleBJ(whichPlayer, whichPlayerState, delta)
 	SetPlayerState(whichPlayer, whichPlayerState, GetPlayerState(whichPlayer, whichPlayerState) + delta)
 end
@@ -9892,6 +10290,7 @@ end
 ---@param delta integer
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
+---@return nothing
 function AdjustPlayerStateBJ(delta, whichPlayer, whichPlayerState)
 	--  If the change was positive, apply the difference to the player's
 	--  gathered resources property as well.
@@ -9910,6 +10309,7 @@ end
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
 ---@param value integer
+---@return nothing
 function SetPlayerStateBJ(whichPlayer, whichPlayerState, value)
 	local oldValue = GetPlayerState(whichPlayer, whichPlayerState)
 	AdjustPlayerStateBJ(value - oldValue, whichPlayer, whichPlayerState)
@@ -9919,6 +10319,7 @@ end
 ---@param whichPlayerFlag playerstate
 ---@param flag boolean
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerFlagBJ(whichPlayerFlag, flag, whichPlayer)
 	SetPlayerState(whichPlayer, whichPlayerFlag, IntegerTertiaryOp(flag, 1, 0))
 end
@@ -9928,6 +10329,7 @@ end
 ---@param whichResource playerstate
 ---@param sourcePlayer player
 ---@param otherPlayer player
+---@return nothing
 function SetPlayerTaxRateBJ(rate, whichResource, sourcePlayer, otherPlayer)
 	SetPlayerTaxRate(sourcePlayer, otherPlayer, whichResource, rate)
 end
@@ -9952,6 +10354,7 @@ end
 
 ---@param delta integer
 ---@param whichUnit unit
+---@return nothing
 function AddResourceAmountBJ(delta, whichUnit)
 	AddResourceAmount(whichUnit, delta)
 end
@@ -10002,8 +10405,8 @@ function BlightGoldMineForPlayerBJ(goldMine, whichPlayer)
 	end
 	
 	--  Save the Gold Mine's properties and remove it.
-	mineX    = GetUnitX(goldMine)
-	mineY    = GetUnitY(goldMine)
+	mineX = GetUnitX(goldMine)
+	mineY = GetUnitY(goldMine)
 	mineGold = GetResourceAmount(goldMine)
 	RemoveUnit(goldMine)
 	
@@ -10034,6 +10437,7 @@ function IsPointBlightedBJ(where)
 	return IsPointBlighted(GetLocationX(where), GetLocationY(where))
 end
 -- ===========================================================================
+---@return nothing
 function SetPlayerColorBJEnum()
 	SetUnitColor(GetEnumUnit(), bj_setPlayerTargetColor)
 end
@@ -10042,13 +10446,14 @@ end
 ---@param whichPlayer player
 ---@param color playercolor
 ---@param changeExisting boolean
+---@return nothing
 function SetPlayerColorBJ(whichPlayer, color, changeExisting)
 	local g
 	
 	SetPlayerColor(whichPlayer, color)
 	if changeExisting then
 		bj_setPlayerTargetColor = color
-		g                       = CreateGroup()
+		g = CreateGroup()
 		GroupEnumUnitsOfPlayer(g, whichPlayer, nil)
 		ForGroup(g, SetPlayerColorBJEnum)
 		DestroyGroup(g)
@@ -10059,6 +10464,7 @@ end
 ---@param unitId integer
 ---@param allowed boolean
 ---@param whichPlayer player
+---@return nothing
 function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 	if allowed then
 		SetPlayerTechMaxAllowed(whichPlayer, unitId, -1)
@@ -10067,10 +10473,12 @@ function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function LockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, true)
 end
 -- ===========================================================================
+---@return nothing
 function UnlockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, false)
 end
@@ -10104,6 +10512,7 @@ end
 function IssueTargetDestructableOrder(whichUnit, order, targetWidget)
 	return IssueTargetOrder(whichUnit, order, targetWidget)
 end
+
 
 ---@param whichUnit unit
 ---@param order string
@@ -10159,6 +10568,7 @@ function GroupTargetDestructableOrder(whichGroup, order, targetWidget)
 	return GroupTargetOrder(whichGroup, order, targetWidget)
 end
 
+
 ---@param whichGroup group
 ---@param order string
 ---@param targetWidget widget
@@ -10177,6 +10587,7 @@ end
 
 ---@param whichUnit unit
 ---@param targPos location
+---@return nothing
 function SetUnitRallyPoint(whichUnit, targPos)
 	IssuePointOrderLocBJ(whichUnit, "setrally", targPos)
 end
@@ -10184,6 +10595,7 @@ end
 
 ---@param whichUnit unit
 ---@param targUnit unit
+---@return nothing
 function SetUnitRallyUnit(whichUnit, targUnit)
 	IssueTargetOrder(whichUnit, "setrally", targUnit)
 end
@@ -10191,6 +10603,7 @@ end
 
 ---@param whichUnit unit
 ---@param targDest destructable
+---@return nothing
 function SetUnitRallyDestructable(whichUnit, targDest)
 	IssueTargetOrder(whichUnit, "setrally", targDest)
 end
@@ -10199,6 +10612,7 @@ end
 --  This function is added as an action to all destructable drop triggers,
 --  so that a widget drop may be differentiated from a unit drop.
 -- 
+---@return nothing
 function SaveDyingWidget()
 	bj_lastDyingWidget = GetTriggerWidget()
 end
@@ -10207,6 +10621,7 @@ end
 ---@param addBlight boolean
 ---@param whichPlayer player
 ---@param r rect
+---@return nothing
 function SetBlightRectBJ(addBlight, whichPlayer, r)
 	SetBlightRect(whichPlayer, r, addBlight)
 end
@@ -10216,6 +10631,7 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param radius real
+---@return nothing
 function SetBlightRadiusLocBJ(addBlight, whichPlayer, loc, radius)
 	SetBlightLoc(whichPlayer, loc, radius, addBlight)
 end
@@ -10232,6 +10648,7 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function MeleeStartingVisibility()
 	--  Start by setting the ToD.
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, bj_MELEE_STARTING_TOD)
@@ -10245,6 +10662,7 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function MeleeStartingResources()
 	local index
 	local indexPlayer
@@ -10254,10 +10672,10 @@ function MeleeStartingResources()
 	
 	v = VersionGet()
 	if (v == VERSION_REIGN_OF_CHAOS) then
-		startingGold   = bj_MELEE_STARTING_GOLD_V0
+		startingGold = bj_MELEE_STARTING_GOLD_V0
 		startingLumber = bj_MELEE_STARTING_LUMBER_V0
 	else
-		startingGold   = bj_MELEE_STARTING_GOLD_V1
+		startingGold = bj_MELEE_STARTING_GOLD_V1
 		startingLumber = bj_MELEE_STARTING_LUMBER_V1
 	end
 	
@@ -10284,6 +10702,7 @@ end
 ---@param whichPlayer player
 ---@param techId integer
 ---@param limit integer
+---@return nothing
 function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 	local oldMax = GetPlayerTechMaxAllowed(whichPlayer, techId)
 	
@@ -10293,6 +10712,7 @@ function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeStartingHeroLimit()
 	local index
 	
@@ -10352,6 +10772,7 @@ end
 -- 
 
 ---@param whichUnit unit
+---@return nothing
 function MeleeGrantItemsToHero(whichUnit)
 	local owner = GetPlayerId(GetOwningPlayer(whichUnit))
 	
@@ -10362,14 +10783,17 @@ function MeleeGrantItemsToHero(whichUnit)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeGrantItemsToTrainedHero()
 	MeleeGrantItemsToHero(GetTrainedUnit())
 end
 -- ===========================================================================
+---@return nothing
 function MeleeGrantItemsToHiredHero()
 	MeleeGrantItemsToHero(GetSoldUnit())
 end
 -- ===========================================================================
+---@return nothing
 function MeleeGrantHeroItems()
 	local index
 	local trig
@@ -10379,7 +10803,7 @@ function MeleeGrantHeroItems()
 	while true do
 		bj_meleeTwinkedHeroes[index] = 0
 		
-		index                        = index + 1
+		index = index + 1
 		if index == bj_MAX_PLAYER_SLOTS then break end
 	end
 	
@@ -10411,16 +10835,17 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function MeleeClearExcessUnit()
 	local theUnit = GetEnumUnit()
-	local owner   = GetPlayerId(GetOwningPlayer(theUnit))
+	local owner = GetPlayerId(GetOwningPlayer(theUnit))
 	
 	if (owner == PLAYER_NEUTRAL_AGGRESSIVE) then
 		--  Remove any Neutral Hostile units from the area.
 		RemoveUnit(GetEnumUnit())
 	elseif (owner == PLAYER_NEUTRAL_PASSIVE) then
 		--  Remove non-structure Neutral Passive units from the area.
-		if not IsUnitType(theUnit, UNIT_TYPE_STRUCTURE) then
+		if  not IsUnitType(theUnit, UNIT_TYPE_STRUCTURE) then
 			RemoveUnit(GetEnumUnit())
 		end
 	end
@@ -10430,6 +10855,7 @@ end
 ---@param x real
 ---@param y real
 ---@param range real
+---@return nothing
 function MeleeClearNearbyUnits(x, y, range)
 	local nearbyUnits
 	
@@ -10439,6 +10865,7 @@ function MeleeClearNearbyUnits(x, y, range)
 	DestroyGroup(nearbyUnits)
 end
 -- ===========================================================================
+---@return nothing
 function MeleeClearExcessUnits()
 	local index
 	local locX
@@ -10467,6 +10894,7 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function MeleeEnumFindNearestMine()
 	local enumUnit = GetEnumUnit()
 	local dist
@@ -10474,12 +10902,12 @@ function MeleeEnumFindNearestMine()
 	
 	if (GetUnitTypeId(enumUnit) == FourCC('ngol')) then
 		unitLoc = GetUnitLoc(enumUnit)
-		dist    = DistanceBetweenPoints(unitLoc, bj_meleeNearestMineToLoc)
+		dist = DistanceBetweenPoints(unitLoc, bj_meleeNearestMineToLoc)
 		RemoveLocation(unitLoc)
 		
 		--  If this is our first mine, or the closest thusfar, use it instead.
 		if (bj_meleeNearestMineDist < 0) or (dist < bj_meleeNearestMineDist) then
-			bj_meleeNearestMine     = enumUnit
+			bj_meleeNearestMine = enumUnit
 			bj_meleeNearestMineDist = dist
 		end
 	end
@@ -10492,11 +10920,11 @@ end
 function MeleeFindNearestMine(src, range)
 	local nearbyMines
 	
-	bj_meleeNearestMine      = nil
-	bj_meleeNearestMineDist  = -1
+	bj_meleeNearestMine = nil
+	bj_meleeNearestMineDist = -1
 	bj_meleeNearestMineToLoc = src
 	
-	nearbyMines              = CreateGroup()
+	nearbyMines = CreateGroup()
 	GroupEnumUnitsInRangeOfLoc(nearbyMines, src, range, nil)
 	ForGroup(nearbyMines, MeleeEnumFindNearestMine)
 	DestroyGroup(nearbyMines)
@@ -10513,13 +10941,13 @@ end
 ---@param loc location
 ---@return unit
 function MeleeRandomHeroLoc(p, id1, id2, id3, id4, loc)
-	local hero
+	local hero = nil
 	local roll
 	local pick
 	local v
 	
 	--  The selection of heroes is dependant on the game version.
-	v          = VersionGet()
+	v = VersionGet()
 	if (v == VERSION_REIGN_OF_CHAOS) then
 		roll = GetRandomInt(1, 3)
 	else
@@ -10557,8 +10985,8 @@ end
 ---@param deltaAngle real
 ---@return location
 function MeleeGetProjectedLoc(src, targ, distance, deltaAngle)
-	local srcX      = GetLocationX(src)
-	local srcY      = GetLocationY(src)
+	local srcX = GetLocationX(src)
+	local srcY = GetLocationY(src)
 	local direction = Atan2(GetLocationY(targ) - srcY, GetLocationX(targ) - srcX) + deltaAngle
 	return Location(srcX + distance * Cos(direction), srcY + distance * Sin(direction))
 end
@@ -10598,15 +11026,16 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
+---@return nothing
 function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
-	local unitSpacing   = 64.00
+	local unitSpacing = 64.00
 	local nearestMine
 	local nearMineLoc
 	local heroLoc
 	local peonX
 	local peonY
-	local townHall
+	local townHall = nil
 	
 	if (doPreload) then
 		Preloader("scripts\\HumanMelee.pld")
@@ -10615,12 +11044,12 @@ function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPr
 	nearestMine = MeleeFindNearestMine(startLoc, bj_MELEE_MINE_SEARCH_RADIUS)
 	if (nearestMine ~= nil) then
 		--  Spawn Town Hall at the start location.
-		townHall    = CreateUnitAtLoc(whichPlayer, FourCC('htow'), startLoc, bj_UNIT_FACING)
+		townHall = CreateUnitAtLoc(whichPlayer, FourCC('htow'), startLoc, bj_UNIT_FACING)
 		
 		--  Spawn Peasants near the mine.
 		nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
-		peonX       = GetLocationX(nearMineLoc)
-		peonY       = GetLocationY(nearMineLoc)
+		peonX = GetLocationX(nearMineLoc)
+		peonY = GetLocationY(nearMineLoc)
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX + 0.00 * unitSpacing, peonY + 1.00 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX + 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX - 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
@@ -10634,8 +11063,8 @@ function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPr
 		townHall = CreateUnitAtLoc(whichPlayer, FourCC('htow'), startLoc, bj_UNIT_FACING)
 		
 		--  Spawn Peasants directly south of the town hall.
-		peonX    = GetLocationX(startLoc)
-		peonY    = GetLocationY(startLoc) - 224.00
+		peonX = GetLocationX(startLoc)
+		peonY = GetLocationY(startLoc) - 224.00
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX + 2.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX + 1.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('hpea'), peonX + 0.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
@@ -10678,9 +11107,10 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
+---@return nothing
 function MeleeStartingUnitsOrc(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
-	local unitSpacing   = 64.00
+	local unitSpacing = 64.00
 	local nearestMine
 	local nearMineLoc
 	local heroLoc
@@ -10698,8 +11128,8 @@ function MeleeStartingUnitsOrc(whichPlayer, startLoc, doHeroes, doCamera, doPrel
 		
 		--  Spawn Peons near the mine.
 		nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
-		peonX       = GetLocationX(nearMineLoc)
-		peonY       = GetLocationY(nearMineLoc)
+		peonX = GetLocationX(nearMineLoc)
+		peonY = GetLocationY(nearMineLoc)
 		CreateUnit(whichPlayer, FourCC('opeo'), peonX + 0.00 * unitSpacing, peonY + 1.00 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('opeo'), peonX + 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('opeo'), peonX - 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
@@ -10755,9 +11185,10 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
+---@return nothing
 function MeleeStartingUnitsUndead(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
-	local unitSpacing   = 64.00
+	local unitSpacing = 64.00
 	local nearestMine
 	local nearMineLoc
 	local nearTownLoc
@@ -10777,18 +11208,18 @@ function MeleeStartingUnitsUndead(whichPlayer, startLoc, doHeroes, doCamera, doP
 		CreateUnitAtLoc(whichPlayer, FourCC('unpl'), startLoc, bj_UNIT_FACING)
 		
 		--  Replace the nearest gold mine with a blighted version.
-		nearestMine                        = BlightGoldMineForPlayerBJ(nearestMine, whichPlayer)
+		nearestMine = BlightGoldMineForPlayerBJ(nearestMine, whichPlayer)
 		
 		--  Spawn Ghoul near the Necropolis.
-		nearTownLoc                        = MeleeGetProjectedLoc(startLoc, GetUnitLoc(nearestMine), 288, 0)
-		ghoulX                             = GetLocationX(nearTownLoc)
-		ghoulY                             = GetLocationY(nearTownLoc)
+		nearTownLoc = MeleeGetProjectedLoc(startLoc, GetUnitLoc(nearestMine), 288, 0)
+		ghoulX = GetLocationX(nearTownLoc)
+		ghoulY = GetLocationY(nearTownLoc)
 		bj_ghoul[GetPlayerId(whichPlayer)] = CreateUnit(whichPlayer, FourCC('ugho'), ghoulX + 0.00 * unitSpacing, ghoulY + 0.00 * unitSpacing, bj_UNIT_FACING)
 		
 		--  Spawn Acolytes near the mine.
-		nearMineLoc                        = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
-		peonX                              = GetLocationX(nearMineLoc)
-		peonY                              = GetLocationY(nearMineLoc)
+		nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
+		peonX = GetLocationX(nearMineLoc)
+		peonY = GetLocationY(nearMineLoc)
 		CreateUnit(whichPlayer, FourCC('uaco'), peonX + 0.00 * unitSpacing, peonY + 0.50 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('uaco'), peonX + 0.65 * unitSpacing, peonY - 0.50 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('uaco'), peonX - 0.65 * unitSpacing, peonY - 0.50 * unitSpacing, bj_UNIT_FACING)
@@ -10844,11 +11275,12 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
+---@return nothing
 function MeleeStartingUnitsNightElf(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
-	local unitSpacing   = 64.00
-	local minTreeDist   = 3.50 * bj_CELLWIDTH
-	local minWispDist   = 1.75 * bj_CELLWIDTH
+	local unitSpacing = 64.00
+	local minTreeDist = 3.50 * bj_CELLWIDTH
+	local minWispDist = 1.75 * bj_CELLWIDTH
 	local nearestMine
 	local nearMineLoc
 	local wispLoc
@@ -10868,14 +11300,14 @@ function MeleeStartingUnitsNightElf(whichPlayer, startLoc, doHeroes, doCamera, d
 		--  the X and Y values to within minTreeDist of the Gold Mine.
 		nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 650, 0)
 		nearMineLoc = MeleeGetLocWithinRect(nearMineLoc, GetRectFromCircleBJ(GetUnitLoc(nearestMine), minTreeDist))
-		tree        = CreateUnitAtLoc(whichPlayer, FourCC('etol'), nearMineLoc, bj_UNIT_FACING)
+		tree = CreateUnitAtLoc(whichPlayer, FourCC('etol'), nearMineLoc, bj_UNIT_FACING)
 		IssueTargetOrder(tree, "entangleinstant", nearestMine)
 		
 		--  Spawn Wisps at the start location.
 		wispLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
 		wispLoc = MeleeGetLocWithinRect(wispLoc, GetRectFromCircleBJ(GetUnitLoc(nearestMine), minWispDist))
-		peonX   = GetLocationX(wispLoc)
-		peonY   = GetLocationY(wispLoc)
+		peonX = GetLocationX(wispLoc)
+		peonY = GetLocationY(wispLoc)
 		CreateUnit(whichPlayer, FourCC('ewsp'), peonX + 0.00 * unitSpacing, peonY + 1.00 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('ewsp'), peonX + 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
 		CreateUnit(whichPlayer, FourCC('ewsp'), peonX - 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
@@ -10927,6 +11359,7 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
+---@return nothing
 function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local index
 	
@@ -10952,6 +11385,7 @@ function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeStartingUnits()
 	local index
 	local indexPlayer
@@ -10965,7 +11399,7 @@ function MeleeStartingUnits()
 		indexPlayer = Player(index)
 		if (GetPlayerSlotState(indexPlayer) == PLAYER_SLOT_STATE_PLAYING) then
 			indexStartLoc = GetStartLocationLoc(GetPlayerStartLocation(indexPlayer))
-			indexRace     = GetPlayerRace(indexPlayer)
+			indexRace = GetPlayerRace(indexPlayer)
 			
 			--  Create initial race-specific starting units
 			if (indexRace == RACE_HUMAN) then
@@ -10984,7 +11418,7 @@ function MeleeStartingUnits()
 		index = index + 1
 		if index == bj_MAX_PLAYERS then break end
 	end
-
+	
 end
 -- ===========================================================================
 
@@ -10992,6 +11426,7 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param doHeroes boolean
+---@return nothing
 function MeleeStartingUnitsForPlayer(whichRace, whichPlayer, loc, doHeroes)
 	--  Create initial race-specific starting units
 	if (whichRace == RACE_HUMAN) then
@@ -11017,6 +11452,7 @@ end
 ---@param s1 string
 ---@param s2 string
 ---@param s3 string
+---@return nothing
 function PickMeleeAI(num, s1, s2, s3)
 	local pick
 	
@@ -11024,7 +11460,7 @@ function PickMeleeAI(num, s1, s2, s3)
 	--  that are designed to be a bit more challenging
 	if GetAIDifficulty(num) == AI_DIFFICULTY_NEWBIE then
 		StartMeleeAI(num, s1)
-		return
+		return 
 	end
 	
 	if s2 == nil then
@@ -11044,6 +11480,7 @@ function PickMeleeAI(num, s1, s2, s3)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeStartingAI()
 	local index
 	local indexPlayer
@@ -11077,7 +11514,9 @@ function MeleeStartingAI()
 	end
 end
 
+
 ---@param targ unit
+---@return nothing
 function LockGuardPosition(targ)
 	SetUnitCreepGuard(targ, true)
 end
@@ -11092,7 +11531,7 @@ end
 ---@param opponentIndex integer
 ---@return boolean
 function MeleePlayerIsOpponent(playerIndex, opponentIndex)
-	local thePlayer   = Player(playerIndex)
+	local thePlayer = Player(playerIndex)
 	local theOpponent = Player(opponentIndex)
 	
 	--  The player himself is not an opponent.
@@ -11136,7 +11575,7 @@ function MeleeGetAllyStructureCount(whichPlayer)
 	
 	--  Count the number of buildings controlled by all not-yet-defeated co-allies.
 	buildingCount = 0
-	playerIndex   = 0
+	playerIndex = 0
 	while true do
 		indexPlayer = Player(playerIndex)
 		
@@ -11168,7 +11607,7 @@ function MeleeGetAllyCount(whichPlayer)
 	playerIndex = 0
 	while true do
 		indexPlayer = Player(playerIndex)
-		if PlayersAreCoAllied(whichPlayer, indexPlayer) and not bj_meleeDefeated[playerIndex] and (whichPlayer ~= indexPlayer) then
+		if PlayersAreCoAllied(whichPlayer, indexPlayer) and  not bj_meleeDefeated[playerIndex] and (whichPlayer ~= indexPlayer) then
 			playerCount = playerCount + 1
 		end
 		
@@ -11193,7 +11632,7 @@ function MeleeGetAllyKeyStructureCount(whichPlayer)
 	local keyStructs
 	
 	--  Count the number of buildings controlled by all not-yet-defeated co-allies.
-	keyStructs  = 0
+	keyStructs = 0
 	playerIndex = 0
 	while true do
 		indexPlayer = Player(playerIndex)
@@ -11210,6 +11649,7 @@ end
 -- ===========================================================================
 --  Enum: Draw out a specific player.
 -- 
+---@return nothing
 function MeleeDoDrawEnum()
 	local thePlayer = GetEnumPlayer()
 	
@@ -11219,11 +11659,12 @@ end
 -- ===========================================================================
 --  Enum: Victory out a specific player.
 -- 
+---@return nothing
 function MeleeDoVictoryEnum()
-	local thePlayer   = GetEnumPlayer()
+	local thePlayer = GetEnumPlayer()
 	local playerIndex = GetPlayerId(thePlayer)
 	
-	if (not bj_meleeVictoried[playerIndex]) then
+	if ( not bj_meleeVictoried[playerIndex]) then
 		bj_meleeVictoried[playerIndex] = true
 		CachePlayerHeroData(thePlayer)
 		RemovePlayerPreserveUnitsBJ(thePlayer, PLAYER_GAME_RESULT_VICTORY, false)
@@ -11234,6 +11675,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function MeleeDoDefeat(whichPlayer)
 	bj_meleeDefeated[GetPlayerId(whichPlayer)] = true
 	RemovePlayerPreserveUnitsBJ(whichPlayer, PLAYER_GAME_RESULT_DEFEAT, false)
@@ -11241,6 +11683,7 @@ end
 -- ===========================================================================
 --  Enum: Defeat out a specific player.
 -- 
+---@return nothing
 function MeleeDoDefeatEnum()
 	local thePlayer = GetEnumPlayer()
 	
@@ -11254,6 +11697,7 @@ end
 -- 
 
 ---@param whichPlayer player
+---@return nothing
 function MeleeDoLeave(whichPlayer)
 	if (GetIntegerGameState(GAME_STATE_DISCONNECTED) ~= 0) then
 		GameOverDialogBJ(whichPlayer, true)
@@ -11265,6 +11709,7 @@ end
 -- ===========================================================================
 --  Remove all observers
 -- 
+---@return nothing
 function MeleeRemoveObservers()
 	local playerIndex
 	local indexPlayer
@@ -11293,12 +11738,12 @@ function MeleeCheckForVictors()
 	local playerIndex
 	local opponentIndex
 	local opponentlessPlayers = CreateForce()
-	local gameOver            = false
+	local gameOver = false
 	
 	--  Check to see if any players have opponents remaining.
-	playerIndex               = 0
+	playerIndex = 0
 	while true do
-		if (not bj_meleeDefeated[playerIndex]) then
+		if ( not bj_meleeDefeated[playerIndex]) then
 			--  Determine whether or not this player has any remaining opponents.
 			opponentIndex = 0
 			while true do
@@ -11329,16 +11774,17 @@ end
 -- ===========================================================================
 --  Test each player to determine if anyone has been defeated.
 -- 
+---@return nothing
 function MeleeCheckForLosersAndVictors()
 	local playerIndex
 	local indexPlayer
 	local defeatedPlayers = CreateForce()
 	local victoriousPlayers
-	local gameOver        = false
+	local gameOver = false
 	
 	--  If the game is already over, do nothing
 	if (bj_meleeGameOver) then
-		return
+		return 
 	end
 	
 	--  If the game was disconnected then it is over, in this case we
@@ -11346,7 +11792,7 @@ function MeleeCheckForLosersAndVictors()
 	--  conflict with the actual game results
 	if (GetIntegerGameState(GAME_STATE_DISCONNECTED) ~= 0) then
 		bj_meleeGameOver = true
-		return
+		return 
 	end
 	
 	--  Check each player to see if he or she has been defeated yet.
@@ -11354,7 +11800,7 @@ function MeleeCheckForLosersAndVictors()
 	while true do
 		indexPlayer = Player(playerIndex)
 		
-		if (not bj_meleeDefeated[playerIndex] and not bj_meleeVictoried[playerIndex]) then
+		if ( not bj_meleeDefeated[playerIndex] and  not bj_meleeVictoried[playerIndex]) then
 			-- call DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, 60, "Player"+I2S(playerIndex)+" has "+I2S(MeleeGetAllyStructureCount(indexPlayer))+" ally buildings.")
 			if (MeleeGetAllyStructureCount(indexPlayer) <= 0) then
 				
@@ -11443,6 +11889,7 @@ end
 
 ---@param whichPlayer player
 ---@param expose boolean
+---@return nothing
 function MeleeExposePlayer(whichPlayer, expose)
 	local playerIndex
 	local indexPlayer
@@ -11451,10 +11898,10 @@ function MeleeExposePlayer(whichPlayer, expose)
 	CripplePlayer(whichPlayer, toExposeTo, false)
 	
 	bj_playerIsExposed[GetPlayerId(whichPlayer)] = expose
-	playerIndex                                  = 0
+	playerIndex = 0
 	while true do
 		indexPlayer = Player(playerIndex)
-		if (not PlayersAreCoAllied(whichPlayer, indexPlayer)) then
+		if ( not PlayersAreCoAllied(whichPlayer, indexPlayer)) then
 			ForceAddPlayer(toExposeTo, indexPlayer)
 		end
 		
@@ -11466,6 +11913,7 @@ function MeleeExposePlayer(whichPlayer, expose)
 	DestroyForce(toExposeTo)
 end
 -- ===========================================================================
+---@return nothing
 function MeleeExposeAllPlayers()
 	local playerIndex
 	local indexPlayer
@@ -11473,7 +11921,7 @@ function MeleeExposeAllPlayers()
 	local indexPlayer2
 	local toExposeTo = CreateForce()
 	
-	playerIndex      = 0
+	playerIndex = 0
 	while true do
 		indexPlayer = Player(playerIndex)
 		
@@ -11485,7 +11933,7 @@ function MeleeExposeAllPlayers()
 			indexPlayer2 = Player(playerIndex2)
 			
 			if playerIndex ~= playerIndex2 then
-				if (not PlayersAreCoAllied(indexPlayer, indexPlayer2)) then
+				if ( not PlayersAreCoAllied(indexPlayer, indexPlayer2)) then
 					ForceAddPlayer(toExposeTo, indexPlayer2)
 				end
 			end
@@ -11503,13 +11951,14 @@ function MeleeExposeAllPlayers()
 	DestroyForce(toExposeTo)
 end
 -- ===========================================================================
+---@return nothing
 function MeleeCrippledPlayerTimeout()
 	local expiredTimer = GetExpiredTimer()
 	local playerIndex
 	local exposedPlayer
 	
 	--  Determine which player's timer expired.
-	playerIndex        = 0
+	playerIndex = 0
 	while true do
 		if (bj_crippledTimer[playerIndex] == expiredTimer) then
 			if true then break end
@@ -11519,7 +11968,7 @@ function MeleeCrippledPlayerTimeout()
 		if playerIndex == bj_MAX_PLAYERS then break end
 	end
 	if (playerIndex == bj_MAX_PLAYERS) then
-		return
+		return 
 	end
 	exposedPlayer = Player(playerIndex)
 	
@@ -11541,7 +11990,7 @@ end
 ---@param whichPlayer player
 ---@return boolean
 function MeleePlayerIsCrippled(whichPlayer)
-	local playerStructures    = GetPlayerStructureCount(whichPlayer, true)
+	local playerStructures = GetPlayerStructureCount(whichPlayer, true)
 	local playerKeyStructures = BlzGetPlayerTownHallCount(whichPlayer)
 	
 	--  Dead players are not considered to be crippled.
@@ -11550,6 +11999,7 @@ end
 -- ===========================================================================
 --  Test each player to determine if anyone has become crippled.
 -- 
+---@return nothing
 function MeleeCheckForCrippledPlayers()
 	local playerIndex
 	local indexPlayer
@@ -11559,16 +12009,16 @@ function MeleeCheckForCrippledPlayers()
 	
 	--  The "finish soon" exposure of all players overrides any "crippled" exposure
 	if bj_finishSoonAllExposed then
-		return
+		return 
 	end
 	
 	--  Check each player to see if he or she has been crippled or uncrippled.
 	playerIndex = 0
 	while true do
-		indexPlayer   = Player(playerIndex)
+		indexPlayer = Player(playerIndex)
 		isNowCrippled = MeleePlayerIsCrippled(indexPlayer)
 		
-		if (not bj_playerIsCrippled[playerIndex] and isNowCrippled) then
+		if ( not bj_playerIsCrippled[playerIndex] and isNowCrippled) then
 			
 			--  Player became crippled; start their cripple timer.
 			bj_playerIsCrippled[playerIndex] = true
@@ -11583,8 +12033,8 @@ function MeleeCheckForCrippledPlayers()
 				--  Display a warning message.
 				DisplayTimedTextToPlayer(indexPlayer, 0, 0, bj_MELEE_CRIPPLE_MSG_DURATION, MeleeGetCrippledWarningMessage(indexPlayer))
 			end
-		
-		elseif (bj_playerIsCrippled[playerIndex] and not isNowCrippled) then
+			
+		elseif (bj_playerIsCrippled[playerIndex] and  not isNowCrippled) then
 			
 			--  Player became uncrippled; stop their cripple timer.
 			bj_playerIsCrippled[playerIndex] = false
@@ -11608,7 +12058,7 @@ function MeleeCheckForCrippledPlayers()
 			
 			--  If the player granted shared vision, deny that vision now.
 			MeleeExposePlayer(indexPlayer, false)
-		
+			
 		end
 		
 		playerIndex = playerIndex + 1
@@ -11620,6 +12070,7 @@ end
 -- 
 
 ---@param lostUnit unit
+---@return nothing
 function MeleeCheckLostUnit(lostUnit)
 	local lostUnitOwner = GetOwningPlayer(lostUnit)
 	
@@ -11638,6 +12089,7 @@ end
 -- 
 
 ---@param addedUnit unit
+---@return nothing
 function MeleeCheckAddedUnit(addedUnit)
 	local addedUnitOwner = GetOwningPlayer(addedUnit)
 	
@@ -11647,20 +12099,24 @@ function MeleeCheckAddedUnit(addedUnit)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionConstructCancel()
 	MeleeCheckLostUnit(GetCancelledStructure())
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionUnitDeath()
 	if (IsUnitType(GetDyingUnit(), UNIT_TYPE_STRUCTURE)) then
 		MeleeCheckLostUnit(GetDyingUnit())
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionUnitConstructionStart()
 	MeleeCheckAddedUnit(GetConstructingStructure())
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionPlayerDefeated()
 	local thePlayer = GetTriggerPlayer()
 	CachePlayerHeroData(thePlayer)
@@ -11669,27 +12125,28 @@ function MeleeTriggerActionPlayerDefeated()
 		--  If at least one ally is still alive and kicking, share units with
 		--  them and proceed with death.
 		ShareEverythingWithTeam(thePlayer)
-		if (not bj_meleeDefeated[GetPlayerId(thePlayer)]) then
+		if ( not bj_meleeDefeated[GetPlayerId(thePlayer)]) then
 			MeleeDoDefeat(thePlayer)
 		end
 	else
 		--  If no living allies remain, swap all units and buildings over to
 		--  neutral_passive and proceed with death.
 		MakeUnitsPassiveForTeam(thePlayer)
-		if (not bj_meleeDefeated[GetPlayerId(thePlayer)]) then
+		if ( not bj_meleeDefeated[GetPlayerId(thePlayer)]) then
 			MeleeDoDefeat(thePlayer)
 		end
 	end
 	MeleeCheckForLosersAndVictors()
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionPlayerLeft()
 	local thePlayer = GetTriggerPlayer()
 	
 	--  Just show game over for observers when they leave
 	if (IsPlayerObserver(thePlayer)) then
 		RemovePlayerPreserveUnitsBJ(thePlayer, PLAYER_GAME_RESULT_NEUTRAL, false)
-		return
+		return 
 	end
 	
 	CachePlayerHeroData(thePlayer)
@@ -11711,22 +12168,24 @@ function MeleeTriggerActionPlayerLeft()
 	MeleeCheckForLosersAndVictors()
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerActionAllianceChange()
 	MeleeCheckForLosersAndVictors()
 	MeleeCheckForCrippledPlayers()
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerTournamentFinishSoon()
 	--  Note: We may get this trigger multiple times
 	local playerIndex
 	local indexPlayer
 	local timeRemaining = GetTournamentFinishSoonTimeRemaining()
 	
-	if not bj_finishSoonAllExposed then
+	if  not bj_finishSoonAllExposed then
 		bj_finishSoonAllExposed = true
 		
 		--  Reset all crippled players and their timers, and hide the local crippled timer dialog
-		playerIndex             = 0
+		playerIndex = 0
 		while true do
 			indexPlayer = Player(playerIndex)
 			if bj_playerIsCrippled[playerIndex] then
@@ -11740,7 +12199,7 @@ function MeleeTriggerTournamentFinishSoon()
 					--  Hide the timer window.
 					TimerDialogDisplay(bj_crippledTimerWindows[playerIndex], false)
 				end
-			
+				
 			end
 			playerIndex = playerIndex + 1
 			if playerIndex == bj_MAX_PLAYERS then break end
@@ -11772,10 +12231,11 @@ end
 -- ===========================================================================
 
 ---@param multiplier integer
+---@return nothing
 function MeleeTournamentFinishNowRuleA(multiplier)
 	local playerScore = {}
-	local teamScore   = {}
-	local teamForce   = {}
+	local teamScore = {}
+	local teamForce = {}
 	local teamCount
 	local index
 	local indexPlayer
@@ -11786,7 +12246,7 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 	local draw
 	
 	--  Compute individual player scores
-	index             = 0
+	index = 0
 	while true do
 		indexPlayer = Player(index)
 		if MeleeWasUserPlayer(indexPlayer) then
@@ -11803,15 +12263,15 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 	
 	--  Compute team scores and team forces
 	teamCount = 0
-	index     = 0
+	index = 0
 	while true do
 		if playerScore[index] ~= 0 then
-			indexPlayer          = Player(index)
+			indexPlayer = Player(index)
 			
 			teamScore[teamCount] = 0
 			teamForce[teamCount] = CreateForce()
 			
-			index2               = index
+			index2 = index
 			while true do
 				if playerScore[index2] ~= 0 then
 					indexPlayer2 = Player(index2)
@@ -11841,12 +12301,12 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 	if teamCount ~= 0 then
 		
 		--  Find best team score
-		bestTeam  = -1
+		bestTeam = -1
 		bestScore = -1
-		index     = 0
+		index = 0
 		while true do
 			if teamScore[index] > bestScore then
-				bestTeam  = index
+				bestTeam = index
 				bestScore = teamScore[index]
 			end
 			
@@ -11857,7 +12317,7 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 		--  Check whether the best team's score is 'multiplier' times better than
 		--  every other team. In the case of multiplier == 1 and exactly equal team
 		--  scores, the first team (which was randomly chosen by the server) will win.
-		draw  = false
+		draw = false
 		index = 0
 		while true do
 			if index ~= bestTeam then
@@ -11895,15 +12355,16 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 			ForForce(teamForce[bestTeam], MeleeDoVictoryEnum)
 		end
 	end
-
+	
 end
 -- ===========================================================================
+---@return nothing
 function MeleeTriggerTournamentFinishNow()
 	local rule = GetTournamentFinishNowRule()
 	
 	--  If the game is already over, do nothing
 	if bj_meleeGameOver then
-		return
+		return 
 	end
 	
 	if (rule == 1) then
@@ -11916,9 +12377,10 @@ function MeleeTriggerTournamentFinishNow()
 	
 	--  Since the game is over we should remove all observers
 	MeleeRemoveObservers()
-
+	
 end
 -- ===========================================================================
+---@return nothing
 function MeleeInitVictoryDefeat()
 	local trig
 	local index
@@ -11929,7 +12391,7 @@ function MeleeInitVictoryDefeat()
 	bj_finishSoonTimerDialog = CreateTimerDialog(nil)
 	
 	--  Set a trigger to fire when we receive a "finish soon" game event
-	trig                     = CreateTrigger()
+	trig = CreateTrigger()
 	TriggerRegisterGameEvent(trig, EVENT_GAME_TOURNAMENT_FINISH_SOON)
 	TriggerAddAction(trig, MeleeTriggerTournamentFinishSoon)
 	
@@ -11945,13 +12407,13 @@ function MeleeInitVictoryDefeat()
 		
 		--  Make sure this player slot is playing.
 		if (GetPlayerSlotState(indexPlayer) == PLAYER_SLOT_STATE_PLAYING) then
-			bj_meleeDefeated[index]        = false
-			bj_meleeVictoried[index]       = false
+			bj_meleeDefeated[index] = false
+			bj_meleeVictoried[index] = false
 			
 			--  Create a timer and timer window in case the player is crippled.
-			bj_playerIsCrippled[index]     = false
-			bj_playerIsExposed[index]      = false
-			bj_crippledTimer[index]        = CreateTimer()
+			bj_playerIsCrippled[index] = false
+			bj_playerIsExposed[index] = false
+			bj_crippledTimer[index] = CreateTimer()
 			bj_crippledTimerWindows[index] = CreateTimerDialog(bj_crippledTimer[index])
 			TimerDialogSetTitle(bj_crippledTimerWindows[index], MeleeGetCrippledTimerMessage(indexPlayer))
 			
@@ -11986,7 +12448,7 @@ function MeleeInitVictoryDefeat()
 			TriggerRegisterPlayerStateEvent(trig, indexPlayer, PLAYER_STATE_ALLIED_VICTORY, EQUAL, 1)
 			TriggerAddAction(trig, MeleeTriggerActionAllianceChange)
 		else
-			bj_meleeDefeated[index]  = true
+			bj_meleeDefeated[index] = true
 			bj_meleeVictoried[index] = false
 			
 			--  Handle leave events for observers
@@ -12012,15 +12474,16 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function CheckInitPlayerSlotAvailability()
 	local index
 	
-	if (not bj_slotControlReady) then
+	if ( not bj_slotControlReady) then
 		index = 0
 		while true do
 			bj_slotControlUsed[index] = false
-			bj_slotControl[index]     = MAP_CONTROL_USER
-			index                     = index + 1
+			bj_slotControl[index] = MAP_CONTROL_USER
+			index = index + 1
 			if index == bj_MAX_PLAYERS then break end
 		end
 		bj_slotControlReady = true
@@ -12030,12 +12493,13 @@ end
 
 ---@param whichPlayer player
 ---@param control mapcontrol
+---@return nothing
 function SetPlayerSlotAvailable(whichPlayer, control)
 	local playerIndex = GetPlayerId(whichPlayer)
 	
 	CheckInitPlayerSlotAvailability()
 	bj_slotControlUsed[playerIndex] = true
-	bj_slotControl[playerIndex]     = control
+	bj_slotControl[playerIndex] = control
 end
 -- ***************************************************************************
 -- 
@@ -12045,6 +12509,7 @@ end
 -- ===========================================================================
 
 ---@param teamCount integer
+---@return nothing
 function TeamInitPlayerSlots(teamCount)
 	local index
 	local indexPlayer
@@ -12054,7 +12519,7 @@ function TeamInitPlayerSlots(teamCount)
 	
 	CheckInitPlayerSlotAvailability()
 	index = 0
-	team  = 0
+	team = 0
 	while true do
 		if (bj_slotControlUsed[index]) then
 			indexPlayer = Player(index)
@@ -12070,14 +12535,17 @@ function TeamInitPlayerSlots(teamCount)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function MeleeInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 -- ===========================================================================
+---@return nothing
 function FFAInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 -- ===========================================================================
+---@return nothing
 function OneOnOneInitPlayerSlots()
 	--  Limit the game to 2 players.
 	SetTeams(2)
@@ -12085,6 +12553,7 @@ function OneOnOneInitPlayerSlots()
 	TeamInitPlayerSlots(2)
 end
 -- ===========================================================================
+---@return nothing
 function InitGenericPlayerSlots()
 	local gType = GetGameTypeSelected()
 	
@@ -12112,22 +12581,25 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function SetDNCSoundsDawn()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_dawnSound)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function SetDNCSoundsDusk()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_duskSound)
 	end
 end
 -- ===========================================================================
+---@return nothing
 function SetDNCSoundsDay()
 	local ToD = GetTimeOfDay()
 	
-	if (ToD >= bj_TOD_DAWN and ToD < bj_TOD_DUSK) and not bj_dncIsDaytime then
+	if (ToD >= bj_TOD_DAWN and ToD < bj_TOD_DUSK) and  not bj_dncIsDaytime then
 		bj_dncIsDaytime = true
 		
 		--  change ambient sounds
@@ -12136,6 +12608,7 @@ function SetDNCSoundsDay()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function SetDNCSoundsNight()
 	local ToD = GetTimeOfDay()
 	
@@ -12148,10 +12621,11 @@ function SetDNCSoundsNight()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function InitDNCSounds()
 	--  Create sounds to be played at dawn and dusk.
-	bj_dawnSound     = CreateSoundFromLabel("RoosterSound", false, false, false, 10000, 10000)
-	bj_duskSound     = CreateSoundFromLabel("WolfSound", false, false, false, 10000, 10000)
+	bj_dawnSound = CreateSoundFromLabel("RoosterSound", false, false, false, 10000, 10000)
+	bj_duskSound = CreateSoundFromLabel("WolfSound", false, false, false, 10000, 10000)
 	
 	--  Set up triggers to respond to dawn and dusk.
 	bj_dncSoundsDawn = CreateTrigger()
@@ -12174,22 +12648,23 @@ function InitDNCSounds()
 	TriggerAddAction(bj_dncSoundsNight, SetDNCSoundsNight)
 end
 -- ===========================================================================
+---@return nothing
 function InitBlizzardGlobals()
 	local index
 	local userControlledPlayers
 	local v
 	
 	--  Init filter function vars
-	filterIssueHauntOrderAtLocBJ      = Filter(IssueHauntOrderAtLocBJFilter)
+	filterIssueHauntOrderAtLocBJ = Filter(IssueHauntOrderAtLocBJFilter)
 	filterEnumDestructablesInCircleBJ = Filter(EnumDestructablesInCircleBJFilter)
-	filterGetUnitsInRectOfPlayer      = Filter(GetUnitsInRectOfPlayerFilter)
-	filterGetUnitsOfTypeIdAll         = Filter(GetUnitsOfTypeIdAllFilter)
-	filterGetUnitsOfPlayerAndTypeId   = Filter(GetUnitsOfPlayerAndTypeIdFilter)
-	filterMeleeTrainedUnitIsHeroBJ    = Filter(MeleeTrainedUnitIsHeroBJFilter)
-	filterLivingPlayerUnitsOfTypeId   = Filter(LivingPlayerUnitsOfTypeIdFilter)
+	filterGetUnitsInRectOfPlayer = Filter(GetUnitsInRectOfPlayerFilter)
+	filterGetUnitsOfTypeIdAll = Filter(GetUnitsOfTypeIdAllFilter)
+	filterGetUnitsOfPlayerAndTypeId = Filter(GetUnitsOfPlayerAndTypeIdFilter)
+	filterMeleeTrainedUnitIsHeroBJ = Filter(MeleeTrainedUnitIsHeroBJFilter)
+	filterLivingPlayerUnitsOfTypeId = Filter(LivingPlayerUnitsOfTypeIdFilter)
 	
 	--  Init force presets
-	index                             = 0
+	index = 0
 	while true do
 		if index == bj_MAX_PLAYER_SLOTS then break end
 		bj_FORCE_PLAYER[index] = CreateForce()
@@ -12201,23 +12676,23 @@ function InitBlizzardGlobals()
 	ForceEnumPlayers(bj_FORCE_ALL_PLAYERS, nil)
 	
 	--  Init Cinematic Mode history
-	bj_cineModePriorSpeed       = GetGameSpeed()
-	bj_cineModePriorFogSetting  = IsFogEnabled()
+	bj_cineModePriorSpeed = GetGameSpeed()
+	bj_cineModePriorFogSetting = IsFogEnabled()
 	bj_cineModePriorMaskSetting = IsFogMaskEnabled()
 	
 	--  Init Trigger Queue
-	index                       = 0
+	index = 0
 	while true do
 		if index >= bj_MAX_QUEUED_TRIGGERS then break end
 		bj_queuedExecTriggers[index] = nil
 		bj_queuedExecUseConds[index] = false
-		index                        = index + 1
+		index = index + 1
 	end
 	
 	--  Init singleplayer check
-	bj_isSinglePlayer     = false
+	bj_isSinglePlayer = false
 	userControlledPlayers = 0
-	index                 = 0
+	index = 0
 	while true do
 		if index >= bj_MAX_PLAYERS then break end
 		if (GetPlayerController(Player(index)) == MAP_CONTROL_USER and GetPlayerSlotState(Player(index)) == PLAYER_SLOT_STATE_PLAYING) then
@@ -12225,21 +12700,21 @@ function InitBlizzardGlobals()
 		end
 		index = index + 1
 	end
-	bj_isSinglePlayer         = (userControlledPlayers == 1)
+	bj_isSinglePlayer = (userControlledPlayers == 1)
 	
 	--  Init sounds
 	-- set bj_pingMinimapSound = CreateSoundFromLabel("AutoCastButtonClick", false, false, false, 10000, 10000)
-	bj_rescueSound            = CreateSoundFromLabel("Rescue", false, false, false, 10000, 10000)
-	bj_questDiscoveredSound   = CreateSoundFromLabel("QuestNew", false, false, false, 10000, 10000)
-	bj_questUpdatedSound      = CreateSoundFromLabel("QuestUpdate", false, false, false, 10000, 10000)
-	bj_questCompletedSound    = CreateSoundFromLabel("QuestCompleted", false, false, false, 10000, 10000)
-	bj_questFailedSound       = CreateSoundFromLabel("QuestFailed", false, false, false, 10000, 10000)
-	bj_questHintSound         = CreateSoundFromLabel("Hint", false, false, false, 10000, 10000)
-	bj_questSecretSound       = CreateSoundFromLabel("SecretFound", false, false, false, 10000, 10000)
+	bj_rescueSound = CreateSoundFromLabel("Rescue", false, false, false, 10000, 10000)
+	bj_questDiscoveredSound = CreateSoundFromLabel("QuestNew", false, false, false, 10000, 10000)
+	bj_questUpdatedSound = CreateSoundFromLabel("QuestUpdate", false, false, false, 10000, 10000)
+	bj_questCompletedSound = CreateSoundFromLabel("QuestCompleted", false, false, false, 10000, 10000)
+	bj_questFailedSound = CreateSoundFromLabel("QuestFailed", false, false, false, 10000, 10000)
+	bj_questHintSound = CreateSoundFromLabel("Hint", false, false, false, 10000, 10000)
+	bj_questSecretSound = CreateSoundFromLabel("SecretFound", false, false, false, 10000, 10000)
 	bj_questItemAcquiredSound = CreateSoundFromLabel("ItemReward", false, false, false, 10000, 10000)
-	bj_questWarningSound      = CreateSoundFromLabel("Warning", false, false, false, 10000, 10000)
-	bj_victoryDialogSound     = CreateSoundFromLabel("QuestCompleted", false, false, false, 10000, 10000)
-	bj_defeatDialogSound      = CreateSoundFromLabel("QuestFailed", false, false, false, 10000, 10000)
+	bj_questWarningSound = CreateSoundFromLabel("Warning", false, false, false, 10000, 10000)
+	bj_victoryDialogSound = CreateSoundFromLabel("QuestCompleted", false, false, false, 10000, 10000)
+	bj_defeatDialogSound = CreateSoundFromLabel("QuestFailed", false, false, false, 10000, 10000)
 	
 	--  Init corpse creation triggers.
 	DelayedSuspendDecayCreate()
@@ -12253,17 +12728,20 @@ function InitBlizzardGlobals()
 	end
 end
 -- ===========================================================================
+---@return nothing
 function InitQueuedTriggers()
 	bj_queuedExecTimeout = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_queuedExecTimeout, bj_queuedExecTimeoutTimer)
 	TriggerAddAction(bj_queuedExecTimeout, QueuedTriggerDoneBJ)
 end
 -- ===========================================================================
+---@return nothing
 function InitMapRects()
 	bj_mapInitialPlayableArea = Rect(GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT), GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM), GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT), GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP))
 	bj_mapInitialCameraBounds = GetCurrentCameraBoundsMapRectBJ()
 end
 -- ===========================================================================
+---@return nothing
 function InitSummonableCaps()
 	local index
 	
@@ -12272,12 +12750,12 @@ function InitSummonableCaps()
 		--  upgraded units
 		--  Note: Only do this if the corresponding upgrade is not yet researched
 		--  Barrage - Siege Engines
-		if (not GetPlayerTechResearched(Player(index), FourCC('Rhrt'), true)) then
+		if ( not GetPlayerTechResearched(Player(index), FourCC('Rhrt'), true)) then
 			SetPlayerTechMaxAllowed(Player(index), FourCC('hrtt'), 0)
 		end
 		
 		--  Berserker Upgrade - Troll Berserkers
-		if (not GetPlayerTechResearched(Player(index), FourCC('Robk'), true)) then
+		if ( not GetPlayerTechResearched(Player(index), FourCC('Robk'), true)) then
 			SetPlayerTechMaxAllowed(Player(index), FourCC('otbk'), 0)
 		end
 		
@@ -12293,8 +12771,9 @@ end
 -- 
 
 ---@param whichItem item
+---@return nothing
 function UpdateStockAvailability(whichItem)
-	local iType  = GetItemType(whichItem)
+	local iType = GetItemType(whichItem)
 	local iLevel = GetItemLevel(whichItem)
 	
 	--  Update allowed type/level combinations.
@@ -12311,6 +12790,7 @@ end
 -- ===========================================================================
 --  Find a sellable item of the given type and level, and then add it.
 -- 
+---@return nothing
 function UpdateEachStockBuildingEnum()
 	local iteration = 0
 	local pickedItemId
@@ -12323,7 +12803,7 @@ function UpdateEachStockBuildingEnum()
 		--  items, or a very unlucky series of random numbers, give up.
 		iteration = iteration + 1
 		if (iteration > bj_STOCK_MAX_ITERATIONS) then
-			return
+			return 
 		end
 	end
 	AddItemToStock(GetEnumUnit(), pickedItemId, 1, 1)
@@ -12332,13 +12812,14 @@ end
 
 ---@param iType itemtype
 ---@param iLevel integer
+---@return nothing
 function UpdateEachStockBuilding(iType, iLevel)
 	local g
 	
-	bj_stockPickedItemType  = iType
+	bj_stockPickedItemType = iType
 	bj_stockPickedItemLevel = iLevel
 	
-	g                       = CreateGroup()
+	g = CreateGroup()
 	GroupEnumUnitsOfType(g, "marketplace", nil)
 	ForGroup(g, UpdateEachStockBuildingEnum)
 	DestroyGroup(g)
@@ -12346,34 +12827,35 @@ end
 -- ===========================================================================
 --  Update stock inventory.
 -- 
+---@return nothing
 function PerformStockUpdates()
 	local pickedItemId
 	local pickedItemType
-	local pickedItemLevel     = 0
+	local pickedItemLevel = 0
 	local allowedCombinations = 0
 	local iLevel
 	
 	--  Give each type/level combination a chance of being picked.
-	iLevel                    = 1
+	iLevel = 1
 	while true do
 		if (bj_stockAllowedPermanent[iLevel]) then
 			allowedCombinations = allowedCombinations + 1
 			if (GetRandomInt(1, allowedCombinations) == 1) then
-				pickedItemType  = ITEM_TYPE_PERMANENT
+				pickedItemType = ITEM_TYPE_PERMANENT
 				pickedItemLevel = iLevel
 			end
 		end
 		if (bj_stockAllowedCharged[iLevel]) then
 			allowedCombinations = allowedCombinations + 1
 			if (GetRandomInt(1, allowedCombinations) == 1) then
-				pickedItemType  = ITEM_TYPE_CHARGED
+				pickedItemType = ITEM_TYPE_CHARGED
 				pickedItemLevel = iLevel
 			end
 		end
 		if (bj_stockAllowedArtifact[iLevel]) then
 			allowedCombinations = allowedCombinations + 1
 			if (GetRandomInt(1, allowedCombinations) == 1) then
-				pickedItemType  = ITEM_TYPE_ARTIFACT
+				pickedItemType = ITEM_TYPE_ARTIFACT
 				pickedItemLevel = iLevel
 			end
 		end
@@ -12384,7 +12866,7 @@ function PerformStockUpdates()
 	
 	--  Make sure we found a valid item type to add.
 	if (allowedCombinations == 0) then
-		return
+		return 
 	end
 	
 	UpdateEachStockBuilding(pickedItemType, pickedItemLevel)
@@ -12392,15 +12874,18 @@ end
 -- ===========================================================================
 --  Perform the first update, and then arrange future updates.
 -- 
+---@return nothing
 function StartStockUpdates()
 	PerformStockUpdates()
 	TimerStart(bj_stockUpdateTimer, bj_STOCK_RESTOCK_INTERVAL, true, PerformStockUpdates)
 end
 -- ===========================================================================
+---@return nothing
 function RemovePurchasedItem()
 	RemoveItemFromStock(GetSellingUnit(), GetItemTypeId(GetSoldItem()))
 end
 -- ===========================================================================
+---@return nothing
 function InitNeutralBuildings()
 	local iLevel
 	
@@ -12408,9 +12893,9 @@ function InitNeutralBuildings()
 	iLevel = 0
 	while true do
 		bj_stockAllowedPermanent[iLevel] = false
-		bj_stockAllowedCharged[iLevel]   = false
-		bj_stockAllowedArtifact[iLevel]  = false
-		iLevel                           = iLevel + 1
+		bj_stockAllowedCharged[iLevel] = false
+		bj_stockAllowedArtifact[iLevel] = false
+		iLevel = iLevel + 1
 		if iLevel > bj_MAX_ITEM_LEVEL then break end
 	end
 	
@@ -12428,16 +12913,19 @@ function InitNeutralBuildings()
 	TriggerAddAction(bj_stockItemPurchased, RemovePurchasedItem)
 end
 -- ===========================================================================
+---@return nothing
 function MarkGameStarted()
 	bj_gameStarted = true
 	DestroyTimer(bj_gameStartedTimer)
 end
 -- ===========================================================================
+---@return nothing
 function DetectGameStarted()
 	bj_gameStartedTimer = CreateTimer()
 	TimerStart(bj_gameStartedTimer, bj_GAME_STARTED_THRESHOLD, false, MarkGameStarted)
 end
 -- ===========================================================================
+---@return nothing
 function InitBlizzard()
 	--  Set up the Neutral Victim player slot, to torture the abandoned units
 	--  of defeated players.  Since some triggers expect this player slot to
@@ -12472,6 +12960,7 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
+---@return nothing
 function RandomDistReset()
 	bj_randDistCount = 0
 end
@@ -12479,16 +12968,17 @@ end
 
 ---@param inID integer
 ---@param inChance integer
+---@return nothing
 function RandomDistAddItem(inID, inChance)
-	bj_randDistID[bj_randDistCount]     = inID
+	bj_randDistID[bj_randDistCount] = inID
 	bj_randDistChance[bj_randDistCount] = inChance
-	bj_randDistCount                    = bj_randDistCount + 1
+	bj_randDistCount = bj_randDistCount + 1
 end
 -- ===========================================================================
 ---@return integer
 function RandomDistChoose()
-	local sum     = 0
-	local chance  = 0
+	local sum = 0
+	local chance = 0
 	local index
 	local foundID = -1
 	local done
@@ -12501,7 +12991,7 @@ function RandomDistChoose()
 	--  Find sum of all chances
 	index = 0
 	while true do
-		sum   = sum + bj_randDistChance[index]
+		sum = sum + bj_randDistChance[index]
 		
 		index = index + 1
 		if index == bj_randDistCount then break end
@@ -12511,15 +13001,15 @@ function RandomDistChoose()
 	chance = GetRandomInt(1, sum)
 	
 	--  Find ID which corresponds to this chance
-	index  = 0
-	sum    = 0
-	done   = false
+	index = 0
+	sum = 0
+	done = false
 	while true do
 		sum = sum + bj_randDistChance[index]
 		
 		if (chance <= sum) then
 			foundID = bj_randDistID[index]
-			done    = true
+			done = true
 		end
 		
 		index = index + 1
@@ -12559,11 +13049,11 @@ function UnitDropItem(inUnit, inItemID)
 		return nil
 	end
 	
-	unitX       = GetUnitX(inUnit)
-	unitY       = GetUnitY(inUnit)
+	unitX = GetUnitX(inUnit)
+	unitY = GetUnitY(inUnit)
 	
-	x           = GetRandomReal(unitX - radius, unitX + radius)
-	y           = GetRandomReal(unitY - radius, unitY + radius)
+	x = GetRandomReal(unitX - radius, unitX + radius)
+	y = GetRandomReal(unitY - radius, unitY + radius)
 	
 	droppedItem = CreateItem(inItemID, x, y)
 	
@@ -12591,8 +13081,8 @@ function WidgetDropItem(inWidget, inItemID)
 	widgetX = GetWidgetX(inWidget)
 	widgetY = GetWidgetY(inWidget)
 	
-	x       = GetRandomReal(widgetX - radius, widgetX + radius)
-	y       = GetRandomReal(widgetY - radius, widgetY + radius)
+	x = GetRandomReal(widgetX - radius, widgetX + radius)
+	y = GetRandomReal(widgetY - radius, widgetY + radius)
 	
 	return CreateItem(inItemID, x, y)
 end
@@ -12614,6 +13104,7 @@ end
 ---@param whichAbility ability
 ---@param whichField abilitybooleanfield
 ---@param value boolean
+---@return nothing
 function BlzSetAbilityBooleanFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanField(whichAbility, whichField, value)
 end
@@ -12622,6 +13113,7 @@ end
 ---@param whichAbility ability
 ---@param whichField abilityintegerfield
 ---@param value integer
+---@return nothing
 function BlzSetAbilityIntegerFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerField(whichAbility, whichField, value)
 end
@@ -12630,6 +13122,7 @@ end
 ---@param whichAbility ability
 ---@param whichField abilityrealfield
 ---@param value real
+---@return nothing
 function BlzSetAbilityRealFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealField(whichAbility, whichField, value)
 end
@@ -12638,6 +13131,7 @@ end
 ---@param whichAbility ability
 ---@param whichField abilitystringfield
 ---@param value string
+---@return nothing
 function BlzSetAbilityStringFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringField(whichAbility, whichField, value)
 end
@@ -12647,6 +13141,7 @@ end
 ---@param whichField abilitybooleanlevelfield
 ---@param level integer
 ---@param value boolean
+---@return nothing
 function BlzSetAbilityBooleanLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanLevelField(whichAbility, whichField, level, value)
 end
@@ -12656,6 +13151,7 @@ end
 ---@param whichField abilityintegerlevelfield
 ---@param level integer
 ---@param value integer
+---@return nothing
 function BlzSetAbilityIntegerLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerLevelField(whichAbility, whichField, level, value)
 end
@@ -12665,6 +13161,7 @@ end
 ---@param whichField abilityreallevelfield
 ---@param level integer
 ---@param value real
+---@return nothing
 function BlzSetAbilityRealLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealLevelField(whichAbility, whichField, level, value)
 end
@@ -12674,6 +13171,7 @@ end
 ---@param whichField abilitystringlevelfield
 ---@param level integer
 ---@param value string
+---@return nothing
 function BlzSetAbilityStringLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringLevelField(whichAbility, whichField, level, value)
 end
@@ -12684,6 +13182,7 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value boolean
+---@return nothing
 function BlzSetAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -12694,6 +13193,7 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value integer
+---@return nothing
 function BlzSetAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -12704,6 +13204,7 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value real
+---@return nothing
 function BlzSetAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -12714,6 +13215,7 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value string
+---@return nothing
 function BlzSetAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -12723,6 +13225,7 @@ end
 ---@param whichField abilitybooleanlevelarrayfield
 ---@param level integer
 ---@param value boolean
+---@return nothing
 function BlzAddAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityBooleanLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12732,6 +13235,7 @@ end
 ---@param whichField abilityintegerlevelarrayfield
 ---@param level integer
 ---@param value integer
+---@return nothing
 function BlzAddAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityIntegerLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12741,6 +13245,7 @@ end
 ---@param whichField abilityreallevelarrayfield
 ---@param level integer
 ---@param value real
+---@return nothing
 function BlzAddAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityRealLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12750,6 +13255,7 @@ end
 ---@param whichField abilitystringlevelarrayfield
 ---@param level integer
 ---@param value string
+---@return nothing
 function BlzAddAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityStringLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12759,6 +13265,7 @@ end
 ---@param whichField abilitybooleanlevelarrayfield
 ---@param level integer
 ---@param value boolean
+---@return nothing
 function BlzRemoveAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityBooleanLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12768,6 +13275,7 @@ end
 ---@param whichField abilityintegerlevelarrayfield
 ---@param level integer
 ---@param value integer
+---@return nothing
 function BlzRemoveAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityIntegerLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12777,6 +13285,7 @@ end
 ---@param whichField abilityreallevelarrayfield
 ---@param level integer
 ---@param value real
+---@return nothing
 function BlzRemoveAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityRealLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12786,6 +13295,7 @@ end
 ---@param whichField abilitystringlevelarrayfield
 ---@param level integer
 ---@param value string
+---@return nothing
 function BlzRemoveAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityStringLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -12794,6 +13304,7 @@ end
 
 ---@param whichItem item
 ---@param abilCode integer
+---@return nothing
 function BlzItemAddAbilityBJ(whichItem, abilCode)
 	bj_lastInstObjFuncSuccessful = BlzItemAddAbility(whichItem, abilCode)
 end
@@ -12801,6 +13312,7 @@ end
 
 ---@param whichItem item
 ---@param abilCode integer
+---@return nothing
 function BlzItemRemoveAbilityBJ(whichItem, abilCode)
 	bj_lastInstObjFuncSuccessful = BlzItemRemoveAbility(whichItem, abilCode)
 end
@@ -12809,6 +13321,7 @@ end
 ---@param whichItem item
 ---@param whichField itembooleanfield
 ---@param value boolean
+---@return nothing
 function BlzSetItemBooleanFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemBooleanField(whichItem, whichField, value)
 end
@@ -12817,6 +13330,7 @@ end
 ---@param whichItem item
 ---@param whichField itemintegerfield
 ---@param value integer
+---@return nothing
 function BlzSetItemIntegerFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemIntegerField(whichItem, whichField, value)
 end
@@ -12825,6 +13339,7 @@ end
 ---@param whichItem item
 ---@param whichField itemrealfield
 ---@param value real
+---@return nothing
 function BlzSetItemRealFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemRealField(whichItem, whichField, value)
 end
@@ -12833,6 +13348,7 @@ end
 ---@param whichItem item
 ---@param whichField itemstringfield
 ---@param value string
+---@return nothing
 function BlzSetItemStringFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemStringField(whichItem, whichField, value)
 end
@@ -12842,6 +13358,7 @@ end
 ---@param whichUnit unit
 ---@param whichField unitbooleanfield
 ---@param value boolean
+---@return nothing
 function BlzSetUnitBooleanFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitBooleanField(whichUnit, whichField, value)
 end
@@ -12850,6 +13367,7 @@ end
 ---@param whichUnit unit
 ---@param whichField unitintegerfield
 ---@param value integer
+---@return nothing
 function BlzSetUnitIntegerFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitIntegerField(whichUnit, whichField, value)
 end
@@ -12858,6 +13376,7 @@ end
 ---@param whichUnit unit
 ---@param whichField unitrealfield
 ---@param value real
+---@return nothing
 function BlzSetUnitRealFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitRealField(whichUnit, whichField, value)
 end
@@ -12866,6 +13385,7 @@ end
 ---@param whichUnit unit
 ---@param whichField unitstringfield
 ---@param value string
+---@return nothing
 function BlzSetUnitStringFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitStringField(whichUnit, whichField, value)
 end
@@ -12876,6 +13396,7 @@ end
 ---@param whichField unitweaponbooleanfield
 ---@param index integer
 ---@param value boolean
+---@return nothing
 function BlzSetUnitWeaponBooleanFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponBooleanField(whichUnit, whichField, index, value)
 end
@@ -12885,6 +13406,7 @@ end
 ---@param whichField unitweaponintegerfield
 ---@param index integer
 ---@param value integer
+---@return nothing
 function BlzSetUnitWeaponIntegerFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponIntegerField(whichUnit, whichField, index, value)
 end
@@ -12894,6 +13416,7 @@ end
 ---@param whichField unitweaponrealfield
 ---@param index integer
 ---@param value real
+---@return nothing
 function BlzSetUnitWeaponRealFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponRealField(whichUnit, whichField, index, value)
 end
@@ -12903,6 +13426,7 @@ end
 ---@param whichField unitweaponstringfield
 ---@param index integer
 ---@param value string
+---@return nothing
 function BlzSetUnitWeaponStringFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponStringField(whichUnit, whichField, index, value)
 end

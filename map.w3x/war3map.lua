@@ -7,6 +7,8 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
+        GetUnitX = GetUnitRealX
+        GetUnitY = GetUnitRealY
         CreateBoss()
         CreateTestUnit()
         InitControlKeys()
@@ -18,6 +20,7 @@ do
         --BlzHideOriginFrames(true)
         CreateSlayer()
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+        globalX, globalY = GetUnitPosition(slayer)
         InitControlMouse()
         SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
 
@@ -33,7 +36,7 @@ do
 
 
         InitCameraScrollBar()
-        InitResetRootLock()
+        InitDamageTrigger()
 
     end
 end
@@ -94,6 +97,8 @@ function InitControlKeys()
 
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_Q, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_V, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_E, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_SPACE, 0, true)
     TriggerAddCondition(KeyTrigger, Condition(ControlKeys))
 
     ------MOVING SYSTEM------
@@ -126,7 +131,7 @@ function InitControlKeys()
 
     local t = CreateTimer()
     TimerStart(t, 1/16, true, function()
-        if (Apressed or Wpressed or Dpressed or Spressed) then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
+        if (Apressed or Wpressed or Dpressed or Spressed) and not Chaining then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
             --local x = GetUnitX(slayer) + orders.Xm + orders.Xp
             --local y = GetUnitY(slayer) + orders.Ym + orders.Yp
             if orders.Xm == 300 and orders.Xp == 300 then
@@ -150,10 +155,11 @@ function InitControlKeys()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
+            FixPosition()
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
-            (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) then
-            print("additional condition")
+            (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
+            --print("additional condition")
             for k, v in pairs(additionalOrders) do
                 if v ~= 0 then
                     orders[k] = v
@@ -166,6 +172,7 @@ function InitControlKeys()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
+            FixPosition()
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -269,10 +276,18 @@ function ControlKeys()
         print("Q")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
-        FireBalls()
+        TimerStart(CreateTimer(), 2, true, function()
+            FireBalls()
+        end)
+    end
+    if BlzGetTriggerPlayerKey() == OSKEY_E then
+        print("E")
+        --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
+        --TripleImpale(30)
+        Sawing()
     end
     if BlzGetTriggerPlayerKey() == OSKEY_V then
-
+        CameraSetFocalDistance(0)
         print("V")
 
         --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
@@ -287,6 +302,50 @@ function ControlKeys()
         --print(GetCameraField(CAMERA_FIELD_LOCAL_YAW))
         --print(GetCameraField(CAMERA_FIELD_LOCAL_ROLL))
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+        --spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+
+                --BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
+                --BlzFrameSetLevel(spriteframe, 3)
+               -- BlzFrameSetSize(spriteframe, 0.01, 0.01)
+               -- BlzFrameSetModel(spriteframe, "aco", 0)
+                --BlzFrameSetScale(spriteframe, 0.00058)
+              --  BlzFrameSetSpriteAnimate(spriteframe, 5, 2)
+                -- birth = 0
+                -- death = 1
+                -- stand = 2
+                -- morph = 3
+                -- alternate = 4
+               -- BlzFrameSetVisible(spriteframe, true)
+        --SelectUnit(boss, true)
+        --local t = RandomPointInCircle(CenterX, CenterY, Radius)
+        --local eff = AddSpecialEffect("models\\Rock3", t[1], t[2])
+       -- BlzSetSpecialEffectScale(eff, 0.75)
+        --BlzSetSpecialEffectYaw(eff, math.random(1, 3))
+       -- BlzSetSpecialEffectZ(eff, 350)
+       -- TimerStart(CreateTimer(), 1, false, function()
+      --      DestroyEffect(eff)
+      --      local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac",false, true, false, 10, 10, "DefaultEAXON")
+      --      SetSoundChannel( snd, 0)
+        --    SetSoundDistances( snd, 600.00, 3200 )
+            --SetSoundDistanceCutoff( snd, 3000.00)
+     --       SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
+     --       SetSoundVolume( snd, 80)
+            --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+            --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+            --SetSoundPitch( snd, 1.0 )
+      --      SetSoundPosition(snd, t[1], t[2],100)
+       --     StartSound(snd)
+      --      KillSoundWhenDone(snd)
+        --    DestroyTimer(GetExpiredTimer())
+       -- end)
+        --ThrowStones(10)
+        TripleImpale(35)
+        CreateTestUnit()
+    end
+
+    if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
+        print("SPACE")
+        Dash()
     end
 end
 
@@ -332,7 +391,8 @@ function Clicker()
         MakeShot(BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY())
     end
     if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
-        print("RMB: "..BlzGetTriggerPlayerMouseX().." "..BlzGetTriggerPlayerMouseY())
+        --print("RMB: "..BlzGetTriggerPlayerMouseX().." "..BlzGetTriggerPlayerMouseY())
+        ChainHook()
     end
 end
 
@@ -408,6 +468,25 @@ function SetUnitFaceToCursor()
     local posx, posy = FindCenterRayIntersection(ux, uy, x, y, 256)
     SetUnitPosition(posdummy, posx, posy)
 end
+
+function FixPosition()
+
+    --нужно сдвигать даммика на случай если курсор не двигается
+    --костыль, и работает не очень хорошо
+    --можно попробовать сдлать отдельный таймер с маленьким периодом, 1/64 или меньше
+    local slayerX, slayerY = GetUnitPosition(slayer)
+    local distance = CalculateDistance(slayerX, slayerY, globalX, globalY)
+    globalX = slayerX
+    globalY = slayerY
+
+    if distance > 0 then
+        local dummyX, dummyY = GetUnitPosition(posdummy)
+        local x, y = GetPointOnLine(slayerX, slayerY, dummyX, dummyY, CalculateDistance(slayerX, slayerY, dummyX, dummyY)+125)
+        local x2, y2 = MovePoint(slayerX, slayerY, dummyX, dummyY, x, y)
+        SetUnitPosition(posdummy, x2, y2)
+    end
+end
+
 function _(code)
     return FourCC(code)
 end
@@ -433,6 +512,27 @@ function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level,
     BlzFrameSetEnable(frame, false)
     BlzFrameSetScale(frame, scale)
     BlzFrameSetTextAlignment(frame, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
+end
+
+function FindClosestUnit(units, x, y)
+    local closestUnit = nil
+    local closestDistance = math.huge
+    for i, unit in ipairs(units) do
+        local unitX, unitY = GetUnitPosition(unit)
+        local distance = CalculateDistance(unitX, unitY, x, y)
+        if distance < closestDistance then
+            closestUnit = unit
+            closestDistance = distance
+        end
+    end
+    return closestUnit
+end
+
+function Shuffle (arr)
+    for i = 1, #arr - 1 do
+        local j = math.random (i, #arr)
+        arr [i], arr [j] = arr [j], arr [i]
+    end
 end
 function CalculateAngleAndDistance(x1, y1, x2, y2)
     --возвращает угол в радианах и расстояние между двумя точками
@@ -553,6 +653,36 @@ function GetPointsOnLine(x1, y1, x2, y2, d)
     return points
 end
 
+function GetPointsOnLineWithRotation(x1, y1, x2, y2, d)
+    --возвращает массив точек, делящих луч на отрезки, а также рандомные значения вращения
+    --с pitch возникает какой-то баг, если задавать через SetPitch
+    local points = {}
+    local dx = x2 - x1
+    local dy = y2 - y1
+    local dist = math.sqrt(dx * dx + dy * dy)
+    local steps = math.floor(dist / d)
+
+    local startYaw = math.random(-math.pi, math.pi)
+    local endYaw = math.random(-math.pi, math.pi)
+    local startPitch = math.random(-math.pi, math.pi)
+    local endPitch = math.random(-math.pi, math.pi)
+    local startRoll = math.random(-math.pi, math.pi)
+    local endRoll = math.random(-math.pi, math.pi)
+
+    for i = 1, steps+1 do
+        local t = i / steps
+        local x = x1 + dx * t
+        local y = y1 + dy * t
+        local yaw = startYaw + (endYaw - startYaw) * t
+        local pitch = startPitch + (endPitch - startPitch) * t
+        local roll = startRoll + (endRoll - startRoll) * t
+        table.insert(points, {x = x, y = y, yaw = yaw, pitch = pitch, roll = roll})
+    end
+
+    table.insert(points, {x = x2, y = y2, yaw = endYaw, pitch = endPitch, roll = endRoll})
+    return points
+end
+
 function GetPointOnLine(x1, y1, x2, y2, d)
     --возвращает точку на луче, удалённую от начальной точки на расстояние d
     local dx = x2 - x1
@@ -635,20 +765,238 @@ function RandomPointInCircle(xCenter, yCenter, radius)
     local y = yCenter + r * math.sin(theta)
     return {x, y}
 end
+
+function RandomPointInCircleXY(xCenter, yCenter, radius)
+    --возвращает случайную точку в пределах окружности
+    local theta = math.random() * 2 * math.pi
+    local r = math.sqrt(math.random()) * radius
+    local x = xCenter + r * math.cos(theta)
+    local y = yCenter + r * math.sin(theta)
+    return x, y
+end
+
+function IsCirclesIntersect(x1, y1, r1, x2, y2, r2)
+    --возвращает true если две окржуности пересекаются
+    local dx = x2 - x1
+    local dy = y2 - y1
+    local distance = math.sqrt(dx * dx + dy * dy)
+    return distance < r1 + r2
+end
+
+function RotatePoints(centerX, centerY, radius, step)
+    --возвращает таблицу значений x,y для вращения четырёх точек по окружности
+    local points = {{},{},{},{}}
+    for angle = 0, 360, step do
+        local radians = math.rad(angle)
+        for i = 1, 4 do
+            local x = centerX + radius * math.cos(radians + math.pi/2 * (i-1))
+            local y = centerY + radius * math.sin(radians + math.pi/2 * (i-1))
+            table.insert(points[i], {x, y})
+        end
+    end
+    return points
+end
+
+function MovePoint(x1, y1, x2, y2, x3, y3)
+    local angle = CalculateAngleAndDistance(x1, y1, x2, y2)
+    local dist = CalculateDistance(x1, y1, x3, y3)
+    local newX3 = x1 + dist * math.cos(angle)
+    local newY3 = y1 + dist * math.sin(angle)
+    return newX3, newY3
+end
+function PlayImpaleSound()
+    PlaySound("Abilities/Spells/Undead/Impale/ImpaleHit.flac")
+end
+
+function PlayBrokenChain()
+    PlaySound("Units/Human/SteamTank/SteamTankAttack1")
+end
+
+function PlayChain()
+    PlaySound("sounds\\chain.flac")
+end
+
+function PlayStoneSound1(x, y)
+    local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayStoneSound2(x, y)
+    local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath2.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayStoneSound3(x, y)
+    local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath3.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayStoneSoundMain(x, y)
+    local t = {PlayStoneSound1, PlayStoneSound2, PlayStoneSound3}
+    local n = math.random(#t)
+    t[n](x, y)
+end
+
+function PlayPainSound1()
+    local snd = CreateSound("sound\\dialogue\\undeadexpcamp\\undead04x\\L04Arthas36.flac",false, false, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 19)
+    SetSoundDuration( snd, GetSoundFileDuration("sound\\dialogue\\undeadexpcamp\\undead04x\\L04Arthas36.flac") )
+    SetSoundVolume( snd, 70)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayPainSound2()
+    local snd = CreateSound("sound\\dialogue\\undeadexpcamp\\undead07cxInterlude\\L07CArthas43.flac",false, false, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 19)
+    SetSoundDuration( snd, GetSoundFileDuration("sound\\dialogue\\undeadexpcamp\\undead07cxInterlude\\L07CArthas43.flac") )
+    SetSoundVolume( snd, 70)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayPainSound3()
+    local snd = CreateSound("sounds\\Pain3",false, false, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 19)
+    SetSoundDuration( snd, GetSoundFileDuration("sounds\\Pain3") )
+    SetSoundVolume( snd, 70)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayPainSound4()
+    local snd = CreateSound("sounds\\Pain4",false, false, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 19)
+    SetSoundDuration( snd, GetSoundFileDuration("sounds\\Pain3") )
+    SetSoundVolume( snd, 70)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayPainSound5()
+    local snd = CreateSound("sounds\\Pain5",false, false, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 19)
+    SetSoundDuration( snd, GetSoundFileDuration("sounds\\Pain3") )
+    SetSoundVolume( snd, 70)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayPainSoundMain()
+    local foos = {PlayPainSound1, PlayPainSound2, PlayPainSound3, PlayPainSound4, PlayPainSound5}
+    local n = math.random(#foos)
+    foos[n]()
+end
+
+function PlayImpaleMarkerSound(x, y)
+    local snd = CreateSound("Abilities\\weapons\\AvengerMissile\\DestroyerMissile.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 10)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("Abilities\\weapons\\AvengerMissile\\DestroyerMissile.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+function GotDamage()
+    print("got damage")
+    PlayPainSoundMain()
+end
+
+
 function ControlDmg(unit)
     SetUnitState(unit, UNIT_STATE_LIFE, GetUnitState(unit, UNIT_STATE_LIFE) - 25)
 end
-function InitResetRootLock()
-    local ResetRootLockTrigger = CreateTrigger()
-    TriggerRegisterUnitEvent(ResetRootLockTrigger, slayer, EVENT_UNIT_DAMAGED)
-    TriggerAddCondition(ResetRootLockTrigger, Condition(ResetRootLock))
+
+function CheckFireballDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 40, x, y, 50) then
+        GotDamage()
+    end
+    return
 end
 
-function ResetRootLock()
+
+function CheckStoneDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 32, x, y, 60) then
+        GotDamage()
+        return true
+    else
+        return false
+    end
+end
+
+function InitDamageTrigger()
+    local DamageTrigger = CreateTrigger()
+    TriggerRegisterUnitEvent(DamageTrigger, slayer, EVENT_UNIT_DAMAGED)
+    TriggerAddCondition(DamageTrigger, Condition(ResetAfterDamage))
+end
+
+function ResetAfterDamage()
+    GotDamage()
     SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+    SetUnitState(slayer, UNIT_STATE_LIFE, GetUnitState(slayer, UNIT_STATE_MAX_LIFE))
 end
 
 
+
+
+RealGetUnitX = GetUnitX
+RealGetUnitY = GetUnitY
+
+
+function GetUnitRealX(unit)
+    local collision = math.floor(BlzGetUnitCollisionSize(unit) + 0.5)
+
+    if not IsUnitType(unit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then return RealGetUnitX(unit) - 16. end
+    end
+
+    return RealGetUnitX(unit)
+end
+
+function GetUnitRealY(unit)
+    local collision = math.floor(BlzGetUnitCollisionSize(unit) + 0.5)
+
+    if not IsUnitType(unit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then return RealGetUnitY(unit) - 16. end
+    end
+
+    return RealGetUnitY(unit)
+end
 
 function CreateBoss()
     boss = CreateUnit(Player(1), _('Uanb'), 0, 0, bj_UNIT_FACING)
@@ -701,7 +1049,6 @@ function TripleImpale(d)
 
     end
     print(GetUnitPosition(impaleCasters[1]))
-    --local firePainter = CreateTimer()
 
     local effects = {}
     local iTable = {1, 1, 1}
@@ -709,6 +1056,7 @@ function TripleImpale(d)
         TimerStart( CreateTimer(), 1/#points[l], true, function()
             eff = AddSpecialEffect("models\\redtriangle3", points[l][iTable[l]].x, points[l][iTable[l]].y)
             BlzSetSpecialEffectYaw( eff, angles[l] )
+            PlayImpaleMarkerSound(points[l][iTable[l]].x, points[l][iTable[l]].y)
             table.insert(effects, eff)
 
             iTable[l] = iTable[l] + 1
@@ -722,6 +1070,7 @@ function TripleImpale(d)
     local castDelay = CreateTimer()
     TimerStart(castDelay, 0.75, false, function()
 
+
         IssuePointOrder(dummy1, "impale", endpoints[1][1], endpoints[1][2])
 
         IssuePointOrder(dummy2, "impale", endpoints[2][1], endpoints[2][2])
@@ -732,6 +1081,7 @@ function TripleImpale(d)
         local t1 = CreateTimer()
         TimerStart(t1, 0.4, false, function()
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
+            PlayImpaleSound()
             DestroyTimer(t1)
         end)
 
@@ -740,7 +1090,6 @@ function TripleImpale(d)
             CameraClearNoiseForPlayer( Player(0) )
             print(#effects)
             for e = 1, #effects do
-                --BlzSetSpecialEffectScale(effects[e], 0.001)
                 DestroyEffect(effects[e])
             end
             DestroyTimer(t2)
@@ -758,17 +1107,15 @@ function TripleImpale(d)
 end
 
 function FireBall(startX, startY, endX, endY)
-    local tripleTimer = CreateTimer()
-    local time = 0.2
-    local bigCircleValue = 20
-    local littleCircleValue = 15
-    TimerStart(tripleTimer, littleCircleValue * time, true)
+    --local angle = CalculateAngle(startX, endX, GetUnitX(slayer), GetUnitY(slayer))
     if IsPointInCircle(endX, endY, CenterX, CenterY, Radius) then
-        local marker = AddSpecialEffect("Abilities\\Spells\\Orc\\CommandAura\\CommandAura", endX, endY)
+        --SetUnitFacing(boss, angle*180 / math.pi)
+        SetUnitAnimationByIndex(boss, 7)
+        local marker = AddSpecialEffect("models\\marker", endX, endY)
         BlzSetSpecialEffectScale(marker, 0.8)
-        local maxZ = 800
+        local maxZ = 820
         local startZ = 400
-        local endZ = 250
+        local endZ = 220
 
         local points = ComputePath(startX, startY, startZ, endX, endY, endZ, maxZ, 30)
         local eff = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", startX, startY)
@@ -784,6 +1131,7 @@ function FireBall(startX, startY, endX, endY)
             i = i + 1
             if i >= sharp then
                 PauseTimer(t)
+                CheckFireballDamage(points[i].x, points[i].y)
                 DestroyEffect(marker)
                 DestroyEffect(eff)
                 DestroyTimer(t)
@@ -793,6 +1141,11 @@ function FireBall(startX, startY, endX, endY)
 end
 
 function FireBalls()
+    local time = 0.15
+    local bigCircleValue = 10
+    local littleCircleValue = 20
+
+
     local startX, startY = GetUnitPosition(boss)
     local endX, endY = GetUnitPosition(slayer)
 
@@ -800,7 +1153,7 @@ function FireBalls()
     table.insert(targets, {endX, endY})
 
     for i = 1, littleCircleValue do
-        table.insert(targets, RandomPointInCircle(endX, endY, 400))
+        table.insert(targets, RandomPointInCircle(endX, endY, 600))
     end
     for ii = 1, bigCircleValue do
         table.insert(targets, RandomPointInCircle(CenterX, CenterY, Radius))
@@ -816,10 +1169,91 @@ function FireBalls()
         end
     end)
 end
+
+function ThrowStone()
+    local bx, by = GetUnitPosition(boss)
+    local sx, sy = RandomPointInCircleXY(GetUnitX(slayer), GetUnitY(slayer), 400)
+    local targetX, targetY = FindIntersection(bx, by, sx, sy)
+    local points = GetPointsOnLineWithRotation(bx, by, targetX, targetY, 50)
+    local eff = AddSpecialEffect("models\\Rock3", bx, by)
+    BlzSetSpecialEffectScale(eff, 0.75)
+    BlzSetSpecialEffectZ(eff, 350)
+
+
+    local t = CreateTimer()
+    local i = 1
+    local sharp = #points
+    TimerStart(t, 1/32, true, function()
+        local pt = points[i]
+        BlzSetSpecialEffectPosition(eff, pt.x,pt.y, 350)
+        if CheckStoneDamage(pt.x, pt.y) then
+            PauseTimer(t)
+            DestroyEffect(eff)
+            PlayStoneSound()
+            DestroyTimer(t)
+        end
+        --BlzSetSpecialEffectYaw(eff, pt.yaw)
+        --BlzSetSpecialEffectPitch(eff, pt.pitch)
+        --BlzSetSpecialEffectRoll(ff, pt.roll)
+        BlzSetSpecialEffectOrientation(eff, pt.yaw, pt.pitch, pt.roll)
+        i = i + 1
+        if i > sharp then
+            PauseTimer(t)
+            DestroyEffect(eff)
+            PlayStoneSoundMain(pt.x, pt.y)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function ThrowStones(duration)
+    local points = RotatePoints(GetUnitX(boss), GetUnitY(boss), 200, 5)
+    local t = {}
+    for i = 1, 4 do
+        local eff = AddSpecialEffect("models\\Rock3", points[i][1][1], points[i][1][2])
+        BlzSetSpecialEffectScale(eff, 0.75)
+        BlzSetSpecialEffectYaw(eff, math.random(1, 3))
+        BlzSetSpecialEffectZ(eff, 350)
+        table.insert(t, eff)
+    end
+    local rotateTimer = CreateTimer()
+    local cd = CreateTimer()
+    local waitDuration = CreateTimer()
+
+
+    local n = 1
+    local sharp = #points[1]
+    TimerStart(rotateTimer, 1/32, true, function()
+        for a = 1, 4 do
+            BlzSetSpecialEffectPosition(t[a], points[a][n][1], points[a][n][2], 350)
+        end
+        if n == sharp then
+            n = 2
+        else
+            n=n+1
+        end
+    end)
+    TimerStart(cd, 0.5, true, function()
+        ThrowStone()
+    end)
+    TimerStart(waitDuration, duration, false, function()
+        PauseTimer(cd)
+        DestroyTimer(cd)
+        PauseTimer(rotateTimer)
+        DestroyTimer(rotateTimer)
+        for m = 1, #t do
+            DestroyEffect(t[m])
+        end
+        DestroyTimer(waitDuration)
+    end)
+end
+
+
 creeps = {}
 
 function CreateTestUnit()
-    testUnit = CreateUnit(Player(1), _('hpea'), 600, 600, bj_UNIT_FACING)
+    local testUnit = CreateUnit(Player(1), _('hpea'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
+    SetUnitPathing(testUnit, false)
     table.insert(creeps, testUnit)
 end
 
@@ -831,6 +1265,7 @@ function CreateDummy()
 end
 function CreateSlayer()
     slayer = CreateUnit(Player(1), _('hrif'), 600, 200, bj_UNIT_FACING)
+    SetUnitPathing(slayer, false)
     --SelectHeroSkill(boss, _('AUim'))
     SetUnitMoveSpeed(slayer, 522)
 end
@@ -913,6 +1348,122 @@ function MakeShot(x, y)
                     end
                 end)
             end
+        end
+    end
+end
+
+function Sawing()
+    local targets = {}
+    local x, y = GetUnitPosition(slayer)
+
+
+    local target = FindClosestUnit(creeps, x, y)
+    local tX, tY = GetUnitPosition(target)
+    if IsPointInCircle(tX, tY, x, y, 350) then
+        SetUnitPosition(slayer, tX, tY)
+        CameraSetFocalDistance(50)
+    end
+end
+
+function Dash()
+    local distance = 400
+    --local mouseX = BlzGetTriggerPlayerMouseX()
+    --local mouseY = BlzGetTriggerPlayerMouseY()
+    local mouseX, mouseY = GetUnitPosition(posdummy)
+
+    local slayerX, slayerY = GetUnitPosition(slayer)
+
+    local x, y = GetPointOnLine(slayerX, slayerY, mouseX, mouseY, distance)
+
+    local points = GetPointsOnLine(slayerX, slayerY, x, y, 40)
+    local i = 1
+    local sharp = #points
+
+    local t = CreateTimer()
+    TimerStart(t, 1/64, true, function()
+        local p = points[i]
+        SetUnitPosition(slayer, p.x, p.y)
+        SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+        i = i + 1
+        if i > sharp then
+            DestroyTimer(t)
+        end
+    end)
+end
+
+Chaining = false
+function ChainHook()
+    if not Chaining then
+        local function MoveToTheTarget(points, effects, sharp)
+            local i = 1
+            local t2 = CreateTimer()
+            TimerStart( t2, 1/64, true, function()
+                p = points[i]
+                DestroyEffect(effects[i])
+                print(p.x.." "..p.y)
+                if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
+                    SetUnitPosition(slayer, p.x, p.y)
+                end
+                i = i + 1
+                if i > sharp - 8 then
+                    Chaining = false
+                end
+                if i > sharp then
+                    PauseTimer(t2)
+                    EnableTrigger(ClickTrigger)
+                    --PauseUnit(slayer, false)
+                    SetUnitMoveSpeed(slayer, 522)
+                    Chaining = false
+                    DestroyTimer(t2)
+                end
+            end)
+        end
+
+
+        local targets = {}
+        local cursorX = BlzGetTriggerPlayerMouseX()
+        local cursorY = BlzGetTriggerPlayerMouseY()
+        local x, y = GetUnitPosition(slayer)
+
+
+        local target = FindClosestUnit(creeps, cursorX, cursorY)
+        local tX, tY = GetUnitPosition(target)
+
+
+        if IsPointInCircle(tX, tY, x, y, 1000) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+            Chaining = true
+            print("chaining")
+            DisableTrigger(ClickTrigger)
+            PlayChain()
+            --PauseUnit(slayer, true)
+            SetUnitMoveSpeed(slayer, 0)
+            IssueImmediateOrder(slayer, "stop")
+            local x1, y1 = GetPointOnLine(tX, tY, x, y, 36)
+            local points = GetPointsOnLine(x, y, x1, y1, 34)
+            table.remove(points, #points)
+            local i = 1
+            local sharp = #points
+            local angle = CalculateAngle(x, y, x1, y1)
+            local t = CreateTimer()
+            local effects = {}
+
+            TimerStart( t, 1/64, true, function()
+                --IssueImmediateOrder(slayer, "stop") --kek
+                p = points[i]
+                eff = AddSpecialEffect("models\\chainlink", p.x, p.y)
+                BlzSetSpecialEffectYaw( eff, angle )
+                table.insert(effects, eff)
+
+                i = i + 1
+                if i > sharp then
+                    PauseTimer(t)
+                    MoveToTheTarget(points, effects, sharp)
+                    DestroyTimer(t)
+                end
+            end)
+            --SetUnitPosition(slayer, x1, y1)
+        else
+            PlayBrokenChain()
         end
     end
 end

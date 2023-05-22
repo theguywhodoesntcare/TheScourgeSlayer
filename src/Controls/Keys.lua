@@ -4,6 +4,8 @@ function InitControlKeys()
 
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_Q, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_V, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_E, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_SPACE, 0, true)
     TriggerAddCondition(KeyTrigger, Condition(ControlKeys))
 
     ------MOVING SYSTEM------
@@ -36,7 +38,7 @@ function InitControlKeys()
 
     local t = CreateTimer()
     TimerStart(t, 1/16, true, function()
-        if (Apressed or Wpressed or Dpressed or Spressed) then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
+        if (Apressed or Wpressed or Dpressed or Spressed) and not Chaining then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
             --local x = GetUnitX(slayer) + orders.Xm + orders.Xp
             --local y = GetUnitY(slayer) + orders.Ym + orders.Yp
             if orders.Xm == 300 and orders.Xp == 300 then
@@ -60,10 +62,11 @@ function InitControlKeys()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
+            FixPosition()
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
-            (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) then
-            print("additional condition")
+            (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
+            --print("additional condition")
             for k, v in pairs(additionalOrders) do
                 if v ~= 0 then
                     orders[k] = v
@@ -76,6 +79,7 @@ function InitControlKeys()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
+            FixPosition()
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -179,10 +183,18 @@ function ControlKeys()
         print("Q")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
-        FireBalls()
+        TimerStart(CreateTimer(), 2, true, function()
+            FireBalls()
+        end)
+    end
+    if BlzGetTriggerPlayerKey() == OSKEY_E then
+        print("E")
+        --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
+        --TripleImpale(30)
+        Sawing()
     end
     if BlzGetTriggerPlayerKey() == OSKEY_V then
-
+        CameraSetFocalDistance(0)
         print("V")
 
         --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
@@ -197,6 +209,50 @@ function ControlKeys()
         --print(GetCameraField(CAMERA_FIELD_LOCAL_YAW))
         --print(GetCameraField(CAMERA_FIELD_LOCAL_ROLL))
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+        --spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+
+                --BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
+                --BlzFrameSetLevel(spriteframe, 3)
+               -- BlzFrameSetSize(spriteframe, 0.01, 0.01)
+               -- BlzFrameSetModel(spriteframe, "aco", 0)
+                --BlzFrameSetScale(spriteframe, 0.00058)
+              --  BlzFrameSetSpriteAnimate(spriteframe, 5, 2)
+                -- birth = 0
+                -- death = 1
+                -- stand = 2
+                -- morph = 3
+                -- alternate = 4
+               -- BlzFrameSetVisible(spriteframe, true)
+        --SelectUnit(boss, true)
+        --local t = RandomPointInCircle(CenterX, CenterY, Radius)
+        --local eff = AddSpecialEffect("models\\Rock3", t[1], t[2])
+       -- BlzSetSpecialEffectScale(eff, 0.75)
+        --BlzSetSpecialEffectYaw(eff, math.random(1, 3))
+       -- BlzSetSpecialEffectZ(eff, 350)
+       -- TimerStart(CreateTimer(), 1, false, function()
+      --      DestroyEffect(eff)
+      --      local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac",false, true, false, 10, 10, "DefaultEAXON")
+      --      SetSoundChannel( snd, 0)
+        --    SetSoundDistances( snd, 600.00, 3200 )
+            --SetSoundDistanceCutoff( snd, 3000.00)
+     --       SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
+     --       SetSoundVolume( snd, 80)
+            --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+            --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+            --SetSoundPitch( snd, 1.0 )
+      --      SetSoundPosition(snd, t[1], t[2],100)
+       --     StartSound(snd)
+      --      KillSoundWhenDone(snd)
+        --    DestroyTimer(GetExpiredTimer())
+       -- end)
+        --ThrowStones(10)
+        TripleImpale(35)
+        CreateTestUnit()
+    end
+
+    if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
+        print("SPACE")
+        Dash()
     end
 end
 

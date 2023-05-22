@@ -3,6 +3,8 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
+        GetUnitX = GetUnitRealX
+        GetUnitY = GetUnitRealY
         CreateBoss()
         CreateTestUnit()
         InitControlKeys()
@@ -14,6 +16,7 @@ do
         --BlzHideOriginFrames(true)
         CreateSlayer()
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+        globalX, globalY = GetUnitPosition(slayer)
         InitControlMouse()
         SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
 
@@ -29,7 +32,7 @@ do
 
 
         InitCameraScrollBar()
-        InitResetRootLock()
+        InitDamageTrigger()
 
     end
 end

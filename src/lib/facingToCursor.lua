@@ -9,3 +9,21 @@ function SetUnitFaceToCursor()
     local posx, posy = FindCenterRayIntersection(ux, uy, x, y, 256)
     SetUnitPosition(posdummy, posx, posy)
 end
+
+function FixPosition()
+
+    --нужно сдвигать даммика на случай если курсор не двигается
+    --костыль, и работает не очень хорошо
+    --можно попробовать сдлать отдельный таймер с маленьким периодом, 1/64 или меньше
+    local slayerX, slayerY = GetUnitPosition(slayer)
+    local distance = CalculateDistance(slayerX, slayerY, globalX, globalY)
+    globalX = slayerX
+    globalY = slayerY
+
+    if distance > 0 then
+        local dummyX, dummyY = GetUnitPosition(posdummy)
+        local x, y = GetPointOnLine(slayerX, slayerY, dummyX, dummyY, CalculateDistance(slayerX, slayerY, dummyX, dummyY)+125)
+        local x2, y2 = MovePoint(slayerX, slayerY, dummyX, dummyY, x, y)
+        SetUnitPosition(posdummy, x2, y2)
+    end
+end
