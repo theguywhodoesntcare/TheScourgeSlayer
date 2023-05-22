@@ -268,3 +268,19 @@ function MovePoint(x1, y1, x2, y2, x3, y3)
     local newY3 = y1 + dist * math.sin(angle)
     return newX3, newY3
 end
+
+
+function GetPointsOnCircle(centerX, centerY, radius, interval)
+
+    --возвращает таблицу точек на окружности
+    local points = {}
+    local numPoints = math.floor(2 * math.pi / interval)
+    print(numPoints)
+    for i = 1, numPoints do
+        local angle = interval * (i - 1)
+        local x = centerX + radius * math.cos(angle)
+        local y = centerY + radius * math.sin(angle)
+        table.insert(points, {x = x, y = y})
+    end
+    return points
+end

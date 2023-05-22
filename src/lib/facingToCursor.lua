@@ -1,12 +1,15 @@
+globalCursorX = 0
+globalCursorY = 0
+
 function SetUnitFaceToCursor()
-    local x = BlzGetTriggerPlayerMouseX()
-    local y = BlzGetTriggerPlayerMouseY()
+    globalCursorX = BlzGetTriggerPlayerMouseX()
+    globalCursorY = BlzGetTriggerPlayerMouseY()
 
     local ux, uy = GetUnitPosition(slayer)
     --local angle = CalculateAngle(ux, uy, x, y)
     --SetUnitFacing(slayer, angle*180/math.pi)
     --SetUnitPositionWithFacing(slayer, ux, uy, angle)
-    local posx, posy = FindCenterRayIntersection(ux, uy, x, y, 256)
+    local posx, posy = FindCenterRayIntersection(ux, uy, globalCursorX, globalCursorY, 256)
     SetUnitPosition(posdummy, posx, posy)
 end
 

@@ -58,7 +58,6 @@ function TripleImpale(d)
             BlzSetSpecialEffectYaw( eff, angles[l] )
             PlayImpaleMarkerSound(points[l][iTable[l]].x, points[l][iTable[l]].y)
             table.insert(effects, eff)
-
             iTable[l] = iTable[l] + 1
             if iTable[l] == #points[l] then
                 PauseTimer(GetExpiredTimer())

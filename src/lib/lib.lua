@@ -2,6 +2,22 @@ function _(code)
     return FourCC(code)
 end
 
+function HideDefaultUI()
+    print("Hide")
+    TimerStart(CreateTimer(), 1, false, function()
+        --local info_bar = BlzFrameGetChild(ORIGIN_FRAME_GAME_UI, 1)
+        local gameui = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+        BlzFrameSetVisible(BlzFrameGetChild(gameui, 1), false)
+        BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, 0)
+        for i = 0, 11 do
+            BlzFrameSetVisible(BlzGetFrameByName("CommandButton_" .. i, 0), false)
+        end
+        BlzHideOriginFrames(true)
+        BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001)
+
+    end)
+end
+
 function GetUnitPosition(u)
     local x = GetUnitX(u)
     local y = GetUnitY(u)

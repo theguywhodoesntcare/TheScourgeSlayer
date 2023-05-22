@@ -3,11 +3,11 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
+        --HideDefaultUI()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
         CreateTestUnit()
-        InitControlKeys()
         dummy1 = CreateDummy()
         dummy2 = CreateDummy()
         dummy3 = CreateDummy()
@@ -18,13 +18,15 @@ do
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         globalX, globalY = GetUnitPosition(slayer)
         InitControlMouse()
+        InitControlKeys()
         SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
 
 
         --------------------
         CenterX = 1
         CenterY = 1
-        Radius = 1400
+        Radius = 1800
+        CreateBarrier()
 
         ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
          CreateTextFrame(ClickBlocker, -0.1338, 0.6, 0.936020, 0, 1, "", 1)

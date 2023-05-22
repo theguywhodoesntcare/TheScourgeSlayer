@@ -6,6 +6,7 @@ function InitControlKeys()
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_V, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_E, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_SPACE, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(KeyTrigger, GetLocalPlayer(), OSKEY_O, 0, true)
     TriggerAddCondition(KeyTrigger, Condition(ControlKeys))
 
     ------MOVING SYSTEM------
@@ -35,9 +36,11 @@ function InitControlKeys()
 
     TriggerAddCondition(ButtonPressedTrigger, Condition(ButtonPressed))
     TriggerAddCondition(ButtonReleasedTrigger, Condition(ButtonReleased))
-
-    local t = CreateTimer()
-    TimerStart(t, 1/16, true, function()
+    InitWalkTimer()
+end
+function InitWalkTimer()
+    walkTimer = CreateTimer()
+    TimerStart(walkTimer, 1/16, true, function()
         if (Apressed or Wpressed or Dpressed or Spressed) and not Chaining then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
             --local x = GetUnitX(slayer) + orders.Xm + orders.Xp
             --local y = GetUnitY(slayer) + orders.Ym + orders.Yp
@@ -65,7 +68,7 @@ function InitControlKeys()
             FixPosition()
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
-            (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
+        (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
             --print("additional condition")
             for k, v in pairs(additionalOrders) do
                 if v ~= 0 then
@@ -247,7 +250,7 @@ function ControlKeys()
        -- end)
         --ThrowStones(10)
         TripleImpale(35)
-        CreateTestUnit()
+        --CreateTestUnit()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then

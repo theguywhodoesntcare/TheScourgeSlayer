@@ -1,3 +1,7 @@
+function PlayDashSound()
+    PlaySound("Abilities/Spells/NightElf/Blink/BlinkBirth1.flac")
+end
+
 function PlayImpaleSound()
     PlaySound("Abilities/Spells/Undead/Impale/ImpaleHit.flac")
 end
