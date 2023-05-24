@@ -1,3 +1,12 @@
+function PlayScream()
+    PlaySound("Units/Undead/Shade/ShadeDeath1")
+end
+
+
+function PlaySawFleshSound()
+    PlaySound("sounds\\sawflesh.flac")
+end
+
 function PlayDashSound()
     PlaySound("Abilities/Spells/NightElf/Blink/BlinkBirth1.flac")
 end

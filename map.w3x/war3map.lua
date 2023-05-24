@@ -7,7 +7,7 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-        --HideDefaultUI()
+        HideDefaultUI()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -56,7 +56,7 @@ function SetGameCamera(preset)
         local t = {1480, 4800, 16, 310, 62, 1.570796, 20}
         local d = 2
         SetCameraFields(t, d)
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, -250, true)
     end
     if preset == 80 then
         local t = {800, 4000, 16, 338.045, 30.0027917027, 1.570796, 20}
@@ -160,7 +160,7 @@ function InitWalkTimer()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
-            FixPosition()
+            FixCursor(ux, uy)
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
         (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
@@ -177,7 +177,7 @@ function InitWalkTimer()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
-            FixPosition()
+            FixCursor(ux, uy)
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -286,7 +286,7 @@ function ControlKeys()
         end)
     end
     if BlzGetTriggerPlayerKey() == OSKEY_E then
-        print("E")
+        --print("E")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
         Sawing()
@@ -469,11 +469,18 @@ end
 globalCursorX = 0
 globalCursorY = 0
 
+globalCursorXInit = 0
+globalCursorYInit = 0
+
+
 function SetUnitFaceToCursor()
     globalCursorX = BlzGetTriggerPlayerMouseX()
     globalCursorY = BlzGetTriggerPlayerMouseY()
 
+    globalCursorXInit, globalCursorYInit = globalCursorX, globalCursorY
+
     local ux, uy = GetUnitPosition(slayer)
+    globalX, globalY = ux, uy
     --local angle = CalculateAngle(ux, uy, x, y)
     --SetUnitFacing(slayer, angle*180/math.pi)
     --SetUnitPositionWithFacing(slayer, ux, uy, angle)
@@ -499,6 +506,18 @@ function FixPosition()
     end
 end
 
+function FixCursor(localX, localY)
+    local deltaX = localX - globalX
+    local deltaY = localY - globalY
+
+    if deltaX ~= 0 or deltaY ~= 0 then
+        globalCursorX = globalCursorXInit + deltaX
+        globalCursorY = globalCursorYInit + deltaY
+    end
+
+    local posx, posy = FindCenterRayIntersection(localX, localY, globalCursorX, globalCursorY, 256)
+    SetUnitPosition(posdummy, posx, posy)
+end
 function _(code)
     return FourCC(code)
 end
@@ -671,7 +690,7 @@ function GetPointsOnLine(x1, y1, x2, y2, d)
     local dy = y2 - y1
     local dist = math.sqrt(dx * dx + dy * dy)
     local steps = math.floor(dist / d)
-    for i = 1, steps+1 do
+    for i = 1, steps do
         local t = i / steps
         local x = x1 + dx * t
         local y = y1 + dy * t
@@ -848,6 +867,15 @@ function GetPointsOnCircle(centerX, centerY, radius, interval)
     end
     return points
 end
+function PlayScream()
+    PlaySound("Units/Undead/Shade/ShadeDeath1")
+end
+
+
+function PlaySawFleshSound()
+    PlaySound("sounds\\sawflesh.flac")
+end
+
 function PlayDashSound()
     PlaySound("Abilities/Spells/NightElf/Blink/BlinkBirth1.flac")
 end
@@ -1316,7 +1344,7 @@ end
 creeps = {}
 
 function CreateTestUnit()
-    local testUnit = CreateUnit(Player(1), _('hpea'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
+    local testUnit = CreateUnit(Player(1), _('uaco'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
     table.insert(creeps, testUnit)
 end
@@ -1431,6 +1459,62 @@ function Sawing()
         SetUnitPosition(slayer, tX, tY)
         CameraSetFocalDistance(50)
     end
+    local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
+
+    PlaySawFleshSound()
+    PlayScream()
+    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
+    BlzFrameSetLevel(spriteframe, 3)
+    BlzFrameSetModel(spriteframe, "acowtf2", 0)
+    BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
+    -- birth = 0
+    -- death = 1
+    -- stand = 2
+    -- morph = 3
+    -- alternate = 4
+    BlzFrameSetVisible(spriteframe, true)
+    Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+    BlzFrameSetLevel(Mask,4)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.14, 0.6)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.95, 0.0)
+    BlzFrameSetTexture(Mask, "backdrops\\blood2", 0, true)
+    BlzFrameSetAlpha(Mask, 0)
+    local alpha = 0
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha + 4
+        if alpha >=255 then
+            BlzFrameSetAlpha(Mask, 255)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(Mask, alpha)
+        end
+    end)
+
+    local focal = 50
+
+    TimerStart(CreateTimer(), 3.2, false, function()
+        BlzDestroyFrame(spriteframe)
+        TimerStart(CreateTimer(), 1/32, true, function()
+            focal = focal + 10
+            if focal >=500 then
+                CameraSetFocalDistance(0)
+                DestroyTimer(GetExpiredTimer())
+            else
+                CameraSetFocalDistance(focal)
+            end
+        end)
+        TimerStart(CreateTimer(), 1/32, true, function()
+            alpha = alpha - 4
+            if alpha <=0 then
+                BlzFrameSetAlpha(Mask, 0)
+                DestroyTimer(GetExpiredTimer())
+            else
+                BlzFrameSetAlpha(Mask, alpha)
+            end
+        end)
+
+        DestroyTimer(GetExpiredTimer())
+    end)
 end
 
 function Dash()
@@ -1475,9 +1559,10 @@ function ChainHook()
             TimerStart( t2, 1/64, true, function()
                 p = points[i]
                 DestroyEffect(effects[i])
-                print(p.x.." "..p.y)
+                --print(p.x.." "..p.y)
                 if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
                     SetUnitPosition(slayer, p.x, p.y)
+                    FixCursor(p.x, p.y)
                 end
                 i = i + 1
                 if i > sharp - 8 then
@@ -1506,7 +1591,7 @@ function ChainHook()
             local target = FindClosestUnit(creeps, cursorX, cursorY)
             local tX, tY = GetUnitPosition(target)
 
-            if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 1000) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+            if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
                 Chaining = true
                 chaincooldown = true
                 local cdtimer = CreateTimer()
@@ -1533,7 +1618,7 @@ function ChainHook()
                 TimerStart( t, 1/64, true, function()
                     --IssueImmediateOrder(slayer, "stop") --kek
                     p = points[i]
-                    eff = AddSpecialEffect("models\\chainlink", p.x, p.y)
+                    eff = AddSpecialEffect("models\\chainlink1", p.x, p.y)
                     BlzSetSpecialEffectYaw( eff, angle )
                     table.insert(effects, eff)
                     i = i + 1
@@ -1555,18 +1640,28 @@ globalMarkerDistance = 0
 function FindChainTarget()
     if chainMarker == false then
         for i = 1, 32 do --создали пул эффектов вне зоны видимости
-            local eff = AddSpecialEffect("models\\greencircle", -6000, -6000)
+            local eff = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
+            BlzSetSpecialEffectScale(eff, 0.5)
+            BlzSetSpecialEffectColor(eff, 0, 255, 0)
             table.insert(slayerEffects, eff)
-            local effr = AddSpecialEffect("models\\redcircle", -6000, -6000)
+            local effr = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
+            BlzSetSpecialEffectScale(effr, 0.5)
+            BlzSetSpecialEffectColor(effr, 255, 0, 0)
             table.insert(slayerEffectsRed, effr)
         end
 
-        local effT = AddSpecialEffect("models\\greencircle", -6000, -6000)
-        BlzSetSpecialEffectScale(effT, 4)
-        BlzSetSpecialEffectAlpha(effT, 100)
+        local effT = AddSpecialEffect("models\\aoe_indicator", -6000, -6000) --models\\greencircle
+        BlzSetSpecialEffectColor(effT, 0, 255, 0)
+        BlzSetSpecialEffectScale(effT, 2)
         table.insert(targetEffects, effT)
-        local effTr = AddSpecialEffect("models\\redcircle", -6000, -6000)
-        table.insert(targetEffects, effTr)
+        local effTr = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
+        BlzSetSpecialEffectColor(effTr, 255, 0, 0)
+        BlzSetSpecialEffectScale(effTr, 2)
+        table.insert(targetEffects, 2, effTr)
+        local effST = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
+        BlzSetSpecialEffectScale(effST, 11)
+        BlzSetSpecialEffectColor(effST, 0, 255, 0)
+        table.insert(targetEffects, 3, effST)
 
         chainMarker = true
         local t = CreateTimer()
@@ -1575,24 +1670,28 @@ function FindChainTarget()
             local target = FindClosestUnit(creeps, globalCursorX, globalCursorY)
 
             local tX, tY = GetUnitPosition(target)
-            BlzSetSpecialEffectPosition(targetEffects[1], tX, tY, 300)
+
+            BlzSetSpecialEffectPosition(targetEffects[3], ux, uy, 320)
+
 
             local mx = BlzGetTriggerPlayerMouseX()
-            print(globalCursorX)
+            --print(globalCursorX)
             local points = GetPointsOnLine(ux, uy, tX, tY, 60)
             local thetable = {}
-            if IsPointInCircle(ux, uy, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, ux, uy, 1000) and IsPointInCircle(tX, tY, globalCursorX, globalCursorY, 150) then
+            if IsPointInCircle(ux, uy, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, ux, uy, 870) and IsPointInCircle(tX, tY, globalCursorX, globalCursorY, 150) then
+                BlzSetSpecialEffectPosition(targetEffects[2], -6000, -6000, 320)
+                BlzSetSpecialEffectPosition(targetEffects[1], tX, tY, 320)
 
                 for a = 1, #slayerEffectsRed do
-                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], -6000, -6000, 350)
+                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], -6000, -6000, 370)
                 end
 
                 for a = 1, #points do
-                    BlzSetSpecialEffectPosition(slayerEffects[a], points[a].x, points[a].y, 350)
+                    BlzSetSpecialEffectPosition(slayerEffects[a], points[a].x, points[a].y, 370)
                 end
 
                 for a = #points + 1, #slayerEffects do
-                    BlzSetSpecialEffectPosition(slayerEffects[a], -6000, -6000, 310)
+                    BlzSetSpecialEffectPosition(slayerEffects[a], -6000, -6000, 370)
                 end
             else
                 if not IsPointInCircle(ux, uy, CenterX, CenterY, Radius) then
@@ -1605,16 +1704,19 @@ function FindChainTarget()
                     end
                     DestroyTimer(t)
                 end
+                BlzSetSpecialEffectPosition(targetEffects[1], -6000, -6000, 320)
+                BlzSetSpecialEffectPosition(targetEffects[2], tX, tY, 320)
+
                 for a = 1, #slayerEffects do
-                    BlzSetSpecialEffectPosition(slayerEffects[a], -6000, -6000, 350)
+                    BlzSetSpecialEffectPosition(slayerEffects[a], -6000, -6000, 370)
                 end
 
                 for a = 1, #points do
-                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], points[a].x, points[a].y, 350)
+                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], points[a].x, points[a].y, 370)
                 end
 
                 for a = #points + 1, #slayerEffectsRed do
-                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], -6000, -6000, 350)
+                    BlzSetSpecialEffectPosition(slayerEffectsRed[a], -6000, -6000, 370)
                 end
             end
             if (not chainMarker) or (not rmbpressed) then

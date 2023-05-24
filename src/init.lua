@@ -3,7 +3,7 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-        --HideDefaultUI()
+        HideDefaultUI()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()

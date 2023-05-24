@@ -65,7 +65,7 @@ function InitWalkTimer()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
-            FixPosition()
+            FixCursor(ux, uy)
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
         (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
@@ -82,7 +82,7 @@ function InitWalkTimer()
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
-            FixPosition()
+            FixCursor(ux, uy)
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -191,7 +191,7 @@ function ControlKeys()
         end)
     end
     if BlzGetTriggerPlayerKey() == OSKEY_E then
-        print("E")
+        --print("E")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
         Sawing()

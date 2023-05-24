@@ -7,7 +7,7 @@ function SetGameCamera(preset)
         local t = {1480, 4800, 16, 310, 62, 1.570796, 20}
         local d = 2
         SetCameraFields(t, d)
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, -250, true)
     end
     if preset == 80 then
         local t = {800, 4000, 16, 338.045, 30.0027917027, 1.570796, 20}

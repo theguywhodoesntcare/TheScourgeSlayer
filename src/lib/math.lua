@@ -107,7 +107,7 @@ function GetPointsOnLine(x1, y1, x2, y2, d)
     local dy = y2 - y1
     local dist = math.sqrt(dx * dx + dy * dy)
     local steps = math.floor(dist / d)
-    for i = 1, steps+1 do
+    for i = 1, steps do
         local t = i / steps
         local x = x1 + dx * t
         local y = y1 + dy * t
