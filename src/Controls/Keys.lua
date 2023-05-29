@@ -39,8 +39,10 @@ function InitControlKeys()
     InitWalkTimer()
 end
 function InitWalkTimer()
+    local acidCounter = 0
     walkTimer = CreateTimer()
     TimerStart(walkTimer, 1/16, true, function()
+        local ux, uy = GetUnitPosition(slayer)
         if (Apressed or Wpressed or Dpressed or Spressed) and not Chaining then --and not (Apressed and Dpressed) and not (Wpressed and Spressed))
             --local x = GetUnitX(slayer) + orders.Xm + orders.Xp
             --local y = GetUnitY(slayer) + orders.Ym + orders.Yp
@@ -61,7 +63,7 @@ function InitWalkTimer()
                 end
             end
 
-            local ux, uy = GetUnitPosition(slayer)
+            --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
@@ -78,7 +80,7 @@ function InitWalkTimer()
             end
             local x = GetUnitX(slayer) + orders.Xm + orders.Xp
             local y = GetUnitY(slayer) + orders.Ym + orders.Yp
-            local ux, uy = GetUnitPosition(slayer)
+            --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
             IssuePointOrder(slayer, "move", x, y)
@@ -89,6 +91,19 @@ function InitWalkTimer()
             orders.Xp = 0
             orders.Ym = 0
             IssueImmediateOrder(slayer, "stop")
+        end
+        if acidGlobal then
+            local sharp = #puddles
+            for p = 1, sharp do
+                if IsPointInCircle(ux, uy, puddles[p].x, puddles[p].y, 90) then
+                    acidCounter = acidCounter + 1
+                    if acidCounter >= 2 then
+                        GotDamage("acid")
+                        acidCounter = 0
+                    end
+                    break
+                end
+            end
         end
     end)
 end
@@ -248,9 +263,11 @@ function ControlKeys()
       --      KillSoundWhenDone(snd)
         --    DestroyTimer(GetExpiredTimer())
        -- end)
-        --ThrowStones(10)
-        TripleImpale(35)
+        --ThrowStones(15)
+        --TripleImpale(35)
         --CreateTestUnit()
+        --Laser()
+        --Acid(30)
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then

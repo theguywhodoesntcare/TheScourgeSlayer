@@ -4,6 +4,7 @@ function CreateBoss()
     --SelectHeroSkill(boss, _('AUim'))
     SetUnitInvulnerable(boss, true)
     print("works")
+    Invulnerable()
 end
 
 function TripleImpale(d)
@@ -247,3 +248,147 @@ function ThrowStones(duration)
     end)
 end
 
+function Bugs()
+    local x1, y1 = GetRandomPointOnCircle(CenterX, CenterY, Radius)
+    local x2, y2 = GetOppositePointOnCircle(CenterX, CenterY, x1, y1)
+
+    local x3, y3, x4, y4 = GetPerpendicularDiameter(Radius, x1, y1, x2, y2)
+    BugLine(x1, y1, x2, y2)
+    BugLine(x3, y3, x4, y4)
+end
+
+function BugLine(x1, y1, x2, y2)
+    local diameterPoints = GetPointsOnLine(x1, y1, x2, y2, 160)
+    for n = #diameterPoints, 1, -1 do
+        if IsPointInCircle(diameterPoints[n].x, diameterPoints[n].y, GetUnitX(boss), GetUnitY(boss), 20) then
+            table.remove(diameterPoints, n)
+            print("wrong bug")
+        end
+    end
+    table.insert(diameterPoints, 1, {x = x1, y = y1})
+    local angle = CalculateAngle(x1, y1, x2, y2)
+    local effects = {}
+    for a = 1, #diameterPoints do
+        local eff = AddSpecialEffect("models\\bug", diameterPoints[a].x, diameterPoints[a].y)
+        if a <= #diameterPoints/2 then
+            BlzSetSpecialEffectYaw(eff, angle + math.pi/2)
+        else
+            BlzSetSpecialEffectYaw(eff, angle - math.pi/2)
+        end
+        local t = CreateTimer()
+        TimerStart(t, 1, false, function()
+            BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
+            DestroyTimer(t)
+        end)
+        table.insert(effects, eff)
+    end
+
+    local newAngle = 0
+    local tim = CreateTimer()
+    TimerStart(tim, 1/32, true, function()
+        local points = RotateDiameter(diameterPoints, CenterX, CenterY, newAngle * math.pi/180)
+        local yaw = CalculateAngle(points[1].x, points[1].y, points[#points].x, points[#points].y)
+        for i = 1, #effects do
+            local p = points[i]
+            BlzSetSpecialEffectPosition(effects[i], p.x, p.y, 320)
+            BlzSetSpecialEffectScale(effects[i], 2)
+            if i <= #diameterPoints/2 then
+                BlzSetSpecialEffectYaw(effects[i], yaw + math.pi/2)
+            else
+                BlzSetSpecialEffectYaw(effects[i], yaw -  math.pi/2)
+            end
+
+        end
+        newAngle = newAngle + 1.5
+        if newAngle > 360 then
+            newAngle = 0
+        end
+    end)
+end
+
+function Invulnerable()
+    SetUnitColor(boss, PLAYER_COLOR_RED)
+end
+
+function Acid(numb)
+    local points = {}
+    for i = 1, numb do
+        table.insert(points, RandomPointInCircle(CenterX, CenterY, Radius))
+    end
+
+    --local acid = AddSpecialEffect("models\\puddle", 400, 400)
+    --BlzSetSpecialEffectScale(acid, 1.5)
+    local startX, startY = GetUnitPosition(boss)
+    local t = CreateTimer()
+    local a = 1
+    SetUnitAnimationByIndex(boss, 7)
+    TimerStart(t, 1/32, true, function()
+        AcidBomb(startX, startY, points[a][1], points[a][2])
+        a=a+1
+        if a > #points then
+            PauseTimer(t)
+            DestroyTimer(t)
+        end
+    end)
+
+    ------------------
+
+    local timerEnd = CreateTimer()
+    local timerAlpha = CreateTimer()
+    local alpha = 255
+    TimerStart(timerEnd, 45, false, function()
+        TimerStart(timerAlpha, 1/32, true, function()
+            alpha = alpha - 2
+            if alpha <= 0 then
+                acidGlobal = false
+                for ee = 1, #puddlesEffects do
+                    BlzSetSpecialEffectAlpha(puddlesEffects[ee], 0)
+                    DestroyEffect(puddlesEffects[ee])
+                    puddlesEffects[ee] = nil
+                    DestroyTimer(timerAlpha)
+                end
+                puddles = {}
+                puddlesEffects = {}
+            else
+                for e = 1, #puddles do
+                    BlzSetSpecialEffectAlpha(puddlesEffects[e], alpha)
+                end
+            end
+            DestroyTimer(timerEnd)
+        end)
+    end)
+end
+
+function AcidBomb(startX, startY, endX, endY)
+    if IsPointInCircle(endX, endY, CenterX, CenterY, Radius) then
+        --SetUnitFacing(boss, angle*180 / math.pi)
+        local maxZ = 820
+        local startZ = 400
+        local endZ = 220
+
+        local points = ComputePath(startX, startY, startZ, endX, endY, endZ, maxZ, 30)
+        local eff = AddSpecialEffect("Abilities\\Spells\\Other\\AcidBomb\\BottleMissile", startX, startY)
+        --BlzSetSpecialEffectScale(eff, 1.5)
+        local t = CreateTimer()
+        local i = 1
+        local sharp = #points
+
+        TimerStart(t, 1/32, true, function()
+            BlzSetSpecialEffectX(eff, points[i].x)
+            BlzSetSpecialEffectY(eff, points[i].y)
+            BlzSetSpecialEffectZ(eff, points[i].z)
+            i = i + 1
+            if i > sharp then
+                PauseTimer(t)
+                DestroyEffect(eff)
+
+                local acid = AddSpecialEffect("models\\puddle2", points[i-2].x, points[i-2].y)
+                BlzSetSpecialEffectYaw(acid, math.random() * 2 * math.pi)
+                table.insert(puddles, {x = points[i-2].x, y = points[i-2].y})
+                table.insert(puddlesEffects, acid)
+                acidGlobal = true
+                DestroyTimer(t)
+            end
+        end)
+    end
+end

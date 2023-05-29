@@ -230,6 +230,23 @@ function RandomPointInCircle(xCenter, yCenter, radius)
     return {x, y}
 end
 
+function GetRandomPointOnCircle(centerX, centerY, radius)
+    --возвращает случайную точку на окружности
+    local angle = math.random() * math.pi * 2
+    local x = centerX + radius * math.cos(angle)
+    local y = centerY + radius * math.sin(angle)
+    return x, y
+end
+
+function GetOppositePointOnCircle(centerX, centerY, pointX, pointY)
+    --возвращает диаметрально противоположную точку на окружности
+    local dx = centerX - pointX
+    local dy = centerY - pointY
+    local oppositeX = centerX + dx
+    local oppositeY = centerY + dy
+    return oppositeX, oppositeY
+end
+
 function RandomPointInCircleXY(xCenter, yCenter, radius)
     --возвращает случайную точку в пределах окружности
     local theta = math.random() * 2 * math.pi
@@ -259,6 +276,32 @@ function RotatePoints(centerX, centerY, radius, step)
         end
     end
     return points
+end
+
+function RotateDiameter(pointsDiameter, centerX, centerY, angle)
+    --поворачивает диаметр на угол angle
+    local newPoints = {}
+    for i, point in ipairs(pointsDiameter) do
+        local x = point.x - centerX
+        local y = point.y - centerY
+        local newX = x * math.cos(angle) + y * math.sin(angle)
+        local newY = -x * math.sin(angle) + y * math.cos(angle)
+        table.insert(newPoints, {x = newX + centerX, y = newY + centerY})
+    end
+    return newPoints
+end
+
+function GetPerpendicularDiameter(radius, x1, y1, x2, y2)
+    --возвращает координаты конечных точек диаметра перпендикулярного заданному диаметру
+    local midX = (x1 + x2) / 2
+    local midY = (y1 + y2) / 2
+    local slope = (y2 - y1) / (x2 - x1)
+    local perpSlope = -1 / slope
+    local x3 = midX + math.sqrt(radius^2 / (1 + perpSlope^2))
+    local y3 = perpSlope * (x3 - midX) + midY
+    local x4 = midX - math.sqrt(radius^2 / (1 + perpSlope^2))
+    local y4 = perpSlope * (x4 - midX) + midY
+    return x3, y3, x4, y4
 end
 
 function MovePoint(x1, y1, x2, y2, x3, y3)

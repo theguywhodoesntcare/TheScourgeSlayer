@@ -3,7 +3,7 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-        HideDefaultUI()
+        InitCustomUI()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -35,6 +35,7 @@ do
 
         InitCameraScrollBar()
         InitDamageTrigger()
+        AttackTimer()
 
     end
 end

@@ -1,7 +1,14 @@
+function PlayAcid()
+    PlaySound("Units/Undead/HeroCryptLord/NerubianCryptLordYesAttack2.flac")
+end
+
+function PlayHit()
+    PlaySound("sounds\\hit")
+end
+
 function PlayScream()
     PlaySound("Units/Undead/Shade/ShadeDeath1")
 end
-
 
 function PlaySawFleshSound()
     PlaySound("sounds\\sawflesh.flac")
