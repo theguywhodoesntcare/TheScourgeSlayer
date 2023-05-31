@@ -18,7 +18,39 @@ function GotDamage(type)
         if type == "acid" then
             MaskEffect("backdrops\\VignettePoison.dds")
         end
+        if type == "blood" then
+            CameraSetEQNoiseForPlayer( Player(0), 30.00 )
+            local t = CreateTimer()
+            TimerStart(t, 0.2, false, function()
+                CameraClearNoiseForPlayer( Player(0) )
+                DestroyTimer(t)
+            end)
+            MaskEffect("backdrops\\blood1.dds")
+        end
     end
+end
+
+function BloodFrame()
+    local randomX = math.random(10, 70) / 100
+    local randomY = math.random(20, 50) / 100
+    local randomS = math.random(20, 50) / 100
+    local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+    BlzFrameSetLevel(Mask,4)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, randomX, randomY)
+    BlzFrameSetSize(Mask, randomS, randomS)
+    BlzFrameSetTexture(Mask, "backdrops\\blood5", 0, true)
+    BlzFrameSetAlpha(Mask, 255)
+    local alpha = 255
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha - 4
+        if alpha <=0 then
+            BlzFrameSetAlpha(Mask, 0)
+            BlzDestroyFrame(Mask)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(Mask, alpha)
+        end
+    end)
 end
 
 function MaskEffect(path)
@@ -77,10 +109,33 @@ function CheckFireballDamage(x, y)
     return
 end
 
+function CheckCorpseBombDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 40, x, y, 95) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("mechanical")
+    end
+    return
+end
+
+function CheckCorpseFireworksDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 40, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("blood")
+    end
+    return
+end
+
 
 function CheckStoneDamage(x, y)
     if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 32, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
         GotDamage("mechanical")
+        return true
+    else
+        return false
+    end
+end
+
+function CheckBeetleDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 32, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("bite")
         return true
     else
         return false

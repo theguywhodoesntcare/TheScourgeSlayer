@@ -392,3 +392,230 @@ function AcidBomb(startX, startY, endX, endY)
         end)
     end
 end
+
+function Cage(radius, duration)
+    local x, y = GetUnitPosition(slayer)
+    local effects = {}
+    hexPoints = GetHexagonPoints(x, y, radius, radius/2.5)
+    local pointsChain = GetHexagonPoints(x, y, radius, 40)
+    print(#hexPoints)
+    local d = 1
+    local sharp = #pointsChain
+    local chainTimer = CreateTimer()
+    PlayCage()
+    TimerStart(chainTimer, 1/64, true, function()
+        local p1 = pointsChain[d]
+        local chain = AddSpecialEffect("models\\chainlink2", p1.x, p1.y )
+        if d < #pointsChain then
+            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[d+1].x, pointsChain[d+1].y)
+            BlzSetSpecialEffectYaw(chain, angleChain)
+            BlzSetSpecialEffectScale(chain, 1.15)
+            table.insert(effects, chain)
+        else
+            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[1].x, pointsChain[1].y)
+            BlzSetSpecialEffectYaw(chain, angleChain)
+            BlzSetSpecialEffectScale(chain, 1.1)
+            table.insert(effects, chain)
+        end
+        d = d + 1
+        if d > sharp then
+            for i = 1, #hexPoints do
+                local p = hexPoints[i]
+                local eff = AddSpecialEffect("models\\skeleton", p.x, p.y)
+                local angle = CalculateAngle(p.x, p.y, x, y)
+                BlzSetSpecialEffectYaw(eff, angle)
+                table.insert(effects, eff)
+            end
+            CageOn = true
+            local spriteframe = CageFrame()
+            if IsPointInHexagon(GetUnitX(slayer), GetUnitY(slayer), hexPoints) then
+                BlzFrameSetVisible(spriteframe, true)
+                SlayerInsideCage = true
+                local frameTimer = CreateTimer()
+                local pos = 1.1
+                TimerStart(frameTimer, 1/32, true, function()
+                    pos = pos - 0.02
+                    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
+                    if pos <= 0.82 then
+                        DestroyTimer(frameTimer)
+                    end
+                end)
+            end
+            local cageTimer = CreateTimer()
+            TimerStart(cageTimer, duration, false, function()
+                for e = 1, #effects do
+                    DestroyEffect(effects[e])
+                end
+                SlayerInsideCage = false
+                CageOn = false
+                local frameTimer1 = CreateTimer()
+                local pos = 0.82
+                TimerStart(frameTimer1, 1/32, true, function()
+                    pos = pos + 0.02
+                    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
+                    if pos >= 1.1 then
+                        BlzDestroyFrame(spriteframe)
+                        DestroyTimer(frameTimer1)
+                    end
+                end)
+                hexPoints = {}
+                DestroyTimer(cageTimer)
+            end)
+            DestroyTimer(chainTimer)
+        end
+    end)
+    print(IsPointInHexagon(x, y, hexPoints))
+end
+
+function CageFrame()
+    local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
+    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 1.1, -0.036)
+    BlzFrameSetSize(spriteframe, 0.001, 0.001)
+    BlzFrameSetScale(spriteframe, 1)
+    BlzFrameSetLevel(spriteframe, 3)
+    BlzFrameSetModel(spriteframe, "models\\skeletonsprite2", 1)
+    BlzFrameSetSpriteAnimate(spriteframe, 2, 2)
+    BlzFrameSetVisible(spriteframe, false)
+
+    return spriteframe
+end
+
+function CorpseBombs()
+    local x, y = GetUnitPosition(slayer)
+    CorpseBomb(x, y)
+    local t = CreateTimer()
+    local i = 0
+    TimerStart(t, 1.5, true, function()
+        local x, y = GetUnitPosition(slayer)
+        --local endP = RandomPointInCircle(x, y, 600)
+        CorpseBomb(x, y)
+        --CorpseBomb(endP[1], endP[2])
+        i = i + 1
+        if i> 5 then
+            DestroyTimer(t)
+        end
+    end)
+
+end
+
+function CorpseBomb(targetX, targetY)
+    local startX, startY = GetUnitPosition(boss)
+    local endX, endY = GetRandomPointOnCircle(GetUnitX(slayer), GetUnitY(slayer), 600)
+    local maxZ = 1200
+    local startZ = 400
+    local endZ = 353
+
+    local points = ComputePathWithRotation(startX, startY, startZ, targetX, targetY, endZ, maxZ, 50)
+    local t = CreateTimer()
+    local i = 1
+    local sharp = #points
+    local eff = AddSpecialEffect("models\\MeatWagon", startX, startY)
+    BlzSetSpecialEffectScale(eff, 0.75)
+    local marker = AddSpecialEffect("models\\marker", targetX, targetY)
+    BlzSetSpecialEffectScale(marker, 1.5)
+    TimerStart(t, 1/32, true, function()
+        local p = points[i]
+        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+        BlzSetSpecialEffectOrientation(eff, p.yaw, p.pitch, p.roll)
+
+        i = i + 1
+        if i > sharp then
+            --BlzSetSpecialEffectOrientation(eff, 0, 0, 0)
+            DestroyEffect(eff)
+            local boom = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", p.x, p.y)
+            BlzSetSpecialEffectScale(boom, 2)
+            DestroyEffect(boom)
+            DestroyEffect(marker)
+            BlzSetSpecialEffectRoll(eff, 0)
+            BlzSetSpecialEffectPitch(eff, 0)
+            CorpseFireworks(p.x, p.y, math.random(12, 24))
+            CheckCorpseBombDamage(p.x, p.y)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function CorpseFireworks(x, y, numb)
+    for i = 1, numb do
+        local eff = AddSpecialEffect("Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile", x, y)
+        local endP = RandomPointInCircle(x, y, 550)
+        local marker = AddSpecialEffect("models\\marker", endP[1], endP[2])
+        local maxZ = 820
+        local startZ = 400
+        local endZ = 320
+        local points = ComputePath(x, y, startZ, endP[1], endP[2], endZ, maxZ, 20)
+
+        local i = 1
+        local sharp = #points
+        local t = CreateTimer()
+        TimerStart(t, 1/32, true, function()
+            local p = points[i]
+            BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+            i = i + 1
+            if i > sharp then
+                PauseTimer(t)
+                DestroyEffect(eff)
+                DestroyEffect(marker)
+                CheckCorpseFireworksDamage(p.x, p.y)
+                DestroyTimer(t)
+            end
+        end)
+    end
+end
+
+function BeetleLaunch()
+    local maxZ = 820
+    local startZ = 400
+    local endZ = 330
+    local x, y = GetUnitPosition(slayer)
+    local startX, startY = GetUnitPosition(boss)
+    local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
+    BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
+    BlzSetSpecialEffectScale(eff, 1.5)
+    local angle = CalculateAngle(startX, startY, x, y)
+    BlzSetSpecialEffectYaw(eff, angle)
+    local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
+
+    local i = 1
+    local sharp = #points
+    local t = CreateTimer()
+
+    TimerStart(t, 1/32, true, function()
+        p = points[i]
+        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+        local xx, yy = GetUnitPosition(slayer)
+        local angle = CalculateAngle(p.x, p.y, xx, yy)
+        BlzSetSpecialEffectYaw(eff, angle)
+        i = i + 1
+        if i > sharp then
+            PauseTimer(t)
+            BeetleCharge(eff, p.x, p.y, p.z)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function BeetleCharge(beetle, x, y, z)
+    local ux, uy = GetUnitPosition(slayer)
+    local endX, endY = FindIntersection(x, y, ux, uy)
+    local points = GetPointsOnLine(x, y, endX, endY, 15)
+    local angle = CalculateAngle(x, y, endX, endY)
+    BlzSetSpecialEffectYaw(beetle, angle)
+
+    local i = 1
+    local sharp = #points
+    local t = CreateTimer()
+    TimerStart(t, 1/64, true, function()
+        local p = points[i]
+        BlzSetSpecialEffectPosition(beetle, p.x, p.y, z)
+        if CheckBeetleDamage(p.x, p.y) then
+            DestroyEffect(beetle)
+            DestroyTimer(t)
+        end
+        i = i + 1
+        if i > sharp then
+            DestroyEffect(beetle)
+            DestroyTimer(t)
+        end
+    end)
+end

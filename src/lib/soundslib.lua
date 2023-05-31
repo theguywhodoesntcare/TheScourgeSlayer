@@ -1,3 +1,7 @@
+function PlayCage()
+    PlaySound("Buildings/Undead/Graveyard/GraveYardWhat1.flac")
+end
+
 function PlayAcid()
     PlaySound("Units/Undead/HeroCryptLord/NerubianCryptLordYesAttack2.flac")
 end

@@ -66,8 +66,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            IssuePointOrder(slayer, "move", x, y)
-            FixCursor(ux, uy)
+            if not CageOn then
+                IssuePointOrder(slayer, "move", x, y)
+                FixCursor(ux, uy)
+            elseif SlayerInsideCage then
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if not IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            else
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            end
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
         (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
@@ -83,8 +101,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            IssuePointOrder(slayer, "move", x, y)
-            FixCursor(ux, uy)
+            if not CageOn then
+                IssuePointOrder(slayer, "move", x, y)
+                FixCursor(ux, uy)
+            elseif SlayerInsideCage then
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if not IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            else
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            end
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -268,6 +304,9 @@ function ControlKeys()
         --CreateTestUnit()
         --Laser()
         --Acid(30)
+        Cage(500, 5)
+        --CorpseBombs()
+        --BeetleLaunch()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then

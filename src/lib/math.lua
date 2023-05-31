@@ -85,21 +85,6 @@ function FindCenterRayIntersection(x1, y1, x2, y2, radius)
     return x3, y3
 end
 
---function GetPointsOnLine(x1, y1, x2, y2, d)
-  --  local points = {}
-   -- local k = (y2 - y1) / (x2 - x1)
-  --  local b = y1 - k * x1
-  --  local dx = d / math.sqrt(1 + k * k)
-  --  local x = x1 + dx
-   -- local y = k * x + b
-  --  while (x2 > x1 and x < x2) or (x2 < x1 and x > x2) do
-   --     table.insert(points, {x = x, y = y})
-  --      x = x + dx
-   --     y = k * x + b
-  --  end
-  --  return points
---end
-
 function GetPointsOnLine(x1, y1, x2, y2, d)
     --возвращает массив точек, делящих луч на отрезки
     local points = {}
@@ -221,6 +206,39 @@ function ComputePath(x1, y1, z1, x3, y3, z3, z2, d)
     return path
 end
 
+function ComputePathWithRotation(x1, y1, z1, x3, y3, z3, z2, d)
+    local dx = x3 - x1
+    local dy = y3 - y1
+    local distance = math.sqrt(dx * dx + dy * dy)
+
+    local n = math.ceil(distance / d)
+
+    local path = {}
+
+    local startYaw = math.random(-math.pi, math.pi)
+    local endYaw = math.random(-math.pi, math.pi)
+    local startPitch = math.random(-math.pi, math.pi)
+    local endPitch = math.random(-math.pi, math.pi)
+    local startRoll = math.random(-math.pi, math.pi)
+    local endRoll = math.random(-math.pi, math.pi)
+
+    for i = 0, n do
+        local t = i / n
+
+        local x = x1 + t * (x3 - x1)
+        local y = y1 + t * (y3 - y1)
+        local z = QuadraticBezier(z1,z2,z3,t)
+
+        local yaw = startYaw + (endYaw - startYaw) * t
+        local pitch = startPitch + (endPitch - startPitch) * t
+        local roll = startRoll + (endRoll - startRoll) * t
+
+        table.insert(path, {x = x, y = y, z = z, yaw = yaw, pitch = pitch, roll = roll})
+    end
+
+    return path
+end
+
 function RandomPointInCircle(xCenter, yCenter, radius)
     --возвращает случайную точку в пределах окружности
     local theta = math.random() * 2 * math.pi
@@ -305,6 +323,7 @@ function GetPerpendicularDiameter(radius, x1, y1, x2, y2)
 end
 
 function MovePoint(x1, y1, x2, y2, x3, y3)
+    --бред
     local angle = CalculateAngleAndDistance(x1, y1, x2, y2)
     local dist = CalculateDistance(x1, y1, x3, y3)
     local newX3 = x1 + dist * math.cos(angle)
@@ -314,7 +333,6 @@ end
 
 
 function GetPointsOnCircle(centerX, centerY, radius, interval)
-
     --возвращает таблицу точек на окружности
     local points = {}
     local numPoints = math.floor(2 * math.pi / interval)
@@ -326,4 +344,66 @@ function GetPointsOnCircle(centerX, centerY, radius, interval)
         table.insert(points, {x = x, y = y})
     end
     return points
+end
+
+function HexagonPoints(centerX, centerY, radius)
+    --возвращает вершины шестиугольника
+    local points = {}
+    for i = 1, 6 do
+        local angle = 2 * math.pi / 6 * (i - 1)
+        local x = centerX + radius * math.cos(angle)
+        local y = centerY + radius * math.sin(angle)
+        table.insert(points, x)
+        table.insert(points, y)
+    end
+    return points
+end
+
+function GetHexagonPoints(centerX, centerY, radius, d)
+    --возвращает таблицу точек на контуре шестиугольника
+    local points = HexagonPoints(centerX, centerY, radius)
+    local allPoints = {}
+    for i = 1, #points - 2, 2 do
+        local x1 = points[i]
+        local y1 = points[i + 1]
+        local x2 = points[i + 2]
+        local y2 = points[i + 3]
+        local sidePoints = GetPointsOnLine(x1, y1, x2, y2, d)
+        table.remove(sidePoints, #sidePoints)
+        for _, point in ipairs(sidePoints) do
+            table.insert(allPoints, point)
+        end
+    end
+    local x1 = points[#points - 1]
+    local y1 = points[#points]
+    local x2 = points[1]
+    local y2 = points[2]
+    local sidePoints = GetPointsOnLine(x1, y1, x2, y2, d)
+    table.remove(sidePoints, #sidePoints)
+    for _, point in ipairs(sidePoints) do
+        table.insert(allPoints, point)
+    end
+    return allPoints
+end
+
+function IsPointInHexagon(x, y, hexagonPoints)
+    --проверяет наличие точки в пространстве, ограниченном контуром шестиугольника
+    local intersections = 0
+    for i = 1, #hexagonPoints - 1 do
+        local x1 = hexagonPoints[i].x
+        local y1 = hexagonPoints[i].y
+        local x2 = hexagonPoints[i + 1].x
+        local y2 = hexagonPoints[i + 1].y
+        if ((y1 > y) ~= (y2 > y)) and (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1) then
+            intersections = intersections + 1
+        end
+    end
+    local x1 = hexagonPoints[#hexagonPoints].x
+    local y1 = hexagonPoints[#hexagonPoints].y
+    local x2 = hexagonPoints[1].x
+    local y2 = hexagonPoints[1].y
+    if ((y1 > y) ~= (y2 > y)) and (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1) then
+        intersections = intersections + 1
+    end
+    return intersections % 2 == 1
 end

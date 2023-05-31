@@ -8,6 +8,7 @@ do
         FogMaskEnableOff()
         FogEnableOff()
         InitCustomUI()
+        StatusList()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -39,7 +40,7 @@ do
 
         InitCameraScrollBar()
         InitDamageTrigger()
-        AttackTimer()
+        --AttackTimer()
 
     end
 end
@@ -162,8 +163,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            IssuePointOrder(slayer, "move", x, y)
-            FixCursor(ux, uy)
+            if not CageOn then
+                IssuePointOrder(slayer, "move", x, y)
+                FixCursor(ux, uy)
+            elseif SlayerInsideCage then
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if not IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            else
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            end
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
         elseif --(not Apressed and not Wpressed and not Dpressed and not Spressed) and
         (additionalOrders.Xm ~= 0 or additionalOrders.Xp ~= 0 or additionalOrders.Ym ~= 0 or additionalOrders.Yp ~= 0) and not Chaining then
@@ -179,8 +198,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            IssuePointOrder(slayer, "move", x, y)
-            FixCursor(ux, uy)
+            if not CageOn then
+                IssuePointOrder(slayer, "move", x, y)
+                FixCursor(ux, uy)
+            elseif SlayerInsideCage then
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if not IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            else
+                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                if IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                else
+                    IssuePointOrder(slayer, "move", x, y)
+                    FixCursor(ux, uy)
+                end
+            end
         else
             orders.Xm = 0
             orders.Yp = 0
@@ -364,6 +401,9 @@ function ControlKeys()
         --CreateTestUnit()
         --Laser()
         --Acid(30)
+        Cage(500, 5)
+        --CorpseBombs()
+        --BeetleLaunch()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
@@ -506,23 +546,6 @@ function SetUnitFaceToCursor()
     SetUnitPosition(posdummy, posx, posy)
 end
 
-function FixPosition()
-
-    --нужно сдвигать даммика на случай если курсор не двигается
-    --костыль, и работает не очень хорошо
-    --можно попробовать сдлать отдельный таймер с маленьким периодом, 1/64 или меньше
-    local slayerX, slayerY = GetUnitPosition(slayer)
-    local distance = CalculateDistance(slayerX, slayerY, globalX, globalY)
-    globalX = slayerX
-    globalY = slayerY
-
-    if distance > 0 then
-        local dummyX, dummyY = GetUnitPosition(posdummy)
-        local x, y = GetPointOnLine(slayerX, slayerY, dummyX, dummyY, CalculateDistance(slayerX, slayerY, dummyX, dummyY)+125)
-        local x2, y2 = MovePoint(slayerX, slayerY, dummyX, dummyY, x, y)
-        SetUnitPosition(posdummy, x2, y2)
-    end
-end
 
 function FixCursor(localX, localY)
     local deltaX = localX - globalX
@@ -686,21 +709,6 @@ function FindCenterRayIntersection(x1, y1, x2, y2, radius)
     return x3, y3
 end
 
---function GetPointsOnLine(x1, y1, x2, y2, d)
-  --  local points = {}
-   -- local k = (y2 - y1) / (x2 - x1)
-  --  local b = y1 - k * x1
-  --  local dx = d / math.sqrt(1 + k * k)
-  --  local x = x1 + dx
-   -- local y = k * x + b
-  --  while (x2 > x1 and x < x2) or (x2 < x1 and x > x2) do
-   --     table.insert(points, {x = x, y = y})
-  --      x = x + dx
-   --     y = k * x + b
-  --  end
-  --  return points
---end
-
 function GetPointsOnLine(x1, y1, x2, y2, d)
     --возвращает массив точек, делящих луч на отрезки
     local points = {}
@@ -822,6 +830,39 @@ function ComputePath(x1, y1, z1, x3, y3, z3, z2, d)
     return path
 end
 
+function ComputePathWithRotation(x1, y1, z1, x3, y3, z3, z2, d)
+    local dx = x3 - x1
+    local dy = y3 - y1
+    local distance = math.sqrt(dx * dx + dy * dy)
+
+    local n = math.ceil(distance / d)
+
+    local path = {}
+
+    local startYaw = math.random(-math.pi, math.pi)
+    local endYaw = math.random(-math.pi, math.pi)
+    local startPitch = math.random(-math.pi, math.pi)
+    local endPitch = math.random(-math.pi, math.pi)
+    local startRoll = math.random(-math.pi, math.pi)
+    local endRoll = math.random(-math.pi, math.pi)
+
+    for i = 0, n do
+        local t = i / n
+
+        local x = x1 + t * (x3 - x1)
+        local y = y1 + t * (y3 - y1)
+        local z = QuadraticBezier(z1,z2,z3,t)
+
+        local yaw = startYaw + (endYaw - startYaw) * t
+        local pitch = startPitch + (endPitch - startPitch) * t
+        local roll = startRoll + (endRoll - startRoll) * t
+
+        table.insert(path, {x = x, y = y, z = z, yaw = yaw, pitch = pitch, roll = roll})
+    end
+
+    return path
+end
+
 function RandomPointInCircle(xCenter, yCenter, radius)
     --возвращает случайную точку в пределах окружности
     local theta = math.random() * 2 * math.pi
@@ -906,6 +947,7 @@ function GetPerpendicularDiameter(radius, x1, y1, x2, y2)
 end
 
 function MovePoint(x1, y1, x2, y2, x3, y3)
+    --бред
     local angle = CalculateAngleAndDistance(x1, y1, x2, y2)
     local dist = CalculateDistance(x1, y1, x3, y3)
     local newX3 = x1 + dist * math.cos(angle)
@@ -915,7 +957,6 @@ end
 
 
 function GetPointsOnCircle(centerX, centerY, radius, interval)
-
     --возвращает таблицу точек на окружности
     local points = {}
     local numPoints = math.floor(2 * math.pi / interval)
@@ -928,6 +969,72 @@ function GetPointsOnCircle(centerX, centerY, radius, interval)
     end
     return points
 end
+
+function HexagonPoints(centerX, centerY, radius)
+    --возвращает вершины шестиугольника
+    local points = {}
+    for i = 1, 6 do
+        local angle = 2 * math.pi / 6 * (i - 1)
+        local x = centerX + radius * math.cos(angle)
+        local y = centerY + radius * math.sin(angle)
+        table.insert(points, x)
+        table.insert(points, y)
+    end
+    return points
+end
+
+function GetHexagonPoints(centerX, centerY, radius, d)
+    --возвращает таблицу точек на контуре шестиугольника
+    local points = HexagonPoints(centerX, centerY, radius)
+    local allPoints = {}
+    for i = 1, #points - 2, 2 do
+        local x1 = points[i]
+        local y1 = points[i + 1]
+        local x2 = points[i + 2]
+        local y2 = points[i + 3]
+        local sidePoints = GetPointsOnLine(x1, y1, x2, y2, d)
+        table.remove(sidePoints, #sidePoints)
+        for _, point in ipairs(sidePoints) do
+            table.insert(allPoints, point)
+        end
+    end
+    local x1 = points[#points - 1]
+    local y1 = points[#points]
+    local x2 = points[1]
+    local y2 = points[2]
+    local sidePoints = GetPointsOnLine(x1, y1, x2, y2, d)
+    table.remove(sidePoints, #sidePoints)
+    for _, point in ipairs(sidePoints) do
+        table.insert(allPoints, point)
+    end
+    return allPoints
+end
+
+function IsPointInHexagon(x, y, hexagonPoints)
+    --проверяет наличие точки в пространстве, ограниченном контуром шестиугольника
+    local intersections = 0
+    for i = 1, #hexagonPoints - 1 do
+        local x1 = hexagonPoints[i].x
+        local y1 = hexagonPoints[i].y
+        local x2 = hexagonPoints[i + 1].x
+        local y2 = hexagonPoints[i + 1].y
+        if ((y1 > y) ~= (y2 > y)) and (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1) then
+            intersections = intersections + 1
+        end
+    end
+    local x1 = hexagonPoints[#hexagonPoints].x
+    local y1 = hexagonPoints[#hexagonPoints].y
+    local x2 = hexagonPoints[1].x
+    local y2 = hexagonPoints[1].y
+    if ((y1 > y) ~= (y2 > y)) and (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1) then
+        intersections = intersections + 1
+    end
+    return intersections % 2 == 1
+end
+function PlayCage()
+    PlaySound("Buildings/Undead/Graveyard/GraveYardWhat1.flac")
+end
+
 function PlayAcid()
     PlaySound("Units/Undead/HeroCryptLord/NerubianCryptLordYesAttack2.flac")
 end
@@ -1128,7 +1235,39 @@ function GotDamage(type)
         if type == "acid" then
             MaskEffect("backdrops\\VignettePoison.dds")
         end
+        if type == "blood" then
+            CameraSetEQNoiseForPlayer( Player(0), 30.00 )
+            local t = CreateTimer()
+            TimerStart(t, 0.2, false, function()
+                CameraClearNoiseForPlayer( Player(0) )
+                DestroyTimer(t)
+            end)
+            MaskEffect("backdrops\\blood1.dds")
+        end
     end
+end
+
+function BloodFrame()
+    local randomX = math.random(10, 70) / 100
+    local randomY = math.random(20, 50) / 100
+    local randomS = math.random(20, 50) / 100
+    local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+    BlzFrameSetLevel(Mask,4)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, randomX, randomY)
+    BlzFrameSetSize(Mask, randomS, randomS)
+    BlzFrameSetTexture(Mask, "backdrops\\blood5", 0, true)
+    BlzFrameSetAlpha(Mask, 255)
+    local alpha = 255
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha - 4
+        if alpha <=0 then
+            BlzFrameSetAlpha(Mask, 0)
+            BlzDestroyFrame(Mask)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(Mask, alpha)
+        end
+    end)
 end
 
 function MaskEffect(path)
@@ -1187,10 +1326,33 @@ function CheckFireballDamage(x, y)
     return
 end
 
+function CheckCorpseBombDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 40, x, y, 95) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("mechanical")
+    end
+    return
+end
+
+function CheckCorpseFireworksDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 40, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("blood")
+    end
+    return
+end
+
 
 function CheckStoneDamage(x, y)
     if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 32, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
         GotDamage("mechanical")
+        return true
+    else
+        return false
+    end
+end
+
+function CheckBeetleDamage(x, y)
+    if IsCirclesIntersect(GetUnitX(slayer), GetUnitY(slayer), 32, x, y, 60) and not BlzIsUnitInvulnerable(slayer) then
+        GotDamage("bite")
         return true
     else
         return false
@@ -1217,7 +1379,28 @@ end
 
 
 
+function StatusList()
+    Stage = 1 --текущая стадия
+    ------
+    CageOn = false --существует ли клетка на карте
+    SlayerInsideCage = false --герой в клетке
+    hexPoints = {} --координаты клетки
+    ------
+    cooldown = false --кулдаун ракетницы
 
+    Chaining = false --юзает хук
+    chaincooldown = false --кулдаун хука
+    slayerEffects = {} --таблица с эффектами для поиска цели хука
+    slayerEffectsRed = {}
+    targetEffects = {}
+
+    acidGlobal = false --кислота на карте
+    puddles = {} --координаты луж кислоты
+    puddlesEffects = {} --таблица эффектов с кислотой
+
+
+
+end
 RealGetUnitX = GetUnitX
 RealGetUnitY = GetUnitY
 
@@ -1666,6 +1849,233 @@ function AcidBomb(startX, startY, endX, endY)
         end)
     end
 end
+
+function Cage(radius, duration)
+    local x, y = GetUnitPosition(slayer)
+    local effects = {}
+    hexPoints = GetHexagonPoints(x, y, radius, radius/2.5)
+    local pointsChain = GetHexagonPoints(x, y, radius, 40)
+    print(#hexPoints)
+    local d = 1
+    local sharp = #pointsChain
+    local chainTimer = CreateTimer()
+    PlayCage()
+    TimerStart(chainTimer, 1/64, true, function()
+        local p1 = pointsChain[d]
+        local chain = AddSpecialEffect("models\\chainlink2", p1.x, p1.y )
+        if d < #pointsChain then
+            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[d+1].x, pointsChain[d+1].y)
+            BlzSetSpecialEffectYaw(chain, angleChain)
+            BlzSetSpecialEffectScale(chain, 1.15)
+            table.insert(effects, chain)
+        else
+            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[1].x, pointsChain[1].y)
+            BlzSetSpecialEffectYaw(chain, angleChain)
+            BlzSetSpecialEffectScale(chain, 1.1)
+            table.insert(effects, chain)
+        end
+        d = d + 1
+        if d > sharp then
+            for i = 1, #hexPoints do
+                local p = hexPoints[i]
+                local eff = AddSpecialEffect("models\\skeleton", p.x, p.y)
+                local angle = CalculateAngle(p.x, p.y, x, y)
+                BlzSetSpecialEffectYaw(eff, angle)
+                table.insert(effects, eff)
+            end
+            CageOn = true
+            local spriteframe = CageFrame()
+            if IsPointInHexagon(GetUnitX(slayer), GetUnitY(slayer), hexPoints) then
+                BlzFrameSetVisible(spriteframe, true)
+                SlayerInsideCage = true
+                local frameTimer = CreateTimer()
+                local pos = 1.1
+                TimerStart(frameTimer, 1/32, true, function()
+                    pos = pos - 0.02
+                    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
+                    if pos <= 0.82 then
+                        DestroyTimer(frameTimer)
+                    end
+                end)
+            end
+            local cageTimer = CreateTimer()
+            TimerStart(cageTimer, duration, false, function()
+                for e = 1, #effects do
+                    DestroyEffect(effects[e])
+                end
+                SlayerInsideCage = false
+                CageOn = false
+                local frameTimer1 = CreateTimer()
+                local pos = 0.82
+                TimerStart(frameTimer1, 1/32, true, function()
+                    pos = pos + 0.02
+                    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
+                    if pos >= 1.1 then
+                        BlzDestroyFrame(spriteframe)
+                        DestroyTimer(frameTimer1)
+                    end
+                end)
+                hexPoints = {}
+                DestroyTimer(cageTimer)
+            end)
+            DestroyTimer(chainTimer)
+        end
+    end)
+    print(IsPointInHexagon(x, y, hexPoints))
+end
+
+function CageFrame()
+    local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
+    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 1.1, -0.036)
+    BlzFrameSetSize(spriteframe, 0.001, 0.001)
+    BlzFrameSetScale(spriteframe, 1)
+    BlzFrameSetLevel(spriteframe, 3)
+    BlzFrameSetModel(spriteframe, "models\\skeletonsprite2", 1)
+    BlzFrameSetSpriteAnimate(spriteframe, 2, 2)
+    BlzFrameSetVisible(spriteframe, false)
+
+    return spriteframe
+end
+
+function CorpseBombs()
+    local x, y = GetUnitPosition(slayer)
+    CorpseBomb(x, y)
+    local t = CreateTimer()
+    local i = 0
+    TimerStart(t, 1.5, true, function()
+        local x, y = GetUnitPosition(slayer)
+        --local endP = RandomPointInCircle(x, y, 600)
+        CorpseBomb(x, y)
+        --CorpseBomb(endP[1], endP[2])
+        i = i + 1
+        if i> 5 then
+            DestroyTimer(t)
+        end
+    end)
+
+end
+
+function CorpseBomb(targetX, targetY)
+    local startX, startY = GetUnitPosition(boss)
+    local endX, endY = GetRandomPointOnCircle(GetUnitX(slayer), GetUnitY(slayer), 600)
+    local maxZ = 1200
+    local startZ = 400
+    local endZ = 353
+
+    local points = ComputePathWithRotation(startX, startY, startZ, targetX, targetY, endZ, maxZ, 50)
+    local t = CreateTimer()
+    local i = 1
+    local sharp = #points
+    local eff = AddSpecialEffect("models\\MeatWagon", startX, startY)
+    BlzSetSpecialEffectScale(eff, 0.75)
+    local marker = AddSpecialEffect("models\\marker", targetX, targetY)
+    BlzSetSpecialEffectScale(marker, 1.5)
+    TimerStart(t, 1/32, true, function()
+        local p = points[i]
+        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+        BlzSetSpecialEffectOrientation(eff, p.yaw, p.pitch, p.roll)
+
+        i = i + 1
+        if i > sharp then
+            --BlzSetSpecialEffectOrientation(eff, 0, 0, 0)
+            DestroyEffect(eff)
+            local boom = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", p.x, p.y)
+            BlzSetSpecialEffectScale(boom, 2)
+            DestroyEffect(boom)
+            DestroyEffect(marker)
+            BlzSetSpecialEffectRoll(eff, 0)
+            BlzSetSpecialEffectPitch(eff, 0)
+            CorpseFireworks(p.x, p.y, math.random(12, 24))
+            CheckCorpseBombDamage(p.x, p.y)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function CorpseFireworks(x, y, numb)
+    for i = 1, numb do
+        local eff = AddSpecialEffect("Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile", x, y)
+        local endP = RandomPointInCircle(x, y, 550)
+        local marker = AddSpecialEffect("models\\marker", endP[1], endP[2])
+        local maxZ = 820
+        local startZ = 400
+        local endZ = 320
+        local points = ComputePath(x, y, startZ, endP[1], endP[2], endZ, maxZ, 20)
+
+        local i = 1
+        local sharp = #points
+        local t = CreateTimer()
+        TimerStart(t, 1/32, true, function()
+            local p = points[i]
+            BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+            i = i + 1
+            if i > sharp then
+                PauseTimer(t)
+                DestroyEffect(eff)
+                DestroyEffect(marker)
+                CheckCorpseFireworksDamage(p.x, p.y)
+                DestroyTimer(t)
+            end
+        end)
+    end
+end
+
+function BeetleLaunch()
+    local maxZ = 820
+    local startZ = 400
+    local endZ = 330
+    local x, y = GetUnitPosition(slayer)
+    local startX, startY = GetUnitPosition(boss)
+    local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
+    BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
+    BlzSetSpecialEffectScale(eff, 1.5)
+    local angle = CalculateAngle(startX, startY, x, y)
+    BlzSetSpecialEffectYaw(eff, angle)
+    local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
+
+    local i = 1
+    local sharp = #points
+    local t = CreateTimer()
+
+    TimerStart(t, 1/32, true, function()
+        p = points[i]
+        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+        local xx, yy = GetUnitPosition(slayer)
+        local angle = CalculateAngle(p.x, p.y, xx, yy)
+        BlzSetSpecialEffectYaw(eff, angle)
+        i = i + 1
+        if i > sharp then
+            PauseTimer(t)
+            BeetleCharge(eff, p.x, p.y, p.z)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function BeetleCharge(beetle, x, y, z)
+    local ux, uy = GetUnitPosition(slayer)
+    local endX, endY = FindIntersection(x, y, ux, uy)
+    local points = GetPointsOnLine(x, y, endX, endY, 15)
+    local angle = CalculateAngle(x, y, endX, endY)
+    BlzSetSpecialEffectYaw(beetle, angle)
+
+    local i = 1
+    local sharp = #points
+    local t = CreateTimer()
+    TimerStart(t, 1/64, true, function()
+        local p = points[i]
+        BlzSetSpecialEffectPosition(beetle, p.x, p.y, z)
+        if CheckBeetleDamage(p.x, p.y) then
+            DestroyEffect(beetle)
+            DestroyTimer(t)
+        end
+        i = i + 1
+        if i > sharp then
+            DestroyEffect(beetle)
+            DestroyTimer(t)
+        end
+    end)
+end
 creeps = {}
 
 function CreateTestUnit()
@@ -1682,18 +2092,12 @@ function CreateDummy()
 end
 function CreateSlayer()
     slayer = CreateUnit(Player(1), _('hrif'), 600, 200, bj_UNIT_FACING)
-    SetUnitPathing(slayer, false)
+    SetUnitPathing(slayer, true)
     --SelectHeroSkill(boss, _('AUim'))
     SetUnitMoveSpeed(slayer, 522)
-    slayerEffects = {}
-    slayerEffectsRed = {}
-    targetEffects = {}
 
-    cooldown = false
-    chaincooldown = false
-    acidGlobal = false
-    puddles = {}
-    puddlesEffects = {}
+
+
 end
 
 
@@ -1869,14 +2273,49 @@ function Dash()
     local t = CreateTimer()
     TimerStart(t, 1/64, true, function()
         if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) then
-            local p = points[i]
-            local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
-            DestroyEffect(eff)
-            SetUnitPosition(slayer, p.x, p.y)
-            SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
-            i = i + 1
-            if i > sharp then
-                DestroyTimer(t)
+                local p = points[i]
+            if not CageOn then
+                local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
+                DestroyEffect(eff)
+                SetUnitPosition(slayer, p.x, p.y)
+                SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+                FixCursor(p.x, p.y)
+                i = i + 1
+                if i > sharp then
+                    DestroyTimer(t)
+                end
+            elseif SlayerInsideCage then
+                local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                if not IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                    DestroyTimer(t)
+                else
+                    local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
+                    DestroyEffect(eff)
+                    SetUnitPosition(slayer, p.x, p.y)
+                    SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+                    FixCursor(p.x, p.y)
+                    i = i + 1
+                    if i > sharp then
+                        DestroyTimer(t)
+                    end
+                end
+            else
+                local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                if IsPointInHexagon(xx, yy, hexPoints) then
+                    IssueImmediateOrder(slayer, "stop")
+                    DestroyTimer(t)
+                else
+                    local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
+                    DestroyEffect(eff)
+                    SetUnitPosition(slayer, p.x, p.y)
+                    SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+                    FixCursor(p.x, p.y)
+                    i = i + 1
+                    if i > sharp then
+                        DestroyTimer(t)
+                    end
+                end
             end
         else
             DestroyTimer(t)
@@ -1884,7 +2323,6 @@ function Dash()
     end)
 end
 
-Chaining = false
 function ChainHook()
     if chainMarker and not Chaining and not chaincooldown then
         chainMarker = false
@@ -1896,8 +2334,46 @@ function ChainHook()
                 DestroyEffect(effects[i])
                 --print(p.x.." "..p.y)
                 if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
-                    SetUnitPosition(slayer, p.x, p.y)
-                    FixCursor(p.x, p.y)
+                    if not CageOn then
+                        SetUnitPosition(slayer, p.x, p.y)
+                        FixCursor(p.x, p.y)
+                    elseif SlayerInsideCage then
+                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                        if not IsPointInHexagon(xx, yy, hexPoints) then
+                            for e = 1, #effects do
+                                DestroyEffect(effects[e])
+                            end
+                            IssueImmediateOrder(slayer, "stop")
+                            EnableTrigger(ClickTrigger)
+                            SetUnitInvulnerable(slayer, false)
+                            InitWalkTimer()
+                            --PauseUnit(slayer, false)
+                            SetUnitMoveSpeed(slayer, 522)
+                            Chaining = false
+                            DestroyTimer(t2)
+                        else
+                            SetUnitPosition(slayer, p.x, p.y)
+                            FixCursor(p.x, p.y)
+                        end
+                    else
+                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 80)
+                        if IsPointInHexagon(xx, yy, hexPoints) then
+                            for e = 1, #effects do
+                                DestroyEffect(effects[e])
+                            end
+                            IssueImmediateOrder(slayer, "stop")
+                            EnableTrigger(ClickTrigger)
+                            SetUnitInvulnerable(slayer, false)
+                            InitWalkTimer()
+                            --PauseUnit(slayer, false)
+                            SetUnitMoveSpeed(slayer, 522)
+                            Chaining = false
+                            DestroyTimer(t2)
+                        else
+                            SetUnitPosition(slayer, p.x, p.y)
+                            FixCursor(p.x, p.y)
+                        end
+                    end
                 end
                 i = i + 1
                 if i > sharp - 8 then
@@ -1971,7 +2447,7 @@ function ChainHook()
     end
 end
 
-globalMarkerDistance = 0
+--globalMarkerDistance = 0
 function FindChainTarget()
     ------fix double circle
     if (not chainMarker) or (not rmbpressed) then

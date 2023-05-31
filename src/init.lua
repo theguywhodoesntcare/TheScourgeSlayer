@@ -4,6 +4,7 @@ do
         FogMaskEnableOff()
         FogEnableOff()
         InitCustomUI()
+        StatusList()
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -35,7 +36,7 @@ do
 
         InitCameraScrollBar()
         InitDamageTrigger()
-        AttackTimer()
+        --AttackTimer()
 
     end
 end
