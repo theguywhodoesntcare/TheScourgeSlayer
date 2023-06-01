@@ -37,7 +37,7 @@ function Wheel()
 end
 
 function Clicker()
-    if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) then
+    if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) and not sawing then
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             MakeShot(BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY())
         end

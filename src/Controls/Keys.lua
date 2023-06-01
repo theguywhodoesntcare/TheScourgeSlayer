@@ -66,24 +66,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            if not CageOn then
-                IssuePointOrder(slayer, "move", x, y)
-                FixCursor(ux, uy)
-            elseif SlayerInsideCage then
-                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
-                if not IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
-                else
+            if not sawing then
+                if not CageOn then
                     IssuePointOrder(slayer, "move", x, y)
                     FixCursor(ux, uy)
-                end
-            else
-                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
-                if IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
+                elseif SlayerInsideCage then
+                    local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                    if not IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                    else
+                        IssuePointOrder(slayer, "move", x, y)
+                        FixCursor(ux, uy)
+                    end
                 else
-                    IssuePointOrder(slayer, "move", x, y)
-                    FixCursor(ux, uy)
+                    local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                    if IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                    else
+                        IssuePointOrder(slayer, "move", x, y)
+                        FixCursor(ux, uy)
+                    end
                 end
             end
             --print(orders.Xm.." "..orders.Xp.." "..orders.Ym.." "..orders.Yp.." "..x.." "..y.." "..ux.." "..uy)
@@ -101,24 +103,26 @@ function InitWalkTimer()
             --local ux, uy = GetUnitPosition(slayer)
             local x = ux - orders.Xm + orders.Xp
             local y = uy - orders.Ym + orders.Yp
-            if not CageOn then
-                IssuePointOrder(slayer, "move", x, y)
-                FixCursor(ux, uy)
-            elseif SlayerInsideCage then
-                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
-                if not IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
-                else
+            if not sawing then
+                if not CageOn then
                     IssuePointOrder(slayer, "move", x, y)
                     FixCursor(ux, uy)
-                end
-            else
-                local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
-                if IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
+                elseif SlayerInsideCage then
+                    local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                    if not IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                    else
+                        IssuePointOrder(slayer, "move", x, y)
+                        FixCursor(ux, uy)
+                    end
                 else
-                    IssuePointOrder(slayer, "move", x, y)
-                    FixCursor(ux, uy)
+                    local xx, yy = GetPointOnLine(ux, uy, x, y, 80)
+                    if IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                    else
+                        IssuePointOrder(slayer, "move", x, y)
+                        FixCursor(ux, uy)
+                    end
                 end
             end
         else
@@ -181,13 +185,6 @@ function ButtonPressed()
             futureOrders.Xp = 300
         end
     end
-    --local ux, uy = GetUnitPosition(slayer)
-    --local x = ux - orders.Xm + orders.Xp
-    --local y = uy - orders.Ym + orders.Yp
-    --local angle = CalculateAngle(ux, uy, x, y)
-    --BlzSetUnitFacingEx(slayer, angle)
-    --IssuePointOrder(slayer, "move", x, y)
-
 end
 
 function ButtonReleased()
@@ -223,12 +220,6 @@ function ButtonReleased()
             futureOrders.Xm = 0
         end
     end
-   -- local x = GetUnitX(slayer) + orders.Xm + orders.Xp
-   -- local y = GetUnitY(slayer) + orders.Ym + orders.Yp
-  --  local ux, uy = GetUnitPosition(slayer)
- --   local x = ux - orders.Xm + orders.Xp
- --   local y = uy - orders.Ym + orders.Yp
- --   IssuePointOrder(slayer, "move", x, y)
 end
 
 
@@ -251,62 +242,15 @@ function ControlKeys()
         CameraSetFocalDistance(0)
         print("V")
 
-        --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
-        --print(GetCameraField(CAMERA_FIELD_FARZ))
-        --print(GetCameraField(CAMERA_FIELD_NEARZ))
-        --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
-        --print(GetCameraField(CAMERA_FIELD_FIELD_OF_VIEW))
-        --print(GetCameraField(CAMERA_FIELD_ROLL))
-        --print(GetCameraField(CAMERA_FIELD_ROTATION))
-        --print(GetCameraField(CAMERA_FIELD_ZOFFSET))
-        --print(GetCameraField(CAMERA_FIELD_LOCAL_PITCH))
-        --print(GetCameraField(CAMERA_FIELD_LOCAL_YAW))
-        --print(GetCameraField(CAMERA_FIELD_LOCAL_ROLL))
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
-        --spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
-
-                --BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
-                --BlzFrameSetLevel(spriteframe, 3)
-               -- BlzFrameSetSize(spriteframe, 0.01, 0.01)
-               -- BlzFrameSetModel(spriteframe, "aco", 0)
-                --BlzFrameSetScale(spriteframe, 0.00058)
-              --  BlzFrameSetSpriteAnimate(spriteframe, 5, 2)
-                -- birth = 0
-                -- death = 1
-                -- stand = 2
-                -- morph = 3
-                -- alternate = 4
-               -- BlzFrameSetVisible(spriteframe, true)
-        --SelectUnit(boss, true)
-        --local t = RandomPointInCircle(CenterX, CenterY, Radius)
-        --local eff = AddSpecialEffect("models\\Rock3", t[1], t[2])
-       -- BlzSetSpecialEffectScale(eff, 0.75)
-        --BlzSetSpecialEffectYaw(eff, math.random(1, 3))
-       -- BlzSetSpecialEffectZ(eff, 350)
-       -- TimerStart(CreateTimer(), 1, false, function()
-      --      DestroyEffect(eff)
-      --      local snd = CreateSound("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac",false, true, false, 10, 10, "DefaultEAXON")
-      --      SetSoundChannel( snd, 0)
-        --    SetSoundDistances( snd, 600.00, 3200 )
-            --SetSoundDistanceCutoff( snd, 3000.00)
-     --       SetSoundDuration( snd, GetSoundFileDuration("doodads\\terrain\\rockchunks\\rockchunksdeath1.flac") )
-     --       SetSoundVolume( snd, 80)
-            --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
-            --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
-            --SetSoundPitch( snd, 1.0 )
-      --      SetSoundPosition(snd, t[1], t[2],100)
-       --     StartSound(snd)
-      --      KillSoundWhenDone(snd)
-        --    DestroyTimer(GetExpiredTimer())
-       -- end)
         --ThrowStones(15)
         --TripleImpale(35)
         --CreateTestUnit()
         --Laser()
         --Acid(30)
-        Cage(500, 5)
+        --Cage(500, 5)
         --CorpseBombs()
-        --BeetleLaunch()
+        BeetleLaunch()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
@@ -315,3 +259,14 @@ function ControlKeys()
     end
 end
 
+function TurnKeyTriggers(off)
+    if off then
+        DisableTrigger(KeyTrigger)
+        DisableTrigger(ButtonPressedTrigger)
+        DisableTrigger(ButtonReleasedTrigger)
+    else
+        EnableTrigger(KeyTrigger)
+        EnableTrigger(ButtonPressedTrigger)
+        EnableTrigger(ButtonReleasedTrigger)
+    end
+end

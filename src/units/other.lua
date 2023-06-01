@@ -10,5 +10,6 @@ function CreateDummy()
     local d = CreateUnit(Player(2), _('Dmmy'), -1500, -1500, bj_UNIT_FACING)
     SetHeroLevel(d, 10, false)
     SelectHeroSkill(d, _('AUim'))
+    SetUnitInvulnerable(d, true)
     return d
 end

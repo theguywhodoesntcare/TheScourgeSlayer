@@ -12,12 +12,17 @@ function GotDamage(type)
         end
 
         if type == "fire" then
-            MaskEffect("backdrops\\VignetteFire.dds")
+            MaskEffect("backdrops\\VignetteFire.dds", 100, 100, 100)
         end
 
         if type == "acid" then
-            MaskEffect("backdrops\\VignettePoison.dds")
+            MaskEffect("backdrops\\VignettePoison.dds", 100, 100, 100)
         end
+
+        if type == "bite" then
+            MaskEffect("backdrops\\VignetteDamage.dds", 75, 10, 10)
+        end
+
         if type == "blood" then
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
             local t = CreateTimer()
@@ -53,9 +58,9 @@ function BloodFrame()
     end)
 end
 
-function MaskEffect(path)
+function MaskEffect(path, red, green, blue)
     DisplayCineFilter(false)
-    CinematicFilterGenericBJ( 5.00, BLEND_MODE_BLEND, path, 100, 100, 100, 0.00, 0, 0, 0, 100.00 )
+    CinematicFilterGenericBJ( 5.00, BLEND_MODE_BLEND, path, red, green, blue, 0.00, 0, 0, 0, 100.00 )
 end
 
 function CrackedGlassEffect()
@@ -140,6 +145,18 @@ function CheckBeetleDamage(x, y)
     else
         return false
     end
+end
+
+function BeetlePeriodic()
+    local t = CreateTimer()
+    TimerStart(t, 0.5, true, function()
+        if beetleAtached then
+            GotDamage("bite")
+        else
+            DestroyTimer(t)
+        end
+        print(beetleAtached)
+    end)
 end
 
 function InitDamageTrigger()

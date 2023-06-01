@@ -17,6 +17,15 @@ function StatusList()
     puddles = {} --координаты луж кислоты
     puddlesEffects = {} --таблица эффектов с кислотой
 
+    beetleAtached = false --жук прицепился к герою
+    beetleAttach = nil --глоаблка для хранения эффекта жука
+    beetleHP = 3 --хп прицепившегося жука
+    beetleFrame = nil --глобалка для фрейма с жуком
+
+    sawing = false --герой пилит
+
+    dashing = false --герой в рывке
+
 
 
 end
