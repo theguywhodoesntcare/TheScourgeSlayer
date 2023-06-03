@@ -3,8 +3,10 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-        InitCustomUI()
+
         StatusList()
+       InitCustomUI()
+
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -29,9 +31,7 @@ do
         Radius = 1800
         CreateBarrier()
 
-        ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
-         CreateTextFrame(ClickBlocker, -0.1338, 0.6, 0.936020, 0, 1, "", 1)
-            BlzFrameSetEnable(ClickBlocker, true)
+
 
 
         InitCameraScrollBar()

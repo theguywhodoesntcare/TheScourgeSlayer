@@ -145,6 +145,18 @@ function InitWalkTimer()
                 end
             end
         end
+        if fuelOnMap then
+            local sharpF = #fuel
+            for f = 1, sharpF do
+                local fuelX = fuel[f][1][1]
+                local fuelY = fuel[f][1][2]
+                if IsPointInCircle(ux, uy, fuelX, fuelY , 60) then
+                    print(fuelX)
+                        PickFuel(fuel[f], f)
+                    break
+                end
+            end
+        end
     end)
 end
 

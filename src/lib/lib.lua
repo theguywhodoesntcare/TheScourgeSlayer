@@ -31,7 +31,7 @@ function SetUnitPositionWithFacing(u, x, y, angle)
 end
 
 
-function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level, text, scale)
+function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level, text, scale) --old
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_TOPLEFT, topleftX, topleftY)
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_BOTTOMRIGHT, botrightX, botrightY)
     BlzFrameSetLevel(frame, level)
@@ -60,4 +60,30 @@ function Shuffle (arr)
         local j = math.random (i, #arr)
         arr [i], arr [j] = arr [j], arr [i]
     end
+end
+
+function CreateBackdrop(parent, centerX, centerY, size, texture, lvl)
+    local fr = BlzCreateFrameByType("BACKDROP", "", parent, "", 1)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, centerX, centerY)
+    BlzFrameSetSize(fr, size, size)
+    BlzFrameSetTexture(fr, texture, 0, true)
+    return fr
+end
+
+function CreateText(parent, centerX, centerY, size, text, lvl)
+    local fr = BlzCreateFrameByType("TEXT", "", parent, "", 0)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, centerX, centerY)
+    BlzFrameSetSize(fr, size, size)
+    BlzFrameSetText(fr, text)
+    BlzFrameSetEnable(fr, false)
+    BlzFrameSetScale(fr, 1)
+    BlzFrameSetTextAlignment(fr, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
+    return fr
+end
+
+function round(num, numDecimalPlaces)
+    local mult = 10^(numDecimalPlaces or 0)
+    return math.floor(num * mult + 0.5) / mult
 end

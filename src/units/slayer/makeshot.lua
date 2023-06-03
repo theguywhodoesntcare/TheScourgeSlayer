@@ -1,7 +1,7 @@
 function MakeShot(x, y)
     local startx, starty = GetUnitPosition(slayer)
     if IsPointInCircle(startx, starty, CenterX, CenterY, Radius - 20) then
-        if not cooldown then
+        if rocketCharges > 0 then --not cooldown
             if not beetleAtached then
                 --cooldown = true
                 --local cooldownTimer = CreateTimer()
@@ -87,6 +87,19 @@ function MakeShot(x, y)
                     beetleAtached = false
                     beetleHP = 3
                 end
+            end
+            rocketCharges = rocketCharges - 1
+            UpdateCharges(1, rocketCharges)
+        end
+        if rocketCharges <= 30 then
+            if #fuel < 3 then
+                local chance = math.random()
+                if chance <= 0.02 then
+                    SpawnFuel()
+                end
+            end
+            if rocketCharges <= 0 and sawingCharges <= 0 and not fuelOnMap then
+                SpawnFuel()
             end
         end
     end

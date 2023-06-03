@@ -1,119 +1,124 @@
 function ChainHook()
-    if chainMarker and not Chaining and not chaincooldown then
-        chainMarker = false
-        local function MoveToTheTarget(points, effects, sharp)
-            local i = 1
-            local t2 = CreateTimer()
-            TimerStart( t2, 1/64, true, function()
-                p = points[i]
-                DestroyEffect(effects[i])
-                if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
-                    if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
-                        SetUnitPosition(slayer, p.x, p.y)
-                        FixCursor(p.x, p.y)
-                    elseif SlayerInsideCage then
-                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
-                        if not IsPointInHexagon(xx, yy, hexPoints) then
-                            for e = 1, #effects do
-                                DestroyEffect(effects[e])
-                            end
-                            IssueImmediateOrder(slayer, "stop")
-                            EnableTrigger(ClickTrigger)
-                            SetUnitInvulnerable(slayer, false)
-                            InitWalkTimer()
-                            --PauseUnit(slayer, false)
-                            SetUnitMoveSpeed(slayer, 522)
-                            Chaining = false
-                            DestroyTimer(t2)
-                        else
-                            SetUnitPosition(slayer, p.x, p.y)
-                            FixCursor(p.x, p.y)
-                        end
-                    else
-                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 80)
-                        if IsPointInHexagon(xx, yy, hexPoints) then
-                            for e = 1, #effects do
-                                DestroyEffect(effects[e])
-                            end
-                            IssueImmediateOrder(slayer, "stop")
-                            EnableTrigger(ClickTrigger)
-                            SetUnitInvulnerable(slayer, false)
-                            InitWalkTimer()
-                            --PauseUnit(slayer, false)
-                            SetUnitMoveSpeed(slayer, 522)
-                            Chaining = false
-                            DestroyTimer(t2)
-                        else
-                            SetUnitPosition(slayer, p.x, p.y)
-                            FixCursor(p.x, p.y)
-                        end
-                    end
-                end
-                i = i + 1
-                if i > sharp - 8 then
-                    Chaining = false
-                end
-                if i > sharp then
-                    PauseTimer(t2)
-                    EnableTrigger(ClickTrigger)
-                    SetUnitInvulnerable(slayer, false)
-                    InitWalkTimer()
-                    --PauseUnit(slayer, false)
-                    SetUnitMoveSpeed(slayer, 522)
-                    Chaining = false
-                    DestroyTimer(t2)
-                end
-            end)
-        end
-
-        local targets = {}
-        local cursorX = BlzGetTriggerPlayerMouseX()
-        local cursorY = BlzGetTriggerPlayerMouseY()
-        if IsPointInCircle(cursorX, cursorY, CenterX, CenterY, Radius) then
-            local x, y = GetUnitPosition(slayer)
-
-
-            local target = FindClosestUnit(creeps, cursorX, cursorY)
-            local tX, tY = GetUnitPosition(target)
-
-            if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
-                Chaining = true
-                chaincooldown = true
-                local cdtimer = CreateTimer()
-                TimerStart(cdtimer, 2, false, function()
-                    chaincooldown = false
-                    DestroyTimer(cdtimer)
-                end)
-                DisableTrigger(ClickTrigger)
-                DestroyTimer(walkTimer)
-                SetUnitInvulnerable(slayer, true)
-                PlayChain()
-                --PauseUnit(slayer, true)
-                SetUnitMoveSpeed(slayer, 0)
-                IssueImmediateOrder(slayer, "stop")
-                local x1, y1 = GetPointOnLine(tX, tY, x, y, 36)
-                local points = GetPointsOnLine(x, y, x1, y1, 34)
-                table.remove(points, #points)
+    if chainCharges > 0 then
+        if chainMarker and not Chaining  then --and not chaincooldown
+            chainMarker = false
+            local function MoveToTheTarget(points, effects, sharp)
                 local i = 1
-                local sharp = #points
-                local angle = CalculateAngle(x, y, x1, y1)
-                local t = CreateTimer()
-                local effects = {}
-
-                TimerStart( t, 1/64, true, function()
+                local t2 = CreateTimer()
+                TimerStart( t2, 1/64, true, function()
                     p = points[i]
-                    eff = AddSpecialEffect("models\\chainlink1", p.x, p.y)
-                    BlzSetSpecialEffectYaw( eff, angle )
-                    table.insert(effects, eff)
+                    DestroyEffect(effects[i])
+                    if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
+                        if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
+                            SetUnitPosition(slayer, p.x, p.y)
+                            FixCursor(p.x, p.y)
+                        elseif SlayerInsideCage then
+                            local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                            if not IsPointInHexagon(xx, yy, hexPoints) then
+                                for e = 1, #effects do
+                                    DestroyEffect(effects[e])
+                                end
+                                IssueImmediateOrder(slayer, "stop")
+                                EnableTrigger(ClickTrigger)
+                                SetUnitInvulnerable(slayer, false)
+                                InitWalkTimer()
+                                --PauseUnit(slayer, false)
+                                SetUnitMoveSpeed(slayer, 522)
+                                Chaining = false
+                                DestroyTimer(t2)
+                            else
+                                SetUnitPosition(slayer, p.x, p.y)
+                                FixCursor(p.x, p.y)
+                            end
+                        else
+                            local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 80)
+                            if IsPointInHexagon(xx, yy, hexPoints) then
+                                for e = 1, #effects do
+                                    DestroyEffect(effects[e])
+                                end
+                                IssueImmediateOrder(slayer, "stop")
+                                EnableTrigger(ClickTrigger)
+                                SetUnitInvulnerable(slayer, false)
+                                InitWalkTimer()
+                                --PauseUnit(slayer, false)
+                                SetUnitMoveSpeed(slayer, 522)
+                                Chaining = false
+                                DestroyTimer(t2)
+                            else
+                                SetUnitPosition(slayer, p.x, p.y)
+                                FixCursor(p.x, p.y)
+                            end
+                        end
+                    end
                     i = i + 1
+                    if i > sharp - 8 then
+                        Chaining = false
+                    end
                     if i > sharp then
-                        PauseTimer(t)
-                        MoveToTheTarget(points, effects, sharp)
-                        DestroyTimer(t)
+                        PauseTimer(t2)
+                        EnableTrigger(ClickTrigger)
+                        SetUnitInvulnerable(slayer, false)
+                        InitWalkTimer()
+                        --PauseUnit(slayer, false)
+                        SetUnitMoveSpeed(slayer, 522)
+                        Chaining = false
+                        DestroyTimer(t2)
                     end
                 end)
-            else
-                PlayBrokenChain()
+            end
+
+            local targets = {}
+            local cursorX = BlzGetTriggerPlayerMouseX()
+            local cursorY = BlzGetTriggerPlayerMouseY()
+            if IsPointInCircle(cursorX, cursorY, CenterX, CenterY, Radius) then
+                local x, y = GetUnitPosition(slayer)
+
+
+                local target = FindClosestUnit(creeps, cursorX, cursorY)
+                local tX, tY = GetUnitPosition(target)
+
+                if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+                    Chaining = true
+                    --chaincooldown = true
+                    chainCharges = chainCharges - 1
+                    UpdateCharges(4, chainCharges)
+                    DisplayCooldown(true)
+                    --local cdtimer = CreateTimer()
+                    --TimerStart(cdtimer, 2, false, function()
+                        --chaincooldown = false
+                        --DestroyTimer(cdtimer)
+                    --end)
+                    DisableTrigger(ClickTrigger)
+                    DestroyTimer(walkTimer)
+                    SetUnitInvulnerable(slayer, true)
+                    PlayChain()
+                    --PauseUnit(slayer, true)
+                    SetUnitMoveSpeed(slayer, 0)
+                    IssueImmediateOrder(slayer, "stop")
+                    local x1, y1 = GetPointOnLine(tX, tY, x, y, 36)
+                    local points = GetPointsOnLine(x, y, x1, y1, 34)
+                    table.remove(points, #points)
+                    local i = 1
+                    local sharp = #points
+                    local angle = CalculateAngle(x, y, x1, y1)
+                    local t = CreateTimer()
+                    local effects = {}
+
+                    TimerStart( t, 1/64, true, function()
+                        p = points[i]
+                        eff = AddSpecialEffect("models\\chainlink1", p.x, p.y)
+                        BlzSetSpecialEffectYaw( eff, angle )
+                        table.insert(effects, eff)
+                        i = i + 1
+                        if i > sharp then
+                            PauseTimer(t)
+                            MoveToTheTarget(points, effects, sharp)
+                            DestroyTimer(t)
+                        end
+                    end)
+                else
+                    PlayBrokenChain()
+                end
             end
         end
     end
@@ -121,6 +126,7 @@ end
 
 --globalMarkerDistance = 0
 function FindChainTarget()
+    print(chainCharges)
     ------fix double circle
     if (not chainMarker) or (not rmbpressed) then
         for b = 1, #slayerEffects do
@@ -137,7 +143,7 @@ function FindChainTarget()
         targetEffects = {}
     end
     --------
-    if chainMarker == false then
+    if chainMarker == false and chainCharges > 0 then
         for i = 1, 32 do --создали пул эффектов вне зоны видимости
             local eff = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
             BlzSetSpecialEffectScale(eff, 0.5)
@@ -238,5 +244,8 @@ function FindChainTarget()
                 DestroyTimer(t)
             end
         end)
+    elseif chainCharges == 0 then
+        print("bruh")
+        PlayBrokenChain()
     end
 end

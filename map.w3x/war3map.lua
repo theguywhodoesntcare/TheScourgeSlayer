@@ -7,8 +7,10 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-        InitCustomUI()
+
         StatusList()
+       InitCustomUI()
+
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
@@ -33,9 +35,7 @@ do
         Radius = 1800
         CreateBarrier()
 
-        ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
-         CreateTextFrame(ClickBlocker, -0.1338, 0.6, 0.936020, 0, 1, "", 1)
-            BlzFrameSetEnable(ClickBlocker, true)
+
 
 
         InitCameraScrollBar()
@@ -242,6 +242,18 @@ function InitWalkTimer()
                 end
             end
         end
+        if fuelOnMap then
+            local sharpF = #fuel
+            for f = 1, sharpF do
+                local fuelX = fuel[f][1][1]
+                local fuelY = fuel[f][1][2]
+                if IsPointInCircle(ux, uy, fuelX, fuelY , 60) then
+                    print(fuelX)
+                        PickFuel(fuel[f], f)
+                    break
+                end
+            end
+        end
     end)
 end
 
@@ -429,55 +441,6 @@ function Releaser()
 end
 
 
-function InitCameraScrollBar()
-    -- create a vertical slider by inheriting from a Scrollbar. It will use esc menu textures
-    local sliderFrame = BlzCreateFrameByType( "SLIDER", "TestSlider", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestMainListScrollBar", 0 )
-    -- clear the inherited attachment
-    BlzFrameClearAllPoints(sliderFrame)
-    -- set pos and size
-    BlzFrameSetLevel(sliderFrame, 3)
-    BlzFrameSetAbsPoint(sliderFrame, FRAMEPOINT_CENTER, 0.92, 0.30 )
-    BlzFrameSetSize(sliderFrame, 0.014, 0.1 )
-    -- define the area the user can choose from
-    BlzFrameSetMinMaxValue(sliderFrame, 0, 80)
-    -- how accurate the user can choose value
-    BlzFrameSetStepSize(sliderFrame, 20)
-    BlzFrameSetValue(sliderFrame, 40)
-
-    local trigger = CreateTrigger()
-
-    -- register the Slider Event
-    BlzTriggerRegisterFrameEvent(trigger, sliderFrame, FRAMEEVENT_SLIDER_VALUE_CHANGED)
-
-    -- this happens when the Slider is pushed
-    TriggerAddAction(trigger, function()
-        local frame = BlzGetTriggerFrame()
-        --print(BlzFrameGetName(frame), "new Value", BlzGetTriggerFrameValue())
-        SetGameCamera(BlzGetTriggerFrameValue())
-
-    end)
-
-    -- scorllable with mousewheel
-    local triggerWheel = CreateTrigger()
-    -- register the Mouse Wheel Event for the Slider
-    BlzTriggerRegisterFrameEvent(triggerWheel, sliderFrame, FRAMEEVENT_MOUSE_WHEEL)
-    -- this happens when the Mouse wheel is rolled while it points at the slider
-    TriggerAddAction(triggerWheel, function()
-
-        -- BlzGetTriggerFrameValue() tells us in which direction the wheel was rolled
-        local add
-        if BlzGetTriggerFrameValue() > 0 then
-            add = 20
-        else
-            add = -20
-        end
-
-        -- the scrolling should only affect the triggering Player
-        if GetLocalPlayer() == GetTriggerPlayer() then
-            BlzFrameSetValue(sliderFrame, BlzFrameGetValue(sliderFrame) + add)
-        end
-    end)
-end
 globalCursorX = 0
 globalCursorY = 0
 
@@ -546,7 +509,7 @@ function SetUnitPositionWithFacing(u, x, y, angle)
 end
 
 
-function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level, text, scale)
+function CreateTextFrame(frame, topleftX, topleftY, botrightX, botrightY, level, text, scale) --old
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_TOPLEFT, topleftX, topleftY)
     BlzFrameSetAbsPoint(frame, FRAMEPOINT_BOTTOMRIGHT, botrightX, botrightY)
     BlzFrameSetLevel(frame, level)
@@ -575,6 +538,32 @@ function Shuffle (arr)
         local j = math.random (i, #arr)
         arr [i], arr [j] = arr [j], arr [i]
     end
+end
+
+function CreateBackdrop(parent, centerX, centerY, size, texture, lvl)
+    local fr = BlzCreateFrameByType("BACKDROP", "", parent, "", 1)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, centerX, centerY)
+    BlzFrameSetSize(fr, size, size)
+    BlzFrameSetTexture(fr, texture, 0, true)
+    return fr
+end
+
+function CreateText(parent, centerX, centerY, size, text, lvl)
+    local fr = BlzCreateFrameByType("TEXT", "", parent, "", 0)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, centerX, centerY)
+    BlzFrameSetSize(fr, size, size)
+    BlzFrameSetText(fr, text)
+    BlzFrameSetEnable(fr, false)
+    BlzFrameSetScale(fr, 1)
+    BlzFrameSetTextAlignment(fr, TEXT_JUSTIFY_CENTER, TEXT_JUSTIFY_MIDDLE)
+    return fr
+end
+
+function round(num, numDecimalPlaces)
+    local mult = 10^(numDecimalPlaces or 0)
+    return math.floor(num * mult + 0.5) / mult
 end
 function CalculateAngleAndDistance(x1, y1, x2, y2)
     --возвращает угол в радианах и расстояние между двумя точками
@@ -1353,14 +1342,28 @@ end
 function StatusList()
     Stage = 1 --текущая стадия
     ------
+    iconsUI = {} --иконки
+    chargesUI = {} --заряды
+    cooldownUI = {} --кулдауны
+    ------
     CageOn = false --существует ли клетка на карте
     SlayerInsideCage = false --герой в клетке
     hexPoints = {} --координаты клетки
+
+    castFireballs = false --кастует файрболлы
+    castRocks = false --кастует глыбы
+    castCarousel = false --кастует карусель жуков
+
     ------
     cooldown = false --кулдаун ракетницы
+    rocketCharges = 100 --заряды ракетницы
 
     Chaining = false --юзает хук
     chaincooldown = false --кулдаун хука
+    chainCharges = 1 --заряды хука
+    chainChargesConst = 1
+    chainCooldown = 0 --кулдаун хука
+    chainCooldownConst = 15
     slayerEffects = {} --таблица с эффектами для поиска цели хука
     slayerEffectsRed = {}
     targetEffects = {}
@@ -1375,9 +1378,21 @@ function StatusList()
     beetleFrame = nil --глобалка для фрейма с жуком
 
     sawing = false --герой пилит
+    sawingCharges = 3 --заряды пилы
+    sawingChargesConst = 3
+    sawingDefaultReward = 40
+    sawingDelay = 1 --ограничение на юз пилы подряд
+    fuelOnMap = false --есть заспавненное топливо
+    fuel = {} --таблица заспавненного топлива
 
     dashing = false --герой в рывке
-
+    dashCharges = 2 --заряды рывка
+    dashChargesConst = 2
+    dashCooldown = 0 --кулдаун зарядя
+    dashCooldownConst = 8.0
+    -------
+    cdTimer = nil --глобалка для таймера, обновляющего кулдауны
+    cooldownUpdating = false --показывает, что работает таймер, обновляющий кулдауны
 
 
 end
@@ -1431,9 +1446,158 @@ function HPBar()
         --print(BlzFrameGetValue(bar))
     end)
 end
+function Icons()
+    local textures = {
+        "backdrops\\rocketIcon",
+        "backdrops\\dashIcon",
+        "backdrops\\sawIcon",
+        "backdrops\\chainIcon"
+    }
+    local x = -0.095
+    local y = 0.5
+
+    local offsety = 0.1
+    local size = 0.08
+
+    local size2 = 0.05
+    local size3 = 0.065
+
+    local consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    for i = 1, 4 do
+        local yy = y - offsety * (i-1)
+        local charges = CreateBackdrop(consoleFrame, x+0.035, yy-0.035, size2, "backdrops\\octFrame1", 6)
+        table.insert(iconsUI, charges)
+        local icon = CreateBackdrop(charges, x, yy, size, textures[i], 6)
+        --table.insert(iconsUI, icon)
+        if i % 2 == 0 then
+            local cooldownFrame = CreateBackdrop(charges, x+0.035+0.0325, yy-0.003, size3, "backdrops\\octFrame1", 6)
+            local cooldownText = CreateText(cooldownFrame, x+0.035+0.032, yy-0.0027, size3, 0, 6)
+            table.insert(cooldownUI, cooldownText)
+        end
+        local chargesText = CreateText(charges, x+0.0345, yy-0.034, size2, "100", 6)
+        table.insert(chargesUI, chargesText)
+
+        BlzFrameSetText(chargesUI[1], rocketCharges)
+        BlzFrameSetText(chargesUI[2], dashCharges)
+        BlzFrameSetText(chargesUI[3], sawingCharges)
+        BlzFrameSetText(chargesUI[4], chainCharges)
+    end
+end
+
+function UpdateCharges(type, value)
+    BlzFrameSetText(chargesUI[type], value)
+end
+
+function DisplayCooldown(start)
+    if dashCooldown == 0 and dashCharges < dashChargesConst then
+        dashCooldown = dashCooldownConst
+    end
+    if chainCooldown == 0 and chainCharges < chainChargesConst then
+        chainCooldown =  chainCooldownConst
+    end
+    print(cooldownUpdating)
+    if start and not cooldownUpdating then
+        cdTimer = CreateTimer()
+        cooldownUpdating = true
+        TimerStart(cdTimer, 0.01, true, function()
+            if dashCooldown > 0 and dashCooldown <= dashCooldownConst and dashCharges < dashChargesConst then
+                dashCooldown = dashCooldown - 0.01
+                BlzFrameSetText(cooldownUI[1], string.format("%.2f", dashCooldown))
+            elseif dashCooldown <= 0 then
+                BlzFrameSetText(cooldownUI[1], 0)
+                if dashCharges < dashChargesConst then
+                    dashCharges = dashCharges + 1
+                    UpdateCharges(2, dashCharges)
+                    if dashCharges == dashChargesConst then
+                        dashCooldown = 0
+                        if chainCooldown == 0 then
+                            cooldownUpdating = false
+                            DestroyTimer(cdTimer)
+                        end
+                    else
+                        dashCooldown = dashCooldownConst
+                    end
+                end
+            end
+
+            if chainCooldown > 0 and chainCooldown <= chainCooldownConst and chainCharges < chainChargesConst then
+                chainCooldown = chainCooldown - 0.01
+                BlzFrameSetText(cooldownUI[2], string.format("%.2f", chainCooldown))
+            elseif chainCooldown <= 0 then
+                BlzFrameSetText(cooldownUI[2], 0)
+                if chainCharges < chainChargesConst then
+                    chainCharges = chainCharges + 1
+                    UpdateCharges(4, chainCharges)
+                    if chainCharges == chainChargesConst then
+                        chainCooldown = 0
+                        if dashCooldown == 0 then
+                            cooldownUpdating = false
+                            DestroyTimer(cdTimer)
+                        end
+                    else
+                        chainCooldown = chainCooldownConst
+                    end
+                end
+            end
+        end)
+    end
+end
 function InitCustomUI()
     HideDefaultUI()
+    ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
+        CreateTextFrame(ClickBlocker, -0.1338, 0.6, 0.936020, 0, 0, "", 1)
+            BlzFrameSetEnable(ClickBlocker, true)
     HPBar()
+    Icons()
+end
+function InitCameraScrollBar()
+    -- create a vertical slider by inheriting from a Scrollbar. It will use esc menu textures
+    local sliderFrame = BlzCreateFrameByType( "SLIDER", "TestSlider", BlzGetFrameByName("ConsoleUIBackdrop", 0), "QuestMainListScrollBar", 0 )
+    -- clear the inherited attachment
+    BlzFrameClearAllPoints(sliderFrame)
+    -- set pos and size
+    BlzFrameSetLevel(sliderFrame, 3)
+    BlzFrameSetAbsPoint(sliderFrame, FRAMEPOINT_CENTER, 0.92, 0.30 )
+    BlzFrameSetSize(sliderFrame, 0.014, 0.1 )
+    -- define the area the user can choose from
+    BlzFrameSetMinMaxValue(sliderFrame, 0, 80)
+    -- how accurate the user can choose value
+    BlzFrameSetStepSize(sliderFrame, 20)
+    BlzFrameSetValue(sliderFrame, 40)
+
+    local trigger = CreateTrigger()
+
+    -- register the Slider Event
+    BlzTriggerRegisterFrameEvent(trigger, sliderFrame, FRAMEEVENT_SLIDER_VALUE_CHANGED)
+
+    -- this happens when the Slider is pushed
+    TriggerAddAction(trigger, function()
+        local frame = BlzGetTriggerFrame()
+        --print(BlzFrameGetName(frame), "new Value", BlzGetTriggerFrameValue())
+        SetGameCamera(BlzGetTriggerFrameValue())
+
+    end)
+
+    -- scorllable with mousewheel
+    local triggerWheel = CreateTrigger()
+    -- register the Mouse Wheel Event for the Slider
+    BlzTriggerRegisterFrameEvent(triggerWheel, sliderFrame, FRAMEEVENT_MOUSE_WHEEL)
+    -- this happens when the Mouse wheel is rolled while it points at the slider
+    TriggerAddAction(triggerWheel, function()
+
+        -- BlzGetTriggerFrameValue() tells us in which direction the wheel was rolled
+        local add
+        if BlzGetTriggerFrameValue() > 0 then
+            add = 20
+        else
+            add = -20
+        end
+
+        -- the scrolling should only affect the triggering Player
+        if GetLocalPlayer() == GetTriggerPlayer() then
+            BlzFrameSetValue(sliderFrame, BlzFrameGetValue(sliderFrame) + add)
+        end
+    end)
 end
 creeps = {}
 
@@ -2187,121 +2351,126 @@ function TripleImpale(d)
     end)
 end
 function ChainHook()
-    if chainMarker and not Chaining and not chaincooldown then
-        chainMarker = false
-        local function MoveToTheTarget(points, effects, sharp)
-            local i = 1
-            local t2 = CreateTimer()
-            TimerStart( t2, 1/64, true, function()
-                p = points[i]
-                DestroyEffect(effects[i])
-                if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
-                    if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
-                        SetUnitPosition(slayer, p.x, p.y)
-                        FixCursor(p.x, p.y)
-                    elseif SlayerInsideCage then
-                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
-                        if not IsPointInHexagon(xx, yy, hexPoints) then
-                            for e = 1, #effects do
-                                DestroyEffect(effects[e])
-                            end
-                            IssueImmediateOrder(slayer, "stop")
-                            EnableTrigger(ClickTrigger)
-                            SetUnitInvulnerable(slayer, false)
-                            InitWalkTimer()
-                            --PauseUnit(slayer, false)
-                            SetUnitMoveSpeed(slayer, 522)
-                            Chaining = false
-                            DestroyTimer(t2)
-                        else
-                            SetUnitPosition(slayer, p.x, p.y)
-                            FixCursor(p.x, p.y)
-                        end
-                    else
-                        local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 80)
-                        if IsPointInHexagon(xx, yy, hexPoints) then
-                            for e = 1, #effects do
-                                DestroyEffect(effects[e])
-                            end
-                            IssueImmediateOrder(slayer, "stop")
-                            EnableTrigger(ClickTrigger)
-                            SetUnitInvulnerable(slayer, false)
-                            InitWalkTimer()
-                            --PauseUnit(slayer, false)
-                            SetUnitMoveSpeed(slayer, 522)
-                            Chaining = false
-                            DestroyTimer(t2)
-                        else
-                            SetUnitPosition(slayer, p.x, p.y)
-                            FixCursor(p.x, p.y)
-                        end
-                    end
-                end
-                i = i + 1
-                if i > sharp - 8 then
-                    Chaining = false
-                end
-                if i > sharp then
-                    PauseTimer(t2)
-                    EnableTrigger(ClickTrigger)
-                    SetUnitInvulnerable(slayer, false)
-                    InitWalkTimer()
-                    --PauseUnit(slayer, false)
-                    SetUnitMoveSpeed(slayer, 522)
-                    Chaining = false
-                    DestroyTimer(t2)
-                end
-            end)
-        end
-
-        local targets = {}
-        local cursorX = BlzGetTriggerPlayerMouseX()
-        local cursorY = BlzGetTriggerPlayerMouseY()
-        if IsPointInCircle(cursorX, cursorY, CenterX, CenterY, Radius) then
-            local x, y = GetUnitPosition(slayer)
-
-
-            local target = FindClosestUnit(creeps, cursorX, cursorY)
-            local tX, tY = GetUnitPosition(target)
-
-            if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
-                Chaining = true
-                chaincooldown = true
-                local cdtimer = CreateTimer()
-                TimerStart(cdtimer, 2, false, function()
-                    chaincooldown = false
-                    DestroyTimer(cdtimer)
-                end)
-                DisableTrigger(ClickTrigger)
-                DestroyTimer(walkTimer)
-                SetUnitInvulnerable(slayer, true)
-                PlayChain()
-                --PauseUnit(slayer, true)
-                SetUnitMoveSpeed(slayer, 0)
-                IssueImmediateOrder(slayer, "stop")
-                local x1, y1 = GetPointOnLine(tX, tY, x, y, 36)
-                local points = GetPointsOnLine(x, y, x1, y1, 34)
-                table.remove(points, #points)
+    if chainCharges > 0 then
+        if chainMarker and not Chaining  then --and not chaincooldown
+            chainMarker = false
+            local function MoveToTheTarget(points, effects, sharp)
                 local i = 1
-                local sharp = #points
-                local angle = CalculateAngle(x, y, x1, y1)
-                local t = CreateTimer()
-                local effects = {}
-
-                TimerStart( t, 1/64, true, function()
+                local t2 = CreateTimer()
+                TimerStart( t2, 1/64, true, function()
                     p = points[i]
-                    eff = AddSpecialEffect("models\\chainlink1", p.x, p.y)
-                    BlzSetSpecialEffectYaw( eff, angle )
-                    table.insert(effects, eff)
+                    DestroyEffect(effects[i])
+                    if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
+                        if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
+                            SetUnitPosition(slayer, p.x, p.y)
+                            FixCursor(p.x, p.y)
+                        elseif SlayerInsideCage then
+                            local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                            if not IsPointInHexagon(xx, yy, hexPoints) then
+                                for e = 1, #effects do
+                                    DestroyEffect(effects[e])
+                                end
+                                IssueImmediateOrder(slayer, "stop")
+                                EnableTrigger(ClickTrigger)
+                                SetUnitInvulnerable(slayer, false)
+                                InitWalkTimer()
+                                --PauseUnit(slayer, false)
+                                SetUnitMoveSpeed(slayer, 522)
+                                Chaining = false
+                                DestroyTimer(t2)
+                            else
+                                SetUnitPosition(slayer, p.x, p.y)
+                                FixCursor(p.x, p.y)
+                            end
+                        else
+                            local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 80)
+                            if IsPointInHexagon(xx, yy, hexPoints) then
+                                for e = 1, #effects do
+                                    DestroyEffect(effects[e])
+                                end
+                                IssueImmediateOrder(slayer, "stop")
+                                EnableTrigger(ClickTrigger)
+                                SetUnitInvulnerable(slayer, false)
+                                InitWalkTimer()
+                                --PauseUnit(slayer, false)
+                                SetUnitMoveSpeed(slayer, 522)
+                                Chaining = false
+                                DestroyTimer(t2)
+                            else
+                                SetUnitPosition(slayer, p.x, p.y)
+                                FixCursor(p.x, p.y)
+                            end
+                        end
+                    end
                     i = i + 1
+                    if i > sharp - 8 then
+                        Chaining = false
+                    end
                     if i > sharp then
-                        PauseTimer(t)
-                        MoveToTheTarget(points, effects, sharp)
-                        DestroyTimer(t)
+                        PauseTimer(t2)
+                        EnableTrigger(ClickTrigger)
+                        SetUnitInvulnerable(slayer, false)
+                        InitWalkTimer()
+                        --PauseUnit(slayer, false)
+                        SetUnitMoveSpeed(slayer, 522)
+                        Chaining = false
+                        DestroyTimer(t2)
                     end
                 end)
-            else
-                PlayBrokenChain()
+            end
+
+            local targets = {}
+            local cursorX = BlzGetTriggerPlayerMouseX()
+            local cursorY = BlzGetTriggerPlayerMouseY()
+            if IsPointInCircle(cursorX, cursorY, CenterX, CenterY, Radius) then
+                local x, y = GetUnitPosition(slayer)
+
+
+                local target = FindClosestUnit(creeps, cursorX, cursorY)
+                local tX, tY = GetUnitPosition(target)
+
+                if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+                    Chaining = true
+                    --chaincooldown = true
+                    chainCharges = chainCharges - 1
+                    UpdateCharges(4, chainCharges)
+                    DisplayCooldown(true)
+                    --local cdtimer = CreateTimer()
+                    --TimerStart(cdtimer, 2, false, function()
+                        --chaincooldown = false
+                        --DestroyTimer(cdtimer)
+                    --end)
+                    DisableTrigger(ClickTrigger)
+                    DestroyTimer(walkTimer)
+                    SetUnitInvulnerable(slayer, true)
+                    PlayChain()
+                    --PauseUnit(slayer, true)
+                    SetUnitMoveSpeed(slayer, 0)
+                    IssueImmediateOrder(slayer, "stop")
+                    local x1, y1 = GetPointOnLine(tX, tY, x, y, 36)
+                    local points = GetPointsOnLine(x, y, x1, y1, 34)
+                    table.remove(points, #points)
+                    local i = 1
+                    local sharp = #points
+                    local angle = CalculateAngle(x, y, x1, y1)
+                    local t = CreateTimer()
+                    local effects = {}
+
+                    TimerStart( t, 1/64, true, function()
+                        p = points[i]
+                        eff = AddSpecialEffect("models\\chainlink1", p.x, p.y)
+                        BlzSetSpecialEffectYaw( eff, angle )
+                        table.insert(effects, eff)
+                        i = i + 1
+                        if i > sharp then
+                            PauseTimer(t)
+                            MoveToTheTarget(points, effects, sharp)
+                            DestroyTimer(t)
+                        end
+                    end)
+                else
+                    PlayBrokenChain()
+                end
             end
         end
     end
@@ -2309,6 +2478,7 @@ end
 
 --globalMarkerDistance = 0
 function FindChainTarget()
+    print(chainCharges)
     ------fix double circle
     if (not chainMarker) or (not rmbpressed) then
         for b = 1, #slayerEffects do
@@ -2325,7 +2495,7 @@ function FindChainTarget()
         targetEffects = {}
     end
     --------
-    if chainMarker == false then
+    if chainMarker == false and chainCharges > 0 then
         for i = 1, 32 do --создали пул эффектов вне зоны видимости
             local eff = AddSpecialEffect("models\\aoe_indicator", -6000, -6000)
             BlzSetSpecialEffectScale(eff, 0.5)
@@ -2426,41 +2596,33 @@ function FindChainTarget()
                 DestroyTimer(t)
             end
         end)
+    elseif chainCharges == 0 then
+        print("bruh")
+        PlayBrokenChain()
     end
 end
 function Dash()
-    local distance = 400
+    if dashCharges > 0 then
+        local distance = 400
 
-    local mouseX, mouseY = GetUnitPosition(posdummy)
+        local mouseX, mouseY = GetUnitPosition(posdummy)
 
-    local slayerX, slayerY = GetUnitPosition(slayer)
+        local slayerX, slayerY = GetUnitPosition(slayer)
 
-    local x, y = GetPointOnLine(slayerX, slayerY, mouseX, mouseY, distance)
+        local x, y = GetPointOnLine(slayerX, slayerY, mouseX, mouseY, distance)
 
-    local points = GetPointsOnLine(slayerX, slayerY, x, y, 40)
-    local i = 1
-    local sharp = #points
-    PlayDashSound()
-    local t = CreateTimer()
-    TimerStart(t, 1/64, true, function()
-        if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) then
-            local p = points[i]
-            if not CageOn then
-                local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
-                DestroyEffect(eff)
-                SetUnitPosition(slayer, p.x, p.y)
-                SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
-                FixCursor(p.x, p.y)
-                i = i + 1
-                if i > sharp then
-                    DestroyTimer(t)
-                end
-            elseif SlayerInsideCage then
-                local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
-                if not IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
-                    DestroyTimer(t)
-                else
+        local points = GetPointsOnLine(slayerX, slayerY, x, y, 40)
+        local i = 1
+        local sharp = #points
+        PlayDashSound()
+        dashCharges = dashCharges - 1
+        UpdateCharges(2, dashCharges)
+        DisplayCooldown(true)
+        local t = CreateTimer()
+        TimerStart(t, 1/64, true, function()
+            if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) then
+                local p = points[i]
+                if not CageOn then
                     local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
                     DestroyEffect(eff)
                     SetUnitPosition(slayer, p.x, p.y)
@@ -2469,35 +2631,51 @@ function Dash()
                     i = i + 1
                     if i > sharp then
                         DestroyTimer(t)
+                    end
+                elseif SlayerInsideCage then
+                    local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                    if not IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                        DestroyTimer(t)
+                    else
+                        local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
+                        DestroyEffect(eff)
+                        SetUnitPosition(slayer, p.x, p.y)
+                        SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+                        FixCursor(p.x, p.y)
+                        i = i + 1
+                        if i > sharp then
+                            DestroyTimer(t)
+                        end
+                    end
+                else
+                    local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
+                    if IsPointInHexagon(xx, yy, hexPoints) then
+                        IssueImmediateOrder(slayer, "stop")
+                        DestroyTimer(t)
+                    else
+                        local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
+                        DestroyEffect(eff)
+                        SetUnitPosition(slayer, p.x, p.y)
+                        SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
+                        FixCursor(p.x, p.y)
+                        i = i + 1
+                        if i > sharp then
+                            DestroyTimer(t)
+                        end
                     end
                 end
             else
-                local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
-                if IsPointInHexagon(xx, yy, hexPoints) then
-                    IssueImmediateOrder(slayer, "stop")
-                    DestroyTimer(t)
-                else
-                    local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
-                    DestroyEffect(eff)
-                    SetUnitPosition(slayer, p.x, p.y)
-                    SetUnitPosition(posdummy, p.x + (mouseX - slayerX), p.y + (mouseY - slayerY))
-                    FixCursor(p.x, p.y)
-                    i = i + 1
-                    if i > sharp then
-                        DestroyTimer(t)
-                    end
-                end
+                DestroyTimer(t)
             end
-        else
-            DestroyTimer(t)
-        end
-    end)
+        end)
+    end
 end
 
 function MakeShot(x, y)
     local startx, starty = GetUnitPosition(slayer)
     if IsPointInCircle(startx, starty, CenterX, CenterY, Radius - 20) then
-        if not cooldown then
+        if rocketCharges > 0 then --not cooldown
             if not beetleAtached then
                 --cooldown = true
                 --local cooldownTimer = CreateTimer()
@@ -2584,6 +2762,19 @@ function MakeShot(x, y)
                     beetleHP = 3
                 end
             end
+            rocketCharges = rocketCharges - 1
+            UpdateCharges(1, rocketCharges)
+        end
+        if rocketCharges <= 30 then
+            if #fuel < 3 then
+                local chance = math.random()
+                if chance < 0.02 then
+                    SpawnFuel()
+                end
+            end
+            if rocketCharges <= 0 and sawingCharges <= 0 and not fuelOnMap then
+                SpawnFuel()
+            end
         end
     end
 end
@@ -2592,75 +2783,114 @@ function Sawing()
     local targets = {}
     local x, y = GetUnitPosition(slayer)
 
-
     local target = FindClosestUnit(creeps, x, y)
     local tX, tY = GetUnitPosition(target)
-    if IsPointInCircle(tX, tY, x, y, 350) and not Chaining and not dashing then
-        sawing = true
-        SetUnitPosition(slayer, tX, tY)
-        SetUnitInvulnerable(slayer, true)
-        CameraSetFocalDistance(50)
-        local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
+    if sawingCharges > 0 then
+        if IsPointInCircle(tX, tY, x, y, 350) and not Chaining and not dashing and not sawing then
+            sawing = true
+            sawingCharges = sawingCharges - 1
+            UpdateCharges(3, sawingCharges)
+            SetUnitPosition(slayer, tX, tY)
+            SetUnitInvulnerable(slayer, true)
+            CameraSetFocalDistance(50)
+            local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
 
-        PlaySawFleshSound()
-        PlayScream()
-        BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
-        BlzFrameSetLevel(spriteframe, 3)
-        BlzFrameSetModel(spriteframe, "acowtf3", 0)
-        BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
-        -- birth = 0
-        -- death = 1
-        -- stand = 2
-        -- morph = 3
-        -- alternate = 4
-        CinematicFilterGenericBJ( 0.00, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 25.00, 100.00, 100.00, 100.00, 25.00 )
-        BlzFrameSetVisible(spriteframe, true)
-        local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
-        BlzFrameSetLevel(Mask,4)
-        BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.14, 0.6)
-        BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.95, 0.0)
-        BlzFrameSetTexture(Mask, "backdrops\\blood2", 0, true)
-        BlzFrameSetAlpha(Mask, 0)
-        local alpha = 0
-        TimerStart(CreateTimer(), 1/32, true, function()
-            alpha = alpha + 4
-            if alpha >=255 then
-                BlzFrameSetAlpha(Mask, 255)
-                DestroyTimer(GetExpiredTimer())
-            else
-                BlzFrameSetAlpha(Mask, alpha)
-            end
-        end)
-
-        local focal = 50
-
-        TimerStart(CreateTimer(), 3, false, function()
-            BlzDestroyFrame(spriteframe)
-            DisplayCineFilterBJ( false )
+            PlaySawFleshSound()
+            PlayScream()
+            BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
+            BlzFrameSetLevel(spriteframe, 3)
+            BlzFrameSetModel(spriteframe, "acowtf4", 0)
+            BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
+            -- birth = 0
+            -- death = 1
+            -- stand = 2
+            -- morph = 3
+            -- alternate = 4
+            CinematicFilterGenericBJ( 0.00, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 25.00, 100.00, 100.00, 100.00, 25.00 )
+            BlzFrameSetVisible(spriteframe, true)
+            local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+            BlzFrameSetLevel(Mask,4)
+            BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.14, 0.6)
+            BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.95, 0.0)
+            BlzFrameSetTexture(Mask, "backdrops\\blood2", 0, true)
+            BlzFrameSetAlpha(Mask, 0)
+            local alpha = 0
+            SawingReward()
             TimerStart(CreateTimer(), 1/32, true, function()
-                focal = focal + 10
-                if focal >=500 then
-                    CameraSetFocalDistance(0)
-                    DestroyTimer(GetExpiredTimer())
-                else
-                    CameraSetFocalDistance(focal)
-                end
-            end)
-            TimerStart(CreateTimer(), 1/32, true, function()
-                alpha = alpha - 4
-                if alpha <=0 then
-                    BlzFrameSetAlpha(Mask, 0)
-                    BlzDestroyFrame(Mask)
+                alpha = alpha + 4
+                if alpha >=255 then
+                    BlzFrameSetAlpha(Mask, 255)
                     DestroyTimer(GetExpiredTimer())
                 else
                     BlzFrameSetAlpha(Mask, alpha)
                 end
             end)
-            SetUnitInvulnerable(slayer, false)
-            sawing = false
-            DestroyTimer(GetExpiredTimer())
-        end)
+
+            local focal = 50
+
+            TimerStart(CreateTimer(), 3, false, function()
+                BlzDestroyFrame(spriteframe)
+                DisplayCineFilterBJ( false )
+                TimerStart(CreateTimer(), 1/32, true, function()
+                    focal = focal + 10
+                    if focal >=500 then
+                        CameraSetFocalDistance(0)
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        CameraSetFocalDistance(focal)
+                    end
+                end)
+                TimerStart(CreateTimer(), 1/32, true, function()
+                    alpha = alpha - 4
+                    if alpha <=0 then
+                        BlzFrameSetAlpha(Mask, 0)
+                        BlzDestroyFrame(Mask)
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        BlzFrameSetAlpha(Mask, alpha)
+                    end
+                end)
+                SetUnitInvulnerable(slayer, false)
+                sawing = false
+                DestroyTimer(GetExpiredTimer())
+            end)
+        end
     end
+end
+
+function SpawnFuel()
+    local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+    local eff = AddSpecialEffect("models\\fuel", xy[1], xy[2])
+    fuelOnMap = true
+    table.insert(fuel, {xy, eff})
+end
+
+function PickFuel(fuelEff, index)
+    if sawingCharges < sawingChargesConst then
+        DestroyEffect(fuelEff[2])
+        table.remove(fuel, index)
+        sawingCharges = sawingCharges + 1
+    end
+    if #fuel == 0 then
+        fuelOnMap = false
+    end
+end
+
+function SawingReward()
+    local t = CreateTimer()
+    local i = 0
+    TimerStart(t, 1/16, true, function()
+        rocketCharges = rocketCharges + 1
+        if rocketCharges > 100 then
+            rocketCharges = 100
+        end
+        UpdateCharges(1, rocketCharges)
+        i = i + 1
+        if i > sawingDefaultReward then
+            DestroyTimer(t)
+        end
+    end)
+
 end
 function CreateSlayer()
     slayer = CreateUnit(Player(1), _('hrif'), 600, 200, bj_UNIT_FACING)
