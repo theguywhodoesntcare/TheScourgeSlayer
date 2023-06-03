@@ -407,3 +407,16 @@ function IsPointInHexagon(x, y, hexagonPoints)
     end
     return intersections % 2 == 1
 end
+
+function CirclePath(radius, centerX, centerY, angleStep)
+    --движение точки по окружности
+    local points = {}
+    local steps = math.floor(2 * math.pi / angleStep)
+    for i = 1, steps do
+        local angle = i * angleStep
+        local x = centerX + radius * math.cos(angle)
+        local y = centerY + radius * math.sin(angle)
+        table.insert(points, {x = x, y = y})
+    end
+    return points
+end

@@ -71,6 +71,15 @@ function CreateBackdrop(parent, centerX, centerY, size, texture, lvl)
     return fr
 end
 
+function CreateBackdropTwoPoints(parent, topleftX, topleftY, botrightX, botrightY, texture, lvl)
+    local fr = BlzCreateFrameByType("BACKDROP", "", parent, "", 1)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_TOPLEFT, topleftX, topleftY)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_BOTTOMRIGHT, botrightX, botrightY)
+    BlzFrameSetTexture(fr, texture, 0, true)
+    return fr
+end
+
 function CreateText(parent, centerX, centerY, size, text, lvl)
     local fr = BlzCreateFrameByType("TEXT", "", parent, "", 0)
     BlzFrameSetLevel(fr, lvl)

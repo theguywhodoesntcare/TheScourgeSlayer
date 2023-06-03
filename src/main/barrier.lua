@@ -13,4 +13,6 @@ function CreateBarrier()
         --BlzSetSpecialEffectZ(eff, 400)
         table.insert(barrier, eff)
     end
+    CreateStatues()
 end
+

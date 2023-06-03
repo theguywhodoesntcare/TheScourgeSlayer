@@ -89,12 +89,25 @@ function MakeShot(x, y)
                 end
             end
             rocketCharges = rocketCharges - 1
+            if rocketCharges <= 0 then
+                SetIconEnable(iconsUI[1], false)
+            end
             UpdateCharges(1, rocketCharges)
         end
-        if rocketCharges <= 30 then
+
+        if rocketCharges <= 40 then
+            if not lowAmmo then
+                lowAmmo = true
+                DisplayWarningAmmo()
+            end
+        elseif rocketCharges > 40 and lowAmmo then
+            lowAmmo = false
+        end
+
+        if (lowAmmo or sawingCharges <= 2) then
             if #fuel < 3 then
                 local chance = math.random()
-                if chance <= 0.02 then
+                if chance <= 0.03 then
                     SpawnFuel()
                 end
             end
@@ -104,3 +117,4 @@ function MakeShot(x, y)
         end
     end
 end
+

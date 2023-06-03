@@ -1,9 +1,17 @@
-creeps = {}
+
 
 function CreateTestUnit()
-    local testUnit = CreateUnit(Player(1), _('uaco'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
+    local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+    local testUnit = CreateUnit(Player(1), _('uaco'), xy[1], xy[2], bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
     table.insert(creeps, testUnit)
+    table.insert(chainTargets, testUnit)
+end
+
+function CreateFakeColumn(x, y)
+    local testUnit = CreateUnit(Player(1), _('fake'), x, y, bj_UNIT_FACING)
+    SetUnitPathing(testUnit, false)
+    table.insert(chainTargets, testUnit)
 end
 
 function CreateDummy()

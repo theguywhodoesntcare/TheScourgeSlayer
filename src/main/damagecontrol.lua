@@ -4,38 +4,69 @@ function GotDamage(type)
         PlayPainSoundMain()
 
         if type == "mechanical" then
+            slayerHP = slayerHP - 10
             CrackedGlassEffect()
         end
 
         if type == "impale" then
+            slayerHP = slayerHP - 20
             CrackedGlassEffect()
         end
 
         if type == "fire" then
+            slayerHP = slayerHP - 10
             MaskEffect("backdrops\\VignetteFire.dds", 100, 100, 100)
         end
 
         if type == "acid" then
+            slayerHP = slayerHP - 1
             MaskEffect("backdrops\\VignettePoison.dds", 100, 100, 100)
         end
 
         if type == "bite" then
+            slayerHP = slayerHP - 5
             MaskEffect("backdrops\\VignetteDamage.dds", 75, 10, 10)
         end
 
         if type == "blood" then
+            slayerHP = slayerHP - 5
+            print("blood")
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
             local t = CreateTimer()
             TimerStart(t, 0.2, false, function()
                 CameraClearNoiseForPlayer( Player(0) )
                 DestroyTimer(t)
             end)
-            MaskEffect("backdrops\\blood1.dds")
+            BloodFrame()
+
+            --MaskEffect("backdrops\\blood1.dds", 100, 100, 100)
         end
+        print(slayerHP)
     end
 end
 
 function BloodFrame()
+
+    local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+    BlzFrameSetLevel(Mask,4)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.1338, 0.6)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.936020, 0)
+    BlzFrameSetTexture(Mask, "backdrops\\blood1.dds", 0, true)
+    BlzFrameSetAlpha(Mask, 255)
+    local alpha = 255
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha - 4
+        if alpha <=0 then
+            BlzFrameSetAlpha(Mask, 0)
+            BlzDestroyFrame(Mask)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(Mask, alpha)
+        end
+    end)
+end
+
+function BloodFrameOLD()
     local randomX = math.random(10, 70) / 100
     local randomY = math.random(20, 50) / 100
     local randomS = math.random(20, 50) / 100

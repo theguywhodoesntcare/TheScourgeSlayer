@@ -1,3 +1,7 @@
+function PlayError()
+    PlaySound("Sound/Interface/Error.flac")
+end
+
 function PlayCage()
     PlaySound("Buildings/Undead/Graveyard/GraveYardWhat1.flac")
 end

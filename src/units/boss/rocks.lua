@@ -72,6 +72,7 @@ function ThrowStones(duration)
         for m = 1, #t do
             DestroyEffect(t[m])
         end
+        castRocks = false --!!!!!
         DestroyTimer(waitDuration)
     end)
 end

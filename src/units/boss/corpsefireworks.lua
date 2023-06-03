@@ -1,15 +1,16 @@
-function CorpseBombs()
+function CorpseBombs(bombs, time)
     local x, y = GetUnitPosition(slayer)
     CorpseBomb(x, y)
     local t = CreateTimer()
     local i = 0
-    TimerStart(t, 1.5, true, function()
+    TimerStart(t, time, true, function()
         local x, y = GetUnitPosition(slayer)
         --local endP = RandomPointInCircle(x, y, 600)
         CorpseBomb(x, y)
         --CorpseBomb(endP[1], endP[2])
         i = i + 1
-        if i> 5 then
+        if i >= bombs-1 then
+            castCorpse = false
             DestroyTimer(t)
         end
     end)
@@ -56,6 +57,7 @@ end
 function CorpseFireworks(x, y, numb)
     for i = 1, numb do
         local eff = AddSpecialEffect("Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile", x, y)
+        BlzSetSpecialEffectScale(eff, 1.11)
         local endP = RandomPointInCircle(x, y, 550)
         local marker = AddSpecialEffect("models\\marker", endP[1], endP[2])
         local maxZ = 820

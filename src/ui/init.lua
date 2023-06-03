@@ -5,4 +5,5 @@ function InitCustomUI()
             BlzFrameSetEnable(ClickBlocker, true)
     HPBar()
     Icons()
+    CreateWarnings()
 end

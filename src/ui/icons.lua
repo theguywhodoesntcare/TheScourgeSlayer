@@ -14,12 +14,12 @@ function Icons()
     local size2 = 0.05
     local size3 = 0.065
 
-    local consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     for i = 1, 4 do
         local yy = y - offsety * (i-1)
         local charges = CreateBackdrop(consoleFrame, x+0.035, yy-0.035, size2, "backdrops\\octFrame1", 6)
-        table.insert(iconsUI, charges)
         local icon = CreateBackdrop(charges, x, yy, size, textures[i], 6)
+        table.insert(iconsUI, icon)
         --table.insert(iconsUI, icon)
         if i % 2 == 0 then
             local cooldownFrame = CreateBackdrop(charges, x+0.035+0.0325, yy-0.003, size3, "backdrops\\octFrame1", 6)
@@ -59,6 +59,7 @@ function DisplayCooldown(start)
                 BlzFrameSetText(cooldownUI[1], 0)
                 if dashCharges < dashChargesConst then
                     dashCharges = dashCharges + 1
+                    SetIconEnable(iconsUI[2], true)
                     UpdateCharges(2, dashCharges)
                     if dashCharges == dashChargesConst then
                         dashCooldown = 0
@@ -79,6 +80,7 @@ function DisplayCooldown(start)
                 BlzFrameSetText(cooldownUI[2], 0)
                 if chainCharges < chainChargesConst then
                     chainCharges = chainCharges + 1
+                    SetIconEnable(iconsUI[4], true)
                     UpdateCharges(4, chainCharges)
                     if chainCharges == chainChargesConst then
                         chainCooldown = 0
@@ -94,3 +96,12 @@ function DisplayCooldown(start)
         end)
     end
 end
+
+function SetIconEnable(frame, flag)
+    if flag then
+        BlzFrameSetAlpha(frame, 255)
+    else
+        BlzFrameSetAlpha(frame, 128)
+    end
+end
+

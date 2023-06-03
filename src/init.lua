@@ -10,7 +10,9 @@ do
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
-        CreateTestUnit()
+        for i = 1, 6 do
+            CreateTestUnit()
+        end
         dummy1 = CreateDummy()
         dummy2 = CreateDummy()
         dummy3 = CreateDummy()
@@ -22,13 +24,11 @@ do
         globalX, globalY = GetUnitPosition(slayer)
         InitControlMouse()
         InitControlKeys()
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 200, true)
 
 
         --------------------
-        CenterX = 1
-        CenterY = 1
-        Radius = 1800
+
         CreateBarrier()
 
 
@@ -37,6 +37,7 @@ do
         InitCameraScrollBar()
         InitDamageTrigger()
         --AttackTimer()
-
+        CreateBlood()
+        CreateBones()
     end
 end

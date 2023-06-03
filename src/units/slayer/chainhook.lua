@@ -11,6 +11,7 @@ function ChainHook()
                     if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
                         if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
                             SetUnitPosition(slayer, p.x, p.y)
+                            SetUnitPathing(slayer, false)
                             FixCursor(p.x, p.y)
                         elseif SlayerInsideCage then
                             local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
@@ -62,6 +63,11 @@ function ChainHook()
                         --PauseUnit(slayer, false)
                         SetUnitMoveSpeed(slayer, 522)
                         Chaining = false
+                        local pathingTimer = CreateTimer()
+                        TimerStart(pathingTimer, 2, false, function()
+                            SetUnitPathing(slayer, true)
+                            DestroyTimer(pathingTimer)
+                        end)
                         DestroyTimer(t2)
                     end
                 end)
@@ -74,13 +80,16 @@ function ChainHook()
                 local x, y = GetUnitPosition(slayer)
 
 
-                local target = FindClosestUnit(creeps, cursorX, cursorY)
+                local target = FindClosestUnit(chainTargets, cursorX, cursorY)
                 local tX, tY = GetUnitPosition(target)
 
                 if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
                     Chaining = true
                     --chaincooldown = true
                     chainCharges = chainCharges - 1
+                    if chainCharges <= 0 then
+                        SetIconEnable(iconsUI[4], false)
+                    end
                     UpdateCharges(4, chainCharges)
                     DisplayCooldown(true)
                     --local cdtimer = CreateTimer()
@@ -172,7 +181,7 @@ function FindChainTarget()
         local t = CreateTimer()
         TimerStart(t, 1/32, true, function()
             local ux, uy = GetUnitPosition(slayer)
-            local target = FindClosestUnit(creeps, globalCursorX, globalCursorY)
+            local target = FindClosestUnit(chainTargets, globalCursorX, globalCursorY)
 
             local tX, tY = GetUnitPosition(target)
 
@@ -245,7 +254,6 @@ function FindChainTarget()
             end
         end)
     elseif chainCharges == 0 then
-        print("bruh")
         PlayBrokenChain()
     end
 end

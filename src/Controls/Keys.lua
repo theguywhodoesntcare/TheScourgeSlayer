@@ -261,8 +261,8 @@ function ControlKeys()
         --Laser()
         --Acid(30)
         --Cage(500, 5)
-        --CorpseBombs()
-        BeetleLaunch()
+        CorpseBombs(10, 1)
+        --BeetleLaunch()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then

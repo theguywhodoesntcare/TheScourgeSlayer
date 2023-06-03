@@ -14,7 +14,9 @@ do
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
-        CreateTestUnit()
+        for i = 1, 6 do
+            CreateTestUnit()
+        end
         dummy1 = CreateDummy()
         dummy2 = CreateDummy()
         dummy3 = CreateDummy()
@@ -26,13 +28,11 @@ do
         globalX, globalY = GetUnitPosition(slayer)
         InitControlMouse()
         InitControlKeys()
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 200, true)
 
 
         --------------------
-        CenterX = 1
-        CenterY = 1
-        Radius = 1800
+
         CreateBarrier()
 
 
@@ -41,7 +41,8 @@ do
         InitCameraScrollBar()
         InitDamageTrigger()
         --AttackTimer()
-
+        CreateBlood()
+        CreateBones()
     end
 end
 ---
@@ -52,13 +53,13 @@ end
 function SetGameCamera(preset)
     if preset == 40 then
         ResetToGameCamera( 1 )
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 200, true)
     end
     if preset == 60 then
         local t = {1480, 4800, 16, 310, 62, 1.570796, 20}
         local d = 2
         SetCameraFields(t, d)
-        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, -250, true)
+        SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 0, true)
     end
     if preset == 80 then
         local t = {800, 4000, 16, 338.045, 30.0027917027, 1.570796, 20}
@@ -358,8 +359,8 @@ function ControlKeys()
         --Laser()
         --Acid(30)
         --Cage(500, 5)
-        --CorpseBombs()
-        BeetleLaunch()
+        CorpseBombs(10, 1)
+        --BeetleLaunch()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
@@ -545,6 +546,15 @@ function CreateBackdrop(parent, centerX, centerY, size, texture, lvl)
     BlzFrameSetLevel(fr, lvl)
     BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, centerX, centerY)
     BlzFrameSetSize(fr, size, size)
+    BlzFrameSetTexture(fr, texture, 0, true)
+    return fr
+end
+
+function CreateBackdropTwoPoints(parent, topleftX, topleftY, botrightX, botrightY, texture, lvl)
+    local fr = BlzCreateFrameByType("BACKDROP", "", parent, "", 1)
+    BlzFrameSetLevel(fr, lvl)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_TOPLEFT, topleftX, topleftY)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_BOTTOMRIGHT, botrightX, botrightY)
     BlzFrameSetTexture(fr, texture, 0, true)
     return fr
 end
@@ -974,6 +984,23 @@ function IsPointInHexagon(x, y, hexagonPoints)
     end
     return intersections % 2 == 1
 end
+
+function CirclePath(radius, centerX, centerY, angleStep)
+    --движение точки по окружности
+    local points = {}
+    local steps = math.floor(2 * math.pi / angleStep)
+    for i = 1, steps do
+        local angle = i * angleStep
+        local x = centerX + radius * math.cos(angle)
+        local y = centerY + radius * math.sin(angle)
+        table.insert(points, {x = x, y = y})
+    end
+    return points
+end
+function PlayError()
+    PlaySound("Sound/Interface/Error.flac")
+end
+
 function PlayCage()
     PlaySound("Buildings/Undead/Graveyard/GraveYardWhat1.flac")
 end
@@ -1141,20 +1168,59 @@ function CreateBarrier()
         --BlzSetSpecialEffectZ(eff, 400)
         table.insert(barrier, eff)
     end
+    CreateStatues()
 end
+
+
 function AttackTimer()
     --эти атаки не могут быть одновременно друг с другом: {глыбы, файрболлы, крест жуков}, {крест жуков, импейл}
     --
     math.randomseed(os.time())
     globalAttackTimer = CreateTimer()
-    TimerStart(globalAttackTimer, 10, true, function()
-        local rand = math.random()
-        if rand < 0.2 then
-            Bugs()
-        elseif rand < 0.5 then
-            TripleImpale(math.random(30, 35))
-        else
-            ThrowStones(5)
+    TimerStart(globalAttackTimer, 4, true, function()
+        if Stage == 1 then
+            if not castFireballs and not castBeetles and not castCorpse and not castRocks then
+                local rand = math.random()
+                if rand <= 0.25 then
+                    local fireTimer = CreateTimer()
+                    local fireCounter = 0
+                    castFireballs = true
+                    TimerStart(fireTimer, 1, true, function()
+                        FireBalls(0.1, 15, 20)
+                        fireCounter = fireCounter + 1
+                        if fireCounter > 5 then
+                            castFireballs = false
+                            DestroyTimer(fireTimer)
+                        end
+                    end)
+                elseif rand <= 0.5 then
+                    castRocks = true
+                    ThrowStones(10)
+                elseif rand <= 0.75 then
+                    local beetleTimer = CreateTimer()
+                    local beetleCounter = 0
+                    castBeetles = true
+                    TimerStart(beetleTimer, 1, true, function()
+                        BeetleLaunch()
+                        beetleCounter = beetleCounter + 1
+                        if beetleCounter > 10 then
+                            castBeetles = false
+                            DestroyTimer(beetleTimer)
+                        end
+                    end)
+                else
+                    castCorpse = true
+                    CorpseBombs(10, 1.25)
+                end
+            end
+            local rand2 = math.random()
+            if rand2 <= 0.2 then
+                TripleImpale(math.random(30, 35))
+            elseif rand2 <= 0.35 and not CageOn and not Sawing then
+                Cage(500, 15)
+            elseif rand2 <= 0.50 and not acidGlobal then
+                Acid(10, 30)
+            end
         end
     end)
 end
@@ -1164,38 +1230,69 @@ function GotDamage(type)
         PlayPainSoundMain()
 
         if type == "mechanical" then
+            slayerHP = slayerHP - 10
             CrackedGlassEffect()
         end
 
         if type == "impale" then
+            slayerHP = slayerHP - 20
             CrackedGlassEffect()
         end
 
         if type == "fire" then
+            slayerHP = slayerHP - 10
             MaskEffect("backdrops\\VignetteFire.dds", 100, 100, 100)
         end
 
         if type == "acid" then
+            slayerHP = slayerHP - 1
             MaskEffect("backdrops\\VignettePoison.dds", 100, 100, 100)
         end
 
         if type == "bite" then
+            slayerHP = slayerHP - 5
             MaskEffect("backdrops\\VignetteDamage.dds", 75, 10, 10)
         end
 
         if type == "blood" then
+            slayerHP = slayerHP - 5
+            print("blood")
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
             local t = CreateTimer()
             TimerStart(t, 0.2, false, function()
                 CameraClearNoiseForPlayer( Player(0) )
                 DestroyTimer(t)
             end)
-            MaskEffect("backdrops\\blood1.dds")
+            BloodFrame()
+
+            --MaskEffect("backdrops\\blood1.dds", 100, 100, 100)
         end
+        print(slayerHP)
     end
 end
 
 function BloodFrame()
+
+    local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+    BlzFrameSetLevel(Mask,4)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.1338, 0.6)
+    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.936020, 0)
+    BlzFrameSetTexture(Mask, "backdrops\\blood1.dds", 0, true)
+    BlzFrameSetAlpha(Mask, 255)
+    local alpha = 255
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha - 4
+        if alpha <=0 then
+            BlzFrameSetAlpha(Mask, 0)
+            BlzDestroyFrame(Mask)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(Mask, alpha)
+        end
+    end)
+end
+
+function BloodFrameOLD()
     local randomX = math.random(10, 70) / 100
     local randomY = math.random(20, 50) / 100
     local randomS = math.random(20, 50) / 100
@@ -1340,8 +1437,17 @@ end
 
 
 function StatusList()
+    CenterX = 1
+    CenterY = 1
+    Radius = 1800
+    -----------
+    slayerHP = 150
+    slayerHPConst = 150
     Stage = 1 --текущая стадия
     ------
+    creeps = {} --таблица крипов
+
+
     iconsUI = {} --иконки
     chargesUI = {} --заряды
     cooldownUI = {} --кулдауны
@@ -1353,17 +1459,22 @@ function StatusList()
     castFireballs = false --кастует файрболлы
     castRocks = false --кастует глыбы
     castCarousel = false --кастует карусель жуков
+    castCorpse = false --кастует трупы
+    castBeetles = false --бросает жуков
 
     ------
     cooldown = false --кулдаун ракетницы
-    rocketCharges = 100 --заряды ракетницы
+    rocketCharges = 125 --заряды ракетницы
+    rocketChargesConst = 125
+    lowAmmo = false --индикатор малого количества заряда ракетницы
 
     Chaining = false --юзает хук
     chaincooldown = false --кулдаун хука
-    chainCharges = 1 --заряды хука
-    chainChargesConst = 1
+    chainCharges = 3 --заряды хука
+    chainChargesConst = 3
     chainCooldown = 0 --кулдаун хука
-    chainCooldownConst = 15
+    chainCooldownConst = 10
+    chainTargets = {} --возможные таргеты для хука
     slayerEffects = {} --таблица с эффектами для поиска цели хука
     slayerEffectsRed = {}
     targetEffects = {}
@@ -1386,13 +1497,14 @@ function StatusList()
     fuel = {} --таблица заспавненного топлива
 
     dashing = false --герой в рывке
-    dashCharges = 2 --заряды рывка
-    dashChargesConst = 2
+    dashCharges = 4 --заряды рывка
+    dashChargesConst = 4
     dashCooldown = 0 --кулдаун зарядя
-    dashCooldownConst = 8.0
+    dashCooldownConst = 5.0
     -------
     cdTimer = nil --глобалка для таймера, обновляющего кулдауны
     cooldownUpdating = false --показывает, что работает таймер, обновляющий кулдауны
+    ----------
 
 
 end
@@ -1418,6 +1530,36 @@ function GetUnitRealY(unit)
     end
 
     return RealGetUnitY(unit)
+end
+function CreateBlood()
+    for i = 1, math.random(4, 8) do
+        local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+        local eff = AddSpecialEffect("blood", xy[1], xy[2])
+        local angle = math.random() * 2 * math.pi
+        BlzSetSpecialEffectYaw(eff, angle)
+    end
+end
+
+
+function CreateStatues()
+    local points = GetPointsOnCircle(CenterX, CenterY, Radius-140, 36 * math.pi / 180)
+
+    for i = 1, #points do
+        local angle = CalculateAngle(points[i].x, points[i].y, CenterX, CenterY) + math.pi / 4
+        local eff = AddSpecialEffect("models\\SpiderStatue", points[i].x, points[i].y)
+        BlzSetSpecialEffectYaw(eff, angle)
+        CreateFakeColumn(points[i].x, points[i].y)
+    end
+end
+
+function CreateBones()
+    for i = 1, math.random(6, 10) do
+        local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+        local n = math.random(0, 4)
+        local angle = math.random() * 2 * math.pi
+        local eff = AddSpecialEffect("environment\\foliage\\blight\\bones\\foliage_blight_bone_0"..n, xy[1], xy[2])
+        BlzSetSpecialEffectYaw(eff, angle)
+    end
 end
 function HPBar()
     local bar = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
@@ -1445,6 +1587,24 @@ function HPBar()
         --i = GetRandomInt(0, 100)
         --print(BlzFrameGetValue(bar))
     end)
+
+
+    ------------
+
+    local bar2 = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetAbsPoint(bar2, FRAMEPOINT_CENTER, 0.4, 0.03)
+    -- Screen Size does not matter but has to be there
+    BlzFrameSetSize(bar2, 0.00001, 0.00001)
+
+    -- Models don't care about Frame Size, But world Object Models are huge . To use them in the UI one has to scale them down alot.
+    BlzFrameSetScale(bar2, 1)
+
+    --BlzFrameSetModel(bar, "ui/feedback/cooldown/ui-cooldown-indicator.mdx", 0)
+    --BlzFrameSetModel(bar, "ui/feedback/XpBar/XpBarConsole.mdx", 0)
+    BlzFrameSetModel(bar2, "sprites/testbar2.mdx", 0)
+    --BlzFrameSetModel(bar, "ui/feedback/buildprogressbar/buildprogressbar.mdx", 0)
+    --BlzFrameSetMinMaxValue(bar, 0, 100)
+    BlzFrameSetValue(bar2, 90)
 end
 function Icons()
     local textures = {
@@ -1462,12 +1622,12 @@ function Icons()
     local size2 = 0.05
     local size3 = 0.065
 
-    local consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     for i = 1, 4 do
         local yy = y - offsety * (i-1)
         local charges = CreateBackdrop(consoleFrame, x+0.035, yy-0.035, size2, "backdrops\\octFrame1", 6)
-        table.insert(iconsUI, charges)
         local icon = CreateBackdrop(charges, x, yy, size, textures[i], 6)
+        table.insert(iconsUI, icon)
         --table.insert(iconsUI, icon)
         if i % 2 == 0 then
             local cooldownFrame = CreateBackdrop(charges, x+0.035+0.0325, yy-0.003, size3, "backdrops\\octFrame1", 6)
@@ -1507,6 +1667,7 @@ function DisplayCooldown(start)
                 BlzFrameSetText(cooldownUI[1], 0)
                 if dashCharges < dashChargesConst then
                     dashCharges = dashCharges + 1
+                    SetIconEnable(iconsUI[2], true)
                     UpdateCharges(2, dashCharges)
                     if dashCharges == dashChargesConst then
                         dashCooldown = 0
@@ -1527,6 +1688,7 @@ function DisplayCooldown(start)
                 BlzFrameSetText(cooldownUI[2], 0)
                 if chainCharges < chainChargesConst then
                     chainCharges = chainCharges + 1
+                    SetIconEnable(iconsUI[4], true)
                     UpdateCharges(4, chainCharges)
                     if chainCharges == chainChargesConst then
                         chainCooldown = 0
@@ -1542,6 +1704,16 @@ function DisplayCooldown(start)
         end)
     end
 end
+
+function SetIconEnable(frame, flag)
+    if flag then
+        BlzFrameSetAlpha(frame, 255)
+    else
+        BlzFrameSetAlpha(frame, 128)
+    end
+end
+
+
 function InitCustomUI()
     HideDefaultUI()
     ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
@@ -1549,6 +1721,7 @@ function InitCustomUI()
             BlzFrameSetEnable(ClickBlocker, true)
     HPBar()
     Icons()
+    CreateWarnings()
 end
 function InitCameraScrollBar()
     -- create a vertical slider by inheriting from a Scrollbar. It will use esc menu textures
@@ -1599,12 +1772,73 @@ function InitCameraScrollBar()
         end
     end)
 end
-creeps = {}
+function CreateWarnings()
+    ammoFr = CreateBackdropTwoPoints(consoleFrame, 0, 0.5, 0.2, 0.42, "backdrops\\lowammo", 7)
+    BlzFrameSetSize(ammoFr, 0.2, 0.08)
+    BlzFrameClearAllPoints(ammoFr)
+    BlzFrameSetVisible(ammoFr, false)
+    healthFr = CreateBackdropTwoPoints(consoleFrame, 0.2, 0.15, 0.4, 0.07, "backdrops\\lowhealth", 7)
+    BlzFrameSetSize(healthFr, 0.2, 0.08)
+    BlzFrameClearAllPoints(healthFr)
+    BlzFrameSetVisible(healthFr, false)
+
+    ammoPoints = CirclePath(0.01, 0.1, 0.5, 9*math.pi / 180)
+    healthPoints = CirclePath(0.01, 0.3, 0.11, 9*math.pi / 180)
+end
+
+function DisplayWarningAmmo()
+    local i = 1
+    local sharp = #ammoPoints
+    local t = CreateTimer()
+    BlzFrameSetVisible(ammoFr, true)
+
+    TimerStart(t, 1/32, true, function()
+        if lowAmmo then
+            BlzFrameSetAbsPoint(ammoFr, FRAMEPOINT_CENTER, ammoPoints[i].x, ammoPoints[i].y)
+            i = i + 1
+            if i > sharp then
+                i = 1
+            end
+        else
+            BlzFrameSetVisible(ammoFr, false)
+            DestroyTimer(t)
+        end
+    end)
+end
+
+function DisplayWarningHealth()
+    local i = 1
+    local sharp = #healthPoints
+    local t = CreateTimer()
+
+    BlzFrameSetVisible(healthFr, true)
+    TimerStart(t, 1/32, true, function()
+        if lowAmmo then
+            BlzFrameSetAbsPoint(ammoFr, FRAMEPOINT_CENTER, healthPoints[i].x, healthPoints[i].y)
+            i = i + 1
+            if i > sharp then
+                i = 1
+            end
+        else
+            BlzFrameSetVisible(healthFr, false)
+            DestroyTimer(t)
+        end
+    end)
+end
+
 
 function CreateTestUnit()
-    local testUnit = CreateUnit(Player(1), _('uaco'), math.random(0, 800), math.random(0, 800), bj_UNIT_FACING)
+    local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+    local testUnit = CreateUnit(Player(1), _('uaco'), xy[1], xy[2], bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
     table.insert(creeps, testUnit)
+    table.insert(chainTargets, testUnit)
+end
+
+function CreateFakeColumn(x, y)
+    local testUnit = CreateUnit(Player(1), _('fake'), x, y, bj_UNIT_FACING)
+    SetUnitPathing(testUnit, false)
+    table.insert(chainTargets, testUnit)
 end
 
 function CreateDummy()
@@ -2008,18 +2242,19 @@ function BugLine(x1, y1, x2, y2)
         end
     end)
 end
-function CorpseBombs()
+function CorpseBombs(bombs, time)
     local x, y = GetUnitPosition(slayer)
     CorpseBomb(x, y)
     local t = CreateTimer()
     local i = 0
-    TimerStart(t, 1.5, true, function()
+    TimerStart(t, time, true, function()
         local x, y = GetUnitPosition(slayer)
         --local endP = RandomPointInCircle(x, y, 600)
         CorpseBomb(x, y)
         --CorpseBomb(endP[1], endP[2])
         i = i + 1
-        if i> 5 then
+        if i >= bombs-1 then
+            castCorpse = false
             DestroyTimer(t)
         end
     end)
@@ -2066,6 +2301,7 @@ end
 function CorpseFireworks(x, y, numb)
     for i = 1, numb do
         local eff = AddSpecialEffect("Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile", x, y)
+        BlzSetSpecialEffectScale(eff, 1.11)
         local endP = RandomPointInCircle(x, y, 550)
         local marker = AddSpecialEffect("models\\marker", endP[1], endP[2])
         local maxZ = 820
@@ -2159,7 +2395,7 @@ function FireBalls(time, bigCircleValue, littleCircleValue)
     table.insert(targets, {endX, endY})
 
     for i = 1, littleCircleValue do
-        table.insert(targets, RandomPointInCircle(endX, endY, 600))
+        table.insert(targets, RandomPointInCircle(endX, endY, 425))
     end
     for ii = 1, bigCircleValue do
         table.insert(targets, RandomPointInCircle(CenterX, CenterY, Radius))
@@ -2249,6 +2485,7 @@ function ThrowStones(duration)
         for m = 1, #t do
             DestroyEffect(t[m])
         end
+        castRocks = false --!!!!!
         DestroyTimer(waitDuration)
     end)
 end
@@ -2363,6 +2600,7 @@ function ChainHook()
                     if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
                         if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
                             SetUnitPosition(slayer, p.x, p.y)
+                            SetUnitPathing(slayer, false)
                             FixCursor(p.x, p.y)
                         elseif SlayerInsideCage then
                             local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
@@ -2414,6 +2652,11 @@ function ChainHook()
                         --PauseUnit(slayer, false)
                         SetUnitMoveSpeed(slayer, 522)
                         Chaining = false
+                        local pathingTimer = CreateTimer()
+                        TimerStart(pathingTimer, 2, false, function()
+                            SetUnitPathing(slayer, true)
+                            DestroyTimer(pathingTimer)
+                        end)
                         DestroyTimer(t2)
                     end
                 end)
@@ -2426,13 +2669,16 @@ function ChainHook()
                 local x, y = GetUnitPosition(slayer)
 
 
-                local target = FindClosestUnit(creeps, cursorX, cursorY)
+                local target = FindClosestUnit(chainTargets, cursorX, cursorY)
                 local tX, tY = GetUnitPosition(target)
 
                 if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
                     Chaining = true
                     --chaincooldown = true
                     chainCharges = chainCharges - 1
+                    if chainCharges <= 0 then
+                        SetIconEnable(iconsUI[4], false)
+                    end
                     UpdateCharges(4, chainCharges)
                     DisplayCooldown(true)
                     --local cdtimer = CreateTimer()
@@ -2524,7 +2770,7 @@ function FindChainTarget()
         local t = CreateTimer()
         TimerStart(t, 1/32, true, function()
             local ux, uy = GetUnitPosition(slayer)
-            local target = FindClosestUnit(creeps, globalCursorX, globalCursorY)
+            local target = FindClosestUnit(chainTargets, globalCursorX, globalCursorY)
 
             local tX, tY = GetUnitPosition(target)
 
@@ -2597,7 +2843,6 @@ function FindChainTarget()
             end
         end)
     elseif chainCharges == 0 then
-        print("bruh")
         PlayBrokenChain()
     end
 end
@@ -2616,6 +2861,9 @@ function Dash()
         local sharp = #points
         PlayDashSound()
         dashCharges = dashCharges - 1
+        if dashCharges <= 0 then
+            SetIconEnable(iconsUI[2], false)
+        end
         UpdateCharges(2, dashCharges)
         DisplayCooldown(true)
         local t = CreateTimer()
@@ -2669,6 +2917,8 @@ function Dash()
                 DestroyTimer(t)
             end
         end)
+    else
+        PlayError()
     end
 end
 
@@ -2763,12 +3013,25 @@ function MakeShot(x, y)
                 end
             end
             rocketCharges = rocketCharges - 1
+            if rocketCharges <= 0 then
+                SetIconEnable(iconsUI[1], false)
+            end
             UpdateCharges(1, rocketCharges)
         end
-        if rocketCharges <= 30 then
+
+        if rocketCharges <= 40 then
+            if not lowAmmo then
+                lowAmmo = true
+                DisplayWarningAmmo()
+            end
+        elseif rocketCharges > 40 and lowAmmo then
+            lowAmmo = false
+        end
+
+        if (lowAmmo or sawingCharges <= 2) then
             if #fuel < 3 then
                 local chance = math.random()
-                if chance < 0.02 then
+                if chance <= 0.03 then
                     SpawnFuel()
                 end
             end
@@ -2778,6 +3041,7 @@ function MakeShot(x, y)
         end
     end
 end
+
 
 function Sawing()
     local targets = {}
@@ -2789,6 +3053,9 @@ function Sawing()
         if IsPointInCircle(tX, tY, x, y, 350) and not Chaining and not dashing and not sawing then
             sawing = true
             sawingCharges = sawingCharges - 1
+            if sawingCharges <= 0 then
+                SetIconEnable(iconsUI[3], false)
+            end
             UpdateCharges(3, sawingCharges)
             SetUnitPosition(slayer, tX, tY)
             SetUnitInvulnerable(slayer, true)
@@ -2870,6 +3137,8 @@ function PickFuel(fuelEff, index)
         DestroyEffect(fuelEff[2])
         table.remove(fuel, index)
         sawingCharges = sawingCharges + 1
+        SetIconEnable(iconsUI[3], true)
+        UpdateCharges(3, sawingCharges)
     end
     if #fuel == 0 then
         fuelOnMap = false
@@ -2881,8 +3150,13 @@ function SawingReward()
     local i = 0
     TimerStart(t, 1/16, true, function()
         rocketCharges = rocketCharges + 1
-        if rocketCharges > 100 then
-            rocketCharges = 100
+        SetIconEnable(iconsUI[1], true)
+        if rocketCharges > 40 then
+            lowAmmo = false
+        end
+
+        if rocketCharges > rocketChargesConst then
+            rocketCharges = rocketChargesConst
         end
         UpdateCharges(1, rocketCharges)
         i = i + 1

@@ -45,7 +45,7 @@ function FireBalls(time, bigCircleValue, littleCircleValue)
     table.insert(targets, {endX, endY})
 
     for i = 1, littleCircleValue do
-        table.insert(targets, RandomPointInCircle(endX, endY, 600))
+        table.insert(targets, RandomPointInCircle(endX, endY, 425))
     end
     for ii = 1, bigCircleValue do
         table.insert(targets, RandomPointInCircle(CenterX, CenterY, Radius))

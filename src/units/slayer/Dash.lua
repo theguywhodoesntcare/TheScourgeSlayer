@@ -13,6 +13,9 @@ function Dash()
         local sharp = #points
         PlayDashSound()
         dashCharges = dashCharges - 1
+        if dashCharges <= 0 then
+            SetIconEnable(iconsUI[2], false)
+        end
         UpdateCharges(2, dashCharges)
         DisplayCooldown(true)
         local t = CreateTimer()
@@ -66,5 +69,7 @@ function Dash()
                 DestroyTimer(t)
             end
         end)
+    else
+        PlayError()
     end
 end

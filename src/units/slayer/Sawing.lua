@@ -8,6 +8,9 @@ function Sawing()
         if IsPointInCircle(tX, tY, x, y, 350) and not Chaining and not dashing and not sawing then
             sawing = true
             sawingCharges = sawingCharges - 1
+            if sawingCharges <= 0 then
+                SetIconEnable(iconsUI[3], false)
+            end
             UpdateCharges(3, sawingCharges)
             SetUnitPosition(slayer, tX, tY)
             SetUnitInvulnerable(slayer, true)
@@ -89,6 +92,8 @@ function PickFuel(fuelEff, index)
         DestroyEffect(fuelEff[2])
         table.remove(fuel, index)
         sawingCharges = sawingCharges + 1
+        SetIconEnable(iconsUI[3], true)
+        UpdateCharges(3, sawingCharges)
     end
     if #fuel == 0 then
         fuelOnMap = false
@@ -100,8 +105,13 @@ function SawingReward()
     local i = 0
     TimerStart(t, 1/16, true, function()
         rocketCharges = rocketCharges + 1
-        if rocketCharges > 100 then
-            rocketCharges = 100
+        SetIconEnable(iconsUI[1], true)
+        if rocketCharges > 40 then
+            lowAmmo = false
+        end
+
+        if rocketCharges > rocketChargesConst then
+            rocketCharges = rocketChargesConst
         end
         UpdateCharges(1, rocketCharges)
         i = i + 1
