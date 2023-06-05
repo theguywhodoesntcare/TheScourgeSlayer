@@ -1544,16 +1544,16 @@ function ControlBossDamage()
             Win()
         end
         BlzFrameSetValue(bar, bossHP)
-        if bossHP <= (bossHPConst ) and Stage == 1 then
+        if bossHP <= (bossHPConst - bossHPConst/5) and Stage == 1 then
             Stage = 2
             PlayStage2()
             local text = "|cffff0000Second stage!\n\nThere is no more safe zone for you|r"
-            local descr = CreateText(consoleFrame, 0.4, 0.3, 0.4, text, 2)
-            BlzFrameSetScale(descr, 2)
+            local descr = CreateText(consoleFrame, 0.4, 0.4, 0.4, text, 2)
+            BlzFrameSetScale(descr, 4)
             local alpha = 255
 
             TimerStart(CreateTimer(), 1/32, true, function()
-                alpha = alpha - 4
+                alpha = alpha - 1
                 if alpha <=0 then
                     BlzFrameSetAlpha(descr, 0)
                     BlzDestroyFrame(descr)
@@ -2007,6 +2007,15 @@ end
 
 function InitCustomUI()
     HideDefaultUI()
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarFrame",0), true)
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarAlliesButton",0), false)
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarChatButton",0), false)
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarQuestsButton",0), false)
+
+    BlzFrameClearAllPoints(BlzGetFrameByName("UpperButtonBarFrame",0))
+    BlzFrameSetScale(BlzGetFrameByName("UpperButtonBarFrame",0), 1.5)
+    BlzFrameSetAbsPoint(BlzGetFrameByName("UpperButtonBarFrame",0), FRAMEPOINT_TOPLEFT, -0.26065, 0.6)
+    BlzFrameSetAbsPoint(BlzGetFrameByName("UpperButtonBarFrame",0), FRAMEPOINT_BOTTOMRIGHT, -0.16065, 0.56)
     ClickBlocker = BlzCreateFrameByType("TEXT", "name", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
         CreateTextFrame(ClickBlocker, -0.1338, 0.6, 0.936020, 0, 0, "", 1)
             BlzFrameSetEnable(ClickBlocker, true)
