@@ -1374,17 +1374,23 @@ function InitCreepsMovement()
     end)
 end
 function GotDamage(type)
+    if type == "impale" then
+        slayerHP = slayerHP - 10
+        CrackedGlassEffect()
+        local t = CreateTimer()
+        TimerStart(t, 1, false, function()
+            SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+            DestroyTimer(t)
+        end)
+    end
+
     if not BlzIsUnitInvulnerable(slayer) then
         --print("got damage")
+
         PlayPainSoundMain()
 
         if type == "mechanical" then
             slayerHP = slayerHP - 7
-            CrackedGlassEffect()
-        end
-
-        if type == "impale" then
-            slayerHP = slayerHP - 20
             CrackedGlassEffect()
         end
 
@@ -2194,6 +2200,7 @@ function Acid(numb, duration)
     local t = CreateTimer()
     local a = 1
     SetUnitAnimationByIndex(boss, 7)
+    PlayAcid()
     TimerStart(t, 1/32, true, function()
         AcidBomb(startX, startY, points[a][1], points[a][2])
         a=a+1
@@ -2209,7 +2216,6 @@ function Acid(numb, duration)
     local timerAlpha = CreateTimer()
     local alpha = 255
     TimerStart(timerEnd, duration, false, function()
-        PlayAcid()
         TimerStart(timerAlpha, 1/32, true, function()
             alpha = alpha - 2
             if alpha <= 0 then

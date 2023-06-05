@@ -1,15 +1,21 @@
 function GotDamage(type)
+    if type == "impale" then
+        slayerHP = slayerHP - 10
+        CrackedGlassEffect()
+        local t = CreateTimer()
+        TimerStart(t, 1, false, function()
+            SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+            DestroyTimer(t)
+        end)
+    end
+
     if not BlzIsUnitInvulnerable(slayer) then
         --print("got damage")
+
         PlayPainSoundMain()
 
         if type == "mechanical" then
             slayerHP = slayerHP - 7
-            CrackedGlassEffect()
-        end
-
-        if type == "impale" then
-            slayerHP = slayerHP - 20
             CrackedGlassEffect()
         end
 

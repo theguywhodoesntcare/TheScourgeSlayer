@@ -10,6 +10,7 @@ function Acid(numb, duration)
     local t = CreateTimer()
     local a = 1
     SetUnitAnimationByIndex(boss, 7)
+    PlayAcid()
     TimerStart(t, 1/32, true, function()
         AcidBomb(startX, startY, points[a][1], points[a][2])
         a=a+1
@@ -25,7 +26,6 @@ function Acid(numb, duration)
     local timerAlpha = CreateTimer()
     local alpha = 255
     TimerStart(timerEnd, duration, false, function()
-        PlayAcid()
         TimerStart(timerAlpha, 1/32, true, function()
             alpha = alpha - 2
             if alpha <= 0 then
