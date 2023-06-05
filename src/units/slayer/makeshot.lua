@@ -46,7 +46,7 @@ function MakeShot(x, y)
                             DestroyTimer(t)
                         end
                     end)
-                else
+                else --снаряд попадёт в босса
                     TimerStart(t, 1/64, true, function()
                         BlzSetSpecialEffectX(projectile, movePoints[i].x)
                         BlzSetSpecialEffectY(projectile, movePoints[i].y)
@@ -65,6 +65,7 @@ function MakeShot(x, y)
                         if d <= 10 then
                             PauseTimer(t)
                             DestroyEffect(projectile)
+                            ControlBossDamage()
                             DestroyTimer(t)
                         end
                         i = i+1
@@ -79,7 +80,7 @@ function MakeShot(x, y)
                 local projectile = AddSpecialEffect("Abilities\\Weapons\\GyroCopter\\GyroCopterMissile", startx, starty)
                 DestroyEffect(projectile)
                 beetleHP = beetleHP - 1
-                print(beetleHP)
+                --print(beetleHP)
                 if beetleHP <= 0 then
                     DestroyEffect(beetleAttach)
                     DestroyBeetleFrame()
@@ -93,6 +94,8 @@ function MakeShot(x, y)
                 SetIconEnable(iconsUI[1], false)
             end
             UpdateCharges(1, rocketCharges)
+        else
+            PlayError()
         end
 
         if rocketCharges <= 40 then
@@ -105,9 +108,9 @@ function MakeShot(x, y)
         end
 
         if (lowAmmo or sawingCharges <= 2) then
-            if #fuel < 3 then
+            if #fuel < 6 then
                 local chance = math.random()
-                if chance <= 0.03 then
+                if chance <= 0.08 then
                     SpawnFuel()
                 end
             end

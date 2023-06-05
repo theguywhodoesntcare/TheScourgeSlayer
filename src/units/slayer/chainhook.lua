@@ -2,7 +2,7 @@ function ChainHook()
     if chainCharges > 0 then
         if chainMarker and not Chaining  then --and not chaincooldown
             chainMarker = false
-            local function MoveToTheTarget(points, effects, sharp)
+            local function MoveToTheTarget(points, effects, sharp, unittarget)
                 local i = 1
                 local t2 = CreateTimer()
                 TimerStart( t2, 1/64, true, function()
@@ -11,7 +11,7 @@ function ChainHook()
                     if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
                         if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
                             SetUnitPosition(slayer, p.x, p.y)
-                            SetUnitPathing(slayer, false)
+                            --SetUnitPathing(slayer, false)
                             FixCursor(p.x, p.y)
                         elseif SlayerInsideCage then
                             local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
@@ -26,6 +26,7 @@ function ChainHook()
                                 --PauseUnit(slayer, false)
                                 SetUnitMoveSpeed(slayer, 522)
                                 Chaining = false
+                                SetUnitMoveSpeed(unittarget, 75)
                                 DestroyTimer(t2)
                             else
                                 SetUnitPosition(slayer, p.x, p.y)
@@ -63,11 +64,11 @@ function ChainHook()
                         --PauseUnit(slayer, false)
                         SetUnitMoveSpeed(slayer, 522)
                         Chaining = false
-                        local pathingTimer = CreateTimer()
-                        TimerStart(pathingTimer, 2, false, function()
-                            SetUnitPathing(slayer, true)
-                            DestroyTimer(pathingTimer)
-                        end)
+                        --local pathingTimer = CreateTimer()
+                        --TimerStart(pathingTimer, 2, false, function()
+                            --SetUnitPathing(slayer, true)
+                           -- DestroyTimer(pathingTimer)
+                        --end)
                         DestroyTimer(t2)
                     end
                 end)
@@ -84,6 +85,8 @@ function ChainHook()
                 local tX, tY = GetUnitPosition(target)
 
                 if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+                    IssueImmediateOrder(target, "stop")
+                    SetUnitMoveSpeed(target, 0)
                     Chaining = true
                     --chaincooldown = true
                     chainCharges = chainCharges - 1
@@ -121,7 +124,7 @@ function ChainHook()
                         i = i + 1
                         if i > sharp then
                             PauseTimer(t)
-                            MoveToTheTarget(points, effects, sharp)
+                            MoveToTheTarget(points, effects, sharp, target)
                             DestroyTimer(t)
                         end
                     end)
@@ -135,7 +138,7 @@ end
 
 --globalMarkerDistance = 0
 function FindChainTarget()
-    print(chainCharges)
+    --print(chainCharges)
     ------fix double circle
     if (not chainMarker) or (not rmbpressed) then
         for b = 1, #slayerEffects do

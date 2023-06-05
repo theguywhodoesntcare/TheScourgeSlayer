@@ -7,14 +7,15 @@ do
     function MarkGameStarted()
         FogMaskEnableOff()
         FogEnableOff()
-
+        UseTimeOfDayBJ(false)
+        CinematicFilterGenericBJ( 2, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 0.00, 100.00, 100.00, 100.00, 0.00 )
         StatusList()
-       InitCustomUI()
-
+        InitCustomUI()
+        math.randomseed(os.time())
         GetUnitX = GetUnitRealX
         GetUnitY = GetUnitRealY
         CreateBoss()
-        for i = 1, 6 do
+        for i = 1, maxcreeps do
             CreateTestUnit()
         end
         dummy1 = CreateDummy()
@@ -26,23 +27,20 @@ do
         CreateSlayer()
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         globalX, globalY = GetUnitPosition(slayer)
-        InitControlMouse()
-        InitControlKeys()
         SetCameraTargetControllerNoZForPlayer(Player(0), slayer, 0, 200, true)
-
-
-        --------------------
+        StopMusicBJ( false )
+        ClearMapMusicBJ(  )
 
         CreateBarrier()
-
-
-
-
         InitCameraScrollBar()
-        InitDamageTrigger()
-        --AttackTimer()
         CreateBlood()
         CreateBones()
+
+
+        local text = "|cffffffffMovement — [|cffffff00W|r][|cffffff00A|r][|cffffff00S|r][|cffffff00D|r]\n\nShooting — |cffffff00Left Mouse Button|r\n\nDash — [|cffffff00SPACE|r]\n\nChain — |cffffff00Right Mouse Button|r\n\nSAW THE UNDEAD BASTARD — [|cffff0000E|r]\n\nHave fun!|r"
+        local descr = CreateText(consoleFrame, 0.4, 0.3, 0.4, text, 2)
+        BlzFrameSetScale(descr, 3)
+        BossFight(descr)
     end
 end
 ---
@@ -248,11 +246,36 @@ function InitWalkTimer()
             for f = 1, sharpF do
                 local fuelX = fuel[f][1][1]
                 local fuelY = fuel[f][1][2]
-                if IsPointInCircle(ux, uy, fuelX, fuelY , 60) then
-                    print(fuelX)
+                if IsPointInCircle(ux, uy, fuelX, fuelY , 80) then
+                    --print(fuelX)
                         PickFuel(fuel[f], f)
                     break
                 end
+            end
+        end
+        if chargesOnMap then
+            local sharpC = #dashChargesItems
+            for c = 1, sharpC do
+                local chargeX = dashChargesItems[c][1][1]
+                local chargeY = dashChargesItems[c][1][2]
+                if IsPointInCircle(ux, uy, chargeX, chargeY , 80) then
+                    --print(chargeX)
+                    PickCharge(dashChargesItems[c], c)
+                    break
+                end
+            end
+        end
+        if Stage == 1 then
+            local incircle = IsPointInCircle(ux, uy, CenterX, CenterY, Radius)
+            if not incircle and not safetyZone then
+                safetyZone = true
+                SetUnitInvulnerable(slayer, true)
+                --print("safety zone")
+                Safety()
+            elseif incircle and safetyZone then
+                safetyZone = false
+                SetUnitInvulnerable(slayer, false)
+                --print("battllefield")
             end
         end
     end)
@@ -335,12 +358,12 @@ end
 
 function ControlKeys()
     if BlzGetTriggerPlayerKey() == OSKEY_Q then
-        print("Q")
+        --print("Q")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
-        TimerStart(CreateTimer(), 2, true, function()
-            FireBalls()
-        end)
+        --TimerStart(CreateTimer(), 2, true, function()
+            --FireBalls()
+        --end)
     end
     if BlzGetTriggerPlayerKey() == OSKEY_E then
         --print("E")
@@ -350,7 +373,7 @@ function ControlKeys()
     end
     if BlzGetTriggerPlayerKey() == OSKEY_V then
         CameraSetFocalDistance(0)
-        print("V")
+        --print("V")
 
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         --ThrowStones(15)
@@ -359,12 +382,14 @@ function ControlKeys()
         --Laser()
         --Acid(30)
         --Cage(500, 5)
-        CorpseBombs(10, 1)
-        --BeetleLaunch()
+        --CorpseBombs(10, 1)
+       --BeetleLaunch()
+        --Bugs()
+        --CreateCharge()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
-        print("SPACE")
+        --print("SPACE")
         Dash()
     end
 end
@@ -394,7 +419,7 @@ function InitControlMouse()
 WheelTrigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(WheelTrigger, InfoBackground, FRAMEEVENT_MOUSE_WHEEL)
     TriggerAddAction(trigger, function()
-        print("wheel")
+        --print("wheel")
     end)
   ClickReleaseTrigger = CreateTrigger()
    TriggerRegisterPlayerEvent(ClickReleaseTrigger, Player(0), EVENT_PLAYER_MOUSE_UP)
@@ -410,12 +435,12 @@ function ControlMouse()
 end
 
 function CancelClick()
-    print("world click")
+    --print("world click")
     ForceUICancelBJ(Player(0))
 end
 
 function Wheel()
-    print("Wheel")
+    --print("Wheel")
 end
 
 function Clicker()
@@ -482,8 +507,7 @@ function _(code)
 end
 
 function HideDefaultUI()
-    print("Hide")
-    TimerStart(CreateTimer(), 1, false, function()
+
         --local info_bar = BlzFrameGetChild(ORIGIN_FRAME_GAME_UI, 1)
         local gameui = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
         BlzFrameSetVisible(BlzFrameGetChild(gameui, 1), false)
@@ -494,7 +518,6 @@ function HideDefaultUI()
         BlzHideOriginFrames(true)
         BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001)
 
-    end)
 end
 
 function GetUnitPosition(u)
@@ -913,7 +936,7 @@ function GetPointsOnCircle(centerX, centerY, radius, interval)
     --возвращает таблицу точек на окружности
     local points = {}
     local numPoints = math.floor(2 * math.pi / interval)
-    print(numPoints)
+    --print(numPoints)
     for i = 1, numPoints do
         local angle = interval * (i - 1)
         local x = centerX + radius * math.cos(angle)
@@ -990,13 +1013,36 @@ function CirclePath(radius, centerX, centerY, angleStep)
     local points = {}
     local steps = math.floor(2 * math.pi / angleStep)
     for i = 1, steps do
-        local angle = i * angleStep
+        local angle = -i * angleStep
         local x = centerX + radius * math.cos(angle)
         local y = centerY + radius * math.sin(angle)
         table.insert(points, {x = x, y = y})
     end
     return points
 end
+function PlayExplode(x, y)
+    local snd = CreateSound("Sound\\Destructibles\\BarrelExplosion1.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("Sound\\Destructibles\\BarrelExplosion1.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayStage2()
+    PlaySound("Units/Undead/HeroCryptLord/NerubianCryptLordPissed1.flac")
+end
+
+function PlayDevouring()
+    PlaySound("Units/Undead/Ghoul/Cannibalize.flac")
+end
+
 function PlayError()
     PlaySound("Sound/Interface/Error.flac")
 end
@@ -1153,7 +1199,7 @@ function PlayImpaleMarkerSound(x, y)
     StartSound(snd)
     KillSoundWhenDone(snd)
 end
-barrier = {}
+
 
 function CreateBarrier()
     local points = GetPointsOnCircle(CenterX, CenterY, Radius, 2 * math.pi / 180)
@@ -1164,11 +1210,24 @@ function CreateBarrier()
         BlzSetSpecialEffectScale(eff, 2)
         --BlzSetSpecialEffectZ(eff, 300)
         BlzSetSpecialEffectYaw(eff, angle)
+        BlzSetSpecialEffectColorByPlayer(eff, Player(6))
         --BlzSetSpecialEffectScale(eff, 2)
         --BlzSetSpecialEffectZ(eff, 400)
         table.insert(barrier, eff)
     end
     CreateStatues()
+end
+
+function LockBarrier()
+    local points = GetPointsOnCircle(CenterX, CenterY, Radius, 2 * math.pi / 180)
+    local points = GetPointsOnCircle(CenterX, CenterY, Radius, 1 * math.pi / 180)
+    for i = 1, #barrier do
+        BlzSetSpecialEffectColorByPlayer(barrier[i], Player(0))
+    end
+
+    for p = 1, #points do
+        CreateDestructable(_('YTfb'), points[p].x, points[p].y, GetRandomDirectionDeg(), 1, 0 )
+    end
 end
 
 
@@ -1177,15 +1236,69 @@ function AttackTimer()
     --
     math.randomseed(os.time())
     globalAttackTimer = CreateTimer()
-    TimerStart(globalAttackTimer, 4, true, function()
+    TimerStart(globalAttackTimer, 6, true, function()
         if Stage == 1 then
+            InvulnerableBlock(0.75)
             if not castFireballs and not castBeetles and not castCorpse and not castRocks then
                 local rand = math.random()
                 if rand <= 0.25 then
                     local fireTimer = CreateTimer()
                     local fireCounter = 0
                     castFireballs = true
-                    TimerStart(fireTimer, 1, true, function()
+                    TimerStart(fireTimer, 1.25, true, function()
+                        FireBalls(0.1, 15, 20)
+                        fireCounter = fireCounter + 1
+                        if fireCounter > 6 then
+                            castFireballs = false
+                            DestroyTimer(fireTimer)
+                        end
+                    end)
+                elseif rand <= 0.5 then
+                    castRocks = true
+                    ThrowStones(10)
+                elseif rand <= 0.75 then
+                    local beetleTimer = CreateTimer()
+                    local beetleCounter = 0
+                    castBeetles = true
+                    TimerStart(beetleTimer, 1.2, true, function()
+                        BeetleLaunch()
+                        beetleCounter = beetleCounter + 1
+                        if beetleCounter > 10 then
+                            castBeetles = false
+                            DestroyTimer(beetleTimer)
+                        end
+                    end)
+                else
+                    castCorpse = true
+                    CorpseBombs(10, 1.5)
+                end
+            end
+            local rand2 = math.random()
+            if rand2 <= 0.2 then
+                TripleImpale(math.random(30, 35))
+            elseif rand2 <= 0.35 and not CageOn and not sawing then
+                Cage(500, 15)
+                local cageTimer = CreateTimer()
+                TimerStart(cageTimer, 5, false, function()
+                    if SlayerInsideCage then
+                        FireBalls(0.25, 1, 30)
+                    end
+                    DestroyTimer(cageTimer)
+                end)
+            elseif rand2 <= 0.55 and not acidGlobal then
+                Acid(12, 30)
+            end
+        end
+
+        if Stage == 2 then
+            InvulnerableBlock(0.65)
+            if not castFireballs and not castBeetles and not castCorpse and not castRocks then
+                local rand = math.random()
+                if rand <= 0.25 then
+                    local fireTimer = CreateTimer()
+                    local fireCounter = 0
+                    castFireballs = true
+                    TimerStart(fireTimer, 1.1, true, function()
                         FireBalls(0.1, 15, 20)
                         fireCounter = fireCounter + 1
                         if fireCounter > 5 then
@@ -1200,7 +1313,7 @@ function AttackTimer()
                     local beetleTimer = CreateTimer()
                     local beetleCounter = 0
                     castBeetles = true
-                    TimerStart(beetleTimer, 1, true, function()
+                    TimerStart(beetleTimer, 1.1, true, function()
                         BeetleLaunch()
                         beetleCounter = beetleCounter + 1
                         if beetleCounter > 10 then
@@ -1210,27 +1323,63 @@ function AttackTimer()
                     end)
                 else
                     castCorpse = true
-                    CorpseBombs(10, 1.25)
+                    CorpseBombs(11, 1.25)
                 end
             end
             local rand2 = math.random()
-            if rand2 <= 0.2 then
+            if rand2 <= 0.25 then
                 TripleImpale(math.random(30, 35))
-            elseif rand2 <= 0.35 and not CageOn and not Sawing then
+            elseif rand2 <= 0.4 and not CageOn and not sawing then
                 Cage(500, 15)
-            elseif rand2 <= 0.50 and not acidGlobal then
-                Acid(10, 30)
+                local cageTimer = CreateTimer()
+                TimerStart(cageTimer, 5, false, function()
+                    if SlayerInsideCage then
+                        FireBalls(0.25, 1, 30)
+                    end
+                    DestroyTimer(cageTimer)
+                end)
+            elseif rand2 <= 0.6 and not acidGlobal then
+                Acid(18, 30)
+            elseif rand2 <= 0.66 and not castCarousel and not SlayerInsideCage then
+                Bugs()
             end
+        end
+    end)
+end
+
+
+function InvulnerableBlock(chance)
+    local rand = math.random()
+    if rand <= chance then
+        Invulnerable(false)
+        local t = CreateTimer()
+        local dur = math.random(2, 5)
+        TimerStart(t, dur, false, function()
+            Invulnerable(true)
+            DestroyTimer(t)
+        end)
+    end
+end
+function InitCreepsMovement()
+    for i = 1, #creeps do
+        local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+        IssuePointOrder(creeps[i], "move",xy[1], xy[2])
+    end
+    local t = CreateTimer()
+    TimerStart(t, 10, true, function()
+        for i = 1, #creeps do
+            local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+            IssuePointOrder(creeps[i], "move",xy[1], xy[2])
         end
     end)
 end
 function GotDamage(type)
     if not BlzIsUnitInvulnerable(slayer) then
-        print("got damage")
+        --print("got damage")
         PlayPainSoundMain()
 
         if type == "mechanical" then
-            slayerHP = slayerHP - 10
+            slayerHP = slayerHP - 7
             CrackedGlassEffect()
         end
 
@@ -1240,23 +1389,24 @@ function GotDamage(type)
         end
 
         if type == "fire" then
-            slayerHP = slayerHP - 10
+            slayerHP = slayerHP - 5
             MaskEffect("backdrops\\VignetteFire.dds", 100, 100, 100)
         end
 
         if type == "acid" then
-            slayerHP = slayerHP - 1
+            slayerHP = slayerHP - 2
             MaskEffect("backdrops\\VignettePoison.dds", 100, 100, 100)
         end
 
         if type == "bite" then
-            slayerHP = slayerHP - 5
+            slayerHP = slayerHP - 2
             MaskEffect("backdrops\\VignetteDamage.dds", 75, 10, 10)
+            PlayDevouring()
         end
 
         if type == "blood" then
-            slayerHP = slayerHP - 5
-            print("blood")
+            slayerHP = slayerHP - 4
+            --print("blood")
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
             local t = CreateTimer()
             TimerStart(t, 0.2, false, function()
@@ -1267,8 +1417,26 @@ function GotDamage(type)
 
             --MaskEffect("backdrops\\blood1.dds", 100, 100, 100)
         end
-        print(slayerHP)
+        BlzFrameSetValue(bar2, slayerHP)
+        if slayerHP < 50 then
+            if not lowHealh then
+                lowHealh = true
+                DisplayWarningHealth()
+            end
+            if slayerHP < 0 then
+                Lost()
+            end
+        end
     end
+    SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+end
+
+function Lost()
+    KillUnit(slayer)
+    BlzDestroyFrame(bar2)
+    TimerStart(CreateTimer(), 5, false, function()
+        CustomDefeatBJ(GetLocalPlayer(), "You got no chance in Hell!")
+    end)
 end
 
 function BloodFrame()
@@ -1289,6 +1457,16 @@ function BloodFrame()
         else
             BlzFrameSetAlpha(Mask, alpha)
         end
+    end)
+end
+
+function Win()
+    KillUnit(boss)
+    DestroyTimer(globalAttackTimer)
+    BlzDestroyFrame(invul)
+    BlzDestroyFrame(bar)
+    TimerStart(CreateTimer(), 5, false, function()
+        CustomVictoryBJ(GetLocalPlayer(), "You are the true Scourge Slayer!", false)
     end)
 end
 
@@ -1359,9 +1537,74 @@ function CrackedGlassEffect()
     end)
 end
 
+function ControlBossDamage()
+    if not BlzIsUnitInvulnerable(boss) then
+        bossHP = bossHP - 1
+        if bossHP <= 0 then
+            Win()
+        end
+        BlzFrameSetValue(bar, bossHP)
+        if bossHP <= (bossHPConst ) and Stage == 1 then
+            Stage = 2
+            PlayStage2()
+            local text = "|cffff0000Second stage!\n\nThere is no more safe zone for you|r"
+            local descr = CreateText(consoleFrame, 0.4, 0.3, 0.4, text, 2)
+            BlzFrameSetScale(descr, 2)
+            local alpha = 255
+
+            TimerStart(CreateTimer(), 1/32, true, function()
+                alpha = alpha - 4
+                if alpha <=0 then
+                    BlzFrameSetAlpha(descr, 0)
+                    BlzDestroyFrame(descr)
+                    DestroyTimer(GetExpiredTimer())
+                else
+                    BlzFrameSetAlpha(descr, alpha)
+                end
+            end)
+
+            if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), CenterX, CenterY, Radius) then
+                LockBarrier()
+            else
+                TimerStart(CreateTimer(), 1/2, true, function()
+                    if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), CenterX, CenterY, Radius) then
+                        LockBarrier()
+                        DestroyTimer(GetExpiredTimer())
+                    end
+                end)
+            end
+        end
+    end
+end
+
+function CheckBugsDamage(x, y)
+    if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), x, y, 100) then
+        carouselCounter = carouselCounter + 1
+        if carouselCounter ~= 0 and carouselCounter % 3 == 0 then
+            GotDamage("bite")
+        end
+    end
+
+
+end
 
 function ControlDmg(unit)
     SetUnitState(unit, UNIT_STATE_LIFE, GetUnitState(unit, UNIT_STATE_LIFE) - 25)
+    if GetUnitState(unit, UNIT_STATE_LIFE) < 1 then
+        for i, v in ipairs(creeps) do
+            if v == unit then
+                table.remove(creeps, i)
+                break
+            end
+        end
+        for i, v in ipairs(chainTargets) do
+            if v == unit then
+                table.remove(chainTargets, i)
+                break
+            end
+        end
+        AddCreep()
+    end
 end
 
 function CheckFireballDamage(x, y)
@@ -1412,7 +1655,7 @@ function BeetlePeriodic()
         else
             DestroyTimer(t)
         end
-        print(beetleAtached)
+        --print(beetleAtached)
     end)
 end
 
@@ -1440,12 +1683,19 @@ function StatusList()
     CenterX = 1
     CenterY = 1
     Radius = 1800
+    barrier = {} -- таблица эффектов
     -----------
-    slayerHP = 150
-    slayerHPConst = 150
+    slayerHP = 180
+    slayerHPConst = 180
     Stage = 1 --текущая стадия
+    safetyZone = false --герой ввышел из поля битвы
     ------
+    bossHP = 300
+    bossHPConst = 300
+    lowHealh = false
+    -----
     creeps = {} --таблица крипов
+    maxcreeps = 8
 
 
     iconsUI = {} --иконки
@@ -1459,6 +1709,7 @@ function StatusList()
     castFireballs = false --кастует файрболлы
     castRocks = false --кастует глыбы
     castCarousel = false --кастует карусель жуков
+    carouselCounter = 0 --считает урон от карусели
     castCorpse = false --кастует трупы
     castBeetles = false --бросает жуков
 
@@ -1491,7 +1742,7 @@ function StatusList()
     sawing = false --герой пилит
     sawingCharges = 3 --заряды пилы
     sawingChargesConst = 3
-    sawingDefaultReward = 40
+    sawingDefaultReward = 60
     sawingDelay = 1 --ограничение на юз пилы подряд
     fuelOnMap = false --есть заспавненное топливо
     fuel = {} --таблица заспавненного топлива
@@ -1501,6 +1752,8 @@ function StatusList()
     dashChargesConst = 4
     dashCooldown = 0 --кулдаун зарядя
     dashCooldownConst = 5.0
+    chargesOnMap = false --есть заряды на карте
+    dashChargesItems = {} --таблица заспавненных зарядов
     -------
     cdTimer = nil --глобалка для таймера, обновляющего кулдауны
     cooldownUpdating = false --показывает, что работает таймер, обновляющий кулдауны
@@ -1532,7 +1785,7 @@ function GetUnitRealY(unit)
     return RealGetUnitY(unit)
 end
 function CreateBlood()
-    for i = 1, math.random(4, 8) do
+    for i = 1, math.random(10, 20) do
         local xy = RandomPointInCircle(CenterX, CenterY, Radius)
         local eff = AddSpecialEffect("blood", xy[1], xy[2])
         local angle = math.random() * 2 * math.pi
@@ -1553,7 +1806,7 @@ function CreateStatues()
 end
 
 function CreateBones()
-    for i = 1, math.random(6, 10) do
+    for i = 1, math.random(8, 14) do
         local xy = RandomPointInCircle(CenterX, CenterY, Radius)
         local n = math.random(0, 4)
         local angle = math.random() * 2 * math.pi
@@ -1561,8 +1814,41 @@ function CreateBones()
         BlzSetSpecialEffectYaw(eff, angle)
     end
 end
+function BossFight(frame)
+    PlayMusic( "sounds\\bfg_division" )
+    local length = GetSoundFileDuration("sounds\\bfg_division")
+    local musicTimer = CreateTimer()
+    TimerStart(musicTimer, length, false, function()
+        ClearMapMusicBJ()
+        PlayMusic("sounds\\fear.flac;sounds\\bfg_division.flac")
+        DestroyTimer(musicTimer)
+    end)
+
+
+    local t = CreateTimer()
+    TimerStart(t, 14, false, function()
+        CinematicFilterGenericBJ( 1, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 0.00, 0, 0, 0, 100 )
+        SetTimeOfDay( 18 )
+        InitControlMouse()
+        InitControlKeys()
+
+        InitDamageTrigger()
+        AttackTimer()
+        InitCreepsMovement()
+        BlzDestroyFrame(frame)
+        local t1 = CreateTimer()
+        TimerStart(t1, 2, false, function()
+            TripleImpale(30)
+            DestroyTimer(t1)
+        end)
+
+    end)
+
+end
 function HPBar()
-    local bar = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    bar = BlzCreateFrameByType("STATUSBAR", "", consoleFrame, "", 0)
+
     BlzFrameSetAbsPoint(bar, FRAMEPOINT_CENTER, 0.4, 0.57)
     -- Screen Size does not matter but has to be there
     BlzFrameSetSize(bar, 0.00001, 0.00001)
@@ -1574,11 +1860,11 @@ function HPBar()
     --BlzFrameSetModel(bar, "ui/feedback/XpBar/XpBarConsole.mdx", 0)
     BlzFrameSetModel(bar, "sprites/testbar.mdx", 0)
     --BlzFrameSetModel(bar, "ui/feedback/buildprogressbar/buildprogressbar.mdx", 0)
-    --BlzFrameSetMinMaxValue(bar, 0, 100)
-    BlzFrameSetValue(bar, 90)
+    BlzFrameSetMinMaxValue(bar, 0, bossHPConst+1)
+    BlzFrameSetValue(bar, bossHPConst)
     local i = 0
-    TimerStart(CreateTimer(), 4, true, function()
-        BlzFrameSetModel(bar, "sprites/testbar1.mdx", 0)
+    TimerStart(CreateTimer(), 4, false, function()
+        --BlzFrameSetModel(bar, "sprites/testbar1.mdx", 0)
         --BlzFrameSetValue(bar, i)
         --i = i + 1
         --if i > 100 then
@@ -1588,10 +1874,15 @@ function HPBar()
         --print(BlzFrameGetValue(bar))
     end)
 
+    invul = BlzCreateFrameByType("BACKDROP", "", bar, "", 1)
 
+    BlzFrameSetAbsPoint(invul, FRAMEPOINT_CENTER, 0.4, 0.58)
+    BlzFrameSetSize(invul, 0.34, 0.17)
+    BlzFrameSetTexture(invul, "backdrops\\invul", 0, true)
+    BlzFrameSetVisible(invul, true)
     ------------
 
-    local bar2 = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    bar2 = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(bar2, FRAMEPOINT_CENTER, 0.4, 0.03)
     -- Screen Size does not matter but has to be there
     BlzFrameSetSize(bar2, 0.00001, 0.00001)
@@ -1603,8 +1894,8 @@ function HPBar()
     --BlzFrameSetModel(bar, "ui/feedback/XpBar/XpBarConsole.mdx", 0)
     BlzFrameSetModel(bar2, "sprites/testbar2.mdx", 0)
     --BlzFrameSetModel(bar, "ui/feedback/buildprogressbar/buildprogressbar.mdx", 0)
-    --BlzFrameSetMinMaxValue(bar, 0, 100)
-    BlzFrameSetValue(bar2, 90)
+    BlzFrameSetMinMaxValue(bar2, 1, slayerHPConst+1)
+    BlzFrameSetValue(bar2, slayerHPConst)
 end
 function Icons()
     local textures = {
@@ -1655,7 +1946,7 @@ function DisplayCooldown(start)
     if chainCooldown == 0 and chainCharges < chainChargesConst then
         chainCooldown =  chainCooldownConst
     end
-    print(cooldownUpdating)
+    --print(cooldownUpdating)
     if start and not cooldownUpdating then
         cdTimer = CreateTimer()
         cooldownUpdating = true
@@ -1722,6 +2013,26 @@ function InitCustomUI()
     HPBar()
     Icons()
     CreateWarnings()
+end
+function Safety()
+    local fr = BlzCreateFrameByType("BACKDROP", "", consoleFrame, "", 1)
+    BlzFrameSetLevel(fr, 2)
+    BlzFrameSetAbsPoint(fr, FRAMEPOINT_CENTER, 0.4, 0.5)
+    BlzFrameSetSize(fr, 0.34, 0.17)
+    BlzFrameSetTexture(fr, "backdrops\\safety", 0, true)
+    BlzFrameSetVisible(fr, true)
+
+    local alpha = 255
+    TimerStart(CreateTimer(), 1/32, true, function()
+        alpha = alpha - 4
+        if alpha <=0 then
+            BlzFrameSetAlpha(fr, 0)
+            BlzDestroyFrame(fr)
+            DestroyTimer(GetExpiredTimer())
+        else
+            BlzFrameSetAlpha(fr, alpha)
+        end
+    end)
 end
 function InitCameraScrollBar()
     -- create a vertical slider by inheriting from a Scrollbar. It will use esc menu textures
@@ -1813,8 +2124,8 @@ function DisplayWarningHealth()
 
     BlzFrameSetVisible(healthFr, true)
     TimerStart(t, 1/32, true, function()
-        if lowAmmo then
-            BlzFrameSetAbsPoint(ammoFr, FRAMEPOINT_CENTER, healthPoints[i].x, healthPoints[i].y)
+        if lowHealh then
+            BlzFrameSetAbsPoint(healthFr, FRAMEPOINT_CENTER, healthPoints[i].x, healthPoints[i].y)
             i = i + 1
             if i > sharp then
                 i = 1
@@ -1831,13 +2142,27 @@ function CreateTestUnit()
     local xy = RandomPointInCircle(CenterX, CenterY, Radius)
     local testUnit = CreateUnit(Player(1), _('uaco'), xy[1], xy[2], bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
+    SetUnitMoveSpeed(testUnit, 75)
+    SetUnitInvulnerable(testUnit, true)
+    SetUnitColor(testUnit, PLAYER_COLOR_SNOW)
     table.insert(creeps, testUnit)
     table.insert(chainTargets, testUnit)
+end
+
+function AddCreep()
+    if #creeps < maxcreeps then
+        local t = CreateTimer()
+        local delay = math.random(5, 15)
+        TimerStart(t, delay, false, function()
+            CreateTestUnit()
+        end)
+    end
 end
 
 function CreateFakeColumn(x, y)
     local testUnit = CreateUnit(Player(1), _('fake'), x, y, bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
+    SetUnitInvulnerable(testUnit, true)
     table.insert(chainTargets, testUnit)
 end
 
@@ -1875,6 +2200,7 @@ function Acid(numb, duration)
     local timerAlpha = CreateTimer()
     local alpha = 255
     TimerStart(timerEnd, duration, false, function()
+        PlayAcid()
         TimerStart(timerAlpha, 1/32, true, function()
             alpha = alpha - 2
             if alpha <= 0 then
@@ -1935,31 +2261,33 @@ function BeetleLaunch()
     local startZ = 400
     local endZ = 330
     local x, y = GetUnitPosition(slayer)
-    local startX, startY = GetUnitPosition(boss)
-    local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
-    BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
-    BlzSetSpecialEffectScale(eff, 1.5)
-    local angle = CalculateAngle(startX, startY, x, y)
-    BlzSetSpecialEffectYaw(eff, angle)
-    local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
-
-    local i = 1
-    local sharp = #points
-    local t = CreateTimer()
-
-    TimerStart(t, 1/32, true, function()
-        p = points[i]
-        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
-        local xx, yy = GetUnitPosition(slayer)
-        local angle = CalculateAngle(p.x, p.y, xx, yy)
+    if IsPointInCircle(x, y, CenterX, CenterY, Radius) then
+        local startX, startY = GetUnitPosition(boss)
+        local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
+        BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
+        BlzSetSpecialEffectScale(eff, 1.5)
+        local angle = CalculateAngle(startX, startY, x, y)
         BlzSetSpecialEffectYaw(eff, angle)
-        i = i + 1
-        if i > sharp then
-            PauseTimer(t)
-            BeetleCharge(eff, p.x, p.y, p.z)
-            DestroyTimer(t)
-        end
-    end)
+        local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
+
+        local i = 1
+        local sharp = #points
+        local t = CreateTimer()
+
+        TimerStart(t, 1/32, true, function()
+            p = points[i]
+            BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+            local xx, yy = GetUnitPosition(slayer)
+            local angle = CalculateAngle(p.x, p.y, xx, yy)
+            BlzSetSpecialEffectYaw(eff, angle)
+            i = i + 1
+            if i > sharp then
+                PauseTimer(t)
+                BeetleCharge(eff, p.x, p.y, p.z)
+                DestroyTimer(t)
+            end
+        end)
+    end
 end
 
 function BeetleCharge(beetle, x, y, z)
@@ -2057,6 +2385,9 @@ function DestroyBeetleFrame()
     local pos = 0.87
     BlzFrameSetVisible(beetleFrame, true)
     TimerStart(frameTimer, 1/32, true, function()
+        if beetleAtached then
+            DestroyTimer(frameTimer)
+        end
         pos = pos + 0.02
         BlzFrameSetAbsPoint(beetleFrame, FRAMEPOINT_CENTER, pos, 0.03)
         if pos >= 1.1 then
@@ -2065,112 +2396,114 @@ function DestroyBeetleFrame()
             DestroyTimer(frameTimer)
         end
     end)
-    print("beetlframedestroy")
+    --print("beetlframedestroy")
 end
 
 
 
 function Cage(radius, duration)
     local x, y = GetUnitPosition(slayer)
-    local effects = {}
-    hexPoints = GetHexagonPoints(x, y, radius, radius/2.5)
-    local pointsChain = GetHexagonPoints(x, y, radius, 40)
-    print(#hexPoints)
-    local d = 1
-    local sharp = #pointsChain
-    local chainTimer = CreateTimer()
-    PlayCage()
-    TimerStart(chainTimer, 1/64, true, function()
-        local p1 = pointsChain[d]
-        local chain = AddSpecialEffect("models\\chainlink2", p1.x, p1.y )
-        if d < #pointsChain then
-            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[d+1].x, pointsChain[d+1].y)
-            BlzSetSpecialEffectYaw(chain, angleChain)
-            BlzSetSpecialEffectScale(chain, 1.15)
-            table.insert(effects, chain)
-        else
-            local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[1].x, pointsChain[1].y)
-            BlzSetSpecialEffectYaw(chain, angleChain)
-            BlzSetSpecialEffectScale(chain, 1.1)
-            table.insert(effects, chain)
-        end
-        d = d + 1
-        if d > sharp then
-            for i = 1, #hexPoints do
-                local p = hexPoints[i]
-                local eff = AddSpecialEffect("models\\skeleton", p.x, p.y)
-                local angle = CalculateAngle(p.x, p.y, x, y)
-                BlzSetSpecialEffectYaw(eff, angle)
-                table.insert(effects, eff)
+    if IsPointInCircle(x, y, CenterX, CenterY, Radius) then
+        local effects = {}
+        hexPoints = GetHexagonPoints(x, y, radius, radius/2.5)
+        local pointsChain = GetHexagonPoints(x, y, radius, 40)
+        --print(#hexPoints)
+        local d = 1
+        local sharp = #pointsChain
+        local chainTimer = CreateTimer()
+        PlayCage()
+        TimerStart(chainTimer, 1/64, true, function()
+            local p1 = pointsChain[d]
+            local chain = AddSpecialEffect("models\\chainlink2", p1.x, p1.y )
+            if d < #pointsChain then
+                local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[d+1].x, pointsChain[d+1].y)
+                BlzSetSpecialEffectYaw(chain, angleChain)
+                BlzSetSpecialEffectScale(chain, 1.15)
+                table.insert(effects, chain)
+            else
+                local angleChain = CalculateAngle(p1.x, p1.y, pointsChain[1].x, pointsChain[1].y)
+                BlzSetSpecialEffectYaw(chain, angleChain)
+                BlzSetSpecialEffectScale(chain, 1.1)
+                table.insert(effects, chain)
             end
-            CageOn = true
-            ------------
-            local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
-            BlzFrameSetVisible(Mask, false)
-            BlzFrameSetLevel(Mask,4)
-            BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, 0.8, 0.08)
-            BlzFrameSetSize(Mask, 0.4, 0.23)
-            BlzFrameSetTexture(Mask, "backdrops\\chain1", 0, true)
-            BlzFrameSetAlpha(Mask, 255)
-
-            local Mask1 = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
-            BlzFrameSetVisible(Mask1, false)
-            BlzFrameSetLevel(Mask1,4)
-            BlzFrameSetAbsPoint(Mask1, FRAMEPOINT_CENTER, -0.05, 0.52)
-            BlzFrameSetSize(Mask1, 0.4, 0.23)
-            BlzFrameSetTexture(Mask1, "backdrops\\chain1", 0, true)
-            BlzFrameSetAlpha(Mask1, 255)
-            ------------
-
-            local spriteframe = CageFrame()
-            if IsPointInHexagon(GetUnitX(slayer), GetUnitY(slayer), hexPoints) then
-                BlzFrameSetVisible(spriteframe, true)
-                BlzFrameSetVisible(Mask1, true)
-                BlzFrameSetVisible(Mask, true)
-                SlayerInsideCage = true
-                local frameTimer = CreateTimer()
-                local pos = 1.1
-                TimerStart(frameTimer, 1/32, true, function()
-                    pos = pos - 0.02
-                    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
-                    if pos <= 0.82 then
-                        DestroyTimer(frameTimer)
-                    end
-                end)
-            end
-            local cageTimer = CreateTimer()
-            TimerStart(cageTimer, duration, false, function()
-                for e = 1, #effects do
-                    DestroyEffect(effects[e])
+            d = d + 1
+            if d > sharp then
+                for i = 1, #hexPoints do
+                    local p = hexPoints[i]
+                    local eff = AddSpecialEffect("models\\skeleton", p.x, p.y)
+                    local angle = CalculateAngle(p.x, p.y, x, y)
+                    BlzSetSpecialEffectYaw(eff, angle)
+                    table.insert(effects, eff)
                 end
+                CageOn = true
+                ------------
+                local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+                BlzFrameSetVisible(Mask, false)
+                BlzFrameSetLevel(Mask,4)
+                BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, 0.8, 0.08)
+                BlzFrameSetSize(Mask, 0.4, 0.23)
+                BlzFrameSetTexture(Mask, "backdrops\\chain1", 0, true)
+                BlzFrameSetAlpha(Mask, 255)
 
-                CageOn = false
-                if SlayerInsideCage then
-                    local frameTimer1 = CreateTimer()
-                    local pos = 0.82
-                    local alpha = 255
-                    TimerStart(frameTimer1, 1/32, true, function()
-                        pos = pos + 0.02
+                local Mask1 = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+                BlzFrameSetVisible(Mask1, false)
+                BlzFrameSetLevel(Mask1,4)
+                BlzFrameSetAbsPoint(Mask1, FRAMEPOINT_CENTER, -0.05, 0.52)
+                BlzFrameSetSize(Mask1, 0.4, 0.23)
+                BlzFrameSetTexture(Mask1, "backdrops\\chain1", 0, true)
+                BlzFrameSetAlpha(Mask1, 255)
+                ------------
+
+                local spriteframe = CageFrame()
+                if IsPointInHexagon(GetUnitX(slayer), GetUnitY(slayer), hexPoints) then
+                    BlzFrameSetVisible(spriteframe, true)
+                    BlzFrameSetVisible(Mask1, true)
+                    BlzFrameSetVisible(Mask, true)
+                    SlayerInsideCage = true
+                    local frameTimer = CreateTimer()
+                    local pos = 1.1
+                    TimerStart(frameTimer, 1/32, true, function()
+                        pos = pos - 0.02
                         BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
-
-                        alpha = alpha - 17
-                        BlzFrameSetAlpha(Mask1, alpha)
-                        BlzFrameSetAlpha(Mask, alpha)
-                        if pos >= 1.1 then
-                            BlzDestroyFrame(spriteframe)
-                            BlzDestroyFrame(Mask)
-                            BlzDestroyFrame(Mask1)
-                            DestroyTimer(frameTimer1)
+                        if pos <= 0.82 then
+                            DestroyTimer(frameTimer)
                         end
                     end)
                 end
-                SlayerInsideCage = false
-                hexPoints = {}
-                DestroyTimer(cageTimer)
-            end)
-            DestroyTimer(chainTimer)
-        end
-    end)
+                local cageTimer = CreateTimer()
+                TimerStart(cageTimer, duration, false, function()
+                    for e = 1, #effects do
+                        DestroyEffect(effects[e])
+                    end
+
+                    CageOn = false
+                    if SlayerInsideCage then
+                        local frameTimer1 = CreateTimer()
+                        local pos = 0.82
+                        local alpha = 255
+                        TimerStart(frameTimer1, 1/32, true, function()
+                            pos = pos + 0.02
+                            BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
+
+                            alpha = alpha - 17
+                            BlzFrameSetAlpha(Mask1, alpha)
+                            BlzFrameSetAlpha(Mask, alpha)
+                            if pos >= 1.1 then
+                                BlzDestroyFrame(spriteframe)
+                                BlzDestroyFrame(Mask)
+                                BlzDestroyFrame(Mask1)
+                                DestroyTimer(frameTimer1)
+                            end
+                        end)
+                    end
+                    SlayerInsideCage = false
+                    hexPoints = {}
+                    DestroyTimer(cageTimer)
+                end)
+                DestroyTimer(chainTimer)
+            end
+        end)
+    end
 end
 
 function CageFrame()
@@ -2186,12 +2519,14 @@ function CageFrame()
     return spriteframe
 end
 function Bugs()
+    carouselCounter = 0
     local x1, y1 = GetRandomPointOnCircle(CenterX, CenterY, Radius)
     local x2, y2 = GetOppositePointOnCircle(CenterX, CenterY, x1, y1)
 
     local x3, y3, x4, y4 = GetPerpendicularDiameter(Radius, x1, y1, x2, y2)
     BugLine(x1, y1, x2, y2)
     BugLine(x3, y3, x4, y4)
+    castCarousel = true
 end
 
 function BugLine(x1, y1, x2, y2)
@@ -2199,7 +2534,7 @@ function BugLine(x1, y1, x2, y2)
     for n = #diameterPoints, 1, -1 do
         if IsPointInCircle(diameterPoints[n].x, diameterPoints[n].y, GetUnitX(boss), GetUnitY(boss), 20) then
             table.remove(diameterPoints, n)
-            print("wrong bug")
+            --print("wrong bug")
         end
     end
     table.insert(diameterPoints, 1, {x = x1, y = y1})
@@ -2222,6 +2557,7 @@ function BugLine(x1, y1, x2, y2)
 
     local newAngle = 0
     local tim = CreateTimer()
+    local double = 1 --надо нормально задавать количество поворотов
     TimerStart(tim, 1/32, true, function()
         local points = RotateDiameter(diameterPoints, CenterX, CenterY, newAngle * math.pi/180)
         local yaw = CalculateAngle(points[1].x, points[1].y, points[#points].x, points[#points].y)
@@ -2229,6 +2565,7 @@ function BugLine(x1, y1, x2, y2)
             local p = points[i]
             BlzSetSpecialEffectPosition(effects[i], p.x, p.y, 320)
             BlzSetSpecialEffectScale(effects[i], 2)
+            CheckBugsDamage(p.x, p.y)
             if i <= #diameterPoints/2 then
                 BlzSetSpecialEffectYaw(effects[i], yaw + math.pi/2)
             else
@@ -2237,8 +2574,15 @@ function BugLine(x1, y1, x2, y2)
 
         end
         newAngle = newAngle + 1.5
-        if newAngle > 360 then
+        if newAngle > 360 and double == 1 then
             newAngle = 0
+            double = 2
+        elseif newAngle > 180 and double == 2 then --сделает полтора оборота
+            for b = 1, #effects do
+                DestroyEffect(effects[b])
+                castCarousel = false
+                DestroyTimer(tim)
+            end
         end
     end)
 end
@@ -2262,40 +2606,42 @@ function CorpseBombs(bombs, time)
 end
 
 function CorpseBomb(targetX, targetY)
-    local startX, startY = GetUnitPosition(boss)
-    local endX, endY = GetRandomPointOnCircle(GetUnitX(slayer), GetUnitY(slayer), 600)
-    local maxZ = 1200
-    local startZ = 400
-    local endZ = 353
+    if IsPointInCircle(targetX, targetY, CenterX, CenterY, Radius) then
+        local startX, startY = GetUnitPosition(boss)
+        local endX, endY = GetRandomPointOnCircle(GetUnitX(slayer), GetUnitY(slayer), 600)
+        local maxZ = 1200
+        local startZ = 400
+        local endZ = 353
 
-    local points = ComputePathWithRotation(startX, startY, startZ, targetX, targetY, endZ, maxZ, 50)
-    local t = CreateTimer()
-    local i = 1
-    local sharp = #points
-    local eff = AddSpecialEffect("models\\MeatWagon", startX, startY)
-    BlzSetSpecialEffectScale(eff, 0.75)
-    local marker = AddSpecialEffect("models\\marker", targetX, targetY)
-    BlzSetSpecialEffectScale(marker, 1.5)
-    TimerStart(t, 1/32, true, function()
-        local p = points[i]
-        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
-        BlzSetSpecialEffectOrientation(eff, p.yaw, p.pitch, p.roll)
+        local points = ComputePathWithRotation(startX, startY, startZ, targetX, targetY, endZ, maxZ, 50)
+        local t = CreateTimer()
+        local i = 1
+        local sharp = #points
+        local eff = AddSpecialEffect("models\\MeatWagon", startX, startY)
+        BlzSetSpecialEffectScale(eff, 0.75)
+        local marker = AddSpecialEffect("models\\marker", targetX, targetY)
+        BlzSetSpecialEffectScale(marker, 1.5)
+        TimerStart(t, 1/32, true, function()
+            local p = points[i]
+            BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+            BlzSetSpecialEffectOrientation(eff, p.yaw, p.pitch, p.roll)
 
-        i = i + 1
-        if i > sharp then
-            --BlzSetSpecialEffectOrientation(eff, 0, 0, 0)
-            DestroyEffect(eff)
-            local boom = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", p.x, p.y)
-            BlzSetSpecialEffectScale(boom, 2)
-            DestroyEffect(boom)
-            DestroyEffect(marker)
-            BlzSetSpecialEffectRoll(eff, 0)
-            BlzSetSpecialEffectPitch(eff, 0)
-            CorpseFireworks(p.x, p.y, math.random(12, 24))
-            CheckCorpseBombDamage(p.x, p.y)
-            DestroyTimer(t)
-        end
-    end)
+            i = i + 1
+            if i > sharp then
+                --BlzSetSpecialEffectOrientation(eff, 0, 0, 0)
+                DestroyEffect(eff)
+                local boom = AddSpecialEffect("Abilities\\Weapons\\FireBallMissile\\FireBallMissile", p.x, p.y)
+                BlzSetSpecialEffectScale(boom, 2)
+                DestroyEffect(boom)
+                DestroyEffect(marker)
+                BlzSetSpecialEffectRoll(eff, 0)
+                BlzSetSpecialEffectPitch(eff, 0)
+                CorpseFireworks(p.x, p.y, math.random(12, 24))
+                CheckCorpseBombDamage(p.x, p.y)
+                DestroyTimer(t)
+            end
+        end)
+    end
 end
 
 function CorpseFireworks(x, y, numb)
@@ -2331,16 +2677,36 @@ function CreateBoss()
     SetHeroLevel(boss, 10, false)
     --SelectHeroSkill(boss, _('AUim'))
     SetUnitInvulnerable(boss, true)
-    print("works")
-    Invulnerable()
+    --print("works")
+    Invulnerable(true)
 end
 
 
 
 
 
-function Invulnerable()
-    SetUnitColor(boss, PLAYER_COLOR_RED)
+function Invulnerable(flag)
+    if flag then
+        SetUnitColor(boss, PLAYER_COLOR_RED)
+        BlzFrameSetModel(bar, "sprites\\testbar.mdx", 0)
+        SetUnitInvulnerable(boss, true)
+        local sX, sY = GetUnitPosition(slayer)
+        local x, y = GetUnitPosition(boss)
+        local angle = CalculateAngle(x, y, sX, sY)
+        --SetUnitFacing(boss, angle*180 / math.pi)
+        SetUnitAnimation(boss, "stand")
+        BlzFrameSetVisible(invul, true)
+    else
+        SetUnitColor(boss, PLAYER_COLOR_GREEN)
+        BlzFrameSetModel(bar, "sprites\\testbar1.mdx", 0)
+        SetUnitInvulnerable(boss, false)
+        local sX, sY = GetUnitPosition(slayer)
+        local x, y = GetUnitPosition(boss)
+        local angle = CalculateAngle(x, y, sX, sY)
+        --SetUnitFacing(boss, angle *180 / math.pi)
+        SetUnitAnimation(boss, "stand")
+        BlzFrameSetVisible(invul, false)
+    end
 end
 
 
@@ -2490,108 +2856,110 @@ function ThrowStones(duration)
     end)
 end
 function TripleImpale(d)
-    print("triple impale")
+    --print("triple impale")
 
     local targetX, targetY = GetUnitPosition(slayer)
-    local target1 = {targetX, targetY}
+    if IsPointInCircle(targetX, targetY, CenterX, CenterY, Radius) then
+        local target1 = {targetX, targetY}
 
-    local casterX, casterY = GetUnitPosition(boss)
-    local casterX, casterY = GetPointOnLine(casterX, casterY, targetX, targetY, 80)
-
-
-    local angle, distance = CalculateAngleAndDistance(casterX, casterY, targetX, targetY)
-    SetUnitFacing(boss, angle*180 / math.pi)
-    SetUnitAnimationByIndex(boss, 7)
-
-    local leftAngle = angle + math.rad(d)
-    local rightAngle = angle - math.rad(d)
-
-    local target1X = casterX + distance * math.cos(leftAngle)
-    local target1Y = casterY + distance * math.sin(leftAngle)
-    local target2 = {target1X, target1Y}
-
-    local target2X = casterX + distance * math.cos(rightAngle)
-    local target2Y = casterY + distance * math.sin(rightAngle)
-    local target3 = {target2X, target2Y}
-
-    local targets = {target1, target2, target3}
-    local angles = {angle, leftAngle, rightAngle}
-    local points = {}
-    local endpoints = {}
-
-    for i = 1, #impaleCasters do
-        local endpointX, endpointY = FindIntersection(casterX, casterY, targets[i][1], targets[i][2])
-        table.insert(endpoints, i, {endpointX, endpointY})
-        local trueDistance = CalculateDistance(casterX, casterY, endpointX, endpointY)
-        local impspll = BlzGetUnitAbility(impaleCasters[i], _('AUim'))
-        BlzSetAbilityRealLevelField(impspll, ABILITY_RLF_WAVE_DISTANCE, 0, trueDistance)
-        SetUnitPositionWithFacing(impaleCasters[i], casterX, casterY, angles[i])
-        local linePoints = GetPointsOnLine(casterX, casterY, endpointX, endpointY, 100)
-        table.insert(points, i, linePoints)
+        local casterX, casterY = GetUnitPosition(boss)
+        local casterX, casterY = GetPointOnLine(casterX, casterY, targetX, targetY, 80)
 
 
-    end
-    print(GetUnitPosition(impaleCasters[1]))
+        local angle, distance = CalculateAngleAndDistance(casterX, casterY, targetX, targetY)
+        SetUnitFacing(boss, angle*180 / math.pi)
+        SetUnitAnimationByIndex(boss, 7)
 
-    local effects = {}
-    local iTable = {1, 1, 1}
-    for l = 1, 3 do
-        TimerStart( CreateTimer(), 1/#points[l], true, function()
-            eff = AddSpecialEffect("models\\redtriangle3", points[l][iTable[l]].x, points[l][iTable[l]].y)
-            BlzSetSpecialEffectYaw( eff, angles[l] )
-            PlayImpaleMarkerSound(points[l][iTable[l]].x, points[l][iTable[l]].y)
-            table.insert(effects, eff)
-            iTable[l] = iTable[l] + 1
-            if iTable[l] == #points[l] then
-                PauseTimer(GetExpiredTimer())
-                DestroyTimer(GetExpiredTimer())
-            end
+        local leftAngle = angle + math.rad(d)
+        local rightAngle = angle - math.rad(d)
+
+        local target1X = casterX + distance * math.cos(leftAngle)
+        local target1Y = casterY + distance * math.sin(leftAngle)
+        local target2 = {target1X, target1Y}
+
+        local target2X = casterX + distance * math.cos(rightAngle)
+        local target2Y = casterY + distance * math.sin(rightAngle)
+        local target3 = {target2X, target2Y}
+
+        local targets = {target1, target2, target3}
+        local angles = {angle, leftAngle, rightAngle}
+        local points = {}
+        local endpoints = {}
+
+        for i = 1, #impaleCasters do
+            local endpointX, endpointY = FindIntersection(casterX, casterY, targets[i][1], targets[i][2])
+            table.insert(endpoints, i, {endpointX, endpointY})
+            local trueDistance = CalculateDistance(casterX, casterY, endpointX, endpointY)
+            local impspll = BlzGetUnitAbility(impaleCasters[i], _('AUim'))
+            BlzSetAbilityRealLevelField(impspll, ABILITY_RLF_WAVE_DISTANCE, 0, trueDistance)
+            SetUnitPositionWithFacing(impaleCasters[i], casterX, casterY, angles[i])
+            local linePoints = GetPointsOnLine(casterX, casterY, endpointX, endpointY, 100)
+            table.insert(points, i, linePoints)
+
+
+        end
+        --print(GetUnitPosition(impaleCasters[1]))
+
+        local effects = {}
+        local iTable = {1, 1, 1}
+        for l = 1, 3 do
+            TimerStart( CreateTimer(), 1/#points[l], true, function()
+                eff = AddSpecialEffect("models\\redtriangle3", points[l][iTable[l]].x, points[l][iTable[l]].y)
+                BlzSetSpecialEffectYaw( eff, angles[l] )
+                PlayImpaleMarkerSound(points[l][iTable[l]].x, points[l][iTable[l]].y)
+                table.insert(effects, eff)
+                iTable[l] = iTable[l] + 1
+                if iTable[l] == #points[l] then
+                    PauseTimer(GetExpiredTimer())
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
+
+        local castDelay = CreateTimer()
+        TimerStart(castDelay, 0.75, false, function()
+
+
+            IssuePointOrder(dummy1, "impale", endpoints[1][1], endpoints[1][2])
+
+            IssuePointOrder(dummy2, "impale", endpoints[2][1], endpoints[2][2])
+
+            IssuePointOrder(dummy3, "impale", endpoints[3][1], endpoints[3][2])
+
+
+            local t1 = CreateTimer()
+            TimerStart(t1, 0.4, false, function()
+                CameraSetEQNoiseForPlayer( Player(0), 30.00 )
+                PlayImpaleSound()
+                DestroyTimer(t1)
+            end)
+
+            local t2 = CreateTimer()
+            TimerStart(t2, 0.65, false, function()
+                CameraClearNoiseForPlayer( Player(0) )
+                --print(#effects)
+                for e = 1, #effects do
+                    DestroyEffect(effects[e])
+                end
+                DestroyTimer(t2)
+            end)
+
+            local t = CreateTimer()
+            TimerStart(t, 0.75, false, function()
+                for i = 1, 3 do
+                    SetUnitPosition(impaleCasters[i], -1500, -1500)
+                end
+                DestroyTimer(t)
+            end)
+            DestroyTimer(castDelay)
         end)
     end
-
-    local castDelay = CreateTimer()
-    TimerStart(castDelay, 0.75, false, function()
-
-
-        IssuePointOrder(dummy1, "impale", endpoints[1][1], endpoints[1][2])
-
-        IssuePointOrder(dummy2, "impale", endpoints[2][1], endpoints[2][2])
-
-        IssuePointOrder(dummy3, "impale", endpoints[3][1], endpoints[3][2])
-
-
-        local t1 = CreateTimer()
-        TimerStart(t1, 0.4, false, function()
-            CameraSetEQNoiseForPlayer( Player(0), 30.00 )
-            PlayImpaleSound()
-            DestroyTimer(t1)
-        end)
-
-        local t2 = CreateTimer()
-        TimerStart(t2, 0.65, false, function()
-            CameraClearNoiseForPlayer( Player(0) )
-            print(#effects)
-            for e = 1, #effects do
-                DestroyEffect(effects[e])
-            end
-            DestroyTimer(t2)
-        end)
-
-        local t = CreateTimer()
-        TimerStart(t, 0.75, false, function()
-            for i = 1, 3 do
-                SetUnitPosition(impaleCasters[i], -1500, -1500)
-            end
-            DestroyTimer(t)
-        end)
-        DestroyTimer(castDelay)
-    end)
 end
 function ChainHook()
     if chainCharges > 0 then
         if chainMarker and not Chaining  then --and not chaincooldown
             chainMarker = false
-            local function MoveToTheTarget(points, effects, sharp)
+            local function MoveToTheTarget(points, effects, sharp, unittarget)
                 local i = 1
                 local t2 = CreateTimer()
                 TimerStart( t2, 1/64, true, function()
@@ -2600,7 +2968,7 @@ function ChainHook()
                     if IsPointInCircle(p.x, p.y, CenterX, CenterY, Radius) then
                         if not CageOn then --блок для проверки на границы костяной тюрьмы, нужно вынести в отдельную функцию
                             SetUnitPosition(slayer, p.x, p.y)
-                            SetUnitPathing(slayer, false)
+                            --SetUnitPathing(slayer, false)
                             FixCursor(p.x, p.y)
                         elseif SlayerInsideCage then
                             local xx, yy = GetPointOnLine(p.x, p.y, points[sharp].x, points[sharp].y, 20)
@@ -2615,6 +2983,7 @@ function ChainHook()
                                 --PauseUnit(slayer, false)
                                 SetUnitMoveSpeed(slayer, 522)
                                 Chaining = false
+                                SetUnitMoveSpeed(unittarget, 75)
                                 DestroyTimer(t2)
                             else
                                 SetUnitPosition(slayer, p.x, p.y)
@@ -2652,11 +3021,11 @@ function ChainHook()
                         --PauseUnit(slayer, false)
                         SetUnitMoveSpeed(slayer, 522)
                         Chaining = false
-                        local pathingTimer = CreateTimer()
-                        TimerStart(pathingTimer, 2, false, function()
-                            SetUnitPathing(slayer, true)
-                            DestroyTimer(pathingTimer)
-                        end)
+                        --local pathingTimer = CreateTimer()
+                        --TimerStart(pathingTimer, 2, false, function()
+                            --SetUnitPathing(slayer, true)
+                           -- DestroyTimer(pathingTimer)
+                        --end)
                         DestroyTimer(t2)
                     end
                 end)
@@ -2673,6 +3042,8 @@ function ChainHook()
                 local tX, tY = GetUnitPosition(target)
 
                 if IsPointInCircle(x, y, CenterX, CenterY, Radius) and IsPointInCircle(tX, tY, x, y, 870) and IsPointInCircle(tX, tY, cursorX, cursorY, 150) then
+                    IssueImmediateOrder(target, "stop")
+                    SetUnitMoveSpeed(target, 0)
                     Chaining = true
                     --chaincooldown = true
                     chainCharges = chainCharges - 1
@@ -2710,7 +3081,7 @@ function ChainHook()
                         i = i + 1
                         if i > sharp then
                             PauseTimer(t)
-                            MoveToTheTarget(points, effects, sharp)
+                            MoveToTheTarget(points, effects, sharp, target)
                             DestroyTimer(t)
                         end
                     end)
@@ -2724,7 +3095,7 @@ end
 
 --globalMarkerDistance = 0
 function FindChainTarget()
-    print(chainCharges)
+    --print(chainCharges)
     ------fix double circle
     if (not chainMarker) or (not rmbpressed) then
         for b = 1, #slayerEffects do
@@ -2856,20 +3227,58 @@ function Dash()
 
         local x, y = GetPointOnLine(slayerX, slayerY, mouseX, mouseY, distance)
 
+        if Stage == 2 and not IsPointInCircle(x, y, CenterX, CenterY, Radius) then
+            x, y = FindIntersection(slayerX, slayerY, x, y)
+            x, y = GetPointOnLine(x, y, slayerX, slayerY, 50)
+        end
+
         local points = GetPointsOnLine(slayerX, slayerY, x, y, 40)
         local i = 1
         local sharp = #points
         PlayDashSound()
         dashCharges = dashCharges - 1
-        if dashCharges <= 0 then
-            SetIconEnable(iconsUI[2], false)
+        if dashCharges <= 2 then
+            if dashCharges <= 0 then
+                SetIconEnable(iconsUI[2], false)
+            end
+            local rand = math.random()
+            if rand <= 0.20 and #dashChargesItems < 3 then
+                CreateCharge()
+            end
         end
+
         UpdateCharges(2, dashCharges)
         DisplayCooldown(true)
         local t = CreateTimer()
         TimerStart(t, 1/64, true, function()
             if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) then
                 local p = points[i]
+
+                if fuelOnMap then
+                    local sharpF = #fuel
+                    for f = 1, sharpF do
+                        local fuelX = fuel[f][1][1]
+                        local fuelY = fuel[f][1][2]
+                        if IsPointInCircle(p.x, p.y, fuelX, fuelY , 80) then
+                            --print(fuelX)
+                            PickFuel(fuel[f], f)
+                            break
+                        end
+                    end
+                end
+                if chargesOnMap then
+                    local sharpC = #dashChargesItems
+                    for c = 1, sharpC do
+                        local chargeX = dashChargesItems[c][1][1]
+                        local chargeY = dashChargesItems[c][1][2]
+                        if IsPointInCircle(p.x, p.y, chargeX, chargeY , 80) then
+                            --print(chargeX)
+                            PickCharge(dashChargesItems[c], c)
+                            break
+                        end
+                    end
+                end
+
                 if not CageOn then
                     local eff = AddSpecialEffect("models\\riflemanTrack", p.x, p.y)
                     DestroyEffect(eff)
@@ -2922,6 +3331,31 @@ function Dash()
     end
 end
 
+
+function CreateCharge()
+    local xy = RandomPointInCircle(CenterX, CenterY, Radius-50)
+    local eff = AddSpecialEffect("units\\nightelf\\Wisp\\Wisp", xy[1], xy[2])
+    BlzSetSpecialEffectColorByPlayer(eff, Player(6))
+    table.insert(dashChargesItems, {xy, eff})
+    chargesOnMap = true
+end
+
+
+
+function PickCharge(chargeEff, index)
+    --без проверки, просто добавить заряд
+
+    DestroyEffect(chargeEff[2])
+    table.remove(dashChargesItems, index)
+    dashCharges = dashCharges + 1
+    SetIconEnable(iconsUI[2], true)
+    UpdateCharges(2, dashCharges)
+
+    if #dashChargesItems == 0 then
+        chargesOnMap = false
+    end
+end
+
 function MakeShot(x, y)
     local startx, starty = GetUnitPosition(slayer)
     if IsPointInCircle(startx, starty, CenterX, CenterY, Radius - 20) then
@@ -2970,7 +3404,7 @@ function MakeShot(x, y)
                             DestroyTimer(t)
                         end
                     end)
-                else
+                else --снаряд попадёт в босса
                     TimerStart(t, 1/64, true, function()
                         BlzSetSpecialEffectX(projectile, movePoints[i].x)
                         BlzSetSpecialEffectY(projectile, movePoints[i].y)
@@ -2989,6 +3423,7 @@ function MakeShot(x, y)
                         if d <= 10 then
                             PauseTimer(t)
                             DestroyEffect(projectile)
+                            ControlBossDamage()
                             DestroyTimer(t)
                         end
                         i = i+1
@@ -3003,7 +3438,7 @@ function MakeShot(x, y)
                 local projectile = AddSpecialEffect("Abilities\\Weapons\\GyroCopter\\GyroCopterMissile", startx, starty)
                 DestroyEffect(projectile)
                 beetleHP = beetleHP - 1
-                print(beetleHP)
+                --print(beetleHP)
                 if beetleHP <= 0 then
                     DestroyEffect(beetleAttach)
                     DestroyBeetleFrame()
@@ -3017,6 +3452,8 @@ function MakeShot(x, y)
                 SetIconEnable(iconsUI[1], false)
             end
             UpdateCharges(1, rocketCharges)
+        else
+            PlayError()
         end
 
         if rocketCharges <= 40 then
@@ -3029,9 +3466,9 @@ function MakeShot(x, y)
         end
 
         if (lowAmmo or sawingCharges <= 2) then
-            if #fuel < 3 then
+            if #fuel < 6 then
                 local chance = math.random()
-                if chance <= 0.03 then
+                if chance <= 0.08 then
                     SpawnFuel()
                 end
             end
@@ -3051,82 +3488,104 @@ function Sawing()
     local tX, tY = GetUnitPosition(target)
     if sawingCharges > 0 then
         if IsPointInCircle(tX, tY, x, y, 350) and not Chaining and not dashing and not sawing then
-            sawing = true
-            sawingCharges = sawingCharges - 1
-            if sawingCharges <= 0 then
-                SetIconEnable(iconsUI[3], false)
-            end
-            UpdateCharges(3, sawingCharges)
-            SetUnitPosition(slayer, tX, tY)
-            SetUnitInvulnerable(slayer, true)
-            CameraSetFocalDistance(50)
-            local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
-
-            PlaySawFleshSound()
-            PlayScream()
-            BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
-            BlzFrameSetLevel(spriteframe, 3)
-            BlzFrameSetModel(spriteframe, "acowtf4", 0)
-            BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
-            -- birth = 0
-            -- death = 1
-            -- stand = 2
-            -- morph = 3
-            -- alternate = 4
-            CinematicFilterGenericBJ( 0.00, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 25.00, 100.00, 100.00, 100.00, 25.00 )
-            BlzFrameSetVisible(spriteframe, true)
-            local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
-            BlzFrameSetLevel(Mask,4)
-            BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.14, 0.6)
-            BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.95, 0.0)
-            BlzFrameSetTexture(Mask, "backdrops\\blood2", 0, true)
-            BlzFrameSetAlpha(Mask, 0)
-            local alpha = 0
-            SawingReward()
-            TimerStart(CreateTimer(), 1/32, true, function()
-                alpha = alpha + 4
-                if alpha >=255 then
-                    BlzFrameSetAlpha(Mask, 255)
-                    DestroyTimer(GetExpiredTimer())
-                else
-                    BlzFrameSetAlpha(Mask, alpha)
+            if (not CageOn) or (CageOn and SlayerInsideCage and IsPointInHexagon(tX, tY, hexPoints)) or (CageOn and not SlayerInsideCage and not IsPointInHexagon(tX, tY, hexPoints)) then
+                IssueImmediateOrder(target, "stop")
+                SetUnitMoveSpeed(target, 0)
+                sawing = true
+                sawingCharges = sawingCharges - 1
+                if sawingCharges <= 0 then
+                    SetIconEnable(iconsUI[3], false)
                 end
-            end)
+                UpdateCharges(3, sawingCharges)
+                SetUnitPosition(slayer, tX, tY)
+                SetUnitInvulnerable(slayer, true)
+                CameraSetFocalDistance(50)
+                local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
 
-            local focal = 50
-
-            TimerStart(CreateTimer(), 3, false, function()
-                BlzDestroyFrame(spriteframe)
-                DisplayCineFilterBJ( false )
+                PlaySawFleshSound()
+                PlayScream()
+                BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
+                BlzFrameSetLevel(spriteframe, 3)
+                BlzFrameSetModel(spriteframe, "acowtf4", 0)
+                BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
+                -- birth = 0
+                -- death = 1
+                -- stand = 2
+                -- morph = 3
+                -- alternate = 4
+                CinematicFilterGenericBJ( 0.00, BLEND_MODE_BLEND, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 100, 100, 100, 25.00, 100.00, 100.00, 100.00, 25.00 )
+                BlzFrameSetAlpha(invul, 200)
+                BlzFrameSetVisible(spriteframe, true)
+                local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
+                BlzFrameSetLevel(Mask,4)
+                BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.14, 0.6)
+                BlzFrameSetAbsPoint(Mask, FRAMEPOINT_BOTTOMRIGHT, 0.95, 0.0)
+                BlzFrameSetTexture(Mask, "backdrops\\blood2", 0, true)
+                BlzFrameSetAlpha(Mask, 0)
+                local alpha = 0
+                SawingReward()
                 TimerStart(CreateTimer(), 1/32, true, function()
-                    focal = focal + 10
-                    if focal >=500 then
-                        CameraSetFocalDistance(0)
-                        DestroyTimer(GetExpiredTimer())
-                    else
-                        CameraSetFocalDistance(focal)
-                    end
-                end)
-                TimerStart(CreateTimer(), 1/32, true, function()
-                    alpha = alpha - 4
-                    if alpha <=0 then
-                        BlzFrameSetAlpha(Mask, 0)
-                        BlzDestroyFrame(Mask)
+                    alpha = alpha + 4
+                    if alpha >=255 then
+                        BlzFrameSetAlpha(Mask, 255)
                         DestroyTimer(GetExpiredTimer())
                     else
                         BlzFrameSetAlpha(Mask, alpha)
                     end
                 end)
-                SetUnitInvulnerable(slayer, false)
-                sawing = false
-                DestroyTimer(GetExpiredTimer())
-            end)
+
+                local focal = 50
+
+                TimerStart(CreateTimer(), 3, false, function()
+                    BlzDestroyFrame(spriteframe)
+                    DisplayCineFilterBJ( false )
+                    BlzFrameSetAlpha(invul, 255)
+                    TimerStart(CreateTimer(), 1/32, true, function()
+                        focal = focal + 10
+                        if focal >=500 then
+                            CameraSetFocalDistance(0)
+                            DestroyTimer(GetExpiredTimer())
+                        else
+                            CameraSetFocalDistance(focal)
+                        end
+                    end)
+                    TimerStart(CreateTimer(), 1/32, true, function()
+                        alpha = alpha - 4
+                        if alpha <=0 then
+                            BlzFrameSetAlpha(Mask, 0)
+                            BlzDestroyFrame(Mask)
+                            DestroyTimer(GetExpiredTimer())
+                        else
+                            BlzFrameSetAlpha(Mask, alpha)
+                        end
+                    end)
+                    SetUnitInvulnerable(slayer, false)
+                    sawing = false
+                    ExplodeUnitBJ(target)
+                    for i, v in ipairs(creeps) do
+                        if v == target then
+                            table.remove(creeps, i)
+                            break
+                        end
+                    end
+                    for i, v in ipairs(chainTargets) do
+                        if v == target then
+                            table.remove(chainTargets, i)
+                            break
+                        end
+                    end
+                    AddCreep()
+                    DestroyTimer(GetExpiredTimer())
+                end)
+            end
         end
+    else
+        PlayError()
     end
 end
 
 function SpawnFuel()
-    local xy = RandomPointInCircle(CenterX, CenterY, Radius)
+    local xy = RandomPointInCircle(CenterX, CenterY, Radius-50)
     local eff = AddSpecialEffect("models\\fuel", xy[1], xy[2])
     fuelOnMap = true
     table.insert(fuel, {xy, eff})
@@ -3134,11 +3593,15 @@ end
 
 function PickFuel(fuelEff, index)
     if sawingCharges < sawingChargesConst then
+        local x = BlzGetLocalSpecialEffectX(fuelEff[2])
+        local y = BlzGetLocalSpecialEffectY(fuelEff[2])
         DestroyEffect(fuelEff[2])
         table.remove(fuel, index)
         sawingCharges = sawingCharges + 1
         SetIconEnable(iconsUI[3], true)
         UpdateCharges(3, sawingCharges)
+
+        PlayExplode(x, y)
     end
     if #fuel == 0 then
         fuelOnMap = false
@@ -3158,6 +3621,22 @@ function SawingReward()
         if rocketCharges > rocketChargesConst then
             rocketCharges = rocketChargesConst
         end
+
+        if i % 4 == 0 then
+            slayerHP = slayerHP + 1
+
+            if slayerHP > slayerHPConst then
+                slayerHP = slayerHPConst
+            end
+
+            if slayerHP > 50 then
+                lowHealh = false
+            end
+
+            BlzFrameSetValue(bar2, slayerHP)
+        end
+
+
         UpdateCharges(1, rocketCharges)
         i = i + 1
         if i > sawingDefaultReward then
@@ -3167,7 +3646,7 @@ function SawingReward()
 
 end
 function CreateSlayer()
-    slayer = CreateUnit(Player(1), _('hrif'), 600, 200, bj_UNIT_FACING)
+    slayer = CreateUnit(Player(1), _('hrif'), 0, -500, bj_UNIT_FACING)
     SetUnitPathing(slayer, true)
     --SelectHeroSkill(boss, _('AUim'))
     SetUnitMoveSpeed(slayer, 522)
@@ -3207,7 +3686,7 @@ end
 
 function config()
 SetMapName("TRIGSTR_001")
-SetMapDescription("TRIGSTR_003")
+SetMapDescription("")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)

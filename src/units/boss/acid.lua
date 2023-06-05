@@ -25,6 +25,7 @@ function Acid(numb, duration)
     local timerAlpha = CreateTimer()
     local alpha = 255
     TimerStart(timerEnd, duration, false, function()
+        PlayAcid()
         TimerStart(timerAlpha, 1/32, true, function()
             alpha = alpha - 2
             if alpha <= 0 then

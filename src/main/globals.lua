@@ -2,12 +2,19 @@ function StatusList()
     CenterX = 1
     CenterY = 1
     Radius = 1800
+    barrier = {} -- таблица эффектов
     -----------
-    slayerHP = 150
-    slayerHPConst = 150
+    slayerHP = 180
+    slayerHPConst = 180
     Stage = 1 --текущая стадия
+    safetyZone = false --герой ввышел из поля битвы
     ------
+    bossHP = 300
+    bossHPConst = 300
+    lowHealh = false
+    -----
     creeps = {} --таблица крипов
+    maxcreeps = 8
 
 
     iconsUI = {} --иконки
@@ -21,6 +28,7 @@ function StatusList()
     castFireballs = false --кастует файрболлы
     castRocks = false --кастует глыбы
     castCarousel = false --кастует карусель жуков
+    carouselCounter = 0 --считает урон от карусели
     castCorpse = false --кастует трупы
     castBeetles = false --бросает жуков
 
@@ -53,7 +61,7 @@ function StatusList()
     sawing = false --герой пилит
     sawingCharges = 3 --заряды пилы
     sawingChargesConst = 3
-    sawingDefaultReward = 40
+    sawingDefaultReward = 60
     sawingDelay = 1 --ограничение на юз пилы подряд
     fuelOnMap = false --есть заспавненное топливо
     fuel = {} --таблица заспавненного топлива
@@ -63,6 +71,8 @@ function StatusList()
     dashChargesConst = 4
     dashCooldown = 0 --кулдаун зарядя
     dashCooldownConst = 5.0
+    chargesOnMap = false --есть заряды на карте
+    dashChargesItems = {} --таблица заспавненных зарядов
     -------
     cdTimer = nil --глобалка для таймера, обновляющего кулдауны
     cooldownUpdating = false --показывает, что работает таймер, обновляющий кулдауны

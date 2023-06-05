@@ -1,5 +1,5 @@
 function CreateBlood()
-    for i = 1, math.random(4, 8) do
+    for i = 1, math.random(10, 20) do
         local xy = RandomPointInCircle(CenterX, CenterY, Radius)
         local eff = AddSpecialEffect("blood", xy[1], xy[2])
         local angle = math.random() * 2 * math.pi
@@ -20,7 +20,7 @@ function CreateStatues()
 end
 
 function CreateBones()
-    for i = 1, math.random(6, 10) do
+    for i = 1, math.random(8, 14) do
         local xy = RandomPointInCircle(CenterX, CenterY, Radius)
         local n = math.random(0, 4)
         local angle = math.random() * 2 * math.pi

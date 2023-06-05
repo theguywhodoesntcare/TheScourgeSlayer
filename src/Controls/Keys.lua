@@ -150,11 +150,36 @@ function InitWalkTimer()
             for f = 1, sharpF do
                 local fuelX = fuel[f][1][1]
                 local fuelY = fuel[f][1][2]
-                if IsPointInCircle(ux, uy, fuelX, fuelY , 60) then
-                    print(fuelX)
+                if IsPointInCircle(ux, uy, fuelX, fuelY , 80) then
+                    --print(fuelX)
                         PickFuel(fuel[f], f)
                     break
                 end
+            end
+        end
+        if chargesOnMap then
+            local sharpC = #dashChargesItems
+            for c = 1, sharpC do
+                local chargeX = dashChargesItems[c][1][1]
+                local chargeY = dashChargesItems[c][1][2]
+                if IsPointInCircle(ux, uy, chargeX, chargeY , 80) then
+                    --print(chargeX)
+                    PickCharge(dashChargesItems[c], c)
+                    break
+                end
+            end
+        end
+        if Stage == 1 then
+            local incircle = IsPointInCircle(ux, uy, CenterX, CenterY, Radius)
+            if not incircle and not safetyZone then
+                safetyZone = true
+                SetUnitInvulnerable(slayer, true)
+                --print("safety zone")
+                Safety()
+            elseif incircle and safetyZone then
+                safetyZone = false
+                SetUnitInvulnerable(slayer, false)
+                --print("battllefield")
             end
         end
     end)
@@ -237,12 +262,12 @@ end
 
 function ControlKeys()
     if BlzGetTriggerPlayerKey() == OSKEY_Q then
-        print("Q")
+        --print("Q")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
         --TripleImpale(30)
-        TimerStart(CreateTimer(), 2, true, function()
-            FireBalls()
-        end)
+        --TimerStart(CreateTimer(), 2, true, function()
+            --FireBalls()
+        --end)
     end
     if BlzGetTriggerPlayerKey() == OSKEY_E then
         --print("E")
@@ -252,7 +277,7 @@ function ControlKeys()
     end
     if BlzGetTriggerPlayerKey() == OSKEY_V then
         CameraSetFocalDistance(0)
-        print("V")
+        --print("V")
 
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         --ThrowStones(15)
@@ -261,12 +286,14 @@ function ControlKeys()
         --Laser()
         --Acid(30)
         --Cage(500, 5)
-        CorpseBombs(10, 1)
-        --BeetleLaunch()
+        --CorpseBombs(10, 1)
+       --BeetleLaunch()
+        --Bugs()
+        --CreateCharge()
     end
 
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
-        print("SPACE")
+        --print("SPACE")
         Dash()
     end
 end

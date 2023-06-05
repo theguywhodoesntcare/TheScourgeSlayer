@@ -1,10 +1,10 @@
 function GotDamage(type)
     if not BlzIsUnitInvulnerable(slayer) then
-        print("got damage")
+        --print("got damage")
         PlayPainSoundMain()
 
         if type == "mechanical" then
-            slayerHP = slayerHP - 10
+            slayerHP = slayerHP - 7
             CrackedGlassEffect()
         end
 
@@ -14,23 +14,24 @@ function GotDamage(type)
         end
 
         if type == "fire" then
-            slayerHP = slayerHP - 10
+            slayerHP = slayerHP - 5
             MaskEffect("backdrops\\VignetteFire.dds", 100, 100, 100)
         end
 
         if type == "acid" then
-            slayerHP = slayerHP - 1
+            slayerHP = slayerHP - 2
             MaskEffect("backdrops\\VignettePoison.dds", 100, 100, 100)
         end
 
         if type == "bite" then
-            slayerHP = slayerHP - 5
+            slayerHP = slayerHP - 2
             MaskEffect("backdrops\\VignetteDamage.dds", 75, 10, 10)
+            PlayDevouring()
         end
 
         if type == "blood" then
-            slayerHP = slayerHP - 5
-            print("blood")
+            slayerHP = slayerHP - 4
+            --print("blood")
             CameraSetEQNoiseForPlayer( Player(0), 30.00 )
             local t = CreateTimer()
             TimerStart(t, 0.2, false, function()
@@ -41,8 +42,26 @@ function GotDamage(type)
 
             --MaskEffect("backdrops\\blood1.dds", 100, 100, 100)
         end
-        print(slayerHP)
+        BlzFrameSetValue(bar2, slayerHP)
+        if slayerHP < 50 then
+            if not lowHealh then
+                lowHealh = true
+                DisplayWarningHealth()
+            end
+            if slayerHP < 0 then
+                Lost()
+            end
+        end
     end
+    SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
+end
+
+function Lost()
+    KillUnit(slayer)
+    BlzDestroyFrame(bar2)
+    TimerStart(CreateTimer(), 5, false, function()
+        CustomDefeatBJ(GetLocalPlayer(), "You got no chance in Hell!")
+    end)
 end
 
 function BloodFrame()
@@ -63,6 +82,16 @@ function BloodFrame()
         else
             BlzFrameSetAlpha(Mask, alpha)
         end
+    end)
+end
+
+function Win()
+    KillUnit(boss)
+    DestroyTimer(globalAttackTimer)
+    BlzDestroyFrame(invul)
+    BlzDestroyFrame(bar)
+    TimerStart(CreateTimer(), 5, false, function()
+        CustomVictoryBJ(GetLocalPlayer(), "You are the true Scourge Slayer!", false)
     end)
 end
 
@@ -133,9 +162,74 @@ function CrackedGlassEffect()
     end)
 end
 
+function ControlBossDamage()
+    if not BlzIsUnitInvulnerable(boss) then
+        bossHP = bossHP - 1
+        if bossHP <= 0 then
+            Win()
+        end
+        BlzFrameSetValue(bar, bossHP)
+        if bossHP <= (bossHPConst - bossHPConst/5) and Stage == 1 then
+            Stage = 2
+            PlayStage2()
+            local text = "|cffff0000Second stage!\n\nThere is no more safe zone for you|r"
+            local descr = CreateText(consoleFrame, 0.4, 0.4, 0.4, text, 2)
+            BlzFrameSetScale(descr, 4)
+            local alpha = 255
+
+            TimerStart(CreateTimer(), 1/32, true, function()
+                alpha = alpha - 1
+                if alpha <=0 then
+                    BlzFrameSetAlpha(descr, 0)
+                    BlzDestroyFrame(descr)
+                    DestroyTimer(GetExpiredTimer())
+                else
+                    BlzFrameSetAlpha(descr, alpha)
+                end
+            end)
+
+            if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), CenterX, CenterY, Radius) then
+                LockBarrier()
+            else
+                TimerStart(CreateTimer(), 1/2, true, function()
+                    if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), CenterX, CenterY, Radius) then
+                        LockBarrier()
+                        DestroyTimer(GetExpiredTimer())
+                    end
+                end)
+            end
+        end
+    end
+end
+
+function CheckBugsDamage(x, y)
+    if IsPointInCircle(GetUnitX(slayer), GetUnitY(slayer), x, y, 100) then
+        carouselCounter = carouselCounter + 1
+        if carouselCounter ~= 0 and carouselCounter % 3 == 0 then
+            GotDamage("bite")
+        end
+    end
+
+
+end
 
 function ControlDmg(unit)
     SetUnitState(unit, UNIT_STATE_LIFE, GetUnitState(unit, UNIT_STATE_LIFE) - 25)
+    if GetUnitState(unit, UNIT_STATE_LIFE) < 1 then
+        for i, v in ipairs(creeps) do
+            if v == unit then
+                table.remove(creeps, i)
+                break
+            end
+        end
+        for i, v in ipairs(chainTargets) do
+            if v == unit then
+                table.remove(chainTargets, i)
+                break
+            end
+        end
+        AddCreep()
+    end
 end
 
 function CheckFireballDamage(x, y)
@@ -186,7 +280,7 @@ function BeetlePeriodic()
         else
             DestroyTimer(t)
         end
-        print(beetleAtached)
+        --print(beetleAtached)
     end)
 end
 

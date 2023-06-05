@@ -3,8 +3,7 @@ function _(code)
 end
 
 function HideDefaultUI()
-    print("Hide")
-    TimerStart(CreateTimer(), 1, false, function()
+
         --local info_bar = BlzFrameGetChild(ORIGIN_FRAME_GAME_UI, 1)
         local gameui = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
         BlzFrameSetVisible(BlzFrameGetChild(gameui, 1), false)
@@ -15,7 +14,6 @@ function HideDefaultUI()
         BlzHideOriginFrames(true)
         BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001)
 
-    end)
 end
 
 function GetUnitPosition(u)

@@ -12,7 +12,7 @@ function InitControlMouse()
 WheelTrigger = CreateTrigger()
     BlzTriggerRegisterFrameEvent(WheelTrigger, InfoBackground, FRAMEEVENT_MOUSE_WHEEL)
     TriggerAddAction(trigger, function()
-        print("wheel")
+        --print("wheel")
     end)
   ClickReleaseTrigger = CreateTrigger()
    TriggerRegisterPlayerEvent(ClickReleaseTrigger, Player(0), EVENT_PLAYER_MOUSE_UP)
@@ -28,12 +28,12 @@ function ControlMouse()
 end
 
 function CancelClick()
-    print("world click")
+    --print("world click")
     ForceUICancelBJ(Player(0))
 end
 
 function Wheel()
-    print("Wheel")
+    --print("Wheel")
 end
 
 function Clicker()

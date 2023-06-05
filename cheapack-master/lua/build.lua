@@ -60,7 +60,7 @@ do
 end
 
 local function log(str)
-	print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
+	--print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
 	return false
 end
 

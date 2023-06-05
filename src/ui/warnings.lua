@@ -39,8 +39,8 @@ function DisplayWarningHealth()
 
     BlzFrameSetVisible(healthFr, true)
     TimerStart(t, 1/32, true, function()
-        if lowAmmo then
-            BlzFrameSetAbsPoint(ammoFr, FRAMEPOINT_CENTER, healthPoints[i].x, healthPoints[i].y)
+        if lowHealh then
+            BlzFrameSetAbsPoint(healthFr, FRAMEPOINT_CENTER, healthPoints[i].x, healthPoints[i].y)
             i = i + 1
             if i > sharp then
                 i = 1

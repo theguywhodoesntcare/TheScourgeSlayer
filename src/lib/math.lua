@@ -336,7 +336,7 @@ function GetPointsOnCircle(centerX, centerY, radius, interval)
     --возвращает таблицу точек на окружности
     local points = {}
     local numPoints = math.floor(2 * math.pi / interval)
-    print(numPoints)
+    --print(numPoints)
     for i = 1, numPoints do
         local angle = interval * (i - 1)
         local x = centerX + radius * math.cos(angle)
@@ -413,7 +413,7 @@ function CirclePath(radius, centerX, centerY, angleStep)
     local points = {}
     local steps = math.floor(2 * math.pi / angleStep)
     for i = 1, steps do
-        local angle = i * angleStep
+        local angle = -i * angleStep
         local x = centerX + radius * math.cos(angle)
         local y = centerY + radius * math.sin(angle)
         table.insert(points, {x = x, y = y})

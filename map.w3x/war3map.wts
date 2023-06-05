@@ -1,6 +1,6 @@
 ﻿STRING 1
 {
-Just another Warcraft III map
+Just another one boss fight
 }
 
 STRING 2
@@ -8,14 +8,9 @@ STRING 2
 Any
 }
 
-STRING 3
-{
-Nondescript
-}
-
 STRING 4
 {
-Unknown
+poisoNDealer
 }
 
 STRING 5

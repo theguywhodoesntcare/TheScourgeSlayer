@@ -3,31 +3,33 @@ function BeetleLaunch()
     local startZ = 400
     local endZ = 330
     local x, y = GetUnitPosition(slayer)
-    local startX, startY = GetUnitPosition(boss)
-    local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
-    BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
-    BlzSetSpecialEffectScale(eff, 1.5)
-    local angle = CalculateAngle(startX, startY, x, y)
-    BlzSetSpecialEffectYaw(eff, angle)
-    local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
-
-    local i = 1
-    local sharp = #points
-    local t = CreateTimer()
-
-    TimerStart(t, 1/32, true, function()
-        p = points[i]
-        BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
-        local xx, yy = GetUnitPosition(slayer)
-        local angle = CalculateAngle(p.x, p.y, xx, yy)
+    if IsPointInCircle(x, y, CenterX, CenterY, Radius) then
+        local startX, startY = GetUnitPosition(boss)
+        local eff = AddSpecialEffect("Units\\Undead\\ScarabLvl3\\ScarabLvl3", startX, startY)
+        BlzPlaySpecialEffect(eff, ANIM_TYPE_WALK)
+        BlzSetSpecialEffectScale(eff, 1.5)
+        local angle = CalculateAngle(startX, startY, x, y)
         BlzSetSpecialEffectYaw(eff, angle)
-        i = i + 1
-        if i > sharp then
-            PauseTimer(t)
-            BeetleCharge(eff, p.x, p.y, p.z)
-            DestroyTimer(t)
-        end
-    end)
+        local points = ComputePath(startX, startY, startZ, x, y, endZ, maxZ, 30)
+
+        local i = 1
+        local sharp = #points
+        local t = CreateTimer()
+
+        TimerStart(t, 1/32, true, function()
+            p = points[i]
+            BlzSetSpecialEffectPosition(eff, p.x, p.y, p.z)
+            local xx, yy = GetUnitPosition(slayer)
+            local angle = CalculateAngle(p.x, p.y, xx, yy)
+            BlzSetSpecialEffectYaw(eff, angle)
+            i = i + 1
+            if i > sharp then
+                PauseTimer(t)
+                BeetleCharge(eff, p.x, p.y, p.z)
+                DestroyTimer(t)
+            end
+        end)
+    end
 end
 
 function BeetleCharge(beetle, x, y, z)
@@ -125,6 +127,9 @@ function DestroyBeetleFrame()
     local pos = 0.87
     BlzFrameSetVisible(beetleFrame, true)
     TimerStart(frameTimer, 1/32, true, function()
+        if beetleAtached then
+            DestroyTimer(frameTimer)
+        end
         pos = pos + 0.02
         BlzFrameSetAbsPoint(beetleFrame, FRAMEPOINT_CENTER, pos, 0.03)
         if pos >= 1.1 then
@@ -133,7 +138,7 @@ function DestroyBeetleFrame()
             DestroyTimer(frameTimer)
         end
     end)
-    print("beetlframedestroy")
+    --print("beetlframedestroy")
 end
 
 

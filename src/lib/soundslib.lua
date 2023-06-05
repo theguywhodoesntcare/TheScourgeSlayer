@@ -1,3 +1,26 @@
+function PlayExplode(x, y)
+    local snd = CreateSound("Sound\\Destructibles\\BarrelExplosion1.flac",false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 600.00, 3200 )
+    --SetSoundDistanceCutoff( snd, 3000.00)
+    SetSoundDuration( snd, GetSoundFileDuration("Sound\\Destructibles\\BarrelExplosion1.flac") )
+    SetSoundVolume( snd, 60)
+    --SetSoundConeAngles( snd, 0.0, 0.0, 127 )
+    --SetSoundConeOrientation( snd, 0.0, 0.0, 0.0 )
+    --SetSoundPitch( snd, 1.0 )
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
+function PlayStage2()
+    PlaySound("Units/Undead/HeroCryptLord/NerubianCryptLordPissed1.flac")
+end
+
+function PlayDevouring()
+    PlaySound("Units/Undead/Ghoul/Cannibalize.flac")
+end
+
 function PlayError()
     PlaySound("Sound/Interface/Error.flac")
 end

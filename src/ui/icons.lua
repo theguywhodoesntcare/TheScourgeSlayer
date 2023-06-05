@@ -47,7 +47,7 @@ function DisplayCooldown(start)
     if chainCooldown == 0 and chainCharges < chainChargesConst then
         chainCooldown =  chainCooldownConst
     end
-    print(cooldownUpdating)
+    --print(cooldownUpdating)
     if start and not cooldownUpdating then
         cdTimer = CreateTimer()
         cooldownUpdating = true
