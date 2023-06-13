@@ -1,6 +1,6 @@
 
 
-function CreateTestUnit()
+function CreateTestUnit(snd)
     local xy = RandomPointInCircle(CenterX, CenterY, Radius)
     local testUnit = CreateUnit(Player(1), _('uaco'), xy[1], xy[2], bj_UNIT_FACING)
     SetUnitPathing(testUnit, false)
@@ -9,6 +9,9 @@ function CreateTestUnit()
     SetUnitColor(testUnit, PLAYER_COLOR_SNOW)
     table.insert(creeps, testUnit)
     table.insert(chainTargets, testUnit)
+    if snd then
+        PlayAcolyte(xy[1], xy[2])
+    end
 end
 
 function AddCreep()
@@ -16,7 +19,7 @@ function AddCreep()
         local t = CreateTimer()
         local delay = math.random(5, 15)
         TimerStart(t, delay, false, function()
-            CreateTestUnit()
+            CreateTestUnit(true)
         end)
     end
 end

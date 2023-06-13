@@ -24,7 +24,7 @@ function Sawing()
                 PlayScream()
                 BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4, 0.3)
                 BlzFrameSetLevel(spriteframe, 3)
-                BlzFrameSetModel(spriteframe, "acowtf4", 0)
+                BlzFrameSetModel(spriteframe, "Sprites\\acowtf4", 0)
                 BlzFrameSetSpriteAnimate(spriteframe, 0, 0)
                 -- birth = 0
                 -- death = 1

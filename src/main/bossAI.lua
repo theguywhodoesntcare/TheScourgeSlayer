@@ -1,6 +1,4 @@
 function AttackTimer()
-    --эти атаки не могут быть одновременно друг с другом: {глыбы, файрболлы, крест жуков}, {крест жуков, импейл}
-    --
     math.randomseed(os.time())
     globalAttackTimer = CreateTimer()
     TimerStart(globalAttackTimer, 6, true, function()
@@ -58,7 +56,7 @@ function AttackTimer()
         end
 
         if Stage == 2 then
-            InvulnerableBlock(0.65)
+            InvulnerableBlock(0.70)
             if not castFireballs and not castBeetles and not castCorpse and not castRocks then
                 local rand = math.random()
                 if rand <= 0.25 then
@@ -96,7 +94,7 @@ function AttackTimer()
             local rand2 = math.random()
             if rand2 <= 0.25 then
                 TripleImpale(math.random(30, 35))
-            elseif rand2 <= 0.4 and not CageOn and not sawing then
+            elseif rand2 <= 0.4 and not CageOn and not sawing and not castCarousel then
                 Cage(500, 15)
                 local cageTimer = CreateTimer()
                 TimerStart(cageTimer, 5, false, function()
@@ -107,7 +105,7 @@ function AttackTimer()
                 end)
             elseif rand2 <= 0.6 and not acidGlobal then
                 Acid(18, 30)
-            elseif rand2 <= 0.66 and not castCarousel and not SlayerInsideCage then
+            elseif rand2 <= 0.65 and not castCarousel and not SlayerInsideCage then
                 Bugs()
             end
         end

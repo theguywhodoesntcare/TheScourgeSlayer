@@ -7,11 +7,8 @@ function CreateBarrier()
         local angle = CalculateAngle(points[i].x, points[i].y, CenterX, CenterY) + math.pi / 2
         local eff = AddSpecialEffect("models\\barrier", points[i].x, points[i].y)
         BlzSetSpecialEffectScale(eff, 2)
-        --BlzSetSpecialEffectZ(eff, 300)
         BlzSetSpecialEffectYaw(eff, angle)
         BlzSetSpecialEffectColorByPlayer(eff, Player(6))
-        --BlzSetSpecialEffectScale(eff, 2)
-        --BlzSetSpecialEffectZ(eff, 400)
         table.insert(barrier, eff)
     end
     CreateStatues()

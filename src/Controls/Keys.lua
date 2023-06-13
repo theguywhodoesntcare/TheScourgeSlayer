@@ -261,14 +261,6 @@ end
 
 
 function ControlKeys()
-    if BlzGetTriggerPlayerKey() == OSKEY_Q then
-        --print("Q")
-        --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
-        --TripleImpale(30)
-        --TimerStart(CreateTimer(), 2, true, function()
-            --FireBalls()
-        --end)
-    end
     if BlzGetTriggerPlayerKey() == OSKEY_E then
         --print("E")
         --IssuePointOrder(slayer, "move", GetUnitX(slayer), GetUnitY(slayer))
@@ -277,8 +269,6 @@ function ControlKeys()
     end
     if BlzGetTriggerPlayerKey() == OSKEY_V then
         CameraSetFocalDistance(0)
-        --print("V")
-
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         --ThrowStones(15)
         --TripleImpale(35)
@@ -287,7 +277,7 @@ function ControlKeys()
         --Acid(30)
         --Cage(500, 5)
         --CorpseBombs(10, 1)
-       --BeetleLaunch()
+        --BeetleLaunch()
         --Bugs()
         --CreateCharge()
     end
@@ -295,17 +285,5 @@ function ControlKeys()
     if BlzGetTriggerPlayerKey() == OSKEY_SPACE then
         --print("SPACE")
         Dash()
-    end
-end
-
-function TurnKeyTriggers(off)
-    if off then
-        DisableTrigger(KeyTrigger)
-        DisableTrigger(ButtonPressedTrigger)
-        DisableTrigger(ButtonReleasedTrigger)
-    else
-        EnableTrigger(KeyTrigger)
-        EnableTrigger(ButtonPressedTrigger)
-        EnableTrigger(ButtonReleasedTrigger)
     end
 end

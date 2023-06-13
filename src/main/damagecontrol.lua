@@ -62,16 +62,7 @@ function GotDamage(type)
     SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
 end
 
-function Lost()
-    KillUnit(slayer)
-    BlzDestroyFrame(bar2)
-    TimerStart(CreateTimer(), 5, false, function()
-        CustomDefeatBJ(GetLocalPlayer(), "You got no chance in Hell!")
-    end)
-end
-
 function BloodFrame()
-
     local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
     BlzFrameSetLevel(Mask,4)
     BlzFrameSetAbsPoint(Mask, FRAMEPOINT_TOPLEFT, -0.1338, 0.6)
@@ -91,38 +82,6 @@ function BloodFrame()
     end)
 end
 
-function Win()
-    KillUnit(boss)
-    DestroyTimer(globalAttackTimer)
-    BlzDestroyFrame(invul)
-    BlzDestroyFrame(bar)
-    TimerStart(CreateTimer(), 5, false, function()
-        CustomVictoryBJ(GetLocalPlayer(), "You are the true Scourge Slayer!", false)
-    end)
-end
-
-function BloodFrameOLD()
-    local randomX = math.random(10, 70) / 100
-    local randomY = math.random(20, 50) / 100
-    local randomS = math.random(20, 50) / 100
-    local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
-    BlzFrameSetLevel(Mask,4)
-    BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, randomX, randomY)
-    BlzFrameSetSize(Mask, randomS, randomS)
-    BlzFrameSetTexture(Mask, "backdrops\\blood5", 0, true)
-    BlzFrameSetAlpha(Mask, 255)
-    local alpha = 255
-    TimerStart(CreateTimer(), 1/32, true, function()
-        alpha = alpha - 4
-        if alpha <=0 then
-            BlzFrameSetAlpha(Mask, 0)
-            BlzDestroyFrame(Mask)
-            DestroyTimer(GetExpiredTimer())
-        else
-            BlzFrameSetAlpha(Mask, alpha)
-        end
-    end)
-end
 
 function MaskEffect(path, red, green, blue)
     DisplayCineFilter(false)

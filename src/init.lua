@@ -12,14 +12,13 @@ do
         GetUnitY = GetUnitRealY
         CreateBoss()
         for i = 1, maxcreeps do
-            CreateTestUnit()
+            CreateTestUnit(false)
         end
         dummy1 = CreateDummy()
         dummy2 = CreateDummy()
         dummy3 = CreateDummy()
         posdummy = CreateDummy()
         impaleCasters = {dummy1, dummy2, dummy3}
-        --BlzHideOriginFrames(true)
         CreateSlayer()
         SetUnitLookAt( slayer, "bone_turret", posdummy, 0, 0, 0 )
         globalX, globalY = GetUnitPosition(slayer)

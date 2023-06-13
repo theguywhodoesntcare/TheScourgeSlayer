@@ -1,3 +1,25 @@
+function PlayAcolyte(x, y)
+    --PlaySound("Units\\Undead\\Shade\\ShadeReady1.flac")
+    local t = {
+        "Units\\Undead\\Shade\\ShadeReady1.flac",
+        "Units\\Undead\\Shade\\ShadeReady1.flac",
+        "Units\\Undead\\Shade\\ShadeYesAttack5.flac",
+        "Units\\Undead\\Shade\\ShadeYesAttack4.flac",
+        "Units\\Undead\\Shade\\ShadeWarcry1.flac",
+        "Units\\Undead\\Shade\\ShadeWarcry1.flac",
+    }
+    local randomIndex = math.random(#t)
+    local path = t[randomIndex]
+    local snd = CreateSound(path,false, true, false, 10, 10, "DefaultEAXON")
+    SetSoundChannel( snd, 0)
+    SetSoundDistances( snd, 3000.00, 8000 )
+    SetSoundDuration( snd, GetSoundFileDuration(path) )
+    SetSoundVolume( snd, 100)
+    SetSoundPosition(snd, x, y,100)
+    StartSound(snd)
+    KillSoundWhenDone(snd)
+end
+
 function PlayExplode(x, y)
     local snd = CreateSound("Sound\\Destructibles\\BarrelExplosion1.flac",false, true, false, 10, 10, "DefaultEAXON")
     SetSoundChannel( snd, 0)
@@ -113,7 +135,8 @@ function PlayStoneSoundMain(x, y)
 end
 
 function PlayPainSound1()
-    local snd = CreateSound("sound\\dialogue\\undeadexpcamp\\undead04x\\L04Arthas36.flac",false, false, false, 10, 10, "DefaultEAXON")
+    --sound\\dialogue\\undeadexpcamp\\undead04x\\L04Arthas36.flac
+    local snd = CreateSound("sound\\L04Arthas36",false, false, false, 10, 10, "DefaultEAXON")
     SetSoundChannel( snd, 19)
     SetSoundDuration( snd, GetSoundFileDuration("sound\\dialogue\\undeadexpcamp\\undead04x\\L04Arthas36.flac") )
     SetSoundVolume( snd, 70)
@@ -122,7 +145,8 @@ function PlayPainSound1()
 end
 
 function PlayPainSound2()
-    local snd = CreateSound("sound\\dialogue\\undeadexpcamp\\undead07cxInterlude\\L07CArthas43.flac",false, false, false, 10, 10, "DefaultEAXON")
+    --sound\\dialogue\\undeadexpcamp\\undead07cxInterlude\\L07CArthas43.flac
+    local snd = CreateSound("sounds\\L07CArthas43",false, false, false, 10, 10, "DefaultEAXON")
     SetSoundChannel( snd, 19)
     SetSoundDuration( snd, GetSoundFileDuration("sound\\dialogue\\undeadexpcamp\\undead07cxInterlude\\L07CArthas43.flac") )
     SetSoundVolume( snd, 70)

@@ -5,7 +5,8 @@ function InitCameraScrollBar()
     BlzFrameClearAllPoints(sliderFrame)
     -- set pos and size
     BlzFrameSetLevel(sliderFrame, 3)
-    BlzFrameSetAbsPoint(sliderFrame, FRAMEPOINT_CENTER, 0.92, 0.30 )
+    local barX = 0.4 + offsetWidth - 0.015
+    BlzFrameSetAbsPoint(sliderFrame, FRAMEPOINT_CENTER, barX, 0.30 ) --old x = 0.92
     BlzFrameSetSize(sliderFrame, 0.014, 0.1 )
     -- define the area the user can choose from
     BlzFrameSetMinMaxValue(sliderFrame, 0, 80)

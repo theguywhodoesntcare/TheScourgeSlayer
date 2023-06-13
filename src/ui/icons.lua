@@ -5,7 +5,7 @@ function Icons()
         "backdrops\\sawIcon",
         "backdrops\\chainIcon"
     }
-    local x = -0.095
+    local x = 0.4 - offsetWidth + 0.0385
     local y = 0.5
 
     local offsety = 0.1
@@ -15,6 +15,11 @@ function Icons()
     local size3 = 0.065
 
     consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
+    --local test = CreateBackdrop(consoleFrame, x+0.035, y-0.035, size2, "backdrops\\octFrame1", 7)
+    --BlzFrameClearAllPoints(test)
+    --BlzFrameSetSize(test, 0.2, 0.2)
+    --BlzFrameSetAbsPoint(test, FRAMEPOINT_CENTER,0, 0.4)
+    --BlzFrameSetPoint(test, FRAMEPOINT_CENTER, consoleFrame, FRAMEPOINT_TOPLEFT, 0.01, 0.3)
     for i = 1, 4 do
         local yy = y - offsety * (i-1)
         local charges = CreateBackdrop(consoleFrame, x+0.035, yy-0.035, size2, "backdrops\\octFrame1", 6)

@@ -1,5 +1,4 @@
 function HPBar()
-    consoleFrame = BlzGetFrameByName("ConsoleUIBackdrop", 0)
     bar = BlzCreateFrameByType("STATUSBAR", "", consoleFrame, "", 0)
 
     BlzFrameSetAbsPoint(bar, FRAMEPOINT_CENTER, 0.4, 0.57)
@@ -35,7 +34,8 @@ function HPBar()
     BlzFrameSetVisible(invul, true)
     ------------
 
-    bar2 = BlzCreateFrameByType("STATUSBAR", "", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    bar2 = BlzCreateFrameByType("STATUSBAR", "", consoleFrame, "", 0)
+    BlzFrameSetLevel(bar2, 1)
     BlzFrameSetAbsPoint(bar2, FRAMEPOINT_CENTER, 0.4, 0.03)
     -- Screen Size does not matter but has to be there
     BlzFrameSetSize(bar2, 0.00001, 0.00001)
@@ -45,7 +45,7 @@ function HPBar()
 
     --BlzFrameSetModel(bar, "ui/feedback/cooldown/ui-cooldown-indicator.mdx", 0)
     --BlzFrameSetModel(bar, "ui/feedback/XpBar/XpBarConsole.mdx", 0)
-    BlzFrameSetModel(bar2, "sprites/testbar2.mdx", 0)
+    BlzFrameSetModel(bar2, "sprites/testbar2low.mdx", 0)
     --BlzFrameSetModel(bar, "ui/feedback/buildprogressbar/buildprogressbar.mdx", 0)
     BlzFrameSetMinMaxValue(bar2, 1, slayerHPConst+1)
     BlzFrameSetValue(bar2, slayerHPConst)

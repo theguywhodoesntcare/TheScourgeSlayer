@@ -53,13 +53,6 @@ function FindClosestUnit(units, x, y)
     return closestUnit
 end
 
-function Shuffle (arr)
-    for i = 1, #arr - 1 do
-        local j = math.random (i, #arr)
-        arr [i], arr [j] = arr [j], arr [i]
-    end
-end
-
 function CreateBackdrop(parent, centerX, centerY, size, texture, lvl)
     local fr = BlzCreateFrameByType("BACKDROP", "", parent, "", 1)
     BlzFrameSetLevel(fr, lvl)

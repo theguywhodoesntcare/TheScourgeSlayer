@@ -55,6 +55,7 @@ function BeetleCharge(beetle, x, y, z)
     local counter = 1
     local index = 1
     local t = CreateTimer()
+    local endPoint = 0.4 + offsetWidth - 0.056 --old x = 0.87
     TimerStart(t, 1/64, true, function()
         local p = points[i]
         BlzSetSpecialEffectPosition(beetle, p.x, p.y, z)
@@ -69,12 +70,12 @@ function BeetleCharge(beetle, x, y, z)
                 local frameTimer = CreateTimer()
                 BlzDestroyFrame(beetleFrame)
                 beetleFrame = BeetleFrame()
-                local pos = 1.1
+                local pos = 0.4 + offsetWidth+0.13
                 BlzFrameSetVisible(beetleFrame, true)
                 TimerStart(frameTimer, 1/32, true, function()
                     pos = pos - 0.02
                     BlzFrameSetAbsPoint(beetleFrame, FRAMEPOINT_CENTER, pos, 0.03)
-                    if pos <= 0.87 then
+                    if pos <= endPoint then
                         DestroyTimer(frameTimer)
                     end
                 end)
@@ -111,7 +112,7 @@ end
 
 function BeetleFrame()
     local spriteframe = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 0)
-    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 1.1, 0.03)
+    BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, 0.4 + offsetWidth+0.23, 0.03) --old x = 1.1
     BlzFrameSetSize(spriteframe, 0.001, 0.001)
     BlzFrameSetScale(spriteframe, 1)
     BlzFrameSetLevel(spriteframe, 3)
@@ -124,7 +125,7 @@ end
 
 function DestroyBeetleFrame()
     local frameTimer = CreateTimer()
-    local pos = 0.87
+    local pos = 0.4 + offsetWidth - 0.056
     BlzFrameSetVisible(beetleFrame, true)
     TimerStart(frameTimer, 1/32, true, function()
         if beetleAtached then
@@ -132,7 +133,7 @@ function DestroyBeetleFrame()
         end
         pos = pos + 0.02
         BlzFrameSetAbsPoint(beetleFrame, FRAMEPOINT_CENTER, pos, 0.03)
-        if pos >= 1.1 then
+        if pos >= 0.4 + offsetWidth+0.13 then
             BlzDestroyFrame(beetleFrame)
             beetleFrame = nil
             DestroyTimer(frameTimer)

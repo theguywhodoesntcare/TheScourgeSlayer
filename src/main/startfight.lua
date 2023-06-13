@@ -1,10 +1,20 @@
 function BossFight(frame)
-    PlayMusic( "sounds\\bfg_division" )
-    local length = GetSoundFileDuration("sounds\\bfg_division")
+    SetMusicVolume(90)
+    PlayMusic( "sounds\\bfg_division1" )
+    local length = GetSoundFileDuration("sounds\\bfg_division1.mp3") / 1000
     local musicTimer = CreateTimer()
     TimerStart(musicTimer, length, false, function()
+        StopMusicBJ(false)
         ClearMapMusicBJ()
-        PlayMusic("sounds\\fear.flac;sounds\\bfg_division.flac")
+        PlayMusic("sounds\\fear.mp3")
+        local length1 = GetSoundFileDuration("sounds\\fear.mp3") / 1000
+        local musicTimer1 = CreateTimer()
+        TimerStart(musicTimer1, length, false, function()
+            StopMusicBJ(false)
+            ClearMapMusicBJ()
+            PlayMusic("sounds\\fear.mp3;sounds\\bfg_division1.mp3")
+            DestroyTimer(musicTimer1)
+        end)
         DestroyTimer(musicTimer)
     end)
 

@@ -4,12 +4,12 @@ function StatusList()
     Radius = 1800
     barrier = {} -- таблица эффектов
     -----------
-    slayerHP = 180
+    slayerHP = 180 --хп героя
     slayerHPConst = 180
     Stage = 1 --текущая стадия
     safetyZone = false --герой ввышел из поля битвы
     ------
-    bossHP = 300
+    bossHP = 300 --хп босса
     bossHPConst = 300
     lowHealh = false
     -----

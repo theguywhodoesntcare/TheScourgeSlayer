@@ -37,7 +37,7 @@ function Cage(radius, duration)
                 local Mask = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
                 BlzFrameSetVisible(Mask, false)
                 BlzFrameSetLevel(Mask,4)
-                BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, 0.8, 0.08)
+                BlzFrameSetAbsPoint(Mask, FRAMEPOINT_CENTER, 0.4 + offsetWidth - 0.1, 0.08) --old x = 0.8
                 BlzFrameSetSize(Mask, 0.4, 0.23)
                 BlzFrameSetTexture(Mask, "backdrops\\chain1", 0, true)
                 BlzFrameSetAlpha(Mask, 255)
@@ -45,7 +45,7 @@ function Cage(radius, duration)
                 local Mask1 = BlzCreateFrameByType("BACKDROP", "Mask", BlzGetFrameByName("ConsoleUIBackdrop", 0), "", 1)
                 BlzFrameSetVisible(Mask1, false)
                 BlzFrameSetLevel(Mask1,4)
-                BlzFrameSetAbsPoint(Mask1, FRAMEPOINT_CENTER, -0.05, 0.52)
+                BlzFrameSetAbsPoint(Mask1, FRAMEPOINT_CENTER, 0.4 - offsetWidth + 0.1, 0.52) --old x = -0.05
                 BlzFrameSetSize(Mask1, 0.4, 0.23)
                 BlzFrameSetTexture(Mask1, "backdrops\\chain1", 0, true)
                 BlzFrameSetAlpha(Mask1, 255)
@@ -58,11 +58,11 @@ function Cage(radius, duration)
                     BlzFrameSetVisible(Mask, true)
                     SlayerInsideCage = true
                     local frameTimer = CreateTimer()
-                    local pos = 1.1
+                    local pos = 0.4 + offsetWidth+0.23 --old posX = 1.1
                     TimerStart(frameTimer, 1/32, true, function()
                         pos = pos - 0.02
                         BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
-                        if pos <= 0.82 then
+                        if pos <= 0.4 + offsetWidth - 0.106 then --old = 0.82
                             DestroyTimer(frameTimer)
                         end
                     end)
@@ -76,16 +76,19 @@ function Cage(radius, duration)
                     CageOn = false
                     if SlayerInsideCage then
                         local frameTimer1 = CreateTimer()
-                        local pos = 0.82
+                        local pos = 0.4 + offsetWidth - 0.106 --0.82
                         local alpha = 255
                         TimerStart(frameTimer1, 1/32, true, function()
                             pos = pos + 0.02
                             BlzFrameSetAbsPoint(spriteframe, FRAMEPOINT_CENTER, pos, -0.036)
 
                             alpha = alpha - 17
+                            if alpha <= 0 then
+                                alpha = 0
+                            end
                             BlzFrameSetAlpha(Mask1, alpha)
                             BlzFrameSetAlpha(Mask, alpha)
-                            if pos >= 1.1 then
+                            if pos >= 0.4 + offsetWidth + 0.23 then --old = 1.1
                                 BlzDestroyFrame(spriteframe)
                                 BlzDestroyFrame(Mask)
                                 BlzDestroyFrame(Mask1)
@@ -109,7 +112,7 @@ function CageFrame()
     BlzFrameSetSize(spriteframe, 0.001, 0.001)
     BlzFrameSetScale(spriteframe, 1)
     BlzFrameSetLevel(spriteframe, 3)
-    BlzFrameSetModel(spriteframe, "models\\skeletonsprite2", 1)
+    BlzFrameSetModel(spriteframe, "Sprites\\skeletonsprite2", 1)
     BlzFrameSetSpriteAnimate(spriteframe, 2, 2)
     BlzFrameSetVisible(spriteframe, false)
 

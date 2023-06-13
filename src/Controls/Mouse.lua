@@ -1,26 +1,18 @@
 function InitControlMouse()
     MouseTrigger = CreateTrigger()
     TriggerRegisterPlayerEvent(MouseTrigger, Player(0), EVENT_PLAYER_MOUSE_MOVE)
-
     TriggerAddCondition(MouseTrigger, Condition(ControlMouse))
 
-  ClickTrigger = CreateTrigger()
+    ClickTrigger = CreateTrigger()
     TriggerRegisterPlayerEvent(ClickTrigger, Player(0), EVENT_PLAYER_MOUSE_DOWN)
     TriggerAddCondition(ClickTrigger, Condition(Clicker))
 
-
-WheelTrigger = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(WheelTrigger, InfoBackground, FRAMEEVENT_MOUSE_WHEEL)
-    TriggerAddAction(trigger, function()
-        --print("wheel")
-    end)
-  ClickReleaseTrigger = CreateTrigger()
-   TriggerRegisterPlayerEvent(ClickReleaseTrigger, Player(0), EVENT_PLAYER_MOUSE_UP)
-   TriggerAddCondition(ClickReleaseTrigger, Condition(Releaser))
+    ClickReleaseTrigger = CreateTrigger()
+    TriggerRegisterPlayerEvent(ClickReleaseTrigger, Player(0), EVENT_PLAYER_MOUSE_UP)
+    TriggerAddCondition(ClickReleaseTrigger, Condition(Releaser))
 
     chainMarker = false
     rmbpressed = false
-
 end
 
 function ControlMouse()
@@ -32,9 +24,7 @@ function CancelClick()
     ForceUICancelBJ(Player(0))
 end
 
-function Wheel()
-    --print("Wheel")
-end
+
 
 function Clicker()
     if (GetUnitAbilityLevel(slayer, _('BUim')) == 0) and not sawing then
